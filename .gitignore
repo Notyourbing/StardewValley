@@ -77,3 +77,7 @@ node_modules/
 # Cocos2d-x 临时文件和日志
 *.log
 *.tmp
+proj.win32/Debug.win32/Stardew.vcxproj.FileListAbsolute.txt
+proj.win32/Debug.win32/libcocos2d.exp
+cocos2d/cocos/2d/Debug.win32/libcocos2d.dll.recipe
+proj.win32/Debug.win32/Stardew.exe.recipe
