@@ -1,8 +1,79 @@
-*.ipch
-*.pch
+# 编译生成的文件
 *.obj
-*.log
+*.o
+*.exe
+*.dll
+*.lib
+*.so
+*.a
+*.pdb
+*.ilk
+*.tlb
+*.tmp
+*.manifest
 *.tlog
 *.idb
 *.ipdb
 *.sdf
+*.ipch
+*.pch
+
+# Visual Studio 临时文件和数据库
+.vs/
+*.suo
+*.user
+*.userosscache
+*.VC.db
+*.VC.VC.opendb
+*.opendb
+*.sln.docstates
+*.sln.ide.cache
+ipch/
+
+# 编译工具生成的文件夹
+[Bb]uild/
+[Bb]in/
+[Dd]ebug*/
+[Rr]elease*/
+x64/
+x86/
+
+# CMake 构建文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Windows 系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 临时文件
+*.swp
+*~
+*.bak
+
+# 忽略资源文件生成的中间产物
+*.pvr
+*.dds
+*.tmp
+*.plist
+*.json
+
+# 忽略外部库文件
+external/
+third-party/
+node_modules/
+
+# 环境变量和敏感信息
+.env
+*.key
+*.pem
+*.crt
+
+# Cocos2d-x 临时文件和日志
+*.log
+*.tmp
