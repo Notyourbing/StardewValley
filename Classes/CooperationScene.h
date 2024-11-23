@@ -15,6 +15,4 @@ public:
 	// 返回项的回调函数
 	void backCallBack(cocos2d::Ref* pSender);
 };
-
-
 #endif

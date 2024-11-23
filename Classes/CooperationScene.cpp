@@ -56,6 +56,7 @@ bool Cooperation::init() {
 	auto menu = Menu::create(backItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 2);
+	return true;
 }
 
 void Cooperation::backCallBack(Ref* pSender) {
