@@ -150,17 +150,21 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\CooperationScene.cpp" />
-    <ClCompile Include="..\Classes\NewGameScene.cpp" />
-    <ClCompile Include="..\Classes\WelcomeScene.cpp" />
+    <ClCompile Include="..\Classes\Player\Player.cpp" />
+    <ClCompile Include="..\Classes\Scene\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Scene\CooperationScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\FarmScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\NewGameScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\WelcomeScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\CooperationScene.h" />
-    <ClInclude Include="..\Classes\NewGameScene.h" />
-    <ClInclude Include="..\Classes\WelcomeScene.h" />
+    <ClInclude Include="..\Classes\Player\Player.h" />
+    <ClInclude Include="..\Classes\Scene\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Scene\CooperationScene.h" />
+    <ClInclude Include="..\Classes\Scene\FarmScene.h" />
+    <ClInclude Include="..\Classes\Scene\NewGameScene.h" />
+    <ClInclude Include="..\Classes\Scene\WelcomeScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

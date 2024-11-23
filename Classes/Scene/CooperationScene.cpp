@@ -8,10 +8,12 @@ static void problemLoading(const char* filename) {
 	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in WelcomeScene.cpp\n");
 }
 
+// 创建场景
 Scene* Cooperation::createScene() {
 	return Cooperation::create();
 }
 
+// 初始化
 bool Cooperation::init() {
 	if (!Scene::init()) {
 		return false;

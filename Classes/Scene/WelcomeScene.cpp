@@ -1,6 +1,7 @@
 #include "WelcomeScene.h"
 #include "SimpleAudioEngine.h"
 #include "CooperationScene.h"
+#include "NewGameScene.h"
 
 USING_NS_CC;
 
@@ -154,7 +155,8 @@ bool Welcome::init() {
 }
 
 void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
-
+    auto newGameScene = NewGame::createScene();
+    Director::getInstance()->pushScene(newGameScene);
 }
 
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
@@ -162,7 +164,7 @@ void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
 }
 
 void Welcome::menuCooperationCallback(Ref* pSender) {
-    // todo: Push一个新场景，显示联系方式
+    // Push一个新场景，显示联系方式
     auto cooperationScene = Cooperation::createScene();
     Director::getInstance()->pushScene(cooperationScene);
 }
