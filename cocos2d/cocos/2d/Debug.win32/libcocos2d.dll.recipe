@@ -3,7 +3,11 @@
   <ProjectOutputs>
     <ProjectOutput>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <FullPath>D:\Cocos2d\StardewValley\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+=======
+      <FullPath>E:\github\1123\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+>>>>>>> 7acb795630b42140323e6fc0bde472fb158eba1c
 =======
       <FullPath>E:\github\1123\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
 >>>>>>> 7acb795630b42140323e6fc0bde472fb158eba1c
