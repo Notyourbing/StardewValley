@@ -43,6 +43,20 @@ bool Welcome::init() {
     // 按钮之间的间距
     const float buttonInterval = 24;
 
+
+    auto background = Sprite::create("icon/background.png");
+    if (background == nullptr) {
+        problemLoading("'background.png'");
+    }
+    else {
+        // 将背景图片居中
+        const float x = visibleSize.width / 2 + origin.x;
+        const float y = visibleSize.height / 2 + origin.y;
+        background->setPosition(Vec2(x, y));
+        // 将背景添加到场景中，zOrder为-1确保它在其他节点的下面
+        this->addChild(background, -1);
+    }
+
     // 新游戏项
     auto newGameItem = MenuItemImage::create("icon/newGameButton.png", "icon/newGameButton.png", 
         CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
