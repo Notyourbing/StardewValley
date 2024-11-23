@@ -33,7 +33,7 @@ ipch/
 # 编译工具生成的文件夹
 [Bb]uild/
 [Bb]in/
-[Dd]ebug*/
+[Dd]ebug/
 [Rr]elease*/
 x64/
 x86/
