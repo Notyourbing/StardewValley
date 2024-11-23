@@ -3,7 +3,6 @@
 *.o
 *.exe
 *.dll
-*.lib
 *.so
 *.a
 *.pdb
