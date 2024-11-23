@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\11-23\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+      <FullPath>E:\github\1123\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\11-23\proj.win32\Debug.win32\Stardew.exe</FullPath>
+      <FullPath>E:\github\1123\proj.win32\Debug.win32\Stardew.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
