@@ -64,7 +64,6 @@ $RECYCLE.BIN/
 *.json
 
 # 忽略外部库文件
-external/
 third-party/
 node_modules/
 
