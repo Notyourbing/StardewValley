@@ -2,7 +2,6 @@
 *.obj
 *.o
 *.exe
-*.dll
 *.so
 *.a
 *.pdb
@@ -33,7 +32,7 @@ ipch/
 [Bb]uild/
 [Bb]in/
 [Dd]ebug/
-[Rr]elease*/
+[Rr]elease/
 x64/
 x86/
 
@@ -52,7 +51,6 @@ $RECYCLE.BIN/
 
 # 临时文件
 *.swp
-*~
 *.bak
 
 # 忽略资源文件生成的中间产物
@@ -63,7 +61,6 @@ $RECYCLE.BIN/
 *.json
 
 # 忽略外部库文件
-third-party/
 node_modules/
 
 # 环境变量和敏感信息
@@ -75,7 +72,3 @@ node_modules/
 # Cocos2d-x 临时文件和日志
 *.log
 *.tmp
-proj.win32/Debug.win32/Stardew.vcxproj.FileListAbsolute.txt
-proj.win32/Debug.win32/libcocos2d.exp
-cocos2d/cocos/2d/Debug.win32/libcocos2d.dll.recipe
-proj.win32/Debug.win32/Stardew.exe.recipe
