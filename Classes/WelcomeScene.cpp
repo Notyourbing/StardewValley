@@ -1,5 +1,6 @@
 #include "WelcomeScene.h"
 #include "SimpleAudioEngine.h"
+#include "CooperationScene.h"
 
 USING_NS_CC;
 
@@ -32,11 +33,9 @@ static void problemLoading(const char* filename) {
 // 在init()函数中初始化实例
 bool Welcome::init() {
     // 首先检查是否初始化父类
-    if (!Scene::init())
-    {
+    if (!Scene::init()) {
         return false;
     }
-
     // 整个视图的大小，我们使用1280*720
     const auto visibleSize = Director::getInstance()->getVisibleSize();
     // 原点坐标
@@ -45,7 +44,8 @@ bool Welcome::init() {
     const float buttonInterval = 24;
 
     // 新游戏项
-    auto newGameItem = MenuItemImage::create("icon/newGameButton.png", "icon/newGameButton.png", CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
+    auto newGameItem = MenuItemImage::create("icon/newGameButton.png", "icon/newGameButton.png", 
+        CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
     if (newGameItem == nullptr ||
         newGameItem->getContentSize().width <= 0 ||
         newGameItem->getContentSize().height <= 0) {
@@ -58,7 +58,8 @@ bool Welcome::init() {
     }
 
     // 加载游戏项
-    auto loadGameItem = MenuItemImage::create("icon/loadGameButton.png", "icon/loadGameButton.png", CC_CALLBACK_1(Welcome::menuLoadGameCallback, this));
+    auto loadGameItem = MenuItemImage::create("icon/loadGameButton.png", "icon/loadGameButton.png", 
+        CC_CALLBACK_1(Welcome::menuLoadGameCallback, this));
     if (loadGameItem == nullptr ||
         loadGameItem->getContentSize().width <= 0 ||
         loadGameItem->getContentSize().height <= 0) {
@@ -71,7 +72,8 @@ bool Welcome::init() {
     }
 
     // 合作项
-    auto cooperationItem = MenuItemImage::create("icon/cooperationButton.png", "icon/cooperationButton.png", CC_CALLBACK_1(Welcome::menuCooperationCallback, this));
+    auto cooperationItem = MenuItemImage::create("icon/cooperationButton.png", "icon/cooperationButton.png", 
+        CC_CALLBACK_1(Welcome::menuCooperationCallback, this));
     if (cooperationItem == nullptr ||
         cooperationItem->getContentSize().width <= 0 ||
         cooperationItem->getContentSize().height <= 0) {
@@ -84,7 +86,8 @@ bool Welcome::init() {
     }
 
     // 退出项，这是一个自动释放的对象
-    auto closeItem = MenuItemImage::create("icon/exitButton.png", "icon/exitButton.png", CC_CALLBACK_1(Welcome::menuExitCallback, this));
+    auto closeItem = MenuItemImage::create("icon/exitButton.png", "icon/exitButton.png", 
+        CC_CALLBACK_1(Welcome::menuExitCallback, this));
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
         closeItem->getContentSize().height <= 0) {
@@ -146,6 +149,8 @@ void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
 
 void Welcome::menuCooperationCallback(Ref* pSender) {
     // todo: Push一个新场景，显示联系方式
+    auto cooperationScene = Cooperation::createScene();
+    Director::getInstance()->pushScene(cooperationScene);
 }
 
 void Welcome::menuExitCallback(Ref* pSender) {
