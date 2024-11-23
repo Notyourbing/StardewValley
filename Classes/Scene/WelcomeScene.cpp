@@ -2,6 +2,7 @@
 #include "SimpleAudioEngine.h"
 #include "CooperationScene.h"
 #include "NewGameScene.h"
+#include "FarmScene.h"
 
 USING_NS_CC;
 
@@ -160,7 +161,8 @@ void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
 }
 
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
-
+    auto farmScene = Farm::createScene();
+    Director::getInstance()->pushScene(farmScene);
 }
 
 void Welcome::menuCooperationCallback(Ref* pSender) {
