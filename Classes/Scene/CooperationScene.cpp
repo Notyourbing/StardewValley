@@ -20,13 +20,11 @@ bool Cooperation::init() {
     }
 
     // 获取界面尺寸
-    auto visibleSize = Director::getInstance()->getVisibleSize();
+    const auto visibleSize = Director::getInstance()->getVisibleSize();
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // 创建背景
-    std::string backgroundPath = "icon/coop_background.png";  // 替换为你的背景图片路径
-    printf("Attempting to load resource: %s\n", backgroundPath.c_str());  // 添加日志
-
+    std::string backgroundPath = "icon/coopBackground.png";
     auto background = Sprite::create(backgroundPath);
     if (background == nullptr) {
         problemLoading(backgroundPath.c_str());
@@ -34,25 +32,12 @@ bool Cooperation::init() {
     }
     else {
         background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-        this->addChild(background, 0);  // 确保背景的 z-order 最低
-    }
-
-    // 创建一个简单的标签来显示合作信息
-    auto label = Label::createWithTTF("Contact us!", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr) {
-        problemLoading("Error loading font\n");
-        return false;
-    }
-    else {
-        const Vec2 position(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
-        label->setPosition(position);
-        this->addChild(label, 2);
+        // 确保背景的 z-order 最低
+        this->addChild(background, 0);
     }
 
     // 创建合作框背景
-    std::string coopPanelPath = "icon/cooperation_panel.png";
-    printf("Attempting to load resource: %s\n", coopPanelPath.c_str());  // 添加日志
-
+    std::string coopPanelPath = "icon/cooperationPanel.png";
     auto coopPanel = Sprite::create(coopPanelPath);
     coopPanel->setName("coopPanel");
 
@@ -62,19 +47,20 @@ bool Cooperation::init() {
     }
     else {
         coopPanel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-        this->addChild(coopPanel, 3);
+        this->addChild(coopPanel, 1);
 
         // 文字提示（寻找）
-        _coopText = Label::createWithTTF("Connecting to online services...", "fonts/Marker Felt.ttf", 24);  // 调整字体大小
-        if (_coopText == nullptr) {
+        coopText = Label::createWithTTF("Connecting to online services...", "fonts/Marker Felt.ttf", 24);  // 调整字体大小
+        if (coopText == nullptr) {
             problemLoading("Error loading font for coopText\n");
             return false;
         }
         else {
             // 调整文字位置，使其位于屏幕中心
-            Vec2 textPosition = Vec2(visibleSize.width / 2, visibleSize.height / 2);
-            _coopText->setPosition(textPosition);
-            this->addChild(_coopText, 4);  // 确保文字的 z-order 高于合作框
+            const Vec2 textPosition = Vec2(visibleSize.width / 2, visibleSize.height / 2);
+            coopText->setPosition(textPosition);
+            // 确保文字的 z-order 高于合作框
+            this->addChild(coopText, 2);
         }
     }
 
@@ -130,16 +116,16 @@ void Cooperation::backCallBack(Ref* pSender) {
 
 void Cooperation::onUpButtonClicked(Ref* pSender) {
     printf("Up button clicked\n");  // 添加日志
-    if (_coopText) {
+    if (coopText) {
         auto moveBy = MoveBy::create(0.3f, Vec2(0, -50)); // 向下移动 50 像素
-        _coopText->runAction(moveBy);
+        coopText->runAction(moveBy);
     }
 }
 
 void Cooperation::onDownButtonClicked(Ref* pSender) {
     printf("Down button clicked\n");  // 添加日志
-    if (_coopText) {
+    if (coopText) {
         auto moveBy = MoveBy::create(0.3f, Vec2(0, 50)); // 向上移动 50 像素
-        _coopText->runAction(moveBy);
+        coopText->runAction(moveBy);
     }
 }

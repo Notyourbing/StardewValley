@@ -19,7 +19,7 @@ private:
     void onDownButtonClicked(cocos2d::Ref* pSender);
 
     // ´æ´¢ coopText µÄÖ¸Õë
-    cocos2d::Label* _coopText;
+    cocos2d::Label* coopText;
 };
 
 #endif // __COOPERATION_SCENE_H__
