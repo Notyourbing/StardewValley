@@ -24,7 +24,7 @@ private:
     std::vector<std::string> dialogues; // NPC的对话列表
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
     std::map<std::string, RelationshipStatus> npcRelations; // NPC之间的关系
-    Vec2 position;                  
+    Vec2 position;
 
 public:
     // 单例实例

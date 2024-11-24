@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include <string>
 #include <map>
+USING_NS_CC;
 
 class Player : public cocos2d::Sprite {
 public:
@@ -44,14 +45,19 @@ private:
 	Player& operator=(const Player&) = delete;
 
 	//动画
-	std::map<std::string, cocos2d::Animate*> animations;
+	std::map<std::string, Animate*> animations;
 	std::string currentAnimationName;
-	cocos2d::Vec2 lastDirection;
+	Vec2 lastDirection;
 
-	void loadAnimations();
-	void createWalkFrames(const std::string& baseFilename, const std::string& animationName, int frameCount);
+	//加载站立帧(全部)
+	void Player::loadStandFrames();
+	//指定方向的站立帧
 	void createStandFrame(const std::string& filename, const std::string& animationName);
-	void playAnimation(const std::string& animationName);
+	//加载移动帧并创建动画
+	void createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount);
+
+
+	//设置站立动作
 	void setStandPose(const std::string& standPoseName);
 };
 
