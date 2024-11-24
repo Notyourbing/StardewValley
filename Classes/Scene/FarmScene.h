@@ -13,11 +13,14 @@ public:
 	CREATE_FUNC(Farm);
 
 private:
+	// 记录当前按下的键
+	std::set<cocos2d::EventKeyboard::KeyCode> keysPressed;
+
 	// 初始化键盘监听器
 	void initKeyboardListener();
 
-	// 获取玩家的新位置，更新地图偏移量
-	void updateMapPosition();
+	// 根据按下的键来更新玩家和地图移动的方向
+	void updateMovement();
 };
 
 #endif

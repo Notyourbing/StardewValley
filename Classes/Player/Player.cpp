@@ -30,18 +30,17 @@ bool Player::init() {
 	// 初始速度为零
 	velocity = Vec2::ZERO;
 
+	// 每dt时间调用一次
 	schedule([this](float dt) {
-			auto position = getPosition();
-			setPosition(position + velocity * dt);
+			// 获取界面尺寸和玩家尺寸
+			const auto visibleSize = Director::getInstance()->getVisibleSize();
 
-			// 获取界面尺寸
-			auto visibleSize = Director::getInstance()->getVisibleSize();
-			const Vec2 origin = Director::getInstance()->getVisibleOrigin();
-			// 边界检测，防止玩家移出屏幕
-			position = getPosition();
 			const Vec2 playerSize(Player::getInstance()->getContentSize());
-			position.x = std::max(origin.x + playerSize.x / 2, std::min(position.x, origin.x + visibleSize.width - playerSize.x / 2));
-			position.y = std::max(origin.y + playerSize.y / 2, std::min(position.y, origin.y + visibleSize.height - playerSize.y / 2));
+
+			auto position = getPosition() + velocity * dt;
+			// 边界检测，防止玩家移出屏幕
+			position.x = std::max(playerSize.x / 2, std::min(position.x, visibleSize.width - playerSize.x / 2));
+			position.y = std::max(playerSize.y / 2, std::min(position.y, visibleSize.height - playerSize.y / 2));
 			setPosition(position);
 		}, "player_movement");
 
@@ -52,9 +51,6 @@ void Player::moveByDirection(const Vec2& direction) {
 	velocity = direction * 200.0f;
 }
 
-void Player::stopMoving() {
-	velocity = Vec2::ZERO; // 停止移动
-}
 
 void Player::setPlayerName(const std::string& name) {
 	this->name = name;

@@ -16,7 +16,6 @@ static void problemLoading(const char* filename) {
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in WelcomeScene.cpp\n");
 }
 
-// 在init()函数中初始化实例
 bool Welcome::init() {
     // 首先检查是否初始化父类
     if (!Scene::init()) {
@@ -24,11 +23,12 @@ bool Welcome::init() {
     }
     // 整个视图的大小，我们使用1280*720
     const auto visibleSize = Director::getInstance()->getVisibleSize();
+
     // 原点坐标
     const Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
     // 按钮之间的间距
     const float buttonInterval = 24;
-
 
     auto background = Sprite::create("icon/background.png");
     if (background == nullptr) {
@@ -39,6 +39,7 @@ bool Welcome::init() {
         const float x = visibleSize.width / 2 + origin.x;
         const float y = visibleSize.height / 2 + origin.y;
         background->setPosition(Vec2(x, y));
+
         // 将背景添加到场景中，zOrder为-1确保它在其他节点的下面
         this->addChild(background, -1);
     }
@@ -104,7 +105,6 @@ bool Welcome::init() {
     menu->addChild(newGameItem);
     menu->addChild(loadGameItem);
     menu->addChild(cooperationItem);
-
     const float menuX = origin.x + visibleSize.width / 2;
     const float menuY = origin.y + visibleSize.height / 6;
     menu->setPosition(Vec2(menuX, menuY));
@@ -116,24 +116,18 @@ bool Welcome::init() {
         problemLoading("'fonts/Marker Felt.ttf'");
     }
     else {
-        // position the label on the center of the screen
         label->setPosition(Vec2(origin.x + visibleSize.width / 2,
             origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer
         this->addChild(label, 1);
     }
 
-    // add splash screen"
+    // 创建标题
     auto sprite = Sprite::create("icon/title.png");
     if (sprite == nullptr) {
         problemLoading("'icon/title.png'");
     }
     else {
-        // position the sprite on the center of the screen
         sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 3 * 2 + origin.y));
-
-        // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
     return true;
@@ -156,6 +150,6 @@ void Welcome::menuCooperationCallback(Ref* pSender) {
 }
 
 void Welcome::menuExitCallback(Ref* pSender) {
-    //Close the cocos2d-x game scene and quit the application
+    // 关闭应用程序
     Director::getInstance()->end();
 }

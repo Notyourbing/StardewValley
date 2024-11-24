@@ -1,4 +1,5 @@
 #include "FarmScene.h"
+#include "../Map/FarmMap.h"
 
 USING_NS_CC;
 
@@ -10,22 +11,18 @@ bool Farm::init() {
 	if (!Scene::init()) {
 		return false;
 	}
+
 	// 获取屏幕大小和原点
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	
-	// 加载农场的瓦片地图
-	auto map = TMXTiledMap::create("Maps/farm.tmx");
-	if (map == nullptr) {
-		return false;			//地图加载失败
+	auto farmMap = FarmMap::getInstance();
+	if (!farmMap->init("Maps/farm.tmx")) {
+		return false;
 	}
-	map->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
-	map->setPosition(origin.x, origin.y);
-	this->addChild(map, 0, "Map");
-
-	// 保存地图信息
-	auto mapSize = map->getContentSize();
-
+	const auto farmMapSize = farmMap->getMapSize();
+	farmMap->setPosition(visibleSize.width / 2 -farmMapSize.width / 2, visibleSize.height / 2 -farmMapSize.height / 2);
+	this->addChild(farmMap, 0);
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();
@@ -42,11 +39,6 @@ bool Farm::init() {
 	// 初始化键盘监听器
 	initKeyboardListener();
 
-	// 定时器，用于更新地图位置
-	schedule([this](float dt) {
-		updateMapPosition();
-		}, "update_map_position");
-
 	return true;
 }
 
@@ -54,72 +46,46 @@ void Farm::initKeyboardListener() {
 	// 创建键盘事件监听器
 	auto listener = EventListenerKeyboard::create();
 
-	listener->onKeyPressed = [](EventKeyboard::KeyCode keyCode, Event* event) {
-		Vec2 direction = Vec2::ZERO;
-
-		// 根据按键设置方向
-		switch (keyCode) {
-		case EventKeyboard::KeyCode::KEY_W:  // 上
-			direction.y = 1;
-			break;
-		case EventKeyboard::KeyCode::KEY_S:  // 下
-			direction.y = -1;
-			break;
-		case EventKeyboard::KeyCode::KEY_A:  // 左
-			direction.x = -1;
-			break;
-		case EventKeyboard::KeyCode::KEY_D:  // 右
-			direction.x = 1;
-			break;
-		default:
-			break;
-		}
-
-		Player::getInstance()->moveByDirection(direction);
+	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+		keysPressed.insert(keyCode);
+		updateMovement(); // 根据当前按下的键计算方向
 		};
 
-	listener->onKeyReleased = [](EventKeyboard::KeyCode KeyCode, Event* event) {
-		// 停止玩家移动
-		Player::getInstance()->stopMoving();
+	// 松开键时从 keysPressed 移除
+	listener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+		keysPressed.erase(keyCode);
+		updateMovement(); // 更新方向
 		};
 
 	// 添加监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-void Farm::updateMapPosition() {
-	auto mapNode = this->getChildByName("Map");
-	auto map = dynamic_cast<TMXTiledMap*>(mapNode); // 转换为 TMXTiledMap*
+void Farm::updateMovement() {
+	Vec2 direction = Vec2::ZERO;
+
+	// 检查按键集合，根据按下的键计算方向
+	if (keysPressed.count(EventKeyboard::KeyCode::KEY_W)) { // 上
+		direction.y += 1;
+	}
+	if (keysPressed.count(EventKeyboard::KeyCode::KEY_S)) { // 下
+		direction.y -= 1;
+	}
+	if (keysPressed.count(EventKeyboard::KeyCode::KEY_A)) { // 左
+		direction.x -= 1;
+	}
+	if (keysPressed.count(EventKeyboard::KeyCode::KEY_D)) { // 右
+		direction.x += 1;
+	}
+
+	// 归一化方向，避免斜方向移动速度过快
+	if (direction != Vec2::ZERO) {
+		direction.normalize();
+	}
+
+	// 更新玩家和地图的移动方向
 	auto player = Player::getInstance();
-
-	if (!map || !player) {
-		return;
-	}
-
-	// 获取地图和屏幕尺寸
-	auto mapSize = map->getContentSize();
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-
-	// 玩家当前位置
-	Vec2 playerPos = player->getPosition();
-
-	// 我真是服了，这个地图的锚点在左下角！！！我还以为和精灵一样在中心
-
-	float offsetX = playerPos.x - visibleSize.width / 2;
-	float offsetY = playerPos.y - visibleSize.height / 2;
-	if (offsetX >= (mapSize.width - visibleSize.width) / 2) {
-		offsetX = (mapSize.width - visibleSize.width) / 2;
-	}
-	if (offsetX <= -(mapSize.width - visibleSize.width) / 2) {
-		offsetX = -(mapSize.width - visibleSize.width) / 2;
-	}
-	if (offsetY >= (mapSize.height - visibleSize.height) / 2) {
-		offsetY = (mapSize.height - visibleSize.height) / 2;
-	}
-	if (offsetY <= -(mapSize.height - visibleSize.height) / 2) {
-		offsetY = -(mapSize.height - visibleSize.height) / 2;
-	}
-	const float currentX = -(mapSize.width - visibleSize.width) / 2 - offsetX;
-	const float currentY = -(mapSize.height - visibleSize.height) / 2 - offsetY;
-	map->setPosition(-(mapSize.width - visibleSize.width) / 2 -offsetX, -(mapSize.height - visibleSize.height) / 2 - offsetY);
+	auto farmMap = FarmMap::getInstance();
+	farmMap->moveMapByDirection(-direction);
+	player->moveByDirection(direction);
 }

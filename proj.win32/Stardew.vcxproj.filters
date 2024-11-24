@@ -16,6 +16,9 @@
     <Filter Include="Classes\Player">
       <UniqueIdentifier>{487be16b-1274-41cb-b390-053a40775949}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Map">
+      <UniqueIdentifier>{a4d31b03-8c24-45f0-a518-204577c02054}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +42,9 @@
     <ClCompile Include="..\Classes\Scene\FarmScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\FarmMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\FarmScene.h">
       <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\FarmMap.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
