@@ -54,7 +54,10 @@ void Farm::initKeyboardListener() {
 	// 松开键时从 keysPressed 移除
 	listener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
 		keysPressed.erase(keyCode);
+		// 停止玩家移动
+		Player::getInstance()->stopMoving();
 		updateMovement(); // 更新方向
+
 		};
 
 	// 添加监听器到事件分发器
