@@ -2,10 +2,7 @@
 #define __PLAYER_H__
 
 #include "cocos2d.h"
-#include <map>
 #include <string>
-
-USING_NS_CC;
 
 class Player : public cocos2d::Sprite {
 public:
@@ -24,9 +21,6 @@ public:
 	// 获取名字
 	std::string getPlayerName() const;
 
-	// 停止移动
-	void stopMoving();
-
 private:
 	// 玩家当前速度
 	cocos2d::Vec2 velocity;
@@ -44,19 +38,6 @@ private:
 	// 禁止拷贝和赋值
 	Player(const Player&) = delete;
 	Player& operator=(const Player&) = delete;
-
-	std::map<std::string, Animate*> animations;
-	//当前动画名称
-	std::string currentAnimationName;
-	//最后一个动作
-	Vec2 lastDirection;
-
-	//控制移动的动画
-	void loadAnimations();
-	void createWalkFrames(const std::string& baseFilename, const std::string& animationName, int frameCount);
-	void createStandFrame(const std::string& filename, const std::string& animationName);
-	void playAnimation(const std::string& animationName);
-	void setStandPose(const std::string& standPoseName);
 };
 
 #endif
