@@ -21,6 +21,8 @@
     </Filter>
     <Filter Include="Classes\Tool">
       <UniqueIdentifier>{bfa84379-bdd2-4e6e-ac63-b6e0de619ac5}</UniqueIdentifier>
+    <Filter Include="Classes\Npc">
+      <UniqueIdentifier>{b67dad6e-bcb9-4ce1-9fb5-caccf9054ed2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +52,8 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Tool.cpp">
       <Filter>Classes\Tool</Filter>
+    <ClCompile Include="..\Classes\Npc\Npc.cpp">
+      <Filter>Classes\Npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +83,8 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Tool.h">
       <Filter>Classes\Tool</Filter>
+    <ClInclude Include="..\Classes\Npc\Npc.h">
+      <Filter>Classes\Npc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
