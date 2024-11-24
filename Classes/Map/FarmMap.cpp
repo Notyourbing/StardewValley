@@ -51,6 +51,14 @@ bool FarmMap::init(const std::string& tmxFile) {
     return true;
 }
 
+bool FarmMap::npcInit(const Vec2& position, Npc* npc)
+{
+    npc->setPosition(position);
+    this->addChild(npc, 5);
+
+    return true;
+}
+
 void FarmMap::moveMapByDirection(const Vec2& direction) {
     velocity = direction * 200.f;
 }
@@ -58,3 +66,4 @@ void FarmMap::moveMapByDirection(const Vec2& direction) {
 Size FarmMap::getMapSize() const {
     return map->getContentSize();
 }
+

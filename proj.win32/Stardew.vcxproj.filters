@@ -19,6 +19,9 @@
     <Filter Include="Classes\Map">
       <UniqueIdentifier>{a4d31b03-8c24-45f0-a518-204577c02054}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Npc">
+      <UniqueIdentifier>{b67dad6e-bcb9-4ce1-9fb5-caccf9054ed2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,6 +48,9 @@
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Npc\Npc.cpp">
+      <Filter>Classes\Npc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Npc\Npc.h">
+      <Filter>Classes\Npc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

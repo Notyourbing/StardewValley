@@ -3,17 +3,49 @@
 #include <algorithm>
 #include <map>
 
+// 初始化静态成员变量
+Npc* Npc::instance = nullptr;
+
+Npc* Npc::getInstance()
+{
+    if (instance == nullptr) {
+        instance = new (std::nothrow) Npc();
+        if (instance && instance->init()) {
+            instance->autorelease();
+        }
+        else {
+            CC_SAFE_DELETE(instance);
+        }
+    }
+    return instance;
+}
+
 // 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话
-Npc::Npc(std::string name, std::string birthday,
-    std::vector<std::string> gifts,
-    std::vector<std::string> dislikes,
-    std::vector<std::string> dialogues)
-    : name(name), birthday(birthday), friendshipLevel(0),
-    gifts(gifts), dislikes(dislikes), dialogues(dialogues), playerRelation(RelationshipStatus::None) {
+Npc::Npc(const std::string& name, const std::string& birthdate,
+    const std::vector<std::string>& favoriteGifts,
+    const std::vector<std::string>& dislikedGifts,
+    const std::vector<std::string>& dialogues,
+    const std::string& imagePath,
+    const Vec2& initPosition)
+    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None),position(initPosition) {
+
+    // 加载NPC的精灵图像
+    sprite = Sprite::create(imagePath);  // 接收 std::string 类型的图像路径
+    if (sprite) {
+        sprite->setPosition(position);  // 设置默认位置
+        this->addChild(sprite, 5);  // 将精灵添加为该节点的子节点
+    }
+    else {
+        CCLOG("error!no npc sprite found!\n");
+    }
+}
+
+Npc::Npc()
+{
 }
 
 // 获取 NPC 的名字
-std::string Npc::getName() const {
+std::string Npc::getNpcName() const {
     return name;
 }
 

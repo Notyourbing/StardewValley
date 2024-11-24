@@ -1,6 +1,6 @@
 #include "FarmScene.h"
 #include "../Map/FarmMap.h"
-
+#include "../Npc/Npc.h"
 USING_NS_CC;
 
 Scene* Farm::createScene() {
@@ -23,6 +23,29 @@ bool Farm::init() {
 	const auto farmMapSize = farmMap->getMapSize();
 	farmMap->setPosition(visibleSize.width / 2 -farmMapSize.width / 2, visibleSize.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
+
+	// 创建NPC
+	
+	Npc* wizard = new Npc("Wizard Yuuu", "Fall 5",
+		{ "Magic Essence", "Diamond" },
+		{ "Milk" },
+		{ "Get out of my way", "How are you?","I like to spend time with you." },
+		{ "npcImages/wizard.png" },
+		Vec2(origin.x + 420, origin.y + 300));  // 传入图像路径
+
+	Npc* cleaner = new Npc("Cleaner Levi", "Winter 25",
+		{ "Milk", "Cleaning tools" },
+		{ "Clay" },
+		{ "...", "Ahh, hi.","Come and have some black-tea with me." },
+		{ "npcImages/cleaner.png" },
+		Vec2(origin.x + 300, origin.y + 300));
+	farmMap->npcInit(Vec2(origin.x + 300, origin.y + 300), wizard);
+	farmMap->npcInit(Vec2(origin.x + 370, origin.y + 300), cleaner);
+
+	//设置NPC的关系
+	wizard->setNpcRelation("cleaner", RelationshipStatus::Romance);
+	cleaner->setNpcRelation("wizard", RelationshipStatus::Romance);
+
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();

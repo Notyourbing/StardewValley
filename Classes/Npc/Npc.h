@@ -1,9 +1,11 @@
 #ifndef NPC_H
 #define NPC_H
 
+#include "cocos2d.h"
 #include <string>
 #include <vector>
 #include <map>
+using namespace cocos2d;
 
 enum class RelationshipStatus {
     None,       // 陌生
@@ -11,9 +13,10 @@ enum class RelationshipStatus {
     Romance     // 浪漫
 };
 
-class Npc {
+class Npc : public cocos2d::Node {
 private:
     std::string name;                   // NPC的名字
+    Sprite* sprite;                     // NPC的图像（作为精灵）
     std::string birthday;               // NPC的生日
     int friendshipLevel;                // NPC与玩家的亲密度（0-100）
     std::vector<std::string> gifts;     // NPC喜欢的礼物
@@ -21,16 +24,24 @@ private:
     std::vector<std::string> dialogues; // NPC的对话列表
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
     std::map<std::string, RelationshipStatus> npcRelations; // NPC之间的关系
+    Vec2 position;                  
 
 public:
+    // 单例实例
+    static Npc* instance;
+    // 单例模式获Npc实例
+    static Npc* getInstance();
     // 构造函数
-    Npc(std::string name, std::string birthday,
-        std::vector<std::string> gifts,
-        std::vector<std::string> dislikes,
-        std::vector<std::string> dialogues);
+    Npc(const std::string& name, const std::string& birthdate,
+        const std::vector<std::string>& favoriteGifts,
+        const std::vector<std::string>& dislikedGifts,
+        const std::vector<std::string>& dialogues,
+        const std::string& imagePath,
+        const Vec2& initPosition);
+    Npc();
 
     // 获取NPC的名字
-    std::string getName() const;
+    std::string getNpcName() const;
 
     // 获取NPC的生日
     std::string getBirthday() const;

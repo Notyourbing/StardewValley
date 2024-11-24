@@ -2,6 +2,7 @@
 #define __FARMMAP_H__
 
 #include "cocos2d.h"
+#include "../Npc/Npc.h"
 #include <string>
 class FarmMap : public cocos2d::Node {
 public:
@@ -10,6 +11,9 @@ public:
 
 	// 初始化地图
 	bool init(const std::string& tmxFile);
+
+	//随地图创建npc
+	bool npcInit(const Vec2& position, Npc* npc);
 
 	// 更新地图位置
 	void moveMapByDirection(const cocos2d::Vec2 &direction);
