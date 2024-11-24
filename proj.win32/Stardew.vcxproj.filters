@@ -45,6 +45,12 @@
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\TileMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Crop.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -69,6 +75,12 @@
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TileMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
