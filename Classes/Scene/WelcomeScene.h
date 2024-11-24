@@ -20,7 +20,6 @@ public:
     // 退出项的回调函数
     void menuExitCallback(cocos2d::Ref* pSender);
 
-    // 等价于 CREATE_FUNC(Welcome);
-    static Welcome* create();
+    CREATE_FUNC(Welcome);
 };
 #endif // __WELCOME_SCENE_H__

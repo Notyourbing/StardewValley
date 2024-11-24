@@ -15,6 +15,9 @@ public:
 private:
 	// 初始化键盘监听器
 	void initKeyboardListener();
+
+	// 获取玩家的新位置，更新地图偏移量
+	void updateMapPosition();
 };
 
 #endif

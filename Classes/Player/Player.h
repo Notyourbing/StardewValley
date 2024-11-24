@@ -19,7 +19,7 @@ public:
 	void stopMoving();
 
 	// 设置名字
-	void setName(const std::string& name);
+	void setPlayerName(const std::string& name);
 
 	// 获取名字
 	std::string getPlayerName() const;

@@ -80,7 +80,7 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 	}
 
 	// 将名字设置到Player单例中
-	Player::getInstance()->setName(playerName);
+	Player::getInstance()->setPlayerName(playerName);
 
 	// 进入FramScene
 	auto framScene = Farm::create();

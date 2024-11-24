@@ -39,8 +39,9 @@ bool Player::init() {
 			const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 			// ±ß½ç¼ì²â£¬·ÀÖ¹Íæ¼ÒÒÆ³öÆÁÄ»
 			position = getPosition();
-			position.x = std::max(origin.x, std::min(position.x, origin.x + visibleSize.width));
-			position.y = std::max(origin.y, std::min(position.y, origin.y + visibleSize.height));
+			const Vec2 playerSize(Player::getInstance()->getContentSize());
+			position.x = std::max(origin.x + playerSize.x / 2, std::min(position.x, origin.x + visibleSize.width - playerSize.x / 2));
+			position.y = std::max(origin.y + playerSize.y / 2, std::min(position.y, origin.y + visibleSize.height - playerSize.y / 2));
 			setPosition(position);
 		}, "player_movement");
 
@@ -55,7 +56,7 @@ void Player::stopMoving() {
 	velocity = Vec2::ZERO; // Í£Ö¹ÒÆ¶¯
 }
 
-void Player::setName(const std::string& name) {
+void Player::setPlayerName(const std::string& name) {
 	this->name = name;
 }
 

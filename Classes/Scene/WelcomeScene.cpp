@@ -10,22 +10,6 @@ Scene* Welcome::createScene() {
     return Welcome::create();
 }
 
-Welcome* Welcome::create() {
-    // 加了(std::nothrow)表示如果分配内存失败不抛出异常，返回nullptr即可
-    Welcome* pRet = new(std::nothrow) Welcome();
-    // init()体现了cocos中常用的二段构建：把申请内存和初始化的操作分离
-    if (pRet && pRet->init()) {
-        // 自动释放
-        pRet->autorelease();
-        return pRet;
-    }
-    else {
-        delete pRet;
-        pRet = nullptr;
-        return nullptr;
-    }
-}
-
 // 打印有用的报错信息
 static void problemLoading(const char* filename) {
     printf("Error while loading: %s\n", filename);

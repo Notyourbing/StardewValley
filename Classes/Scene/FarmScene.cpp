@@ -3,17 +3,7 @@
 USING_NS_CC;
 
 Scene* Farm::createScene() {
-	auto scene = new (std::nothrow) Farm();
-	// 二段构建
-	if (scene && scene->init()) {
-		scene->autorelease();
-		return scene;
-	}
-	else {
-		delete scene;
-		scene = nullptr;
-		return nullptr;
-	}
+	return Farm::create();
 }
 
 bool Farm::init() {
@@ -21,25 +11,20 @@ bool Farm::init() {
 		return false;
 	}
 	// 获取屏幕大小和原点
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	const auto visibleSize = Director::getInstance()->getVisibleSize();
+	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	
 	// 加载农场的瓦片地图
-
-	auto map = TMXTiledMap::create("Scene/FarmScene.tmx");
-
+	auto map = TMXTiledMap::create("Maps/farm.tmx");
 	if (map == nullptr) {
 		return false;			//地图加载失败
 	}
-	this->addChild(map, 0, 99);
+	map->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
+	map->setPosition(origin.x, origin.y);
+	this->addChild(map, 0, "Map");
 
+	// 保存地图信息
 	auto mapSize = map->getContentSize();
-	auto winSize = Director::getInstance()->getVisibleSize();
-
-	const float x = winSize.width / 2.0f - mapSize.width / 2.0f;
-	const float y = winSize.height / 2.0f - mapSize.height / 2.0f;
-
-	map->setPosition(Vec2(x, y));
 
 
 	// 获取玩家单例并添加到场景中
@@ -48,14 +33,19 @@ bool Farm::init() {
 	this->addChild(player, 3);
 
 	// 显示玩家名字
-	auto nameLabel = Label::createWithTTF(player->getName(), "fonts/Marker Felt.ttf", 24);
+	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", "fonts/Marker Felt.ttf", 24);
 	if (nameLabel) {
 		nameLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 50));
-		this->addChild(nameLabel, 2);
+		this->addChild(nameLabel, 4);
 	}
 
 	// 初始化键盘监听器
 	initKeyboardListener();
+
+	// 定时器，用于更新地图位置
+	schedule([this](float dt) {
+		updateMapPosition();
+		}, "update_map_position");
 
 	return true;
 }
@@ -95,4 +85,41 @@ void Farm::initKeyboardListener() {
 
 	// 添加监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void Farm::updateMapPosition() {
+	auto mapNode = this->getChildByName("Map");
+	auto map = dynamic_cast<TMXTiledMap*>(mapNode); // 转换为 TMXTiledMap*
+	auto player = Player::getInstance();
+
+	if (!map || !player) {
+		return;
+	}
+
+	// 获取地图和屏幕尺寸
+	auto mapSize = map->getContentSize();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+
+	// 玩家当前位置
+	Vec2 playerPos = player->getPosition();
+
+	// 我真是服了，这个地图的锚点在左下角！！！我还以为和精灵一样在中心
+
+	float offsetX = playerPos.x - visibleSize.width / 2;
+	float offsetY = playerPos.y - visibleSize.height / 2;
+	if (offsetX >= (mapSize.width - visibleSize.width) / 2) {
+		offsetX = (mapSize.width - visibleSize.width) / 2;
+	}
+	if (offsetX <= -(mapSize.width - visibleSize.width) / 2) {
+		offsetX = -(mapSize.width - visibleSize.width) / 2;
+	}
+	if (offsetY >= (mapSize.height - visibleSize.height) / 2) {
+		offsetY = (mapSize.height - visibleSize.height) / 2;
+	}
+	if (offsetY <= -(mapSize.height - visibleSize.height) / 2) {
+		offsetY = -(mapSize.height - visibleSize.height) / 2;
+	}
+	const float currentX = -(mapSize.width - visibleSize.width) / 2 - offsetX;
+	const float currentY = -(mapSize.height - visibleSize.height) / 2 - offsetY;
+	map->setPosition(-(mapSize.width - visibleSize.width) / 2 -offsetX, -(mapSize.height - visibleSize.height) / 2 - offsetY);
 }
