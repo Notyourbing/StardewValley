@@ -22,6 +22,9 @@
     <Filter Include="win32">
       <UniqueIdentifier>{f4e02088-0dc5-4829-8539-65f715748d24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Tool">
+      <UniqueIdentifier>{6cb58ea4-24a9-46c8-aa5a-1b42cfa65e10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -51,6 +54,12 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Axe.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Tool.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -79,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Axe.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Tool.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

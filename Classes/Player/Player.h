@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 
+// 玩家类
 class Player : public cocos2d::Sprite {
 public:
 	// 单例模式获取玩家实例
