@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 #include <string>
 #include <map>
-USING_NS_CC;
 
 class Player : public cocos2d::Sprite {
 public:
@@ -40,14 +39,14 @@ private:
 	Player();
 	~Player();
 
-	//// ½ûÖ¹¿½±´ºÍ¸³Öµ
-	//Player(const Player&) = delete;
-	//Player& operator=(const Player&) = delete;
+	// ½ûÖ¹¿½±´ºÍ¸³Öµ
+	Player(const Player&) = delete;
+	Player& operator=(const Player&) = delete;
 
 	//¶¯»­
-	std::map<std::string, Animate*> animations;
+	std::map<std::string, cocos2d::Animate*> animations;
 	std::string currentAnimationName;
-	Vec2 lastDirection;
+	cocos2d::Vec2 lastDirection;
 
 	void loadAnimations();
 	void createWalkFrames(const std::string& baseFilename, const std::string& animationName, int frameCount);

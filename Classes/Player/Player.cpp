@@ -8,6 +8,7 @@ static void problemLoading(const char* filename) {
 	CCLOG("Error while loading: %s", filename);
 	printf("Error while loading: %s\n", filename);
 }
+
 // 初始化静态成员变量
 Player* Player::instance = nullptr;
 
@@ -58,7 +59,6 @@ bool Player::init() {
 
 	return true;
 }
-
 
 void Player::playAnimation(const std::string& animationName) {
     CCLOG("Play animation: %s", animationName.c_str());
