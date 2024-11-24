@@ -76,7 +76,6 @@ void Player::moveByDirection(const Vec2& direction) {
     }
     else if (direction.y > 0) {
         createWalkAnimation("up/", "walkUp", 4);
-
         lastDirection = Vec2(0, 1); // 记录最后移动的方向
     }
     else if (direction.y < 0) {
