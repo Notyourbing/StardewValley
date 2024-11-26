@@ -13,7 +13,7 @@ public:
 	bool init();
 
 	// 使用工具
-	void useTool(const cocos2d::Vec2& targetPosition) override;
+	void useTool() override;
 };
 
 #endif

@@ -12,7 +12,7 @@ Tool* Tool::create(const std::string& name) {
 	return nullptr;
 }
 
-void Tool::useTool(const Vec2& targetPosition) {}
+void Tool::useTool() {}
 
 bool Tool::init(const std::string& name) {
 	toolName = name;

@@ -21,6 +21,9 @@ private:
 
 	// 根据按下的键来更新玩家和地图移动的方向
 	void updateMovement();
+
+	// 初始化鼠标监听器
+	void initMouseListener();
 };
 
 #endif

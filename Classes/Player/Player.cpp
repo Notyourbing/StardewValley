@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "SimpleAudioEngine.h"
+#include "../Tool/Axe.h"
+
 USING_NS_CC;
 using namespace CocosDenshion;
 
@@ -8,18 +10,11 @@ static void problemLoading(const char* filename) {
     CCLOG("Error while loading: %s", filename);
     printf("Error while loading: %s\n", filename);
 }
+
 // 初始化静态成员变量
 Player* Player::instance = nullptr;
 
-Player::Player()
-    : velocity(Vec2::ZERO),
-    name(""),
-    currentAnimationName(""),
-    lastDirection(Vec2::ZERO) {
-}
-
-Player::~Player() {}
-
+// 单例模式获取玩家实例
 Player* Player::getInstance() {
     if (instance == nullptr) {
         instance = new (std::nothrow) Player();
@@ -33,6 +28,16 @@ Player* Player::getInstance() {
     return instance;
 }
 
+Player::Player()
+    : velocity(Vec2::ZERO),
+    name(""),
+    currentAnimationName(""),
+    lastDirection(Vec2::ZERO) {
+}
+
+Player::~Player() {}
+
+// 初始化
 bool Player::init() {
     if (!Sprite::initWithFile("playerWalkImages/standDown.png")) {
         problemLoading("playerWalkImages/standDown.png");
@@ -41,6 +46,19 @@ bool Player::init() {
 
     // 初始速度为零
     velocity = Vec2::ZERO;
+
+    // 创建工具（默认是斧头），但不添加到场景中
+    currentTool = Axe::create();
+    if (currentTool) {
+        // 初始时隐藏工具
+        currentTool->setVisible(false);
+        currentTool->setAnchorPoint(Vec2(0, 0));
+        // 工具作始终为玩家的子节点
+        addChild(currentTool);
+        currentTool->setPosition(55, 45);
+
+    }
+
     loadStandFrames();
     // 每dt时间调用一次
     schedule([this](float dt) {
@@ -57,6 +75,16 @@ bool Player::init() {
         }, "playerMovement");
 
     return true;
+}
+
+// 设置玩家姓名
+void Player::setPlayerName(const std::string& name) {
+    this->name = name;
+}
+
+// 获取玩家姓名
+std::string Player::getPlayerName() const {
+    return name;
 }
 
 //根据移动方向播放动画并移动角色
@@ -104,13 +132,10 @@ void Player::stopMoving() {
     }
 }
 
-void Player::setPlayerName(const std::string& name) {
-    this->name = name;
+Vec2 Player::getLastDirection() const {
+    return lastDirection;
 }
 
-std::string Player::getPlayerName() const {
-    return name;
-}
 // 加载全部站立帧的纹理
 void Player::loadStandFrames() {
     SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();
@@ -171,5 +196,29 @@ void Player::setStandPose(const std::string& standPoseName) {
     SpriteFrame* frame = frameCache->getSpriteFrameByName(standPoseName);
     if (frame) {
         setSpriteFrame(frame);
+    }
+}
+
+// 设置当前工具
+void Player::setCurrentTool(Tool* tool) {
+    currentTool = tool;
+}
+
+// 使用当前工具
+void Player::useCurrentTool() {
+    if (currentTool) {
+        // 工具位置和人物位置相同
+        // currentTool->setPosition(getPosition());
+        currentTool->setVisible(true);
+        currentTool->useTool();
+
+        // 使用完成后隐藏工具
+        currentTool->runAction(Sequence::create(
+            DelayTime::create(0.5f), // 等待工具使用完成
+            CallFunc::create([this]() {
+                currentTool->setVisible(false);
+                }),
+            nullptr
+        ));
     }
 }

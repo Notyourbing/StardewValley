@@ -59,9 +59,9 @@ bool Farm::init() {
 		this->addChild(nameLabel, 4);
 	}
 
-	// ³õÊ¼»¯¼üÅÌ¼àÌýÆ÷
+	// ³õÊ¼»¯¼üÅÌºÍÊó±ê¼àÌýÆ÷
 	initKeyboardListener();
-
+	initMouseListener();
 	return true;
 }
 
@@ -114,4 +114,17 @@ void Farm::updateMovement() {
 	auto farmMap = FarmMap::getInstance();
 	farmMap->moveMapByDirection(-direction);
 	player->moveByDirection(direction);
+}
+
+void Farm::initMouseListener() {
+	auto listener = EventListenerMouse::create();
+
+	listener->onMouseDown = [](Event* event) {
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+			Player::getInstance()->useCurrentTool();
+		}
+	};
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }

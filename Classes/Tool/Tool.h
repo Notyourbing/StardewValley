@@ -14,7 +14,7 @@ public:
 	virtual bool init(const std::string& name);
 
 	// 使用工具
-	virtual void useTool(const cocos2d::Vec2& targetPosition);
+	virtual void useTool();
 
 	// 获取工具名称
 	std::string getToolName() const {

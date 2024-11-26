@@ -1,5 +1,5 @@
 #include "Axe.h"
-
+#include "../Player/Player.h"
 USING_NS_CC;
 
 Axe* Axe::create() {
@@ -17,15 +17,21 @@ bool Axe::init() {
 	return Tool::init("axe");
 }
 
-void Axe::useTool(const Vec2& targetPosition) {
-	// 播放斧头使用动画（示例实现）
-	auto chopAction = Sequence::create(
-		MoveTo::create(0.1f, targetPosition), // 移动到目标位置
+void Axe::useTool() {
+	// 播放斧头使用动画
+	auto rotationAction = RotateBy::create(0.2f, 90); // 顺时针旋转九十度，耗时0.2秒
+	auto resetRotationAction = RotateBy::create(0.2f, -90); // 回复初始角度
+	
+	// 动作序列
+	auto sequence = Sequence::create(
+		rotationAction,
 		CallFunc::create([=]() {
-			CCLOG("Chopping at position (%f, %f)", targetPosition.x, targetPosition.y);
+			CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
+			// todo 可以添加逻辑，比如检测是否命中目标
 			}),
-		MoveTo::create(0.1f, this->getPosition()), // 返回原位置
+		resetRotationAction,
 		nullptr
 	);
-	this->runAction(chopAction);
+
+	this->runAction(sequence);
 }
