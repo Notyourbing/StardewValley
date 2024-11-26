@@ -24,7 +24,6 @@ bool Farm::init() {
 	farmMap->setPosition(visibleSize.width / 2 - farmMapSize.width / 2, visibleSize.height / 2 - farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
-<<<<<<< HEAD
 	// 加载TMX地图
 	tmxMap = TMXTiledMap::create("Maps/farm.tmx");
 	if (!tmxMap) {
@@ -38,7 +37,6 @@ bool Farm::init() {
 
 	// 初始化瓦片节点
 	//initTileNodes();
-=======
 	// 创建NPC
 	
 	Npc* wizard = new Npc("Wizard Yuuu", "Fall 5",
@@ -60,8 +58,6 @@ bool Farm::init() {
 	//设置NPC的关系
 	wizard->setNpcRelation("cleaner", RelationshipStatus::Romance);
 	cleaner->setNpcRelation("wizard", RelationshipStatus::Romance);
-
->>>>>>> origin/master
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();
