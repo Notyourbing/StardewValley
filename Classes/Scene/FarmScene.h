@@ -35,7 +35,6 @@ private:
 	// 根据按下的键来更新玩家和地图移动的方向
 	void updateMovement();
 
-<<<<<<< HEAD
 	Vec2 worldToTileCoord(const Vec2& worldPosition) const;
 
 	// 地图对象
@@ -50,10 +49,9 @@ private:
 	std::vector<std::shared_ptr<TileNode>> tileNodes;
 	// 定义 houses 成员变量
 	std::vector<House*> houses; 
-=======
 	// 初始化鼠标监听器
 	void initMouseListener();
->>>>>>> origin/master
+
 };
 
 #endif

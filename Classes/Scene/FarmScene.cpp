@@ -144,7 +144,6 @@ void Farm::updateMovement() {
 	player->moveByDirection(direction);
 }
 
-<<<<<<< HEAD
 void Farm::initLayers(){
 	// 初始化背景层
 	backgroundLayer = tmxMap->getLayer("background");
@@ -239,7 +238,7 @@ bool Farm::isCollidingWithTile(const Vec2& position) const {
 
 	CCLOG("No collision detected at position (%f, %f).", mapPosition.x, mapPosition.y);
 	return false;  // 如果是可通行区域，返回无碰撞
-=======
+}
 void Farm::initMouseListener() {
 	auto listener = EventListenerMouse::create();
 
@@ -251,5 +250,5 @@ void Farm::initMouseListener() {
 	};
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
->>>>>>> origin/master
+
 }
