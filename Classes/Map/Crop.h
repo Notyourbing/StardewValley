@@ -1,9 +1,5 @@
-#ifndef __CROP_H__
-#define __CROP_H__
-
-#include "cocos2d.h"
-#include "TileMap.h"
 #include<string>
+#include "cocos2d.h"
 
 USING_NS_CC;
 
@@ -30,10 +26,9 @@ public:
 
 
 	// 检查作物是否准备好收获
-	virtual bool canHarvest() const = 0;
+	//virtual bool canHarvest() const = 0;
 
 	// 获取作物名称（由子类实现）
-	virtual std::string getCropName() const = 0;
 
 	// 标记作物是否已浇水
 	void water();
@@ -60,8 +55,8 @@ class Potato : public Crop
 public:
 	Potato();
 	void updateGrowth(int deltaTime) override;
-	bool canHarvest() const override;
-	std::string getCropName() const override;
+	//bool canHarvest() const override;
+	
 private:
 	int maturityTime = 3;
 };
@@ -71,8 +66,8 @@ class Corn : public Crop
 public:
 	Corn();
 	void updateGrowth(int deltaTime) override;
-	bool canHarvest() const override;
-	std::string getCropName() const override;
+	//bool canHarvest() const override;
+	
 private:
 	int maturityTime = 4;
 };
@@ -82,10 +77,8 @@ class Cabbage : public Crop
 public:
 	Cabbage();
 	void updateGrowth(int deltaTime) override;
-	bool canHarvest() const override;
-	std::string getCropName() const override;
+	//bool canHarvest() const override;
+	
 private:
 	int maturityTime = 5;
 };
-
-#endif

@@ -1,5 +1,5 @@
 #include "TileMap.h"
-#include "Crop.h"
+
 
 USING_NS_CC;
 
@@ -21,13 +21,13 @@ void Soil::plantCrop(CropType cropType)
 	if (isPlowed && !currentCrop) {
 		switch (cropType) {
 		case CropType::POTATO:
-			currentCrop = new Potato();
+			//currentCrop = new Potato();
 			break;
 		case CropType::CRON:
-			currentCrop = new Corn();
+			//currentCrop = new Corn();
 			break;
 		case CropType::CABBAGE:
-			currentCrop = new Cabbage();
+			//currentCrop = new Cabbage();
 			break;
 		}
 	}
@@ -95,10 +95,10 @@ void TreeStump::interact()
 		//CCLOG("Tree Stump has been removed, turning into Soil.");
 
 		// 替换为土壤
-		auto soil = new Soil();
-		soil->setPosition(this->getPosition());  // 保留当前位置
-		this->getParent()->addChild(soil);      // 将土壤添加到图层
-		this->removeFromParent();               // 删除树桩
+		//auto soil = new Soil();
+		//soil->setPosition(this->getPosition());  // 保留当前位置
+		//this->getParent()->addChild(soil);      // 将土壤添加到图层
+		//this->removeFromParent();               // 删除树桩
 	}
 }
 
@@ -109,9 +109,9 @@ void Flower::interact()
 		//CCLOG("Flower has been removed, turning into Soil.");
 
 		// 替换为土壤
-		auto soil = new Soil();
-		soil->setPosition(this->getPosition());  // 保留当前位置
-		this->getParent()->addChild(soil);      // 将土壤添加到图层
-		this->removeFromParent();               // 删除花
+		//auto soil = new Soil();
+		//soil->setPosition(this->getPosition());  // 保留当前位置
+		//this->getParent()->addChild(soil);      // 将土壤添加到图层
+		//this->removeFromParent();               // 删除花
 	}
 }

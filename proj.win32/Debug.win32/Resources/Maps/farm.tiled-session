@@ -5,25 +5,28 @@
     },
     "activeFile": "farm.tmx",
     "expandedProjectPaths": [
+        "."
     ],
     "fileStates": {
         "farm.tmx": {
-            "scale": 0.7345262096774193,
-            "selectedLayer": 0,
+            "scale": 0.6966985887096774,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 942.1038907568792,
-                "y": 543.888012077129
+                "x": 991.8205823837947,
+                "y": 511.699041417978
             }
         },
         "farm.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "C:/Users/24170/Desktop/farm",
-    "map.height": 34,
+    "last.imagePath": "C:/Users/24170/Desktop/Maps",
+    "map.height": 16,
     "map.lastUsedFormat": "tmx",
-    "map.width": 62,
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 31,
     "openFiles": [
         "farm.tmx",
         "farm.tsx"
@@ -33,5 +36,9 @@
         "farm.tsx",
         "farm.tmx"
     ],
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
 }

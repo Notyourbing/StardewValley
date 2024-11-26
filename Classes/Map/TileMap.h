@@ -1,16 +1,11 @@
-#ifndef __Tile_Map_H__
-#define __Tile_Map_H__
-
-#include "Crop.h"
-#include "cocos2d.h"
 #include<vector>
 #include<memory>
 #include<array>
 #include<unordered_map>
+#include "cocos2d.h"
+#include "Crop.h"
 
 USING_NS_CC;
-
-
 
 // 瓦片类型
 enum class TileType
@@ -60,7 +55,17 @@ public:
     bool harvestCrop();
 
     // 交互方法
-    void interact() override;
+    void interact() override {
+        if (!isPlowed) {
+            plow();  // 如果土地未耕种，进行耕种
+        }
+        else if (isPlowed && !isWatered) {
+            water();  // 如果耕种了但未浇水，进行浇水
+        }
+        else if (currentCrop) {
+            updateCropGrowth(1);  // 更新作物生长
+        }
+    }
 
     // 浇水
     void water();
@@ -226,5 +231,3 @@ private:
     int width, height;  // 地图的宽度和高度
     std::vector<TileMapLayer*> layers;  // 图层列表
 };
-
-#endif
