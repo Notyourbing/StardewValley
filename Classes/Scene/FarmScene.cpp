@@ -1,6 +1,6 @@
 #include "FarmScene.h"
 #include "../Map/FarmMap.h"
-
+#include "../Npc/Npc.h"
 USING_NS_CC;
 
 Scene* Farm::createScene() {
@@ -24,6 +24,7 @@ bool Farm::init() {
 	farmMap->setPosition(visibleSize.width / 2 - farmMapSize.width / 2, visibleSize.height / 2 - farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
+<<<<<<< HEAD
 	// 加载TMX地图
 	tmxMap = TMXTiledMap::create("Maps/farm.tmx");
 	if (!tmxMap) {
@@ -37,6 +38,30 @@ bool Farm::init() {
 
 	// 初始化瓦片节点
 	//initTileNodes();
+=======
+	// 创建NPC
+	
+	Npc* wizard = new Npc("Wizard Yuuu", "Fall 5",
+		{ "Magic Essence", "Diamond" },
+		{ "Milk" },
+		{ "Get out of my way", "How are you?","I like to spend time with you." },
+		{ "npcImages/wizard.png" },
+		Vec2(origin.x + 420, origin.y + 300));  // 传入图像路径
+
+	Npc* cleaner = new Npc("Cleaner Levi", "Winter 25",
+		{ "Milk", "Cleaning tools" },
+		{ "Clay" },
+		{ "...", "Ahh, hi.","Come and have some black-tea with me." },
+		{ "npcImages/cleaner.png" },
+		Vec2(origin.x + 300, origin.y + 300));
+	farmMap->npcInit(Vec2(origin.x + 300, origin.y + 300), wizard);
+	farmMap->npcInit(Vec2(origin.x + 370, origin.y + 300), cleaner);
+
+	//设置NPC的关系
+	wizard->setNpcRelation("cleaner", RelationshipStatus::Romance);
+	cleaner->setNpcRelation("wizard", RelationshipStatus::Romance);
+
+>>>>>>> origin/master
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();
@@ -50,9 +75,9 @@ bool Farm::init() {
 		this->addChild(nameLabel, 4);
 	}
 
-	// 初始化键盘监听器
+	// 初始化键盘和鼠标监听器
 	initKeyboardListener();
-
+	initMouseListener();
 	return true;
 }
 
@@ -119,6 +144,7 @@ void Farm::updateMovement() {
 	player->moveByDirection(direction);
 }
 
+<<<<<<< HEAD
 void Farm::initLayers(){
 	// 初始化背景层
 	backgroundLayer = tmxMap->getLayer("background");
@@ -213,4 +239,17 @@ bool Farm::isCollidingWithTile(const Vec2& position) const {
 
 	CCLOG("No collision detected at position (%f, %f).", mapPosition.x, mapPosition.y);
 	return false;  // 如果是可通行区域，返回无碰撞
+=======
+void Farm::initMouseListener() {
+	auto listener = EventListenerMouse::create();
+
+	listener->onMouseDown = [](Event* event) {
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+			Player::getInstance()->useCurrentTool();
+		}
+	};
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+>>>>>>> origin/master
 }

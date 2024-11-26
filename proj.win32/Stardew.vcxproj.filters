@@ -1,33 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes">
-      <UniqueIdentifier>{f761274c-718f-4f3e-9449-6a4b8c82a442}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Scene">
-      <UniqueIdentifier>{4adda335-98ca-490e-8a92-75b9fe6571ce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Player">
-      <UniqueIdentifier>{487be16b-1274-41cb-b390-053a40775949}</UniqueIdentifier>
+      <UniqueIdentifier>{8e8d24ae-f0bf-4613-a020-b6f67509367c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Map">
-      <UniqueIdentifier>{a4d31b03-8c24-45f0-a518-204577c02054}</UniqueIdentifier>
+      <UniqueIdentifier>{b99a396a-2ecf-4425-aae8-85e79ec9bcd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Npc">
+      <UniqueIdentifier>{6a90c18d-7630-40a9-aaa9-9c5cb01b37a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Player">
+      <UniqueIdentifier>{2c4192af-e5cd-4d38-8e59-2ad28bfe964c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{11c9042c-3196-4a5c-9ce5-4eb8f3851c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{a1762975-6d47-4910-9f7c-46bf6266d6de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{f4e02088-0dc5-4829-8539-65f715748d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Tool">
+      <UniqueIdentifier>{6cb58ea4-24a9-46c8-aa5a-1b42cfa65e10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
+    <ClCompile Include="..\Classes\Map\FarmMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Npc\Npc.cpp">
+      <Filter>Classes\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player\Player.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\AppDelegate.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\CooperationScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\FarmScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\NewGameScene.cpp">
@@ -36,14 +51,14 @@
     <ClCompile Include="..\Classes\Scene\WelcomeScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Player\Player.cpp">
-      <Filter>Classes\Player</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\FarmScene.cpp">
-      <Filter>Classes\Scene</Filter>
+    <ClCompile Include="..\Classes\Tool\Axe.cpp">
+      <Filter>Classes\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\FarmMap.cpp">
-      <Filter>Classes\Map</Filter>
+    <ClCompile Include="..\Classes\Tool\Tool.cpp">
+      <Filter>Classes\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Map\TileMap.cpp">
       <Filter>Classes\Map</Filter>
@@ -53,13 +68,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
+    <ClInclude Include="..\Classes\Map\FarmMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Npc\Npc.h">
+      <Filter>Classes\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player\Player.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\AppDelegate.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\CooperationScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\FarmScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\NewGameScene.h">
@@ -68,14 +92,14 @@
     <ClInclude Include="..\Classes\Scene\WelcomeScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Player\Player.h">
-      <Filter>Classes\Player</Filter>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\FarmScene.h">
-      <Filter>Classes\Scene</Filter>
+    <ClInclude Include="..\Classes\Tool\Axe.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\FarmMap.h">
-      <Filter>Classes\Map</Filter>
+    <ClInclude Include="..\Classes\Tool\Tool.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\TileMap.h">
       <Filter>Classes\Map</Filter>

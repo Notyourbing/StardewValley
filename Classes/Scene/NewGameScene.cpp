@@ -20,34 +20,78 @@ bool NewGame::init() {
 	}
 
 	// 获取屏幕大小和原点
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	const auto visibleSize = Director::getInstance()->getVisibleSize();
+	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto titleLabel = Label::createWithTTF("Enter Player Name", "fonts/Marker Felt.ttf", 36);
-	titleLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 100));
-	this->addChild(titleLabel, 1);
+	// 创建背景
+	const std::string backgroundPath = "icon/coopBackground.png";
+	auto background = Sprite::create(backgroundPath);
+	if (background == nullptr) {
+		problemLoading(backgroundPath.c_str());
+		return false;
+	}
+	else {
+		background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+		this->addChild(background, 0);
+	}
+
+	// 创建合作框背景
+	const std::string coopPanelPath = "icon/cooperationPanel.png";
+	auto coopPanel = Sprite::create(coopPanelPath);
+	if (coopPanel == nullptr) {
+		problemLoading(coopPanelPath.c_str());
+		return false;
+	}
+	else {
+		coopPanel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+		this->addChild(coopPanel, 1);
+	}
+
+	// 创建输入框背景条
+	const std::string nameBarPath = "icon/nameBar.png";
+	auto nameBar = Sprite::create(nameBarPath);
+	if (nameBar == nullptr) {
+		problemLoading(nameBarPath.c_str());
+		return false;
+	}
+	else {
+		nameBar->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2 + 80));
+		this->addChild(nameBar, 2);
+	}
+
+	// 创建标题标签
+	const std::string fontPath = "fonts/Marker Felt.ttf";
+	auto titleLabel = Label::createWithTTF("Please Enter Your Name (English or Number).", fontPath, 36);
+	if (titleLabel == nullptr) {
+		problemLoading(fontPath.c_str());
+		return false;
+	}
+	titleLabel->setTextColor(Color4B::BLUE);
+	titleLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 150));
+	this->addChild(titleLabel, 3);
 
 	// 创建输入框
-	nameInput = ui::TextField::create("Enter Name", "fonts/Marker Felt.ttf", 30);
-	nameInput->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2 + 50));
-	nameInput->setMaxLength(15); // 限制名字长度
+	nameInput = ui::TextField::create("Enter Here!", fontPath, 30);
+	if (nameInput == nullptr) {
+		problemLoading("nameInput create wrong");
+		return false;
+	}
+	nameInput->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2 + 80));
+	nameInput->setMaxLength(10); // 限制名字长度
 	nameInput->setMaxLengthEnabled(true);
 	nameInput->setTextColor(Color4B::WHITE);
-	nameInput->setCursorEnabled(true); // 显示光标
-	this->addChild(nameInput, 1);
+	this->addChild(nameInput, 3);
 
 	// 创建OK按钮
-	auto okButton = ui::Button::create("icon/okButton.png", "icon/okButton.png");
+	const std::string okButtonPath = "icon/okButton.png";
+	auto okButton = ui::Button::create(okButtonPath, okButtonPath);
 	okButton->setPosition(Vec2(origin.x + visibleSize.width * 0.7, origin.y + visibleSize.height * 0.3));
 	okButton->addClickEventListener(CC_CALLBACK_1(NewGame::onOKButtonClicked, this));
-	this->addChild(okButton, 1);
-
+	this->addChild(okButton, 3);
 
 	// 返回项
-	auto backItem = MenuItemImage::create(
-		"icon/backButton.png",
-		"icon/backButton.png",
-		CC_CALLBACK_1(NewGame::backCallBack, this));
+	const std::string backButtonPath = "icon/backButton.png";
+	auto backItem = MenuItemImage::create(backButtonPath, backButtonPath, CC_CALLBACK_1(NewGame::backCallBack, this));
 	if (backItem == nullptr ||
 		backItem->getContentSize().width <= 0 ||
 		backItem->getContentSize().height <= 0) {
@@ -65,7 +109,7 @@ bool NewGame::init() {
 	// 创建菜单容器
 	auto menu = Menu::create(backItem, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 2);
+	this->addChild(menu, 3);
 
 	return true;
 }
@@ -76,7 +120,7 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 	
 	// 如果名字为空，设置为默认名字
 	if (playerName.empty()) {
-		playerName = "kuanye";
+		playerName = "Kuanye";
 	}
 
 	// 将名字设置到Player单例中
