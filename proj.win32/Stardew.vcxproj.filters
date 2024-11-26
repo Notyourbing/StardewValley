@@ -60,6 +60,12 @@
     <ClCompile Include="..\Classes\Tool\Tool.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\Crop.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\TileMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -94,6 +100,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Tool.h">
       <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Crop.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\FramMap.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TileMap.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

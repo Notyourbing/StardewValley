@@ -3,3 +3,4 @@ D:\Cocos2d\StardewValley\proj.win32\Debug.win32\Stardew.exe
 D:\Stardew_Valley\Stardew_Valley\proj.win32\Debug.win32\Stardew.exe
 D:\11-23\proj.win32\Debug.win32\Stardew.exe
 E:\github\1123\proj.win32\Debug.win32\Stardew.exe
+D:\Stardew\proj.win32\Debug.win32\Stardew.exe
