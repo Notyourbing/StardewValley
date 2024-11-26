@@ -16,7 +16,6 @@ enum class RelationshipStatus {
 class Npc : public cocos2d::Node {
 private:
     std::string name;                   // NPC的名字
-    Sprite* sprite;                     // NPC的图像（作为精灵）
     std::string birthday;               // NPC的生日
     int friendshipLevel;                // NPC与玩家的亲密度（0-100）
     std::vector<std::string> gifts;     // NPC喜欢的礼物
@@ -24,20 +23,21 @@ private:
     std::vector<std::string> dialogues; // NPC的对话列表
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
     std::map<std::string, RelationshipStatus> npcRelations; // NPC之间的关系
-    Vec2 position;
+
+    // 对话框相关成员
+    Sprite* dialogueBox;                // 对话框背景
+    Label* dialogueLabel;               // 对话框中的文本标签
+    bool isDialogueVisible;             // 用于标记对话框是否显示
 
 public:
-    // 单例实例
-    static Npc* instance;
-    // 单例模式获Npc实例
-    static Npc* getInstance();
+
+    Sprite* sprite;                     // NPC的图像（作为精灵）
     // 构造函数
     Npc(const std::string& name, const std::string& birthdate,
         const std::vector<std::string>& favoriteGifts,
         const std::vector<std::string>& dislikedGifts,
         const std::vector<std::string>& dialogues,
-        const std::string& imagePath,
-        const Vec2& initPosition);
+        const std::string& imagePath);
     Npc();
 
     // 获取NPC的名字
@@ -83,7 +83,7 @@ public:
     void setDislikes(const std::vector<std::string>& dislikeList);
 
     // 获取NPC的对话
-    void printDialogue() const;
+    std::string printDialogue() const;
 
     // 获取NPC与玩家的关系状态
     RelationshipStatus getPlayerRelation() const;
@@ -91,17 +91,8 @@ public:
     // 设置与玩家的关系
     void setPlayerRelation(RelationshipStatus status);
 
-    // 设置NPC之间的关系
-    void setNpcRelation(const std::string& npcName, RelationshipStatus status);
-
-    // 获取NPC与另一NPC的关系
-    RelationshipStatus getNpcRelation(const std::string& npcName) const;
-
     // 输出NPC的当前状态
     void printStatus() const;
-
-    // 询问NPC之间的关系
-    void askAboutNocRelation(const std::string& otherNpcName) const;
 };
 
 #endif // NPC_H

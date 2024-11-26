@@ -5,7 +5,7 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
-// 这里是定义 problemLoading 函数
+// 定义 problemLoading 函数
 static void problemLoading(const char* filename) {
     CCLOG("Error while loading: %s", filename);
     printf("Error while loading: %s\n", filename);
@@ -149,7 +149,12 @@ void Player::loadStandFrames() {
 }
 
 //创建移动动画
-void Player::createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount) {
+void Player::createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount) { 
+    if (currentAnimationName == animationName) {
+        return; // 如果当前已经在播放相同的动画，则无需重复播放
+    }
+
+    stopAllActions(); // 停止所有动作
     //先建立移动帧
     SpriteFrame* frame = nullptr;
 
