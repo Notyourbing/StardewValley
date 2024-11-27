@@ -55,7 +55,7 @@ bool Player::init() {
         currentTool->setAnchorPoint(Vec2(0, 0));
         // 工具作始终为玩家的子节点
         addChild(currentTool);
-        currentTool->setPosition(55, 45);
+        currentTool->setPosition(-10, -20);
 
     }
 
@@ -204,26 +204,18 @@ void Player::setStandPose(const std::string& standPoseName) {
     }
 }
 
-// 设置当前工具
-void Player::setCurrentTool(Tool* tool) {
-    currentTool = tool;
-}
-
-// 使用当前工具
 void Player::useCurrentTool() {
     if (currentTool) {
-        // 工具位置和人物位置相同
-        // currentTool->setPosition(getPosition());
-        currentTool->setVisible(true);
-        currentTool->useTool();
-
-        // 使用完成后隐藏工具
+        // 使用工具
+        currentTool->useTool();  // 触发工具的动画
+        // 使用完成后将工具重新添加回玩家，并恢复玩家状态
         currentTool->runAction(Sequence::create(
-            DelayTime::create(0.5f), // 等待工具使用完成
+            DelayTime::create(0.5f),  // 等待工具使用完成
             CallFunc::create([this]() {
-                currentTool->setVisible(false);
+                currentTool->setVisible(false); // 隐藏工具 
                 }),
             nullptr
         ));
+
     }
 }

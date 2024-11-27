@@ -38,7 +38,8 @@ public:
 	// 使用当前工具
 	void useCurrentTool();
 
-
+	// 设置站立动作
+	void setStandPose(const std::string& standPoseName);
 private:
 	// 单例实例
 	static Player* instance;
@@ -75,9 +76,6 @@ private:
 
 	// 加载移动帧并创建动画
 	void createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount);
-
-	// 设置站立动作
-	void setStandPose(const std::string& standPoseName);
 };
 
 #endif

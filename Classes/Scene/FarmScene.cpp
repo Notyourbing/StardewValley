@@ -31,7 +31,7 @@ bool Farm::init() {
 	Npc* wizard = new Npc("Wizard Yuuu", "Fall 5",
 		{ "Magic Essence", "Diamond" },
 		{ "Milk" },
-		{ "Get out of my way", "How are you?", "I like to spend time with you." },
+		{ "Get out of my way.", "It's nice to see you here.", "I like to spend time with you." },
 		"npcImages/wizard.png");
 
 	Npc* cleaner = new Npc("Cleaner Levi", "Winter 25",
@@ -41,7 +41,7 @@ bool Farm::init() {
 		"npcImages/cleaner.png");
 
 	//测试：亲密度90
-	wizard->increaseFriendship(90);
+	cleaner->increaseFriendship(90);
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 
@@ -143,9 +143,6 @@ void Farm::showDialogue(Npc* npc) {
 	// 设置文字大小
 	const float padding = 20.0f;  // 背景与文字的间距
 	auto label = Label::createWithTTF(npc->printDialogue(), "fonts/Marker Felt.ttf", 44);
-	if (!label) {
-		return;
-	}
 
 	// 计算文字的宽度和高度，确保背景能够容纳文字
 	const float labelWidth = 720;  // 文字占宽度
@@ -153,7 +150,6 @@ void Farm::showDialogue(Npc* npc) {
 
 	// 调整背景框的大小
 	dialogueBackground->setContentSize(Size(1283, 462));//素材框大小
-
 	// 设置对话框背景的位置
 	dialogueBackground->setPosition(Vec2(640, 200));//使对话框在屏幕下半侧占满
 	this->addChild(dialogueBackground, 10);  // 确保背景图在最上层
@@ -165,10 +161,9 @@ void Farm::showDialogue(Npc* npc) {
 	label->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);  // 文字左上对齐
 	label->setTextColor(Color4B::WHITE);  // 设置文字颜色为白色
 	this->addChild(label, 11);  // 确保文字在背景图之上
-	isDialogueVisible = true;
 
 	//添加人物立绘
-	std::string npcImageName = "npcImages/" + npc->getNpcName() + "Talk.png";  // 假设NPC的名字就是图片的文件名，且图片后缀为 .png
+	std::string npcImageName = "npcImages/" + npc->getNpcName() + "Talk.png"; 
 
 	// 创建并显示NPC的立绘
 	auto npcTalkImage = Sprite::create(npcImageName);
@@ -177,6 +172,15 @@ void Farm::showDialogue(Npc* npc) {
 		this->addChild(npcTalkImage, 12);  // 确保图像在最上层
 	}
 
+	//在对话框中添加人物名字
+	auto nameLabel = Label::createWithTTF(npc->getNpcName(), "fonts/Marker Felt.ttf", 40);
+
+	nameLabel->setPosition(Vec2(dialogueBackground->getPositionX() + 360, dialogueBackground->getPositionY() - 140));
+
+	nameLabel->setTextColor(Color4B::WHITE);  // 设置文字颜色为白色
+	this->addChild(nameLabel, 11);  // 确保文字在背景图之上
+	isDialogueVisible = true;
+	
 	// 添加鼠标点击事件监听器,左键关闭对话框
 	auto listener = EventListenerMouse::create();
 	listener->onMouseDown = [=](Event* event) {
@@ -184,6 +188,7 @@ void Farm::showDialogue(Npc* npc) {
 			dialogueBackground->setVisible(false);  // 隐藏对话框
 			label->setVisible(false);  // 隐藏文字
 			npcTalkImage->setVisible(false); // 隐藏人物立绘
+			nameLabel->setVisible(false);
 			isDialogueVisible = false;
 		}
 		};
