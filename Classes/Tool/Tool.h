@@ -2,6 +2,7 @@
 #define __TOOL_H__
 
 #include "cocos2d.h"
+#include "../Map/FarmMap.h"
 #include <string>
 
 // π§æﬂ¿‡

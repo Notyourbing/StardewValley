@@ -1,5 +1,6 @@
 #include "Tool.h"
 
+
 USING_NS_CC;
 
 Tool* Tool::create(const std::string& name) {
@@ -19,6 +20,5 @@ bool Tool::init(const std::string& name) {
 	if (!Sprite::initWithFile("tools/" + toolName + ".png")) {
 		return false;
 	}
-
 	return true;
 }
