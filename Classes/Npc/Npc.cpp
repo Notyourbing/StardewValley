@@ -1,43 +1,17 @@
 #include "Npc.h"
 #include <iostream>
-#include <algorithm>
 #include <map>
-
-// 初始化静态成员变量
-Npc* Npc::instance = nullptr;
-
-Npc* Npc::getInstance()
-{
-    if (instance == nullptr) {
-        instance = new (std::nothrow) Npc();
-        if (instance && instance->init()) {
-            instance->autorelease();
-        }
-        else {
-            CC_SAFE_DELETE(instance);
-        }
-    }
-    return instance;
-}
 
 // 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话
 Npc::Npc(const std::string& name, const std::string& birthdate,
     const std::vector<std::string>& favoriteGifts,
     const std::vector<std::string>& dislikedGifts,
     const std::vector<std::string>& dialogues,
-    const std::string& imagePath,
-    const Vec2& initPosition)
-    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None),position(initPosition) {
+    const std::string& imagePath)
+    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None), dialogues(dialogues) {
 
     // 加载NPC的精灵图像
     sprite = Sprite::create(imagePath);  // 接收 std::string 类型的图像路径
-    if (sprite) {
-        sprite->setPosition(position);  // 设置默认位置
-        this->addChild(sprite, 5);  // 将精灵添加为该节点的子节点
-    }
-    else {
-        CCLOG("error!no npc sprite found!\n");
-    }
 }
 
 Npc::Npc()
@@ -85,7 +59,6 @@ void Npc::setFriendshipLevel(int level) {
 
 // 与 NPC 互动
 void Npc::interactWithPlayer() {
-    std::cout << "你与 " << name << " 互动了！" << std::endl;
     increaseFriendship(5);
     printDialogue();  // 互动后打印当前的对话
 }
@@ -154,18 +127,18 @@ void Npc::setDislikes(const std::vector<std::string>& dislikeList) {
 }
 
 // 获取 NPC 的对话
-void Npc::printDialogue() const {
-    std::cout << name << " 的对话：" << std::endl;
-
+std::string Npc::printDialogue() const {
     if (friendshipLevel >= 80) {
-        std::cout << "浪漫对话: " << dialogues[2] << std::endl;
+        return dialogues[2];
     }
     else if (friendshipLevel >= 50) {
-        std::cout << "友好对话: " << dialogues[1] << std::endl;
+        return dialogues[1];
     }
     else {
-        std::cout << "普通对话: " << dialogues[0] << std::endl;
+        return dialogues[0];
     }
+
+    return "";
 }
 
 // 获取NPC与玩家的关系状态
@@ -178,20 +151,6 @@ void Npc::setPlayerRelation(RelationshipStatus status) {
     playerRelation = status;
 }
 
-// 设置NPC之间的关系
-void Npc::setNpcRelation(const std::string& npcName, RelationshipStatus status) {
-    npcRelations[npcName] = status;
-}
-
-// 获取NPC与另一NPC的关系
-RelationshipStatus Npc::getNpcRelation(const std::string& npcName) const {
-    auto it = npcRelations.find(npcName);
-    if (it != npcRelations.end()) {
-        return it->second;
-    }
-    return RelationshipStatus::None; // 默认没有关系
-}
-
 // 输出 NPC 的当前状态
 void Npc::printStatus() const {
     std::cout << "NPC: " << name << std::endl;
@@ -199,33 +158,5 @@ void Npc::printStatus() const {
     std::cout << "亲密度: " << friendshipLevel << std::endl;
     std::cout << "与玩家的关系: " << (playerRelation == RelationshipStatus::Romance ? "浪漫" :
         playerRelation == RelationshipStatus::Friendship ? "友谊" : "陌生") << std::endl;
-    //std::cout << "喜欢的礼物: ";
-    //for (const auto& gift : gifts) {
-    //    std::cout << gift << " ";
-    //}
-    //std::cout << std::endl;
-    //std::cout << "讨厌的礼物: ";
-    //for (const auto& gift : dislikes) {
-    //    std::cout << gift << " ";
-    //}
     std::cout << std::endl;
-}
-
-// 询问NPC之间的关系
-void Npc::askAboutNocRelation(const std::string& otherNpcName) const
-{
-    const RelationshipStatus otherRelation = getNpcRelation(otherNpcName);
-    const RelationshipStatus playerRelation = getPlayerRelation();
-    if (playerRelation == RelationshipStatus::None)
-        return;
-
-    if (otherRelation == RelationshipStatus::Romance) {
-        std::cout << name << " 和 " << otherNpcName << " 关系很亲密！他们共享浪漫时刻。" << std::endl;
-    }
-    else if (otherRelation == RelationshipStatus::Friendship) {
-        std::cout << name << " 和 " << otherNpcName << " 是朋友，他们的互动很愉快。" << std::endl;
-    }
-    else {
-        std::cout << name << " 和 " << otherNpcName << " 关系陌生，他们互不干扰。" << std::endl;
-    }
 }

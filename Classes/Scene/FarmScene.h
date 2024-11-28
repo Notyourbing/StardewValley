@@ -2,7 +2,10 @@
 #define __FARM_SCENE_H__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 #include "../Player/Player.h"
+#include "../Map/FarmMap.h"
+#include "../Npc/Npc.h"
 #include "../Map/TileMap.h"
 
 class Farm : public cocos2d::Scene {
@@ -10,6 +13,11 @@ public:
 	static cocos2d::Scene* createScene();
 
 	virtual bool init();
+
+	//该地图上所有npc
+	std::vector<Npc*> npcs;
+
+	void showDialogue(Npc* npc);  // 用来显示对话框的方法
 
 	bool isCollidingWithTile(const Vec2& position) const;
 
@@ -23,6 +31,8 @@ public:
 	std::shared_ptr<TileNode> createTileNode(const std::string& layerName, const cocos2d::Vec2& position);
 
 	CREATE_FUNC(Farm);
+
+	bool isDialogueVisible = false;
 
 private:
 	// 记录当前按下的键
