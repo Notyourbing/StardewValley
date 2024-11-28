@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\Stardew\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+      <FullPath>D:\Cocos2d\StardewValley\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

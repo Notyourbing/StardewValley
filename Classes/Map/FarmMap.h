@@ -21,6 +21,8 @@ public:
 	// 获取地图大小
 	cocos2d::Size getMapSize() const;
 
+	// 碰撞检测：检查给定位置是否是障碍物
+	bool isCollidable(const cocos2d::Vec2& position) const;
 private:
 	// 构造函数和析构函数私有化
 	FarmMap();
@@ -31,7 +33,7 @@ private:
 	FarmMap& operator=(const FarmMap&) = delete;
 
 	// 瓦片地图对象
-	cocos2d::TMXTiledMap* map = nullptr;
+	cocos2d::TMXTiledMap* map;
 
 	// 地图当前的偏移位置
 	cocos2d::Vec2 currentPosition; 
@@ -41,7 +43,7 @@ private:
 
 	// 单例实例
 	static FarmMap* instance;
+
+	cocos2d::TMXLayer* obstacleLayer;
 };
-
-
 #endif

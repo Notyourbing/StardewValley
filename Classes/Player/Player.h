@@ -38,6 +38,11 @@ public:
 	// 使用当前工具
 	void useCurrentTool();
 
+	// 获取人当前的速度
+	cocos2d::Vec2 getVelocity() {
+		return velocity;
+	}
+
 
 private:
 	// 单例实例

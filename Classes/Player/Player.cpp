@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "SimpleAudioEngine.h"
 #include "../Tool/Axe.h"
+#include "../Map/FarmMap.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -67,6 +68,19 @@ bool Player::init() {
 
         const Vec2 playerSize(Player::getInstance()->getContentSize());
 
+        // 检查目标位置是否是障碍物
+        auto farmMap = FarmMap::getInstance();
+
+        // 人在地图坐标中下一步会到达的位置
+        // 这里的- velocity / 200.0f * 10.0f是预测下一步的位置
+        // velocity / 200.0f是因为velocity的绝对值是200
+        Vec2 playerSize1 = Vec2(0.0f, getContentSize().height * 1.0f);
+
+        auto targetPosition = getPosition() - farmMap->getPosition() - playerSize1 * 0.5f + velocity / 200.0f * 10.0f; // 每帧移动的距离
+        if (farmMap->isCollidable(targetPosition)) {
+            velocity = Vec2::ZERO;
+        }
+        
         auto position = getPosition() + velocity * dt;
         // 边界检测，防止玩家移出屏幕
         position.x = std::max(playerSize.x / 2, std::min(position.x, visibleSize.width - playerSize.x / 2));
@@ -92,6 +106,7 @@ void Player::moveByDirection(const Vec2& direction) {
     if (direction.lengthSquared() == 0) {
         return;
     }
+
     velocity = direction * 200.0f;
 
     if (direction.x > 0) {
