@@ -14,8 +14,6 @@ public:
 
 	virtual bool init();
 
-	// <<<<<<< HEAD
-	// =======
 	//该地图上所有npc
 	std::vector<Npc*> npcs;
 
@@ -32,7 +30,6 @@ public:
 	// 创建瓦片节点
 	std::shared_ptr<TileNode> createTileNode(const std::string& layerName, const cocos2d::Vec2& position);
 
-	// >>>>>>> 75f5d433ca3bd3759a894911816bae485e86db27
 	CREATE_FUNC(Farm);
 
 	bool isDialogueVisible = false;

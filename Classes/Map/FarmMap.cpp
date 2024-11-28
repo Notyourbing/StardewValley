@@ -1,6 +1,6 @@
 #include "FarmMap.h"
 #include "../Player/Player.h"
-
+#include "../Constant/Constant.h"
 USING_NS_CC;
 
 // 初始化静态实例
@@ -58,7 +58,7 @@ bool FarmMap::init(const std::string& tmxFile) {
             // velocity / 200.0f是因为velocity的绝对值是200
             Vec2 playerSize2 = Vec2(0.0f, player->getContentSize().height * 1.0f);
 
-            auto playerPositionInMap = player->getPosition() - getPosition() - playerSize2 * 0.5f + player->getVelocity() / 200.0f * 10.0f;
+            auto playerPositionInMap = player->getPosition() - getPosition() - playerSize2 * 0.5f + player->getVelocity() / MAP_MOVE_SPEED * 10.0f;
             if (isCollidable(playerPositionInMap)) {
                 velocity = Vec2::ZERO;
             }
@@ -83,7 +83,7 @@ bool FarmMap::npcInit(const Vec2& position, Npc* npc)
 }
 
 void FarmMap::moveMapByDirection(const Vec2& direction) {
-    velocity = direction * 200.f;
+    velocity = direction * MAP_MOVE_SPEED;
 }
 
 Size FarmMap::getMapSize() const {

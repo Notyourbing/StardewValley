@@ -2,6 +2,7 @@
 #include "SimpleAudioEngine.h"
 #include "../Tool/Axe.h"
 #include "../Map/FarmMap.h"
+#include "../Constant/Constant.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -72,11 +73,11 @@ bool Player::init() {
         auto farmMap = FarmMap::getInstance();
 
         // 人在地图坐标中下一步会到达的位置
-        // 这里的- velocity / 200.0f * 10.0f是预测下一步的位置
-        // velocity / 200.0f是因为velocity的绝对值是200
+        // 这里的- velocity / PLAYER_MOVE_SPEED.0f * 10.0f是预测下一步的位置
+        // velocity / PLAYER_MOVE_SPEED.0f是因为velocity的绝对值是PLAYER_MOVE_SPEED
         Vec2 playerSize1 = Vec2(0.0f, getContentSize().height * 1.0f);
 
-        auto targetPosition = getPosition() - farmMap->getPosition() - playerSize1 * 0.5f + velocity / 200.0f * 10.0f; // 每帧移动的距离
+        auto targetPosition = getPosition() - farmMap->getPosition() - playerSize1 * 0.5f + velocity / PLAYER_MOVE_SPEED * 10.0f; // 每帧移动的距离
         if (farmMap->isCollidable(targetPosition)) {
             velocity = Vec2::ZERO;
         }
@@ -107,7 +108,7 @@ void Player::moveByDirection(const Vec2& direction) {
         return;
     }
 
-    velocity = direction * 200.0f;
+    velocity = direction * PLAYER_MOVE_SPEED;
 
     if (direction.x > 0) {
         createWalkAnimation("right/", "walkRight", 3);//播放动画

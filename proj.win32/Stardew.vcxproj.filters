@@ -25,6 +25,9 @@
     <Filter Include="Classes\Tool">
       <UniqueIdentifier>{6cb58ea4-24a9-46c8-aa5a-1b42cfa65e10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Constant">
+      <UniqueIdentifier>{1a482286-62fb-4cc2-bd0c-ab1bc931c897}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\TileMap.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Constant\Constant.h">
+      <Filter>Classes\Constant</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
