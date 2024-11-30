@@ -50,17 +50,6 @@ void Npc::setFriendshipLevel(int level) {
     else {
         friendshipLevel = level;
     }
-
-    // 根据亲密度调整与玩家的关系
-    if (friendshipLevel >= 80) {
-        playerRelation = RelationshipStatus::Romance;
-    }
-    else if (friendshipLevel >= 50) {
-        playerRelation = RelationshipStatus::Friendship;
-    }
-    else {
-        playerRelation = RelationshipStatus::None;
-    }
 }
 
 // 与 NPC 互动
@@ -148,7 +137,17 @@ std::string Npc::printDialogue() const {
 }
 
 // 获取NPC与玩家的关系状态
-RelationshipStatus Npc::getPlayerRelation() const {
+RelationshipStatus Npc::getPlayerRelation() {
+    // 根据亲密度调整与玩家的关系
+    if (friendshipLevel >= 80) {
+        playerRelation = RelationshipStatus::Romance;
+    }
+    else if (friendshipLevel >= 50) {
+        playerRelation = RelationshipStatus::Friendship;
+    }
+    else {
+        playerRelation = RelationshipStatus::None;
+    }
     return playerRelation;
 }
 
@@ -158,11 +157,11 @@ void Npc::setPlayerRelation(RelationshipStatus status) {
 }
 
 // 输出 NPC 的当前状态
-void Npc::printStatus() const {
-    std::cout << "NPC: " << name << std::endl;
-    std::cout << "生日: " << birthday << std::endl;
-    std::cout << "亲密度: " << friendshipLevel << std::endl;
-    std::cout << "与玩家的关系: " << (playerRelation == RelationshipStatus::Romance ? "浪漫" :
-        playerRelation == RelationshipStatus::Friendship ? "友谊" : "陌生") << std::endl;
-    std::cout << std::endl;
+std::string Npc::printStatus() const {
+    if (friendshipLevel >= 80)
+        return "Romance";
+    else if (friendshipLevel >= 50)
+        return "Friend";
+    else
+        return "None";
 }
