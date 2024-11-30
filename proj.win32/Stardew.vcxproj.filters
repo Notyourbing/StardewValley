@@ -28,6 +28,9 @@
     <Filter Include="Classes\Constant">
       <UniqueIdentifier>{1a482286-62fb-4cc2-bd0c-ab1bc931c897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Bag">
+      <UniqueIdentifier>{06989d12-6464-4fd5-95c1-39395af0da09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -68,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Map\TileMap.cpp">
       <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Pickaxe.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bag\Bag.cpp">
+      <Filter>Classes\Bag</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\PickAxe.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bag\Bag.h">
+      <Filter>Classes\Bag</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

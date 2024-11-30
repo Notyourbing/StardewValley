@@ -12,7 +12,7 @@ class Farm : public cocos2d::Scene {
 public:
 	static cocos2d::Scene* createScene();
 
-	virtual bool init();
+	bool init();
 
 	//该地图上所有npc
 	std::vector<Npc*> npcs;

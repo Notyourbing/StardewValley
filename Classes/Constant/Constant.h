@@ -2,7 +2,6 @@
 #define __CONSTANT_H
 #include "../Npc/Npc.h"
 
-
 constexpr float MAP_MOVE_SPEED = 400.0f;
 constexpr float PLAYER_MOVE_SPEED = 200.0f;
 

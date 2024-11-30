@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "SimpleAudioEngine.h"
 #include "../Tool/Axe.h"
+#include "../Tool/Pickaxe.h"
 #include "../Map/FarmMap.h"
 #include "../Constant/Constant.h"
 

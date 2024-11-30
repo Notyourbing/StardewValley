@@ -3,7 +3,9 @@
 #include "../Map/FarmMap.h"
 #include "../Npc/Npc.h"
 #include "../Constant/Constant.h"
-
+#include "../Bag/Bag.h"
+#include "../Tool/PickAxe.h"
+#include "../Tool/Axe.h"
 
 USING_NS_CC;
 
@@ -54,8 +56,21 @@ bool Farm::init() {
 		this->addChild(nameLabel, 4);
 	}
 
+	auto bag = Bag::create();
+	this->addChild(bag, 4);
+	auto pickaxe = Pickaxe::create();
+	bag->addTool(pickaxe);
+	auto axe = Axe::create();
+	bag->addTool(axe);
+	bag->selectTool(0);
+	
+
+
 	// 初始化键盘监听器
 	initKeyboardListener();
+
+	// 初始化鼠标监听器
+	initMouseListener();
 
 	return true;
 }
@@ -75,7 +90,6 @@ void Farm::initKeyboardListener() {
 		// 停止玩家移动
 		Player::getInstance()->stopMoving();
 		updateMovement(); // 更新方向
-
 		};
 
 	// 添加监听器到事件分发器
@@ -112,7 +126,7 @@ void Farm::updateMovement() {
 	player->moveByDirection(direction);
 
 	//显示对话框,添加鼠标事件监听器
-	initMouseListener();
+	// initMouseListener();
 }
 
 void Farm::showDialogue(Npc* npc) {
@@ -198,31 +212,46 @@ void Farm::initMouseListener()
 	listener->onMouseDown = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-			if (isDialogueVisible == false)
+			if (isDialogueVisible == false) {
 				Player::getInstance()->useCurrentTool();
+			}
 		}
-		};
-
-	for (auto npc : npcs) {
-		// 计算玩家与 NPC 的距离
-		Player* player = Player::getInstance();
-		FarmMap* farmMap = FarmMap::getInstance();
-		float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
-
-		// 设定一个合适的距离阈值
-		float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
-		CCLOG("distance:(%f)\n", distance);
-		// 如果玩家与 NPC 的距离小于阈值，则触发对话框
-		if (distance < interactionRange) {
-			listener->onMouseDown = [=](Event* event) {
-				// 检查是否是右键点击
-				if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT
-					&& player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition()) < interactionRange) {
+		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
+			for (auto npc : npcs) {
+				// 计算玩家与NPC的距离
+				Player* player = Player::getInstance();
+				FarmMap* farmMap = FarmMap::getInstance();
+				const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
+				// 设定一个合适的距离阈值
+				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
+				CCLOG("distance:(%f)\n", distance);
+				if (distance < interactionRange) {
 					showDialogue(npc);  // 显示对话框
 				}
-				};
+			}
 		}
-	}
+	};
+
+	//for (auto npc : npcs) {
+	//	// 计算玩家与 NPC 的距离
+	//	Player* player = Player::getInstance();
+	//	FarmMap* farmMap = FarmMap::getInstance();
+	//	const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
+
+	//	// 设定一个合适的距离阈值
+	//	const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
+	//	CCLOG("distance:(%f)\n", distance);
+	//	// 如果玩家与 NPC 的距离小于阈值，则触发对话框
+	//	if (distance < interactionRange) {
+	//		listener->onMouseDown = [=](Event* event) {
+	//			// 检查是否是右键点击
+	//			if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT
+	//				&& player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition()) < interactionRange) {
+	//				showDialogue(npc);  // 显示对话框
+	//			}
+	//			};
+	//	}
+	//}
 	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }

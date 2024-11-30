@@ -7,7 +7,7 @@ class Welcome : public cocos2d::Scene {
 public:
     static cocos2d::Scene* createScene();
 
-    virtual bool init();
+    bool init();
     // 新游戏项的回调函数
     void menuNewGameCallback(cocos2d::Ref* pSender);
 
