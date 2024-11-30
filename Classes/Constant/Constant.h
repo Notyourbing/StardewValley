@@ -5,6 +5,21 @@
 
 constexpr float MAP_MOVE_SPEED = 400.0f;
 constexpr float PLAYER_MOVE_SPEED = 200.0f;
+constexpr float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
+
+const int WIZARD_X = 300;
+const int WIZARD_Y = 300;
+const int CLEANER_X = 500;
+const int CLEANER_Y = 300;
+
+const int TALKING_BOX_WIDTH = 1283;
+const int TALKING_BOX_HEIGHT = 462;
+
+const int TALKING_BOX_X = 640;
+const int TALKING_BOX_Y = 200;
+
+const int LABEL_WIDTH = 720;
+const int LABEL_HEIGHT = 390;
 
 const Npc WIZARD("Wizard Yuuu", "Fall 5",
 	{ "Magic Essence", "Diamond" },
