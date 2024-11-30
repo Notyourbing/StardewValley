@@ -20,9 +20,7 @@ Npc::Npc(const Npc& other)
     sprite = Sprite::create(other.image);
 }
 
-Npc::Npc()
-{
-}
+Npc::Npc(){}
 
 // 获取 NPC 的名字
 std::string Npc::getNpcName() const {

@@ -26,25 +26,14 @@ public:
 	void showInitialDialogue(Npc* npc);
 
 	// 显示对话选项
-	void showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel);
+	void showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
 
 	// 根据选择的选项更新对话内容
 	 void updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> optionButtons, int optionIndex, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) ;
 
 	// 关闭对话框和所有对话文字
-	void closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel);
-
-	bool isCollidingWithTile(const Vec2& position) const;
-
-	// 初始化地图图层
-	void initLayers();
-
-	// 初始化瓦片节点
-	void initTileNodes();
-
-	// 创建瓦片节点
-	std::shared_ptr<TileNode> createTileNode(const std::string& layerName, const cocos2d::Vec2& position);
-
+	void closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
+	
 	void createFestivals();
 
 	void checkFestivalEvent();

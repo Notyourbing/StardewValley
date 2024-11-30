@@ -42,7 +42,6 @@ bool Farm::init() {
 	farmMap->setPosition(visibleSize.width / 2 -farmMapSize.width / 2, visibleSize.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
-
 	// 创建 NPC 示例
 	Npc* wizard = new Npc(WIZARD);
 	Npc* cleaner = new Npc(CLEANER);
@@ -76,8 +75,6 @@ bool Farm::init() {
 	bag->addTool(axe);
 	bag->selectTool(0);
 	
-
-
 	createFestivals();
 
 	// 初始化键盘监听器
@@ -185,21 +182,24 @@ void Farm::showInitialDialogue(Npc* npc) {
 	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 	listener->onMouseDown = [=](Event* event) {
-		if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT && isDialogueVisible)
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT && isDialogueVisible) {
 			// 显示选项按钮
-			showDialogueOptions(npc, dialogueBackground, label, npcTalkImage, nameLabel);
+			showDialogueOptions(npc, dialogueBackground, label, npcTalkImage, nameLabel, listener);
+		}
 		};
 	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
+void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, EventListenerMouse* lastListener) {
+	_eventDispatcher->removeEventListener(lastListener);
 	// 清除原始的对话文本
 	label->setVisible(false);
 
 	// 选项文本内容
 	std::vector<std::string> options = { "Relationship between us", "Any tasks?", "Community Celebrations", "I have a gift for you" };
-	float optionY = dialogueBackground->getPositionY() + 120;  // 选项显示位置
+	const float optionY = dialogueBackground->getPositionY() + 120;  // 选项显示位置
 
 	// 创建选项按钮
 	for (int i = 0; i < options.size(); ++i) {
@@ -220,7 +220,6 @@ void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* labe
 }
 
 void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> optionButtons, int optionIndex, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
-	isDialogueVisible = false;
 	// 隐藏所有选项按钮
 	for (auto button : optionButtons) {
 		button->setTitleText("");
@@ -253,17 +252,20 @@ void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> 
 	// 重新创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 	listener->onMouseDown = [=](Event* event) {
-		if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
-			closeDialogue(dialogueBackground, label, npcTalkImage, nameLabel);
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+			closeDialogue(dialogueBackground, label, npcTalkImage, nameLabel, listener);
 		};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-void Farm::closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
+void Farm::closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, EventListenerMouse* lastListener) {
+	_eventDispatcher->removeEventListener(lastListener);
 	dialogueBackground->setVisible(false);
 	label->setVisible(false);
 	npcTalkImage->setVisible(false);
 	nameLabel->setVisible(false);
+	isDialogueVisible = false;
 }
 
 void Farm::initMouseListener()
@@ -288,7 +290,7 @@ void Farm::initMouseListener()
 				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
 				CCLOG("distance:(%f)\n", distance);
 				if (distance < interactionRange && isDialogueVisible == false) {
-					showDialogue(npc);  // 显示对话框
+					showInitialDialogue(npc);
 				}
 			}
 		}
