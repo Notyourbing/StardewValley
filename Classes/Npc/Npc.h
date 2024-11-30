@@ -89,13 +89,13 @@ public:
     std::string printDialogue() const;
 
     // 获取NPC与玩家的关系状态
-    RelationshipStatus getPlayerRelation() const;
+    RelationshipStatus getPlayerRelation();
 
     // 设置与玩家的关系
     void setPlayerRelation(RelationshipStatus status);
 
     // 输出NPC的当前状态
-    void printStatus() const;
+    std::string printStatus() const;
 };
 
 #endif // NPC_H

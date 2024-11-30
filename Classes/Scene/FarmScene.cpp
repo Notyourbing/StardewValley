@@ -22,6 +22,18 @@ bool Farm::init() {
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	
+	// 创建显示日期的标签
+	dateLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 24);
+	if (dateLabel) {
+		dateLabel->setPosition(Vec2(visibleSize.width - 100, visibleSize.height - 40));  // 右上角位置
+		this->addChild(dateLabel, 5);
+	}
+
+	// 启动一个定时器，每秒调用一次 updateDate 方法
+	schedule([this](float deltaTime) {
+		updateDate();
+		}, 1.0f, "update_date_key");
+
 	auto farmMap = FarmMap::getInstance();
 	if (!farmMap->init("Maps/farmSpring11_28/farmSpring11_28.tmx")) {
 		return false;
@@ -40,8 +52,8 @@ bool Farm::init() {
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 
-	farmMap->npcInit(Vec2(origin.x + 300, origin.y + 300), wizard);
-	farmMap->npcInit(Vec2(origin.x + 500, origin.y + 300), cleaner);
+	farmMap->npcInit(Vec2(origin.x + WIZARD_X, origin.y + WIZARD_Y), wizard);
+	farmMap->npcInit(Vec2(origin.x + CLEANER_X, origin.y + CLEANER_Y), cleaner);
 	isDialogueVisible = false;
 
 	// 获取玩家单例并添加到场景中
@@ -65,6 +77,8 @@ bool Farm::init() {
 	bag->selectTool(0);
 	
 
+
+	createFestivals();
 
 	// 初始化键盘监听器
 	initKeyboardListener();
@@ -124,84 +138,132 @@ void Farm::updateMovement() {
 	auto farmDirection = -direction;
 	farmMap->moveMapByDirection(farmDirection);
 	player->moveByDirection(direction);
-
-	//显示对话框,添加鼠标事件监听器
-	// initMouseListener();
 }
 
-void Farm::showDialogue(Npc* npc) {
+// 显示初始对话框
+void Farm::showInitialDialogue(Npc* npc) {
+	// 标记对话框已显示
+	isDialogueVisible = true;
 
-	if (isDialogueVisible) {
-		return;  // 如果对话框已经显示，则不再显示
-	}
 	// 获取屏幕尺寸
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	Player* player = Player::getInstance();
-	// 获取玩家的位置
-	auto playerPosition = player->getPosition();
-
-	// 创建对话框背景图片
+	// 创建对话框背景
 	auto dialogueBackground = Sprite::create("npcImages/dialogueBox.png");
 	if (!dialogueBackground) {
 		return;
 	}
 
-	// 设置文字大小
-	const float padding = 20.0f;  // 背景与文字的间距
+	// 创建并显示NPC的对话内容
 	auto label = Label::createWithTTF(npc->printDialogue(), "fonts/Marker Felt.ttf", 44);
+	dialogueBackground->setContentSize(Size(TALKING_BOX_WIDTH, TALKING_BOX_HEIGHT)); // 设置对话框大小
+	dialogueBackground->setPosition(Vec2(TALKING_BOX_X, TALKING_BOX_Y));  // 设置对话框位置
+	this->addChild(dialogueBackground, 10);
 
-	// 计算文字的宽度和高度，确保背景能够容纳文字
-	const float labelWidth = 720;  // 文字占宽度
-	const float labelHeight = 390;  // 文字占高度
+	// 设置文字框
+	label->setDimensions(LABEL_WIDTH, LABEL_HEIGHT);
+	label->setPosition(Vec2(dialogueBackground->getPositionX() - 240, dialogueBackground->getPositionY()));
+	label->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);
+	label->setTextColor(Color4B::WHITE);
+	this->addChild(label, 11);
 
-	// 调整背景框的大小
-	dialogueBackground->setContentSize(Size(1283, 462));//素材框大小
-	// 设置对话框背景的位置
-	dialogueBackground->setPosition(Vec2(640, 200));//使对话框在屏幕下半侧占满
-	this->addChild(dialogueBackground, 10);  // 确保背景图在最上层
-
-	// 设置文字的位置和对齐方式
-	label->setDimensions(labelWidth - 50, labelHeight - 50);  // 文字框的宽度为背景框的宽度，设置高度为背景框高度,稍微缩小
-	label->setPosition(Vec2(dialogueBackground->getPositionX() - 240,
-		dialogueBackground->getPositionY()));
-	label->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);  // 文字左上对齐
-	label->setTextColor(Color4B::WHITE);  // 设置文字颜色为白色
-	this->addChild(label, 11);  // 确保文字在背景图之上
-
-	//添加人物立绘
-	std::string npcImageName = "npcImages/" + npc->getNpcName() + "Talk.png"; 
-
-	// 创建并显示NPC的立绘
+	// NPC立绘
+	std::string npcImageName = "npcImages/" + npc->getNpcName() + "Talk.png";
 	auto npcTalkImage = Sprite::create(npcImageName);
 	if (npcTalkImage) {
-		npcTalkImage->setPosition(Vec2(dialogueBackground->getPositionX() + 365, dialogueBackground->getPositionY() + 40));  // 设置图片显示的位置
-		this->addChild(npcTalkImage, 12);  // 确保图像在最上层
+		npcTalkImage->setPosition(Vec2(dialogueBackground->getPositionX() + 365, dialogueBackground->getPositionY() + 40));
+		this->addChild(npcTalkImage, 12);
 	}
 
-	//在对话框中添加人物名字
+	// NPC名字
 	auto nameLabel = Label::createWithTTF(npc->getNpcName(), "fonts/Marker Felt.ttf", 40);
-
 	nameLabel->setPosition(Vec2(dialogueBackground->getPositionX() + 360, dialogueBackground->getPositionY() - 140));
+	nameLabel->setTextColor(Color4B::WHITE);
+	this->addChild(nameLabel, 11);
 
-	nameLabel->setTextColor(Color4B::WHITE);  // 设置文字颜色为白色
-	this->addChild(nameLabel, 11);  // 确保文字在背景图之上
-	isDialogueVisible = true;
-	
-	// 添加鼠标点击事件监听器,左键关闭对话框
+	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 	listener->onMouseDown = [=](Event* event) {
-		if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-			dialogueBackground->setVisible(false);  // 隐藏对话框
-			label->setVisible(false);  // 隐藏文字
-			npcTalkImage->setVisible(false); // 隐藏人物立绘
-			nameLabel->setVisible(false);
-			isDialogueVisible = false;
-		}
+		if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT && isDialogueVisible)
+			// 显示选项按钮
+			showDialogueOptions(npc, dialogueBackground, label, npcTalkImage, nameLabel);
 		};
 	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
+	// 清除原始的对话文本
+	label->setVisible(false);
+
+	// 选项文本内容
+	std::vector<std::string> options = { "Relationship between us", "Any tasks?", "Community Celebrations", "I have a gift for you" };
+	float optionY = dialogueBackground->getPositionY() + 120;  // 选项显示位置
+
+	// 创建选项按钮
+	for (int i = 0; i < options.size(); ++i) {
+		auto optionButton = ui::Button::create();  // 创建按钮
+		optionButton->setTitleText(options[i]);
+		optionButton->setTitleFontSize(30);
+		optionButton->setTitleColor(Color3B::WHITE);  // 设置文字颜色为白色
+		optionButton->setPosition(Vec2(dialogueBackground->getPositionX() - 240, optionY - (i * 60)));  // 设置按钮位置
+
+		// 为每个按钮添加点击事件
+		optionButton->addClickEventListener([=](Ref* sender) {
+			updateDialogueAfterOptionSelected(npc, optionButtons, i, dialogueBackground, label, npcTalkImage, nameLabel);
+			});
+
+		optionButtons.push_back(optionButton);
+		this->addChild(optionButton, 15);  // 将按钮添加到场景中
+	}
+}
+
+void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> optionButtons, int optionIndex, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
+	isDialogueVisible = false;
+	// 隐藏所有选项按钮
+	for (auto button : optionButtons) {
+		button->setTitleText("");
+		button->setVisible(false);
+	}
+	std::string newDialogue;
+
+	// 根据选择的选项更新对话框内容
+	switch (optionIndex) {
+		case 0:
+			newDialogue = npc->printStatus();
+			break;
+		case 1:
+			newDialogue = "Not yet";
+			break;
+		case 2:
+			newDialogue = "The next festival will be a great celebration. You should join us!";
+			break;
+		case 3:
+			newDialogue = "Oh, a gift? That's so kind of you. What did you bring me?";
+			npc->interactWithPlayer();
+			break;
+		default:
+			break;
+	}
+
+	label->setString(newDialogue);
+	label->setVisible(true);  // 显示新的对话内容
+
+	// 重新创建鼠标事件监听器
+	auto listener = EventListenerMouse::create();
+	listener->onMouseDown = [=](Event* event) {
+		if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+			closeDialogue(dialogueBackground, label, npcTalkImage, nameLabel);
+		};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void Farm::closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) {
+	dialogueBackground->setVisible(false);
+	label->setVisible(false);
+	npcTalkImage->setVisible(false);
+	nameLabel->setVisible(false);
 }
 
 void Farm::initMouseListener()
@@ -225,34 +287,62 @@ void Farm::initMouseListener()
 				// 设定一个合适的距离阈值
 				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
 				CCLOG("distance:(%f)\n", distance);
-				if (distance < interactionRange) {
+				if (distance < interactionRange && isDialogueVisible == false) {
 					showDialogue(npc);  // 显示对话框
 				}
 			}
 		}
-	};
-
-	//for (auto npc : npcs) {
-	//	// 计算玩家与 NPC 的距离
-	//	Player* player = Player::getInstance();
-	//	FarmMap* farmMap = FarmMap::getInstance();
-	//	const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
-
-	//	// 设定一个合适的距离阈值
-	//	const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
-	//	CCLOG("distance:(%f)\n", distance);
-	//	// 如果玩家与 NPC 的距离小于阈值，则触发对话框
-	//	if (distance < interactionRange) {
-	//		listener->onMouseDown = [=](Event* event) {
-	//			// 检查是否是右键点击
-	//			if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT
-	//				&& player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition()) < interactionRange) {
-	//				showDialogue(npc);  // 显示对话框
-	//			}
-	//			};
-	//	}
-	//}
+		};
+	
 	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
+// 创建节日庆典事件
+void Farm::createFestivals() {
+	Festival* springFestival = Festival::create("Spring Festival", "Celebrate the arrival of Spring with games, food, and fun!", "Spring 13", true);
+	if (springFestival) {
+		festivals.push_back(springFestival);
+	}
+
+	Festival* summerFestival = Festival::create("Summer Festival", "The hot days of Summer are here! Time for the beach!", "Summer 11", false);
+	if (summerFestival) {
+		festivals.push_back(summerFestival);
+	}
+}
+
+// 检查是否是节日，并触发节日活动
+void Farm::checkFestivalEvent() {
+	auto dateManager = DateManage::getInstance();
+	std::string currentDate = dateManager->getCurrentDate();
+
+	for (auto& festival : festivals) {
+		if (festival->getEventDate() == currentDate) {
+			// 当前日期与节日日期匹配，开始节日活动
+			festival->startEvent(dateManager);
+			break;
+		}
+	}
+}
+
+void Farm::updateDate() {
+	// 获取 DateManage 实例
+	DateManage* dateManager = DateManage::getInstance();
+
+	// 增加一天
+	dateManager->advanceDay();
+
+	// 获取当前的年份、季节和日期
+	int year = dateManager->getCurrentYear();
+	std::string season = dateManager->getCurrentSeason();
+	int day = dateManager->getCurrentDay();
+
+	// 更新日期字符串
+	std::stringstream dateStream;
+	dateStream << season << " " << day << " - Year " << year;
+
+	// 更新 Label
+	dateLabel->setString(dateStream.str());
+
+	checkFestivalEvent();
+}

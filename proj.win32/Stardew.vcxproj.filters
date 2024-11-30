@@ -31,6 +31,15 @@
     <Filter Include="Classes\Bag">
       <UniqueIdentifier>{06989d12-6464-4fd5-95c1-39395af0da09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\CommunityEvent">
+      <UniqueIdentifier>{e3e616ec-cbf2-4671-8c5c-7dcb42115aae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Fesitval">
+      <UniqueIdentifier>{ff64ee16-628b-49ba-9e42-bd3f20d3ce36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\DateManage">
+      <UniqueIdentifier>{4f964f1a-0018-41e5-ba16-2ef2a2c5c5d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -77,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Bag\Bag.cpp">
       <Filter>Classes\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CommunityEvent\CommunityEvent.cpp">
+      <Filter>Classes\CommunityEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Festival\Festival.cpp">
+      <Filter>Classes\Fesitval</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DateManage\DateManage.cpp">
+      <Filter>Classes\DateManage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +148,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Bag\Bag.h">
       <Filter>Classes\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CommunityEvent\CommunityEvent.h">
+      <Filter>Classes\CommunityEvent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Festival\Festival.h">
+      <Filter>Classes\Fesitval</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DateManage\DateManage.h">
+      <Filter>Classes\DateManage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
