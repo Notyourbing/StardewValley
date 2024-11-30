@@ -85,8 +85,19 @@ bool DateManage::isFestivalDay() const {
 
 std::string DateManage::getNextFestival()
 {
-    if (isFestivalDay())
-        return "Today is " + getCurrentDate() + "!";
+    std::string res = "Today is " + getCurrentDate() + "!\n";
+    if (isFestivalDay()) {
+        int dayInSeason = getCurrentDay();
+        if (getCurrentSeason() == "Spring" && dayInSeason == 7)
+            res += "Celebrate the arrival of Spring with games, food, and fun!\n";
+        else if (getCurrentSeason() == "Summer" && dayInSeason == 15)
+            res += "The hot days of Summer are here! Time for the beach!\n";
+        else if (getCurrentSeason() == "Fall" && dayInSeason == 5)
+            res += "Let's picking up the falling leaves!\n";
+        else if (getCurrentSeason() == "Winter" && dayInSeason == 25)
+            res += "Merry Christmas and Happy Birthday to levi!\n";
+    }
+        
     FarmMap* farmMap = FarmMap::getInstance();
     for (Festival* festival : farmMap->festivals) {
         std::string season, day, curSeason;
@@ -102,7 +113,7 @@ std::string DateManage::getNextFestival()
         else if (season > getCurrentSeason())
             return festival->getEventName() + "is coming soon!";
     }
-    return "";
+    return "waiting for next year..";
 }
 
 int DateManage::getSeasonIndex(const std::string& season) {

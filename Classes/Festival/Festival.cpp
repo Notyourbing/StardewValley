@@ -43,7 +43,7 @@ void Festival::startEvent(DateManage* dateManage) {
 
     FarmMap* farmMap = FarmMap::getInstance();
     // 创建一个新的 Label 来显示消息
-    auto label = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 66);
+    auto label = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 46);
     if (label) {
         // 设置位置为屏幕中央
         label->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x - farmMap->getPosition().x, visibleSize.height / 2 + origin.y - farmMap->getPosition().y));
