@@ -2,19 +2,22 @@
 #include <iostream>
 #include <map>
 
-// 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话，但是不创建精灵
-Npc::Npc(const std::string& name, const std::string& birthdate,
-    const std::vector<std::string>& favoriteGifts,
+// 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话
+Npc::Npc(const std::string& name, const std::string& birthday,
+    const std::vector<std::string>& favorateGifts,
     const std::vector<std::string>& dislikedGifts,
     const std::vector<std::string>& dialogues,
     const std::string& imagePath)
-    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None), dialogues(dialogues), image(imagePath) {
+    : name(name), birthday(birthday), friendshipLevel(0), gifts(favorateGifts), dislikes( dislikedGifts), dialogues(dialogues), image(imagePath), playerRelation(RelationshipStatus::None) {
 }
 
 Npc::Npc(const Npc& other)
     : name(other.name),
+    birthday(other.birthday),
     friendshipLevel(other.friendshipLevel),
     playerRelation(other.playerRelation),
+    gifts(other.gifts), 
+    dislikes(other.dislikes),
     dialogues(other.dialogues) {
     // 创建精灵
     sprite = Sprite::create(other.image);
@@ -57,30 +60,39 @@ void Npc::interactWithPlayer() {
 }
 
 // 给 NPC 送礼物
-void Npc::giveGift(const std::string& gift) {
-    std::cout << "你送给 " << name << " " << gift << "。" << std::endl;
+std::string Npc::giveGift(const std::string& gift) {
+    std::string str = "you sent " + name + " " + gift + ".\n";
 
     if (likesGift(gift)) {
-        std::cout << name << " 很喜欢这个礼物！" << std::endl;
+        str += name + " likes it very much.";
         increaseFriendship(10);
     }
     else if (dislikesGift(gift)) {
-        std::cout << name << " 并不喜欢这个礼物。" << std::endl;
-        decreaseFriendship(5);
+        str += name + " doesn't like it.";
+        decreaseFriendship(10);
     }
     else {
-        std::cout << name << " 对这个礼物没有特别的感觉。" << std::endl;
+        str += name + " said nothing about it.";
     }
+    return str;
 }
 
 // 判断 NPC 是否喜欢某个礼物
 bool Npc::likesGift(const std::string& gift) const {
-    return std::find(gifts.begin(), gifts.end(), gift) != gifts.end();
+    for (std::string item : gifts) {
+        if (item == gift)
+            return true;
+    }
+    return false;
 }
 
 // 判断 NPC 是否讨厌某个礼物
 bool Npc::dislikesGift(const std::string& gift) const {
-    return std::find(dislikes.begin(), dislikes.end(), gift) != dislikes.end();
+    for (std::string item : dislikes) {
+        if (item == gift)
+            return true;
+    }
+    return false;
 }
 
 // 增加 NPC 的亲密度
@@ -156,10 +168,12 @@ void Npc::setPlayerRelation(RelationshipStatus status) {
 
 // 输出 NPC 的当前状态
 std::string Npc::printStatus() const {
+    std::string res = "friendshipLevel with " + name + ":  " + std::to_string(friendshipLevel);
     if (friendshipLevel >= 80)
-        return "Romance";
+        res += "\nRomance";
     else if (friendshipLevel >= 50)
-        return "Friend";
+        res += "\nFriend";
     else
-        return "None";
+        res += "\nNone";
+    return res;
 }
