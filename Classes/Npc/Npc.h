@@ -22,6 +22,7 @@ private:
     std::vector<std::string> dislikes;  // NPC讨厌的礼物
     std::vector<std::string> dialogues; // NPC的对话列表
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
+    std::string image;
     std::map<std::string, RelationshipStatus> npcRelations; // NPC之间的关系
 
     // 对话框相关成员
@@ -32,12 +33,14 @@ private:
 public:
 
     Sprite* sprite;                     // NPC的图像（作为精灵）
-    // 构造函数
+    // 构造函数，但是不创建精灵
     Npc(const std::string& name, const std::string& birthdate,
         const std::vector<std::string>& favoriteGifts,
         const std::vector<std::string>& dislikedGifts,
         const std::vector<std::string>& dialogues,
         const std::string& imagePath);
+    // 创建精灵的构造函数
+    Npc(const Npc& other);
     Npc();
 
     // 获取NPC的名字

@@ -32,7 +32,7 @@ public:
 
 	CREATE_FUNC(Farm);
 
-	bool isDialogueVisible = false;
+	bool isDialogueVisible;
 
 private:
 	// 记录当前按下的键

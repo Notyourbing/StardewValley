@@ -1,7 +1,9 @@
+#include "ui/CocosGUI.h"
 #include "FarmScene.h"
 #include "../Map/FarmMap.h"
 #include "../Npc/Npc.h"
-#include "ui/CocosGUI.h"
+#include "../Constant/Constant.h"
+
 
 USING_NS_CC;
 
@@ -28,26 +30,17 @@ bool Farm::init() {
 
 
 	// 创建 NPC 示例
-	Npc* wizard = new Npc("Wizard Yuuu", "Fall 5",
-		{ "Magic Essence", "Diamond" },
-		{ "Milk" },
-		{ "Get out of my way.", "It's nice to see you here.", "I like to spend time with you." },
-		"npcImages/wizard.png");
-
-	Npc* cleaner = new Npc("Cleaner Levi", "Winter 25",
-		{ "Milk", "Cleaning tools" },
-		{ "Clay" },
-		{ "...", "Ahh, hi.", "Come and have some black-tea with me." },
-		"npcImages/cleaner.png");
+	Npc* wizard = new Npc(WIZARD);
+	Npc* cleaner = new Npc(CLEANER);
 
 	//测试：亲密度90
 	cleaner->increaseFriendship(90);
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 
-
 	farmMap->npcInit(Vec2(origin.x + 300, origin.y + 300), wizard);
 	farmMap->npcInit(Vec2(origin.x + 500, origin.y + 300), cleaner);
+	isDialogueVisible = false;
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();
@@ -193,23 +186,23 @@ void Farm::showDialogue(Npc* npc) {
 			isDialogueVisible = false;
 		}
 		};
-
 	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
+
 void Farm::initMouseListener()
 {
 	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 
-	if (isDialogueVisible == false) {
-		listener->onMouseDown = [](Event* event) {
-			auto mouseEvent = dynamic_cast<EventMouse*>(event);
-			if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+	listener->onMouseDown = [this](Event* event) {
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+			if (isDialogueVisible == false)
 				Player::getInstance()->useCurrentTool();
-			}
-			};
-	}
+		}
+		};
+
 	for (auto npc : npcs) {
 		// 计算玩家与 NPC 的距离
 		Player* player = Player::getInstance();

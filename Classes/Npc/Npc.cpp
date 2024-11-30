@@ -2,16 +2,22 @@
 #include <iostream>
 #include <map>
 
-// 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话
+// 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话，但是不创建精灵
 Npc::Npc(const std::string& name, const std::string& birthdate,
     const std::vector<std::string>& favoriteGifts,
     const std::vector<std::string>& dislikedGifts,
     const std::vector<std::string>& dialogues,
     const std::string& imagePath)
-    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None), dialogues(dialogues) {
+    : name(name), friendshipLevel(0), playerRelation(RelationshipStatus::None), dialogues(dialogues), image(imagePath) {
+}
 
-    // 加载NPC的精灵图像
-    sprite = Sprite::create(imagePath);  // 接收 std::string 类型的图像路径
+Npc::Npc(const Npc& other)
+    : name(other.name),
+    friendshipLevel(other.friendshipLevel),
+    playerRelation(other.playerRelation),
+    dialogues(other.dialogues) {
+    // 创建精灵
+    sprite = Sprite::create(other.image);
 }
 
 Npc::Npc()
