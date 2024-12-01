@@ -2,7 +2,7 @@
 #define __FESTIVAL_H__
 
 #include "../CommunityEvent/CommunityEvent.h"
-#include "../DateManage/DateManage.h"
+//#include "../DateManage/DateManage.h"
 
 class Festival : public CommunityEvent {
 public:

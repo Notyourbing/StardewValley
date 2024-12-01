@@ -9,6 +9,7 @@
 #include "../Map/TileMap.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
+#include "../DateManage/DateManage.h"
 
 class Farm : public cocos2d::Scene {
 public:
@@ -18,9 +19,6 @@ public:
 
 	//该地图上所有npc
 	std::vector<Npc*> npcs;
-
-	// 存储节日庆典的容器
-	std::vector<Festival*> festivals;
 
 	// 显示初始对话框
 	void showInitialDialogue(Npc* npc);

@@ -170,7 +170,7 @@ void Farm::showInitialDialogue(Npc* npc) {
 	auto npcTalkImage = Sprite::create(npcImageName);
 	if (npcTalkImage) {
 		npcTalkImage->setPosition(Vec2(dialogueBackground->getPositionX() + 365, dialogueBackground->getPositionY() + 40));
-		this->addChild(npcTalkImage, 12);
+		this->addChild(npcTalkImage, 11);
 	}
 
 	// NPC名字
@@ -215,7 +215,7 @@ void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* labe
 			});
 
 		optionButtons.push_back(optionButton);
-		this->addChild(optionButton, 15);  // 将按钮添加到场景中
+		this->addChild(optionButton, 12);  // 将按钮添加到场景中
 	}
 }
 
@@ -226,7 +226,7 @@ void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> 
 		button->setVisible(false);
 	}
 	std::string newDialogue;
-
+	DateManage* dateManage = DateManage::getInstance();
 	// 根据选择的选项更新对话框内容
 	switch (optionIndex) {
 		case 0:
@@ -236,10 +236,11 @@ void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> 
 			newDialogue = "Not yet";
 			break;
 		case 2:
-			newDialogue = "The next festival will be a great celebration. You should join us!";
+			newDialogue = dateManage->getNextFestival();
 			break;
 		case 3:
-			newDialogue = "Oh, a gift? That's so kind of you. What did you bring me?";
+			//选择礼物，给出gift
+			newDialogue = npc->giveGift("Milk");
 			npc->interactWithPlayer();
 			break;
 		default:
@@ -289,7 +290,6 @@ void Farm::initMouseListener()
 				const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
 				// 设定一个合适的距离阈值
 				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
-				CCLOG("distance:(%f)\n", distance);
 				if (distance < interactionRange && isDialogueVisible == false) {
 					showInitialDialogue(npc);
 				}
@@ -303,14 +303,25 @@ void Farm::initMouseListener()
 
 // 创建节日庆典事件
 void Farm::createFestivals() {
-	Festival* springFestival = Festival::create("Spring Festival", "Celebrate the arrival of Spring with games, food, and fun!", "Spring 13", true);
+	FarmMap* farmMap = FarmMap::getInstance();
+	Festival* springFestival = Festival::create("Spring Festival", "Celebrate the arrival of Spring with games, food, and fun!", "Spring 7", true);
 	if (springFestival) {
-		festivals.push_back(springFestival);
+		farmMap->festivals.push_back(springFestival);
 	}
 
-	Festival* summerFestival = Festival::create("Summer Festival", "The hot days of Summer are here! Time for the beach!", "Summer 11", false);
+	Festival* summerFestival = Festival::create("Summer Festival", "The hot days of Summer are here! Time for the beach!", "Summer 15", false);
 	if (summerFestival) {
-		festivals.push_back(summerFestival);
+		farmMap->festivals.push_back(summerFestival);
+	}
+
+	Festival* fallFestival = Festival::create("Fall Festival", "Let's picking up the falling leaves!", "Fall 5", false);
+	if (fallFestival) {
+		farmMap->festivals.push_back(fallFestival);
+	}
+
+	Festival* winterFestival = Festival::create("Winter Festival", "Merry Christmas and Happy Birthday to levi!", "Winter 25", false);
+	if (winterFestival) {
+		farmMap->festivals.push_back(winterFestival);
 	}
 }
 
@@ -318,8 +329,8 @@ void Farm::createFestivals() {
 void Farm::checkFestivalEvent() {
 	auto dateManager = DateManage::getInstance();
 	std::string currentDate = dateManager->getCurrentDate();
-
-	for (auto& festival : festivals) {
+	FarmMap* farmMap = FarmMap::getInstance();
+	for (auto& festival : farmMap->festivals) {
 		if (festival->getEventDate() == currentDate) {
 			// 当前日期与节日日期匹配，开始节日活动
 			festival->startEvent(dateManager);
