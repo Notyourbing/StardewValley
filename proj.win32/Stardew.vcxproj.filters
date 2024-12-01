@@ -143,10 +143,6 @@
     <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\FramMap.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\TileType.h">
     <ClInclude Include="..\Classes\Map\TileMap.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
