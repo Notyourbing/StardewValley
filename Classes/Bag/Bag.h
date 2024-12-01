@@ -5,8 +5,8 @@
 
 class Bag : public cocos2d::Node {
 public:
-	// 创建背包实例
-	static Bag* create();
+	// 单例模式获取背包实例
+	static Bag* getInstance();
 
 	// 初始化背包
 	bool init();
@@ -26,9 +26,24 @@ public:
 	// 获取当前选中的工具
 	Tool* getSelectedTool() const;
 
-private:
-	// 存储工具的容器
+	// 显示背包
+	void updateDisplay();
+
 	std::vector<Tool*> tools;
+
+private:
+	// 单例实例
+	static Bag* instance;
+
+	// 私有构造函数，防止多次实例化，确保唯一性
+	Bag();
+	~Bag();
+
+	// 禁止拷贝和赋值
+	Bag(const Bag&) = delete;
+	Bag& operator=(const Bag&) = delete;
+
+	// 存储工具的容器
 
 	// 背包容量
 	static const int capacity = 9;
@@ -39,8 +54,6 @@ private:
 	// 用于显示背包的矩形框和工具
 	cocos2d::DrawNode* bagBackground; // 背景框
 	std::vector<cocos2d::Sprite*> toolIcons; // 工具图标
-
-	void updateDisplay();
 
 	static const int iconSize = 54; // 每个图标的宽度/高度
 	static const int spacing = 10; // 图标间距

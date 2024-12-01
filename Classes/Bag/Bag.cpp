@@ -1,16 +1,28 @@
 #include "Bag.h"
+#include "../Tool/Axe.h"
+#include "../Tool/PickAxe.h"
+#include "../Player/Player.h"
 
 USING_NS_CC;
 
-Bag* Bag::create() {
-	Bag* bag = new (std::nothrow) Bag();
-	if (bag && bag->init()) {
-		bag->autorelease();
-		return bag;
+// 初始化静态成员变量
+Bag* Bag::instance = nullptr;
+
+Bag* Bag::getInstance() {
+	if (instance == nullptr) {
+		instance = new (std::nothrow) Bag();
+		if (instance && instance->init()) {
+			instance->autorelease();
+		}
+		else {
+			CC_SAFE_DELETE(instance);
+		}
 	}
-	CC_SAFE_DELETE(bag);
-	return nullptr;
+	return instance;
 }
+
+Bag::Bag(): selectedIndex(0) {}
+Bag::~Bag() {}
 
 bool Bag::init() {
 	if (!Node::init()) {
@@ -19,7 +31,7 @@ bool Bag::init() {
 
 	// 初始化工具
 	tools.resize(capacity, nullptr);
-	selectedIndex = -1; // 无法选中工具
+	selectedIndex = 0;
 
 	// 创建背包背景框
 	bagBackground = DrawNode::create();
@@ -33,8 +45,15 @@ bool Bag::init() {
 		toolIcons.push_back(icon);
 	}
 
+	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	// 更新显示
 	updateDisplay();
+
+	Tool* pickaxe = Pickaxe::create();
+	addTool(pickaxe);
+	Tool* axe = Axe::create();
+	addTool(axe);
+	selectTool(0);
 
 	return true;
 }
@@ -44,6 +63,7 @@ bool Bag::addTool(Tool* tool) {
 	for (int i = 0; i < capacity; ++i) {
 		if (tools[i] == nullptr) {
 			tools[i] = tool;
+			addChild(tool);
 			updateDisplay();
 			return true;
 		}
@@ -68,6 +88,7 @@ Tool* Bag::getTool(int index) const {
 void Bag::selectTool(int index) {
 	if (index >= 0 && index < capacity && tools[index] != nullptr) {
 		selectedIndex = index;
+		Player::getInstance()->setCurrentTool(tools[index]);
 	}
 	updateDisplay();
 }
@@ -82,7 +103,7 @@ Tool* Bag::getSelectedTool() const {
 void Bag::updateDisplay() {
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
-	const float startY = 50; // 背包显示在屏幕底部，距底部 50 像素
+ 	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
 
 	// 绘制背景框
 	bagBackground->clear();
@@ -117,7 +138,4 @@ void Bag::updateDisplay() {
 			icon->setColor(Color3B::WHITE);
 		}
 	}
-
-
-	
 }

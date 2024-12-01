@@ -18,13 +18,13 @@ public:
 	virtual void useTool();
 
 	// 获取工具名称
-	std::string getToolName() const {
+	std::string getToolName() {
 		return toolName;
 	}
-
-protected:
 	// 工具名称
-	std::string toolName; 
+	std::string toolName;
+protected:
+
 };
 
 #endif

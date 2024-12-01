@@ -67,14 +67,9 @@ bool Farm::init() {
 		this->addChild(nameLabel, 4);
 	}
 
-	auto bag = Bag::create();
+	Bag* bag = Bag::getInstance();
 	this->addChild(bag, 4);
-	auto pickaxe = Pickaxe::create();
-	bag->addTool(pickaxe);
-	auto axe = Axe::create();
-	bag->addTool(axe);
-	bag->selectTool(0);
-	
+	bag->selectTool(1);
 	createFestivals();
 
 	// 初始化键盘监听器
@@ -91,6 +86,11 @@ void Farm::initKeyboardListener() {
 	auto listener = EventListenerKeyboard::create();
 
 	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
+			int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
+			auto bag = Bag::getInstance();
+			Bag::getInstance()->selectTool(index);
+		}
 		keysPressed.insert(keyCode);
 		updateMovement(); // 根据当前按下的键计算方向
 		};
@@ -277,7 +277,8 @@ void Farm::initMouseListener()
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
-				Player::getInstance()->useCurrentTool();
+				auto bag = Bag::getInstance();
+				Player::getInstance()->useCurrentTool(); 
 			}
 		}
 		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {

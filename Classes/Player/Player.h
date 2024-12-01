@@ -43,7 +43,6 @@ public:
 		return velocity;
 	}
 
-
 	// 设置站立动作
 	void setStandPose(const std::string& standPoseName);
 private:
@@ -62,7 +61,7 @@ private:
 
 	// 玩家的最后的朝向
 	Vec2 lastDirection;
-
+	
 	// 当前工具
 	Tool* currentTool;
 
