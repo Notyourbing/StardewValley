@@ -35,7 +35,7 @@ bool Farm::init() {
 		}, 1.0f, "update_date_key");
 
 	auto farmMap = FarmMap::getInstance();
-	if (!farmMap->init("Maps/farmSpring11_28/farmSpring11_28.tmx")) {
+	if (!farmMap->init("Maps/farmSpring11_28/farm.tmx")) {
 		return false;
 	}
 	const auto farmMapSize = farmMap->getMapSize();
@@ -276,12 +276,44 @@ void Farm::initMouseListener()
 
 	listener->onMouseDown = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		Player* player = Player::getInstance();
+		FarmMap* farmMap = FarmMap::getInstance();
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
-				Player::getInstance()->useCurrentTool(); 
+				Player::getInstance()->useCurrentTool();
+				Vec2 playerPosition = player->getPosition();
+
+				// 将这个坐标转化为瓦点地图中的坐标
+				const Size tileSize = farmMap->map->getTileSize();
+				const Size mapSize = farmMap->map->getMapSize();
+				playerPosition = playerPosition - farmMap->getPosition();
+				int x = playerPosition.x / tileSize.width;
+				int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
+				// 加入人物的朝向
+				if (player->getLastDirection() == Vec2(1, 0)) {
+					if (x + 1 < mapSize.width - 1) {
+						x++;
+					}
+				}
+				else if (player->getLastDirection() == Vec2(0, 1)) {
+					if (y - 1 >= 0) {
+						y--;
+					}
+				}
+				else if (player->getLastDirection() == Vec2(-1, 0)) {
+					if (x - 1 >= 0) {
+						x--;
+					}
+				}
+				else {
+					if (y + 1 < mapSize.height - 1) {
+						y++;
+					}
+				}
+				farmMap->interactWithFarmMap(Vec2(x,y));
 			}
 		}
-		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
+		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : npcs) {
 				// 计算玩家与NPC的距离
 				Player* player = Player::getInstance();
@@ -358,4 +390,49 @@ void Farm::updateDate() {
 	dateLabel->setString(dateStream.str());
 
 	checkFestivalEvent();
+}
+
+void Farm::interactWithTheMap() {
+	// 获取玩家位置
+	auto player = Player::getInstance();
+	auto farmMap = FarmMap::getInstance();
+	Vec2 playerPosition = player->getPosition();
+	
+	// 将这个坐标转化为瓦点地图中的坐标
+	const Size tileSize = farmMap->map->getTileSize();
+	const Size mapSize = farmMap->map->getMapSize();
+	playerPosition = playerPosition - farmMap->getPosition();
+	int x = playerPosition.x / tileSize.width;
+	int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
+
+	// 加入人物的朝向
+	if (player->getLastDirection() == Vec2(1, 0)) {
+		if (x + 1 < mapSize.width - 1) {
+			x++;
+		}
+	}
+	else if (player->getLastDirection() == Vec2(0, 1)) {
+		if (y - 1 >= 0) {
+			y--;
+		}
+	}
+	else if (player->getLastDirection() == Vec2(-1, 0)) {
+		if (x - 1 >= 0) {
+			x--;
+		}
+	}
+	else {
+		if (y + 1 < mapSize.height - 1) {
+			y++;
+		}
+	}
+
+	for (auto tile : farmMap->soil) {
+		if (tile->getPosition() == Vec2(x, y)) {
+			if (tile->isTillable()) {
+				tile->till();
+				farmMap->replaceTile(Vec2(x, y), 8);
+			}
+		}
+	}
 }

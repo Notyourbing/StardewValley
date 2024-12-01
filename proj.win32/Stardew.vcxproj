@@ -166,9 +166,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\CommunityEvent\CommunityEvent.cpp" />
     <ClCompile Include="..\Classes\DateManage\DateManage.cpp" />
     <ClCompile Include="..\Classes\Festival\Festival.cpp" />
+    <ClCompile Include="..\Classes\Map\Animal.cpp" />
     <ClCompile Include="..\Classes\Map\Crop.cpp" />
+    <ClCompile Include="..\Classes\Map\Entity.cpp" />
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
-    <ClCompile Include="..\Classes\Map\TileMap.cpp" />
+    <ClCompile Include="..\Classes\Map\TileType.cpp" />
     <ClCompile Include="..\Classes\Npc\Npc.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\AppDelegate.cpp" />
@@ -188,9 +190,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Constant\Constant.h" />
     <ClInclude Include="..\Classes\DateManage\DateManage.h" />
     <ClInclude Include="..\Classes\Festival\Festival.h" />
+    <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\Crop.h" />
+    <ClInclude Include="..\Classes\Map\Entity.h" />
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
-    <ClInclude Include="..\Classes\Map\TileMap.h" />
+    <ClInclude Include="..\Classes\Map\FramMap.h" />
+    <ClInclude Include="..\Classes\Map\TileType.h" />
     <ClInclude Include="..\Classes\Npc\Npc.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Scene\AppDelegate.h" />

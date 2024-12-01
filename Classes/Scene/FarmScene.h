@@ -6,7 +6,6 @@
 #include "../Player/Player.h"
 #include "../Map/FarmMap.h"
 #include "../Npc/Npc.h"
-#include "../Map/TileMap.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
 #include "../DateManage/DateManage.h"
@@ -41,6 +40,9 @@ public:
 	bool isDialogueVisible;
 
 	void updateDate();
+
+	// 左键与地图交互
+	void interactWithTheMap();
 
 private:
 	// 用于显示日期的标签

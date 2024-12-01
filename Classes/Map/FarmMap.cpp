@@ -3,6 +3,27 @@
 #include "../Constant/Constant.h"
 USING_NS_CC;
 
+// 土壤类的耕种
+void Soil::till() {
+    isTilled = true;
+    soilStage = SoilStage::TILLED;
+}
+
+// 获得土壤块位置
+Vec2 Soil::getPosition() {
+    return position;
+}
+
+// 判断该土块是否可耕种
+bool Soil::isTillable() {
+    return isTilled == false && entity == nullptr;
+}
+
+// 判断该土块是否可种植
+bool Soil::isPlantable() {
+    return isTilled == true && entity == nullptr;
+}
+
 // 初始化静态实例
 FarmMap* FarmMap::instance = nullptr;
 
@@ -39,7 +60,40 @@ bool FarmMap::init(const std::string& tmxFile) {
         this->addChild(map);
 
         // 获取障碍物层
+        grassLayer = map->getLayer("Grass");
+        soilLayer = map->getLayer("Soil");
         obstacleLayer = map->getLayer("obstacles");
+        stoneLayer = map->getLayer("stone");
+        waterLayer = map->getLayer("water");
+
+        int width = map->getMapSize().width;
+        int height = map->getMapSize().height;
+
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (waterLayer->getTileGIDAt(Vec2(x, y))) {
+                    //mapTiles[x][y] = TileNode(TileType::WATER);
+                }
+                else if (stoneLayer->getTileGIDAt(Vec2(x, y))) {
+                    //mapTiles[x][y] = TileNode(TileType::STONE);
+                }
+                else if (obstacleLayer->getTileGIDAt(Vec2(x, y))) {
+                    //mapTiles[x][y] = TileNode(TileType::HOUSE);
+                }
+                else if (soilLayer->getTileGIDAt(Vec2(x, y))) {
+                    auto soilInMap = new Soil(Vec2(x, y));
+                    soil.push_back(soilInMap);
+                }
+                else {
+                    //mapTiles[x][y] = TileNode(TileType::GRASS);
+                }
+                //mapTiles[x][y].position = Vec2(x, y);
+                
+            }
+        }
+        
+        //CCLOG("successful map");
+
         if (!obstacleLayer) {
             CCLOG("No 'obstacles' layer found in TMX file.");
             return false;
@@ -110,12 +164,25 @@ bool FarmMap::isCollidable(const Vec2& position) const {
     }
 
     // 获取障碍物瓦片的 GID（瓦片 ID）
-    int tileGID = obstacleLayer->getTileGIDAt(Vec2(x, y));
-    if (tileGID != 0) {
+    int tileGIDInObstacle = obstacleLayer->getTileGIDAt(Vec2(x, y));
+    int tileGIDInStone = stoneLayer->getTileGIDAt(Vec2(x, y));
+    int tileGIDInWater = waterLayer->getTileGIDAt(Vec2(x, y));
+    if (tileGIDInObstacle||tileGIDInStone||tileGIDInWater) {
         return true;
     }
     else {
         return false;
     }
+ 
 }
 
+void FarmMap::replaceTile(const Vec2& position, int GID) {
+    soilLayer->setTileGID(8, position);
+}
+
+// 玩家与农场的交互函数
+void FarmMap::interactWithFarmMap(Vec2 position) {
+    if (soilLayer->getTileGIDAt(position)){
+        soilLayer->setTileGID(8, position);
+    }
+}

@@ -78,7 +78,7 @@
     <ClCompile Include="..\Classes\Map\Crop.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\TileMap.cpp">
+    <ClCompile Include="..\Classes\Map\TileType.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp">
@@ -95,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\DateManage\DateManage.cpp">
       <Filter>Classes\DateManage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Entity.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Animal.cpp">
+      <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Hoe.cpp">
       <Filter>Classes\Tool</Filter>
@@ -137,6 +143,10 @@
     <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Map\FramMap.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TileType.h">
     <ClInclude Include="..\Classes\Map\TileMap.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
@@ -157,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\DateManage\DateManage.h">
       <Filter>Classes\DateManage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Entity.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Animal.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Hoe.h">
       <Filter>Classes\Tool</Filter>
