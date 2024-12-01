@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "../Npc/Npc.h"
+#include "../Festival/Festival.h"
 #include <string>
 class FarmMap : public cocos2d::Node {
 public:
@@ -11,6 +12,8 @@ public:
 
 	// 初始化地图
 	bool init(const std::string& tmxFile);
+
+	std::vector<Festival*> festivals;
 
 	//随地图创建npc
 	bool npcInit(const Vec2& position, Npc* npc);
