@@ -69,7 +69,7 @@ bool Farm::init() {
 
 	Bag* bag = Bag::getInstance();
 	this->addChild(bag, 4);
-	bag->selectTool(1);
+
 	createFestivals();
 
 	// 初始化键盘监听器
@@ -79,32 +79,6 @@ bool Farm::init() {
 	initMouseListener();
 
 	return true;
-}
-
-void Farm::initKeyboardListener() {
-	// 创建键盘事件监听器
-	auto listener = EventListenerKeyboard::create();
-
-	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
-		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
-			int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
-			auto bag = Bag::getInstance();
-			Bag::getInstance()->selectTool(index);
-		}
-		keysPressed.insert(keyCode);
-		updateMovement(); // 根据当前按下的键计算方向
-		};
-
-	// 松开键时从 keysPressed 移除
-	listener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
-		keysPressed.erase(keyCode);
-		// 停止玩家移动
-		Player::getInstance()->stopMoving();
-		updateMovement(); // 更新方向
-		};
-
-	// 添加监听器到事件分发器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 void Farm::updateMovement() {
@@ -269,6 +243,32 @@ void Farm::closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTa
 	isDialogueVisible = false;
 }
 
+void Farm::initKeyboardListener() {
+	// 创建键盘事件监听器
+	auto listener = EventListenerKeyboard::create();
+
+	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
+			int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
+			auto bag = Bag::getInstance();
+			Bag::getInstance()->selectTool(index);
+		}
+		keysPressed.insert(keyCode);
+		updateMovement(); // 根据当前按下的键计算方向
+		};
+
+	// 松开键时从 keysPressed 移除
+	listener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+		keysPressed.erase(keyCode);
+		// 停止玩家移动
+		Player::getInstance()->stopMoving();
+		updateMovement(); // 更新方向
+		};
+
+	// 添加监听器到事件分发器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
 void Farm::initMouseListener()
 {
 	// 创建鼠标事件监听器
@@ -278,7 +278,6 @@ void Farm::initMouseListener()
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
-				auto bag = Bag::getInstance();
 				Player::getInstance()->useCurrentTool(); 
 			}
 		}

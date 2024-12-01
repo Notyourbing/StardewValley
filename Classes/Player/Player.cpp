@@ -213,6 +213,7 @@ void Player::setStandPose(const std::string& standPoseName) {
     }
 }
 
+// 使用当前工具
 void Player::useCurrentTool() {
     if (currentTool) {
         // 使用工具
@@ -229,6 +230,7 @@ void Player::useCurrentTool() {
     }
 }
 
+// 设置当前工具
 void Player::setCurrentTool(Tool* tool) {
     if (tool) {
         currentTool = tool;

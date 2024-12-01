@@ -52,7 +52,7 @@ private:
 	int selectedIndex;
 
 	// 用于显示背包的矩形框和工具
-	cocos2d::DrawNode* bagBackground; // 背景框
+	cocos2d::Sprite* bagBackground; // 背景框
 	std::vector<cocos2d::Sprite*> toolIcons; // 工具图标
 
 	static const int iconSize = 54; // 每个图标的宽度/高度

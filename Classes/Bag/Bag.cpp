@@ -1,7 +1,9 @@
 #include "Bag.h"
 #include "../Tool/Axe.h"
 #include "../Tool/PickAxe.h"
+#include "../Tool/Hoe.h"
 #include "../Player/Player.h"
+
 
 USING_NS_CC;
 
@@ -33,9 +35,17 @@ bool Bag::init() {
 	tools.resize(capacity, nullptr);
 	selectedIndex = 0;
 
-	// 创建背包背景框
-	bagBackground = DrawNode::create();
-	addChild(bagBackground);
+	const auto visibleSize = Director::getInstance()->getVisibleSize();
+	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
+	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
+
+
+	bagBackground = Sprite::create("icon/bagBackground.png");
+	if (bagBackground) {
+		bagBackground->setPosition(Vec2(startX + (capacity * (iconSize + spacing)) / 2, startY + iconSize / 2));
+		this->addChild(bagBackground, 0);
+	}
+
 
 	// 初始化工具图标
 	for (int i = 0; i < capacity; ++i) {
@@ -45,14 +55,15 @@ bool Bag::init() {
 		toolIcons.push_back(icon);
 	}
 
-	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	// 更新显示
 	updateDisplay();
 
-	Tool* pickaxe = Pickaxe::create();
-	addTool(pickaxe);
 	Tool* axe = Axe::create();
 	addTool(axe);
+	Tool* pickaxe = Pickaxe::create();
+	addTool(pickaxe);
+	Tool* hoe = Hoe::create();
+	addTool(hoe);
 	selectTool(0);
 
 	return true;
@@ -72,7 +83,8 @@ bool Bag::addTool(Tool* tool) {
 }
 
 void Bag::removeTool(int index) {
-	if (index >= 0 && index < capacity) {
+	if (index >= 0 && index < capacity && tools[index]) {
+		removeChild(tools[index]);
 		tools[index] = nullptr;
 		updateDisplay();
 	}
@@ -86,7 +98,7 @@ Tool* Bag::getTool(int index) const {
 }
 
 void Bag::selectTool(int index) {
-	if (index >= 0 && index < capacity && tools[index] != nullptr) {
+	if (index >= 0 && index < capacity && tools[index]) {
 		selectedIndex = index;
 		Player::getInstance()->setCurrentTool(tools[index]);
 	}
@@ -94,7 +106,7 @@ void Bag::selectTool(int index) {
 }
 
 Tool* Bag::getSelectedTool() const {
-	if (selectedIndex >= 0 && selectedIndex < capacity) {
+	if (selectedIndex >= 0 && selectedIndex < capacity && tools[selectedIndex]) {
 		return tools[selectedIndex];
 	}
 	return nullptr;
@@ -104,14 +116,6 @@ void Bag::updateDisplay() {
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
  	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
-
-	// 绘制背景框
-	bagBackground->clear();
-	bagBackground->drawSolidRect(
-		Vec2(startX - 10, startY - 10),
-		Vec2(startX + capacity * (iconSize + spacing) - spacing + 10, startY + iconSize + 10),
-		Color4F(0, 0, 0, 0.5f) // 半透明黑色背景
-	);
 
 	// 更新工具图标
 	for (int i = 0; i < capacity; ++i) {

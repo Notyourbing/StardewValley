@@ -20,6 +20,7 @@ constexpr int TALKING_BOX_Y = 200;
 constexpr int LABEL_WIDTH = 720;
 constexpr int LABEL_HEIGHT = 390;
 
+
 const Npc WIZARD("Wizard Yuuu", "Fall 5",
 	{ "Magic Essence", "Diamond" },
 	{ "Milk" },

@@ -1,24 +1,23 @@
-#include "PickAxe.h"
+#include "Hoe.h"
 #include "../Player/Player.h"
 
 USING_NS_CC;
 
-Pickaxe* Pickaxe::create() {
-	Pickaxe* pickaxe = new(std::nothrow) Pickaxe();
-	if (pickaxe && pickaxe->init()) {
-		pickaxe->autorelease();
-		return pickaxe;
+Hoe* Hoe::create() {
+	Hoe* hoe = new (std::nothrow) Hoe();
+	if (hoe && hoe->init()) {
+		hoe->autorelease();
+		return hoe;
 	}
-	CC_SAFE_DELETE(pickaxe);
-	return nullptr;
+	CC_SAFE_DELETE(hoe);
 }
 
-bool Pickaxe::init() {
+bool Hoe::init() {
 	// 调用基类的初始化方法
-	return Tool::init("pickaxe");
+	return Tool::init("hoe");
 }
 
-void Pickaxe::useTool() {
+void Hoe::useTool() {
 	// 播放斧头使用动画
 	auto rotationAction = RotateBy::create(0.2f, 90); // 顺时针旋转九十度，耗时0.2秒
 	auto resetRotationAction = RotateBy::create(0.2f, -90); // 回复初始角度

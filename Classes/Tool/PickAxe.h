@@ -1,5 +1,5 @@
-#ifndef __PICKAXE_H__H
-#define __PICKAXE_H__H
+#ifndef __PICKAXE_H__
+#define __PICKAXE_H__
 
 #include "Tool.h"
 
