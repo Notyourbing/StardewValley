@@ -6,7 +6,6 @@
 #include "../Player/Player.h"
 #include "../Map/FarmMap.h"
 #include "../Npc/Npc.h"
-#include "../Map/TileMap.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
 
@@ -39,12 +38,6 @@ public:
 	// 初始化地图图层
 	void initLayers();
 
-	// 初始化瓦片节点
-	void initTileNodes();
-
-	// 创建瓦片节点
-	std::shared_ptr<TileNode> createTileNode(const std::string& layerName, const cocos2d::Vec2& position);
-
 	void createFestivals();
 
 	void checkFestivalEvent();
@@ -54,6 +47,9 @@ public:
 	bool isDialogueVisible;
 
 	void updateDate();
+
+	// 左键与地图交互
+	void interactWithTheMap();
 
 private:
 	// 用于显示日期的标签

@@ -2,11 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-<<<<<<< HEAD
-      <FullPath>D:\Cocos2d\StardewValley\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
-=======
-      <FullPath>E:\github\1123\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
->>>>>>> 75f5d433ca3bd3759a894911816bae485e86db27
+      <FullPath>D:\Work\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
