@@ -5,6 +5,7 @@
 #include "Crop.h"
 #include "../Npc/Npc.h"
 #include "Entity.h"
+#include "../Festival/Festival.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -113,6 +114,8 @@ public:
 
 	// 初始化地图
 	bool init(const std::string& tmxFile);
+
+	std::vector<Festival*> festivals;
 
 	//随地图创建npc
 	bool npcInit(const Vec2& position, Npc* npc);

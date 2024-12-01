@@ -8,36 +8,29 @@
 #include "../Npc/Npc.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
+#include "../DateManage/DateManage.h"
 
 class Farm : public cocos2d::Scene {
 public:
 	static cocos2d::Scene* createScene();
 
-	virtual bool init();
+	bool init();
 
 	//该地图上所有npc
 	std::vector<Npc*> npcs;
-
-	// 存储节日庆典的容器
-	std::vector<Festival*> festivals;
 
 	// 显示初始对话框
 	void showInitialDialogue(Npc* npc);
 
 	// 显示对话选项
-	void showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel);
+	void showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
 
 	// 根据选择的选项更新对话内容
 	 void updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> optionButtons, int optionIndex, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) ;
 
 	// 关闭对话框和所有对话文字
-	void closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel);
-
-	bool isCollidingWithTile(const Vec2& position) const;
-
-	// 初始化地图图层
-	void initLayers();
-
+	void closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
+	
 	void createFestivals();
 
 	void checkFestivalEvent();

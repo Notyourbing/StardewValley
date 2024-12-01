@@ -1,7 +1,9 @@
 #include "Festival.h"
 #include "../Map/FarmMap.h"
 
-// 静态工厂方法
+static std::vector<Festival*> festivals;  // 静态成员变量
+
+// 静态方法
 Festival* Festival::create(const std::string& name, const std::string& description, const std::string& date, bool isHoliday) {
     Festival* instance = new Festival();
     if (instance && instance->init(name, description, date, isHoliday)) {
@@ -33,18 +35,18 @@ void Festival::startEvent(DateManage* dateManage) {
 
     // 如果是节假日，修改消息内容
     if (holiday) {
-        message = "It's a holiday! Enjoy your time off!";
+        message = "It's a holiday! Enjoy your time off in " + eventName + "!";
     }
     else {
-        message = "Join the community to celebrate the event!";
+        message = "Join the community to celebrate the " + eventName + "!";
     }
 
     FarmMap* farmMap = FarmMap::getInstance();
     // 创建一个新的 Label 来显示消息
-    auto label = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 36);
+    auto label = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 46);
     if (label) {
         // 设置位置为屏幕中央
-        label->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+        label->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x - farmMap->getPosition().x, visibleSize.height / 2 + origin.y - farmMap->getPosition().y));
         label->setTextColor(cocos2d::Color4B::WHITE);
 
         // 将 label 添加到场景中

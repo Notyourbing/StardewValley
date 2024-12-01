@@ -21,9 +21,8 @@ private:
     std::vector<std::string> gifts;     // NPC喜欢的礼物
     std::vector<std::string> dislikes;  // NPC讨厌的礼物
     std::vector<std::string> dialogues; // NPC的对话列表
-    RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
     std::string image;
-    std::map<std::string, RelationshipStatus> npcRelations; // NPC之间的关系
+    RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
 
     // 对话框相关成员
     Sprite* dialogueBox;                // 对话框背景
@@ -33,7 +32,7 @@ private:
 public:
 
     Sprite* sprite;                     // NPC的图像（作为精灵）
-    // 构造函数，但是不创建精灵
+    // 构造函数
     Npc(const std::string& name, const std::string& birthdate,
         const std::vector<std::string>& favoriteGifts,
         const std::vector<std::string>& dislikedGifts,
@@ -59,7 +58,7 @@ public:
     void interactWithPlayer();
 
     // 给NPC送礼物
-    void giveGift(const std::string& gift);
+    std::string giveGift(const std::string& gift);
 
     // 判断NPC是否喜欢某个礼物
     bool likesGift(const std::string& gift) const;

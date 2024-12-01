@@ -1,17 +1,13 @@
 #include "Player.h"
 #include "SimpleAudioEngine.h"
 #include "../Tool/Axe.h"
+#include "../Tool/Pickaxe.h"
 #include "../Map/FarmMap.h"
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
 
-// 定义 problemLoading 函数
-static void problemLoading(const char* filename) {
-    CCLOG("Error while loading: %s", filename);
-    printf("Error while loading: %s\n", filename);
-}
 
 // 初始化静态成员变量
 Player* Player::instance = nullptr;
@@ -42,13 +38,12 @@ Player::~Player() {}
 // 初始化
 bool Player::init() {
     if (!Sprite::initWithFile("playerWalkImages/standDown.png")) {
-        problemLoading("playerWalkImages/standDown.png");
         return false;
     }
 
     // 初始速度为零
     velocity = Vec2::ZERO;
-
+    
     // 创建工具（默认是斧头），但不添加到场景中
     currentTool = Axe::create();
     if (currentTool) {
@@ -58,8 +53,8 @@ bool Player::init() {
         // 工具作始终为玩家的子节点
         addChild(currentTool);
         currentTool->setPosition(-10, -20);
-
     }
+
 
     loadStandFrames();
     // 每dt时间调用一次
@@ -197,7 +192,6 @@ void Player::createStandFrame(const std::string& filename, const std::string& an
 
     Texture2D* texture = Director::getInstance()->getTextureCache()->addImage(filename);
     if (!texture) {
-        problemLoading(filename.c_str());
         return;
     }
 
@@ -207,7 +201,6 @@ void Player::createStandFrame(const std::string& filename, const std::string& an
         frameCache->addSpriteFrame(frame, animationName);
     }
     else {
-        problemLoading(("stand" + animationName).c_str());
     }
 }
 
@@ -220,6 +213,7 @@ void Player::setStandPose(const std::string& standPoseName) {
     }
 }
 
+// 使用当前工具
 void Player::useCurrentTool() {
     if (currentTool) {
         // 使用工具
@@ -233,5 +227,12 @@ void Player::useCurrentTool() {
             nullptr
         ));
 
+    }
+}
+
+// 设置当前工具
+void Player::setCurrentTool(Tool* tool) {
+    if (tool) {
+        currentTool = tool;
     }
 }

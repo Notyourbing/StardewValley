@@ -3,6 +3,7 @@
 
 #include <string>
 #include "cocos2d.h"
+
 USING_NS_CC;
 class DateManage; // 前向声明 DateManage 类
 

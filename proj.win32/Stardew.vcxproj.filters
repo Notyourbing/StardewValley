@@ -28,6 +28,9 @@
     <Filter Include="Classes\Constant">
       <UniqueIdentifier>{1a482286-62fb-4cc2-bd0c-ab1bc931c897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Bag">
+      <UniqueIdentifier>{06989d12-6464-4fd5-95c1-39395af0da09}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Classes\CommunityEvent">
       <UniqueIdentifier>{e3e616ec-cbf2-4671-8c5c-7dcb42115aae}</UniqueIdentifier>
     </Filter>
@@ -78,6 +81,12 @@
     <ClCompile Include="..\Classes\Map\TileType.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Pickaxe.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bag\Bag.cpp">
+      <Filter>Classes\Bag</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\CommunityEvent\CommunityEvent.cpp">
       <Filter>Classes\CommunityEvent</Filter>
     </ClCompile>
@@ -92,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Map\Animal.cpp">
       <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Hoe.cpp">
+      <Filter>Classes\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +147,17 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Map\TileType.h">
+    <ClInclude Include="..\Classes\Map\TileMap.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\PickAxe.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bag\Bag.h">
+      <Filter>Classes\Bag</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CommunityEvent\CommunityEvent.h">
       <Filter>Classes\CommunityEvent</Filter>
@@ -154,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\Animal.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Hoe.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
