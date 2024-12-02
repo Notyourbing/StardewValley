@@ -105,6 +105,9 @@
     <ClCompile Include="..\Classes\Tool\Hoe.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\TileNode.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -172,6 +175,10 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Hoe.h">
       <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\TileType.h" />
+    <ClInclude Include="..\Classes\Map\TileNode.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

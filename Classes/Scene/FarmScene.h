@@ -41,9 +41,6 @@ public:
 
 	void updateDate();
 
-	// 左键与地图交互
-	void interactWithTheMap();
-
 private:
 	// 用于显示日期的标签
 	cocos2d::Label* dateLabel; 
