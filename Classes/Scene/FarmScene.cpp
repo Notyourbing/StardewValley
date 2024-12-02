@@ -51,19 +51,19 @@ bool Farm::init() {
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 
-	farmMap->npcInit(Vec2(origin.x + WIZARD_X, origin.y + WIZARD_Y), wizard);
-	farmMap->npcInit(Vec2(origin.x + CLEANER_X, origin.y + CLEANER_Y), cleaner);
+	farmMap->npcInit(Vec2( + WIZARD_X, origin.y + WIZARD_Y), wizard);
+	farmMap->npcInit(Vec2( + CLEANER_X, origin.y + CLEANER_Y), cleaner);
 	isDialogueVisible = false;
 
 	// 获取玩家单例并添加到场景中
 	auto player = Player::getInstance();
-	player->setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2); // 初始位置
+	player->setPosition( + visibleSize.width / 2, origin.y + visibleSize.height / 2); // 初始位置
 	this->addChild(player, 3);
 
 	// 显示玩家名字
 	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", "fonts/Marker Felt.ttf", 24);
 	if (nameLabel) {
-		nameLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - 50));
+		nameLabel->setPosition(Vec2( + visibleSize.width / 2, origin.y + visibleSize.height - 50));
 		this->addChild(nameLabel, 4);
 	}
 
