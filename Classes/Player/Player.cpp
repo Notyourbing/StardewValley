@@ -52,7 +52,7 @@ bool Player::init() {
         currentTool->setAnchorPoint(Vec2(0, 0));
         // 工具作始终为玩家的子节点
         addChild(currentTool);
-        currentTool->setPosition(-10, -20);
+        currentTool->setPosition(0, 0);
     }
 
 
