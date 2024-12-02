@@ -21,32 +21,31 @@ bool Axe::init() {
 void Axe::useTool() {
     // 获取玩家实例
     Player* player = Player::getInstance();
-
     // 创建动画帧
     Vector<SpriteFrame*> frames;
 
     Vec2 direction = player->getLastDirection();
     if (direction.x > 0) {
-        frames.pushBack(SpriteFrame::create("tools/rightUseAxe1.png", Rect(0, 0, 100, 183)));
-        frames.pushBack(SpriteFrame::create("tools/rightUseAxe2.png", Rect(0, 0, 201, 183)));
-        frames.pushBack(SpriteFrame::create("tools/rightUseAxe3.png", Rect(0, 0, 165, 164)));
+        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe1.png", Rect(0, 0, 100, 183)));
+        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe2.png", Rect(0, 0, 201, 183)));
+        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe3.png", Rect(0, 0, 165, 164)));
         frames.pushBack(SpriteFrame::create("playerWalkImages/standRight.png", Rect(0, 0, 70, 120)));
     }
     else if (direction.x < 0) {
-        frames.pushBack(SpriteFrame::create("tools/leftUseAxe1.png", Rect(0, 0, 100, 183)));
-        frames.pushBack(SpriteFrame::create("tools/leftUseAxe2.png", Rect(0, 0, 201, 183)));
-        frames.pushBack(SpriteFrame::create("tools/leftUseAxe3.png", Rect(0, 0, 165, 164)));
+        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe1.png", Rect(0, 0, 100, 183)));
+        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe2.png", Rect(0, 0, 201, 183)));
+        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe3.png", Rect(0, 0, 165, 164)));
         frames.pushBack(SpriteFrame::create("playerWalkImages/standLeft.png", Rect(0, 0, 70, 120)));
     }
     else if (direction.y > 0) {
-        frames.pushBack(SpriteFrame::create("tools/upUseAxe1.png", Rect(0, 0, 85, 200)));
-        frames.pushBack(SpriteFrame::create("tools/upUseAxe2.png", Rect(0, 0, 81, 127)));
-        frames.pushBack(SpriteFrame::create("tools/upUseAxe3.png", Rect(0, 0, 75, 145)));
+        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe1.png", Rect(0, 0, 85, 200)));
+        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe2.png", Rect(0, 0, 81, 127)));
+        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe3.png", Rect(0, 0, 75, 145)));
         frames.pushBack(SpriteFrame::create("playerWalkImages/standUp.png", Rect(0, 0, 70, 120)));
     }
     else if (direction.y < 0) {
-        frames.pushBack(SpriteFrame::create("tools/downUseAxe1.png", Rect(0, 0, 74, 185)));
-        frames.pushBack(SpriteFrame::create("tools/downUseAxe2.png", Rect(0, 0, 75, 127)));
+        frames.pushBack(SpriteFrame::create("tools/axe/downUseAxe1.png", Rect(0, 0, 74, 185)));
+        frames.pushBack(SpriteFrame::create("tools/axe/downUseAxe2.png", Rect(0, 0, 75, 127)));
         frames.pushBack(SpriteFrame::create("tools/downUseAxe3.png", Rect(0, 0, 77, 109)));
         frames.pushBack(SpriteFrame::create("playerWalkImages/standDown.png", Rect(0, 0, 70, 120)));
     }

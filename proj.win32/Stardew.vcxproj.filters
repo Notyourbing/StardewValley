@@ -146,6 +146,9 @@
     <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Map\TileMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
     </ClInclude>

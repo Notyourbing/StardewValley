@@ -20,5 +20,6 @@ bool Tool::init(const std::string& name) {
 	if (!Sprite::initWithFile("tools/" + toolName + ".png")) {
 		return false;
 	}
+	this->setVisible(false);
 	return true;
 }
