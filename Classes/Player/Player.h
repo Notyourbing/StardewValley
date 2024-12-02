@@ -43,6 +43,11 @@ public:
 		return velocity;
 	}
 
+	// 获得当前工具名称
+	std::string getCurrentToolName() const {
+		return currentTool->getToolName();
+	}
+
 	// 设置站立动作
 	void setStandPose(const std::string& standPoseName);
 private:
