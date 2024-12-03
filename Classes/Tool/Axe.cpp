@@ -1,6 +1,6 @@
 #include "Axe.h"
 #include "../Player/Player.h"
-
+#include "../Constant/Constant.h"
 USING_NS_CC;
 
 Axe* Axe::create() {
@@ -25,29 +25,29 @@ void Axe::useTool() {
     Vector<SpriteFrame*> frames;
 
     Vec2 direction = player->getLastDirection();
-    if (direction.x > 0) {
-        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe1.png", Rect(0, 0, 100, 183)));
-        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe2.png", Rect(0, 0, 201, 183)));
-        frames.pushBack(SpriteFrame::create("tools/axe/rightUseAxe3.png", Rect(0, 0, 165, 164)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standRight.png", Rect(0, 0, 70, 120)));
+    if (direction.x > 0) { // 玩家面向右侧
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_RIGHT_1, ToolRects::AXE_RIGHT_1));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_RIGHT_2, ToolRects::AXE_RIGHT_2));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_RIGHT_3, ToolRects::AXE_RIGHT_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_RIGHT, ToolRects::STAND_RIGHT));
     }
-    else if (direction.x < 0) {
-        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe1.png", Rect(0, 0, 100, 183)));
-        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe2.png", Rect(0, 0, 201, 183)));
-        frames.pushBack(SpriteFrame::create("tools/axe/leftUseAxe3.png", Rect(0, 0, 165, 164)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standLeft.png", Rect(0, 0, 70, 120)));
+    else if (direction.x < 0) { // 玩家面向左侧
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_LEFT_1, ToolRects::AXE_LEFT_1));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_LEFT_2, ToolRects::AXE_LEFT_2));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_LEFT_3, ToolRects::AXE_LEFT_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_LEFT, ToolRects::STAND_LEFT));
     }
-    else if (direction.y > 0) {
-        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe1.png", Rect(0, 0, 85, 200)));
-        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe2.png", Rect(0, 0, 81, 127)));
-        frames.pushBack(SpriteFrame::create("tools/axe/upUseAxe3.png", Rect(0, 0, 75, 145)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standUp.png", Rect(0, 0, 70, 120)));
+    else if (direction.y > 0) { // 玩家面向上方
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_UP_1, ToolRects::AXE_UP_1));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_UP_2, ToolRects::AXE_UP_2));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_UP_3, ToolRects::AXE_UP_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_UP, ToolRects::STAND_UP));
     }
-    else if (direction.y < 0) {
-        frames.pushBack(SpriteFrame::create("tools/axe/downUseAxe1.png", Rect(0, 0, 74, 185)));
-        frames.pushBack(SpriteFrame::create("tools/axe/downUseAxe2.png", Rect(0, 0, 75, 127)));
-        frames.pushBack(SpriteFrame::create("tools/downUseAxe3.png", Rect(0, 0, 77, 109)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standDown.png", Rect(0, 0, 70, 120)));
+    else if (direction.y < 0) { // 玩家面向下方
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_DOWN_1, ToolRects::AXE_DOWN_1));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_DOWN_2, ToolRects::AXE_DOWN_2));
+        frames.pushBack(SpriteFrame::create(ResPath::AXE_DOWN_3, ToolRects::AXE_DOWN_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_DOWN, ToolRects::STAND_DOWN));
     }
 
     // 创建动画

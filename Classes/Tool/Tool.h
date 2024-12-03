@@ -5,7 +5,6 @@
 #include "../Map/FarmMap.h"
 #include <string>
 
-
 // 工具类
 class Tool : public cocos2d::Sprite {
 public:
@@ -22,9 +21,8 @@ public:
 	std::string getToolName() {
 		return toolName;
 	}
-protected:
 
-private:
+protected:
 	// 工具名称
 	std::string toolName;
 };

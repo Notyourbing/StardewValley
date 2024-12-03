@@ -16,6 +16,8 @@ public:
 
 	bool init();
 
+	CREATE_FUNC(Farm);
+
 	//该地图上所有npc
 	std::vector<Npc*> npcs;
 
@@ -34,8 +36,6 @@ public:
 	void createFestivals();
 
 	void checkFestivalEvent();
-
-	CREATE_FUNC(Farm);
 
 	bool isDialogueVisible;
 
