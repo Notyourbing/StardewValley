@@ -1,5 +1,6 @@
 #include "PickAxe.h"
 #include "../Player/Player.h"
+#include "../Constant/Constant.h"
 
 USING_NS_CC;
 
@@ -24,30 +25,29 @@ void Pickaxe::useTool() {
     // 创建动画帧
     Vector<SpriteFrame*> frames;
 
-    Vec2 direction = player->getLastDirection();
-    if (direction.x > 0) {
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/rightUsePickaxe1.png", Rect(0, 0, 131, 198)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/rightUsePickaxe2.png", Rect(0, 0, 95, 193)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/rightUsePickaxe3.png", Rect(0, 0, 267, 183)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standRight.png", Rect(0, 0, 70, 120)));
+    const Vec2 direction = player->getLastDirection();
+    if (direction.x > 0) { // 玩家面向右侧
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_RIGHT_1, ToolRects::PICKAXE_RIGHT_1));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_RIGHT_2, ToolRects::PICKAXE_RIGHT_2));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_RIGHT_3, ToolRects::PICKAXE_RIGHT_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_RIGHT, ToolRects::STAND_RIGHT));
     }
-    else if (direction.x < 0) {
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/leftUsePickaxe1.png", Rect(0, 0, 131, 198)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/leftUsePickaxe2.png", Rect(0, 0, 95, 193)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/leftUsePickaxe3.png", Rect(0, 0, 267, 183)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standLeft.png", Rect(0, 0, 70, 120)));
+    else if (direction.x < 0) { // 玩家面向左侧
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_LEFT_1, ToolRects::PICKAXE_LEFT_1));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_LEFT_2, ToolRects::PICKAXE_LEFT_2));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_LEFT_3, ToolRects::PICKAXE_LEFT_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_LEFT, ToolRects::STAND_LEFT));
     }
-    else if (direction.y > 0) {
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/upUsePickaxe1.png", Rect(0, 0, 98, 261)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/upUsePickaxe2.png", Rect(0, 0, 93, 146)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standUp.png", Rect(0, 0, 70, 120)));
+    else if (direction.y > 0) { // 玩家面向上方
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_UP_1, ToolRects::PICKAXE_UP_1));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_UP_2, ToolRects::PICKAXE_UP_2));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_UP, ToolRects::STAND_UP));
     }
-    else if (direction.y < 0) {
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/downUsePickaxe1.png", Rect(0, 0, 86, 270)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/downUsePickaxe2.png", Rect(0, 0, 81, 203)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/downUsePickaxe3.png", Rect(0, 0, 63, 132)));
-        frames.pushBack(SpriteFrame::create("tools/pickaxe/downUsePickaxe3.png", Rect(0, 0, 69, 131)));
-        frames.pushBack(SpriteFrame::create("playerWalkImages/standDown.png", Rect(0, 0, 70, 120)));
+    else if (direction.y < 0) { // 玩家面向下方
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_DOWN_1, ToolRects::PICKAXE_DOWN_1));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_DOWN_2, ToolRects::PICKAXE_DOWN_2));
+        frames.pushBack(SpriteFrame::create(ResPath::PICKAXE_DOWN_3, ToolRects::PICKAXE_DOWN_3));
+        frames.pushBack(SpriteFrame::create(ResPath::STAND_DOWN, ToolRects::STAND_DOWN));
     }
 
     // 创建动画
