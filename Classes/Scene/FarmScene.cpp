@@ -35,7 +35,7 @@ bool Farm::init() {
 		}, 1.0f, "update_date_key");
 
 	auto farmMap = FarmMap::getInstance();
-	if (!farmMap->init("Maps/farmSpring11_28/farm.tmx")) {
+	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
 		return false;
 	}
 	const auto farmMapSize = farmMap->getMapSize();

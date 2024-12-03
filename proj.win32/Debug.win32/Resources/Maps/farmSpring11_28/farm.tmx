@@ -3,12 +3,6 @@
  <tileset firstgid="1" name="farm" tilewidth="64" tileheight="64" tilecount="112" columns="16">
   <image source="farm.png" width="1024" height="511"/>
  </tileset>
- <tileset firstgid="113" name="111" tilewidth="914" tileheight="1280" tilecount="1" columns="0">
-  <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
-   <image source="C:/Users/24170/Desktop/微信图片_20240901105040.jpg" width="914" height="1280"/>
-  </tile>
- </tileset>
  <layer id="7" name="other" width="31" height="17" visible="0">
   <data encoding="csv">
 4,5,6,7,8,23,33,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
