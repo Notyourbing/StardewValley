@@ -37,7 +37,7 @@ public:
 	// 瓦片地图节点基类的构造函数
 	TileNode(const cocos2d::Vec2& position, const TileType& tileType,const int& currentGID) :
 		position(position), tileType(tileType),currentGID(currentGID)
-	{}
+	{} // ?? 注意括号的格式保持和其他文件统一，这里不应该另起一行。另外这里是.h文件，对于非静态成员变量和函数只应该有声明不应该有定义
 
 	// 获取该节点的类型
 	TileType getTileType() const{
@@ -98,7 +98,8 @@ public:
 	// 土壤的施肥
 	void fertilize();
 
-	virtual void interact(std::string toolName) override;
+	// ?? 这个也写虚函数是因为Soil还有派生类吗？
+	void interact(std::string toolName) override;
 };
 
 // Water类表示水，从TileNode类继承而来

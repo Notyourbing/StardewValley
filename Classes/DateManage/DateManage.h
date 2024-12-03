@@ -4,11 +4,13 @@
 #include "cocos2d.h"
 #include "../Festival/Festival.h"
 #include "../Map/FarmMap.h"
+
 class DateManage {
 public:
     // 获取单例实例
     static DateManage* getInstance();
 
+    // ?? 单例实例为什么会有create()方法，参考Player.h
     // 创建实例的方法（通过传递特定的开始年份和开始日期）
     static DateManage* create(int startYear, int startDay);
 
@@ -48,4 +50,4 @@ private:
     static const int daysInWeek = 7;  // 一周7天
 };
 
-#endif // __DATAMANAGE_H__
+#endif

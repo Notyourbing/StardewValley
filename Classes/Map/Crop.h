@@ -23,6 +23,7 @@ class Crop {
 private:
 
 protected:
+	// ?? 规范注释
 	// 作物的种类
 	CropType cropType;
 	// 最长的成熟天数
@@ -51,7 +52,7 @@ public:
 		season(season),isInfested(false),isDrought(false),
 		fertilizedLevel(0),cropGID(cropGID),position(position) ,
 		infestedDay(0)
-	{}
+	{} // 不能在此处定义
 
 	// 处理作物的生长,虚函数
 	virtual void grow();

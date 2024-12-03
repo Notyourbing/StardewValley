@@ -18,17 +18,14 @@ bool Farm::init() {
 		return false;
 	}
 
-	// 获取屏幕大小和原点
-	const auto visibleSize = Director::getInstance()->getVisibleSize();
-	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	
 	// 创建显示日期的标签
-	dateLabel = Label::createWithTTF("", "fonts/Marker Felt.ttf", 24);
+	dateLabel = Label::createWithTTF("", ResPath::FONT_TTF, 24);
 	if (dateLabel) {
-		dateLabel->setPosition(Vec2(visibleSize.width - 100, visibleSize.height - 40));  // 右上角位置
+		dateLabel->setPosition(Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
 		this->addChild(dateLabel, 5);
 	}
 
+	// ??定时器
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this](float deltaTime) {
 		updateDate();
@@ -38,35 +35,34 @@ bool Farm::init() {
 	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
 		return false;
 	}
+
 	const auto farmMapSize = farmMap->getMapSize();
-	farmMap->setPosition(visibleSize.width / 2 -farmMapSize.width / 2, visibleSize.height / 2 -farmMapSize.height / 2);
+	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
 	// 创建 NPC 示例
 	Npc* wizard = new Npc(WIZARD);
 	Npc* cleaner = new Npc(CLEANER);
-
-	//测试：亲密度90
-	cleaner->increaseFriendship(90);
+	cleaner->increaseFriendship(90); // 亲密度90
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
-
-	farmMap->npcInit(Vec2( + WIZARD_X, origin.y + WIZARD_Y), wizard);
-	farmMap->npcInit(Vec2( + CLEANER_X, origin.y + CLEANER_Y), cleaner);
+	farmMap->npcInit(Vec2(WIZARD_X, WIZARD_Y), wizard);
+	farmMap->npcInit(Vec2(CLEANER_X, CLEANER_Y), cleaner);
 	isDialogueVisible = false;
 
-	// 获取玩家单例并添加到场景中
+	// 玩家
 	auto player = Player::getInstance();
-	player->setPosition( + visibleSize.width / 2, origin.y + visibleSize.height / 2); // 初始位置
+	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 玩家初始位置在屏幕中央
 	this->addChild(player, 3);
 
-	// 显示玩家名字
+	// 玩家名字
 	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", "fonts/Marker Felt.ttf", 24);
 	if (nameLabel) {
-		nameLabel->setPosition(Vec2( + visibleSize.width / 2, origin.y + visibleSize.height - 50));
+		nameLabel->setPosition(Vec2(WINSIZE.width / 2, WINSIZE.height - 50));
 		this->addChild(nameLabel, 4);
 	}
 
+	// 背包
 	Bag* bag = Bag::getInstance();
 	this->addChild(bag, 4);
 
@@ -116,10 +112,6 @@ void Farm::showInitialDialogue(Npc* npc) {
 	// 标记对话框已显示
 	isDialogueVisible = true;
 
-	// 获取屏幕尺寸
-	const auto visibleSize = Director::getInstance()->getVisibleSize();
-	const Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 	// 创建对话框背景
 	auto dialogueBackground = Sprite::create("npcImages/dialogueBox.png");
 	if (!dialogueBackground) {
@@ -148,7 +140,7 @@ void Farm::showInitialDialogue(Npc* npc) {
 	}
 
 	// NPC名字
-	auto nameLabel = Label::createWithTTF(npc->getNpcName(), "fonts/Marker Felt.ttf", 40);
+	auto nameLabel = Label::createWithTTF(npc->getNpcName(), ResPath::FONT_TTF, 40);
 	nameLabel->setPosition(Vec2(dialogueBackground->getPositionX() + 360, dialogueBackground->getPositionY() - 140));
 	nameLabel->setTextColor(Color4B::WHITE);
 	this->addChild(nameLabel, 11);
@@ -249,8 +241,7 @@ void Farm::initKeyboardListener() {
 
 	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
-			int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
-			auto bag = Bag::getInstance();
+			const int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
 			Bag::getInstance()->selectTool(index);
 		}
 		keysPressed.insert(keyCode);
