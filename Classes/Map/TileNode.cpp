@@ -1,6 +1,23 @@
 #include "TileNode.h"
 
 
+// 草地的养殖交互函数
+void Grass::interact(std::string toolName) {
+	// 判断手里的动物是什么
+	if (toolName == "crow") {				// 牛
+
+	}
+	else if (toolName == "chicken") {		// 鸡
+
+	}
+	else if (toolName == "sheep") {			// 羊
+
+	}
+	else if (toolName == "pig") {			// 猪
+
+	}
+}
+
 // 土壤的锄地
 void Soil::hoe() {
 	isHoed = true;

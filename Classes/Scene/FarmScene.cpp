@@ -282,34 +282,6 @@ void Farm::initMouseListener()
 			if (isDialogueVisible == false) {
 				Player::getInstance()->useCurrentTool();
 				Vec2 playerPosition = player->getPosition();
-
-				// 将这个坐标转化为瓦点地图中的坐标
-				const Size tileSize = farmMap->map->getTileSize();
-				const Size mapSize = farmMap->map->getMapSize();
-				playerPosition = playerPosition - farmMap->getPosition();
-				int x = playerPosition.x / tileSize.width;
-				int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
-				// 加入人物的朝向
-				if (player->getLastDirection() == Vec2(1, 0)) {
-					if (x + 1 < mapSize.width - 1) {
-						x++;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(0, 1)) {
-					if (y - 1 >= 0) {
-						y--;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(-1, 0)) {
-					if (x - 1 >= 0) {
-						x--;
-					}
-				}
-				else {
-					if (y + 1 < mapSize.height - 1) {
-						y++;
-					}
-				}
 				farmMap->interactWithFarmMap();
 			}
 		}

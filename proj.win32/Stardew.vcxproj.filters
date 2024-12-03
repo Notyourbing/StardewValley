@@ -108,6 +108,9 @@
     <ClCompile Include="..\Classes\Map\TileNode.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Kettle.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -146,9 +149,6 @@
     <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\TileMap.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
     </ClInclude>
@@ -179,6 +179,9 @@
     <ClInclude Include="..\Classes\Map\TileType.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Kettle.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

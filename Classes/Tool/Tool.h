@@ -5,9 +5,6 @@
 #include "../Map/FarmMap.h"
 #include <string>
 
-enum class ToolType {
-	HOE,
-};
 
 // 工具类
 class Tool : public cocos2d::Sprite {
@@ -25,12 +22,11 @@ public:
 	std::string getToolName() {
 		return toolName;
 	}
-	// 工具名称
-	std::string toolName;
 protected:
 
 private:
-
+	// 工具名称
+	std::string toolName;
 };
 
 #endif

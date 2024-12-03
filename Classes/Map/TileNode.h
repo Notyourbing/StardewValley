@@ -59,6 +59,9 @@ public:
 	Grass(const cocos2d::Vec2& position):
 		TileNode(position,TileType::GRASS,1)
 	{}
+
+	// 草地的养殖交互函数的实现
+	virtual void interact(std::string toolName);
 };
 
 // Soil类表示土壤，从TileNode类继承而来
@@ -98,6 +101,7 @@ public:
 	// 土壤的施肥
 	void fertilize();
 
+	// 土壤交互函数的实现
 	virtual void interact(std::string toolName) override;
 };
 
