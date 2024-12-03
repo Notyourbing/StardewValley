@@ -2,6 +2,7 @@
 #include "../Player/Player.h"
 #include "FarmScene.h"
 #include "../Constant/Constant.h"
+#include "../MyButton/MyButton.h"
 
 USING_NS_CC;
 
@@ -54,7 +55,7 @@ bool NewGame::init() {
 	}
 
 	// OK按钮
-	auto okButton = ui::Button::create(ResPath::OK_BUTTON, ResPath::OK_BUTTON);
+	auto okButton = MyButton::create(ResPath::OK_BUTTON, ResPath::OK_BUTTON_ON);
 	if (okButton) {
 		okButton->setPosition(Vec2(WINSIZE.width * OK_BUTTON_POSITION_X_RATIO,
 			WINSIZE.height * OK_BUTTON_POSITION_Y_RATIO));
@@ -94,8 +95,9 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 	Player::getInstance()->setPlayerName(playerName);
 
 	// 进入FramScene
-	auto framScene = Farm::create();
-	Director::getInstance()->replaceScene(framScene);
+	auto farmScene = Farm::create();
+	auto transition = TransitionFade::create(0.5f, farmScene, cocos2d::Color3B::WHITE); // 0.7秒，淡入紫色背景
+	Director::getInstance()->replaceScene(transition);
 }
 
 // 返回项的回调函数

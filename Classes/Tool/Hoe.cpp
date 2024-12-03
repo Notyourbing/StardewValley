@@ -11,6 +11,7 @@ Hoe* Hoe::create() {
 		return hoe;
 	}
 	CC_SAFE_DELETE(hoe);
+    return nullptr;
 }
 
 bool Hoe::init() {

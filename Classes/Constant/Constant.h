@@ -8,15 +8,20 @@ namespace ResPath {
 	// 背景框、按钮、字体
 	constexpr char BACKGROUND_IMAGE[] = "icon/background.png";
 	constexpr char NEW_GAME_ITEM[] = "icon/newGameButton.png";
+	constexpr char NEW_GAME_ON_ITEM[] = "icon/newGameButtonOn.png";
 	constexpr char LOAD_GAME_ITEM[] = "icon/loadGameButton.png";
+	constexpr char LOAD_GAME_ON_ITEM[] = "icon/loadGameButtonOn.png";
 	constexpr char COOPERATION_ITEM[] = "icon/cooperationButton.png";
+	constexpr char COOPERATION_ON_ITEM[] = "icon/cooperationButtonOn.png";
 	constexpr char EXIT_ITEM[] = "icon/exitButton.png";
+	constexpr char EXIT_ON_ITEM[] = "icon/exitButton.png";
 	constexpr char TITLE[] = "icon/title.png";
 	constexpr char FONT_TTF[] = "fonts/Marker Felt.ttf";
 	constexpr char COOP_BACKGROUND[] = "icon/coopBackground.png";
 	constexpr char COOP_PANEL[] = "icon/cooperationPanel.png";
 	constexpr char NAME_BAR[] = "icon/nameBar.png";
 	constexpr char OK_BUTTON[] = "icon/okButton.png";
+	constexpr char OK_BUTTON_ON[] = "icon/okButtonOn.png";
 	constexpr char BACK_BUTTON[] = "icon/backButton.png";
 	constexpr char UP_ARROW[] = "icon/upArrow.png";
 	constexpr char DOWN_ARROW[] = "icon/downArrow.png";
@@ -127,6 +132,7 @@ constexpr float PLAYER_MOVE_SPEED = 200.0f;			// 玩家移动速度
 // WecomScene
 constexpr float MENU_ITEM_INTERVAL = 24.0f;			// 菜单项之间的间距
 constexpr float WELCOME_LABEL_SIZE = 24.0f;			// Weclome标签字体大小
+const cocos2d::Color3B PURPUL(15, 13, 38);			// 紫色
 
 // NewGameScene
 constexpr char DEFAULT_PLAYER_NAME[] = "Kuanye";	// 默认玩家名字

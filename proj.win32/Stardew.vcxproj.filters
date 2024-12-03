@@ -40,6 +40,9 @@
     <Filter Include="Classes\DateManage">
       <UniqueIdentifier>{4f964f1a-0018-41e5-ba16-2ef2a2c5c5d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Mybutton">
+      <UniqueIdentifier>{e19c448f-f1fb-4714-8da8-0eac5346893c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -108,6 +111,9 @@
     <ClCompile Include="..\Classes\Map\TileNode.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MyButton\MyButton.cpp">
+      <Filter>Classes\Mybutton</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -146,9 +152,6 @@
     <ClInclude Include="..\Classes\Map\Crop.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\TileMap.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
     </ClInclude>
@@ -179,6 +182,9 @@
     <ClInclude Include="..\Classes\Map\TileType.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MyButton\MyButton.h">
+      <Filter>Classes\Mybutton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

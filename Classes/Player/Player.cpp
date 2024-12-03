@@ -150,8 +150,6 @@ Vec2 Player::getLastDirection() const {
 // 加载全部站立帧的纹理
 void Player::loadStandFrames() {
     SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();
-
-
     createStandFrame("playerWalkImages/standDown.png", "standDown");
     createStandFrame("playerWalkImages/standUp.png", "standUp");
     createStandFrame("playerWalkImages/standLeft.png", "standLeft");
