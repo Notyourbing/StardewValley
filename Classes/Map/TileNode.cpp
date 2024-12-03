@@ -4,7 +4,7 @@
 // 土壤的锄地
 void Soil::hoe() {
 	isHoed = true;
-	this->updateGID(4);
+	this->updateGID(64);
 }
 
 // 土壤的浇水
@@ -12,7 +12,7 @@ void Soil::water() {
 	if (isHoed ) {
 		// 判断这个土壤位置是否有作物
 		if (crop == nullptr) {
-			this->updateGID(5);
+			this->updateGID(96);
 		}
 		// 更新土壤的状态
 		waterLevel = 10;

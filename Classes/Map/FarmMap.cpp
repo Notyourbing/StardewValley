@@ -43,7 +43,7 @@ bool FarmMap::init(const std::string& tmxFile) {
         // 获取地图的各个图层
         grassLayer = map->getLayer("Grass");
         soilLayer = map->getLayer("Soil");
-        obstacleLayer = map->getLayer("obstacles");
+        obstacleLayer = map->getLayer("Obstacles");
         moldLayer = map->getLayer("Mold");
         waterLayer = map->getLayer("Water");
         stoneLayer = map->getLayer("Stone");
@@ -199,8 +199,7 @@ void FarmMap::interactWithFarmMap() {
 
 
     // 与石头的交互
-
-
+ 
     // 与水的交互
 
 
