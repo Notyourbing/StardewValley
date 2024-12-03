@@ -4,9 +4,7 @@
 #include <string>
 #include "cocos2d.h"
 
-// ?? .h文件中一般不要加命名空间
-USING_NS_CC;
-
+// ?? .h文件中一般不要加命名空间 // check 已删除 无影响
 class DateManage; // 前向声明 DateManage 类
 
 class CommunityEvent {
@@ -14,11 +12,8 @@ public:
 
     virtual ~CommunityEvent() = default;
 
-    // 静态工厂方法，用于创建并初始化 CommunityEvent 实例
-    static CommunityEvent* create(const std::string& name, const std::string& description, const std::string& date);
-
     // 公有方法：启动事件
-    void startEvent(DateManage* dateManage);
+    virtual void startEvent(DateManage* dateManage) = 0;
 
     // 公有方法：显示活动详情
     void displayEventDetails() const;
@@ -33,6 +28,7 @@ public:
     std::string getEventDate() const;
 
 protected:
+
     // 私有构造函数，防止外部直接创建对象
     CommunityEvent() = default;
 

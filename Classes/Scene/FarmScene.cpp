@@ -6,6 +6,7 @@
 #include "../Bag/Bag.h"
 #include "../Tool/PickAxe.h"
 #include "../Tool/Axe.h"
+#include "../Tool/FishingRod.h"
 
 USING_NS_CC;
 
@@ -25,7 +26,7 @@ bool Farm::init() {
 		this->addChild(dateLabel, 5);
 	}
 
-	// ??定时器
+	// ??定时器 // check 为了测试节日和后续的季节更迭采用定时器来进行1秒1日的时间增加，后续功能完全后可以调整。
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this](float deltaTime) {
 		updateDate();
@@ -107,6 +108,7 @@ void Farm::updateMovement() {
 	auto farmDirection = -direction;
 	farmMap->moveMapByDirection(farmDirection);
 	player->moveByDirection(direction);
+	FishingRod::isUsed = false;
 }
 
 // 显示初始对话框

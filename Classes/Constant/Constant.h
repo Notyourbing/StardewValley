@@ -66,6 +66,30 @@ namespace ResPath {
 	constexpr char PICKAXE_DOWN_2[] = "tools/pickaxe/downUsePickaxe2.png";
 	constexpr char PICKAXE_DOWN_3[] = "tools/pickaxe/downUsePickaxe3.png";
 
+	// Scythe ¶¯»­Ö¡Â·¾¶
+	constexpr char SCYTHE_RIGHT_1[] = "tools/scythe/rightUseScythe1.png";
+	constexpr char SCYTHE_RIGHT_2[] = "tools/scythe/rightUseScythe2.png";
+	constexpr char SCYTHE_RIGHT_3[] = "tools/scythe/rightUseScythe3.png";
+	constexpr char SCYTHE_LEFT_1[] = "tools/scythe/leftUseScythe1.png";
+	constexpr char SCYTHE_LEFT_2[] = "tools/scythe/leftUseScythe2.png";
+	constexpr char SCYTHE_LEFT_3[] = "tools/scythe/leftUseScythe3.png";
+	constexpr char SCYTHE_UP_1[] = "tools/scythe/upUseScythe1.png";
+	constexpr char SCYTHE_UP_2[] = "tools/scythe/upUseScythe2.png";
+	constexpr char SCYTHE_UP_3[] = "tools/scythe/upUseScythe3.png";
+	constexpr char SCYTHE_DOWN_1[] = "tools/scythe/downUseScythe1.png";
+	constexpr char SCYTHE_DOWN_2[] = "tools/scythe/downUseScythe2.png";
+	constexpr char SCYTHE_DOWN_3[] = "tools/scythe/downUseScythe3.png";
+
+	//fising
+	constexpr char FISHING_OUT_1[] = "tools/fishing/out1.png";
+	constexpr char FISHING_OUT_2[] = "tools/fishing/out2.png";
+	constexpr char FISHING_OUT_3[] = "tools/fishing/out3.png";
+	constexpr char FISHING_OUT_4[] = "tools/fishing/out4.png";
+	constexpr char FISHING_WAITING_1[] = "tools/fishing/waiting1.png";
+	constexpr char FISHING_WAITING_2[] = "tools/fishing/waiting2.png";
+	constexpr char FISHING_IN_1[] = "tools/fishing/in1.png";
+	constexpr char FISHING_IN_2[] = "tools/fishing/in2.png";
+
 	// Íæ¼ÒÕ¾Á¢Ö¡
 	constexpr char STAND_RIGHT[] = "playerWalkImages/standRight.png";
 	constexpr char STAND_LEFT[] = "playerWalkImages/standLeft.png";
@@ -114,6 +138,30 @@ namespace ToolRects {
 	const cocos2d::Rect PICKAXE_DOWN_1(0, 0, 86, 270);
 	const cocos2d::Rect PICKAXE_DOWN_2(0, 0, 81, 203);
 	const cocos2d::Rect PICKAXE_DOWN_3(0, 0, 63, 132);
+
+	// Scythe¶¯»­Ö¡
+	const cocos2d::Rect SCYTHE_RIGHT_1(0, 0, 105, 182);
+	const cocos2d::Rect SCYTHE_RIGHT_2(0, 0, 208, 155);
+	const cocos2d::Rect SCYTHE_RIGHT_3(0, 0, 159, 210);
+	const cocos2d::Rect SCYTHE_LEFT_1(0, 0, 105, 182);
+	const cocos2d::Rect SCYTHE_LEFT_2(0, 0, 203, 151);
+	const cocos2d::Rect SCYTHE_LEFT_3(0, 0, 178, 167);
+	const cocos2d::Rect SCYTHE_UP_1(0, 0, 163, 146);
+	const cocos2d::Rect SCYTHE_UP_2(0, 0, 98, 202);
+	const cocos2d::Rect SCYTHE_UP_3(0, 0, 178, 167);
+	const cocos2d::Rect SCYTHE_DOWN_1(0, 0, 176, 141);
+	const cocos2d::Rect SCYTHE_DOWN_2(0, 0, 162, 173);
+	const cocos2d::Rect SCYTHE_DOWN_3(0, 0, 290, 186);
+
+	// fishing
+	const cocos2d::Rect FISHING_OUT_1(0, 0, 67, 142);
+	const cocos2d::Rect FISHING_OUT_2(0, 0, 104, 292);
+	const cocos2d::Rect FISHING_OUT_3(0, 0, 92, 432);
+	const cocos2d::Rect FISHING_OUT_4(0, 0, 70, 163);
+	const cocos2d::Rect FISHING_WAITING_1(0, 0, 102, 377);
+	const cocos2d::Rect FISHING_WAITING_2(0, 0, 94, 321);
+	const cocos2d::Rect FISHING_IN_1(0, 0, 70, 174);
+	const cocos2d::Rect FISHING_IN_2(0, 0, 71, 217);
 
 	// Íæ¼ÒÕ¾Á¢Ö¡ Rect
 	const cocos2d::Rect STAND_RIGHT(0, 0, 70, 120);
