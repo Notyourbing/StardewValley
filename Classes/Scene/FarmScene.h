@@ -50,6 +50,8 @@ private:
 
 	std::vector<ui::Button*> optionButtons;  // 存储对话选项按钮
 
+	void closeButtonClicked(Ref* pSender);
+
 	// 初始化键盘监听器
 	void initKeyboardListener();
 

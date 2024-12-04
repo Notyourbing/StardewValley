@@ -8,7 +8,9 @@ DateManage::DateManage() : currentYear(0), currentDay(0) {
 DateManage* DateManage::instance = nullptr;  // 定义并初始化为 nullptr
 
 DateManage::~DateManage() {
-    // 清理资源（如果有的话）
+    if (instance != nullptr) {
+        instance = nullptr;
+    }
 }
 
 // 获取单例实例

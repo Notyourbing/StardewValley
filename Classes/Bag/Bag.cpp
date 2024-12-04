@@ -26,7 +26,12 @@ Bag* Bag::getInstance() {
 }
 
 Bag::Bag(): selectedIndex(0) {}
-Bag::~Bag() {}
+
+Bag::~Bag() {
+	if (instance != nullptr) {
+		instance = nullptr;
+	}
+}
 
 bool Bag::init() {
 	if (!Node::init()) {

@@ -25,6 +25,8 @@ namespace ResPath {
 	constexpr char BACK_BUTTON[] = "icon/backButton.png";
 	constexpr char UP_ARROW[] = "icon/upArrow.png";
 	constexpr char DOWN_ARROW[] = "icon/downArrow.png";
+	constexpr char CLOSE_BUTTON_NORMAL[] = "CloseNormal.png";
+	constexpr char CLOSE_BUTTON_HOVER[] = "CloseHover.png";
 
 	// Axe ¶¯»­Ö¡
 	constexpr char AXE_RIGHT_1[] = "tools/axe/rightUseAxe1.png";

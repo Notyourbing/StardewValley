@@ -10,7 +10,9 @@ FarmMap* FarmMap::instance = nullptr;
 
 FarmMap::FarmMap() : velocity(Vec2::ZERO) {}
 
-FarmMap::~FarmMap() {}
+FarmMap::~FarmMap() {
+    instance = nullptr;
+}
 
 FarmMap* FarmMap::getInstance() {
     if (!instance) {

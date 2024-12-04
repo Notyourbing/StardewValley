@@ -7,6 +7,7 @@
 #include "../Tool/PickAxe.h"
 #include "../Tool/Axe.h"
 #include "../Tool/FishingRod.h"
+#include "../MyButton/MyButton.h"
 
 USING_NS_CC;
 
@@ -26,7 +27,6 @@ bool Farm::init() {
 		this->addChild(dateLabel, 5);
 	}
 
-	// ??定时器 // check 为了测试节日和后续的季节更迭采用定时器来进行1秒1日的时间增加，后续功能完全后可以调整。
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this](float deltaTime) {
 		updateDate();
@@ -65,9 +65,18 @@ bool Farm::init() {
 
 	// 背包
 	Bag* bag = Bag::getInstance();
-	this->addChild(bag, 4);
+	if (bag) {
+		this->addChild(bag, 4);
+	}
 
-	// auto exitButton = ui::Button::create()
+	// 退出按钮
+	auto closeButton = MyButton::create(ResPath::CLOSE_BUTTON_NORMAL, ResPath::CLOSE_BUTTON_HOVER);
+	if (closeButton) {
+		const auto closeButtonSize = closeButton->getContentSize();
+		closeButton->setPosition(Vec2(closeButtonSize.width / 2, WINSIZE.height - closeButtonSize.height / 2)); // 放在左上角
+		this->addChild(closeButton, 4);
+		closeButton->addClickEventListener(CC_CALLBACK_1(Farm::closeButtonClicked, this));
+	}
 
 	createFestivals();
 
@@ -278,33 +287,6 @@ void Farm::initMouseListener()
 				Player::getInstance()->useCurrentTool();
 				Vec2 playerPosition = player->getPosition();
 
-				// 将这个坐标转化为瓦点地图中的坐标
-				const Size tileSize = farmMap->map->getTileSize();
-				const Size mapSize = farmMap->map->getMapSize();
-				playerPosition = playerPosition - farmMap->getPosition();
-				int x = playerPosition.x / tileSize.width;
-				int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
-				// 加入人物的朝向
-				if (player->getLastDirection() == Vec2(1, 0)) {
-					if (x + 1 < mapSize.width - 1) {
-						x++;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(0, 1)) {
-					if (y - 1 >= 0) {
-						y--;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(-1, 0)) {
-					if (x - 1 >= 0) {
-						x--;
-					}
-				}
-				else {
-					if (y + 1 < mapSize.height - 1) {
-						y++;
-					}
-				}
 				farmMap->interactWithFarmMap();
 			}
 		}
@@ -385,4 +367,9 @@ void Farm::updateDate() {
 	dateLabel->setString(dateStream.str());
 
 	checkFestivalEvent();
+}
+
+// 关闭按钮的回调函数
+void Farm::closeButtonClicked(Ref* pSender) {
+	Director::getInstance()->popScene();
 }
