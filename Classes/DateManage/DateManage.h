@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 #include "../Festival/Festival.h"
-#include "../Map/FarmMap.h"
 
 class DateManage {
 public:
@@ -20,6 +19,7 @@ public:
     int getCurrentDay() const;
     int getCurrentWeekday() const;
     int getCurrentYear() const;
+    int getDay() const;
 
     // 日期推进
     void advanceDay();
@@ -27,7 +27,7 @@ public:
     // 判断是否是节日
     bool isFestivalDay() const;
 
-    std::string getNextFestival();
+    //std::string getNextFestival();
 
     static DateManage* instance;  // 单例实例
 

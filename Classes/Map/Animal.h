@@ -30,9 +30,13 @@ private:
 	std::vector<ProductType> product;	// 动物收获的产品
 	int growthDay;						// 动物的成长天数
 	int maxGrowthDay;					// 动物的成熟天数
+	bool isMature;						// 动物是否成熟
+
 protected:
 
 public:
+
+	// 收获
 };
 
 // Cattle类表示牛，继承自Animal

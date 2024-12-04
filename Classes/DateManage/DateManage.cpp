@@ -63,6 +63,10 @@ int DateManage::getCurrentWeekday() const {
     return currentDay % daysInWeek; // 每周的哪一天
 }
 
+int DateManage::getDay() const{
+    return currentDay;
+}
+
 void DateManage::advanceDay() {
     currentDay++;
     if (currentDay >= daysInYear) {
@@ -83,7 +87,7 @@ bool DateManage::isFestivalDay() const {
     return false;
 }
 
-std::string DateManage::getNextFestival()
+/*std::string DateManage::getNextFestival()
 {
     std::string res = "Today is " + getCurrentDate() + "!\n";
     if (isFestivalDay()) {
@@ -98,7 +102,7 @@ std::string DateManage::getNextFestival()
             res += "Merry Christmas and Happy Birthday to levi!\n";
     }
         
-    FarmMap* farmMap = FarmMap::getInstance();
+    //FarmMap* farmMap = FarmMap::getInstance();
     for (Festival* festival : farmMap->festivals) {
         std::string season, day, curSeason;
         std::istringstream stream(festival->getEventDate());
@@ -114,7 +118,7 @@ std::string DateManage::getNextFestival()
             return festival->getEventName() + "is coming soon!";
     }
     return "waiting for next year..";
-}
+}*/
 
 int DateManage::getSeasonIndex(const std::string& season) {
     // 映射季节字符串到整数

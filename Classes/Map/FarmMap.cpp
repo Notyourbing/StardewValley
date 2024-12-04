@@ -150,10 +150,6 @@ bool FarmMap::isCollidable(const Vec2& position) const {
     }
 }
 
-void FarmMap::replaceTile(const Vec2& position, int GID) {
-    soilLayer->setTileGID(8, position);
-}
-
 // 玩家与农场的接口
 void FarmMap::interactWithFarmMap() {
     // 获取玩家以及地图实例

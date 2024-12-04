@@ -2,6 +2,7 @@
 #include "../Tool/Axe.h"
 #include "../Tool/PickAxe.h"
 #include "../Tool/Hoe.h"
+#include "../Tool/WateringCan.h"
 #include "../Player/Player.h"
 
 
@@ -64,6 +65,8 @@ bool Bag::init() {
 	addTool(pickaxe);
 	Tool* hoe = Hoe::create();
 	addTool(hoe);
+	Tool* kettle = Kettle::create();
+	addTool(kettle);
 	selectTool(0);
 
 	return true;

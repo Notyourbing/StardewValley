@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 #include "Crop.h"
 #include "../Npc/Npc.h"
-#include "Entity.h"
 #include "TileNode.h"
 #include "../Festival/Festival.h"
 #include "../Tool/Tool.h"
@@ -43,9 +42,6 @@ public:
 
 	// 瓦片地图对象
 	cocos2d::TMXTiledMap* map;
-
-	// 将瓦片替换成不同类型
-	void replaceTile(const Vec2& position,int GID);
 	
 private:
 
