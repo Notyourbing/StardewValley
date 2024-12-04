@@ -114,6 +114,12 @@
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp">
       <Filter>Classes\Mybutton</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Tool\FishingRod.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Scythe.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -185,6 +191,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MyButton\MyButton.h">
       <Filter>Classes\Mybutton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\FishingRod.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Scythe.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

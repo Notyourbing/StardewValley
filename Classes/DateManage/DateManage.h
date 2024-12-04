@@ -10,9 +10,7 @@ public:
     // 获取单例实例
     static DateManage* getInstance();
 
-    // ?? 单例实例为什么会有create()方法，参考Player.h
-    // 创建实例的方法（通过传递特定的开始年份和开始日期）
-    static DateManage* create(int startYear, int startDay);
+    // ?? 单例实例为什么会有create()方法，参考Player.h // check 已删除
 
     // 获取当前日期
     std::string getCurrentDate() const;
