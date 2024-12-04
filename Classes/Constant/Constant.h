@@ -220,4 +220,8 @@ const Npc CLEANER("Cleaner Levi", "Winter 25",
 	"npcImages/cleaner.png");
 
 
+// Crop
+constexpr int WATER_SCARCITY_DAY = 5;
+constexpr int INFESTED_DAY = 5;
+
 #endif __CONSTANT_H

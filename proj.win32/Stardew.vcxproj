@@ -168,7 +168,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Festival\Festival.cpp" />
     <ClCompile Include="..\Classes\Map\Animal.cpp" />
     <ClCompile Include="..\Classes\Map\Crop.cpp" />
-    <ClCompile Include="..\Classes\Map\Entity.cpp" />
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
     <ClCompile Include="..\Classes\Map\TileType.cpp" />
@@ -183,6 +182,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Tool\Axe.cpp" />
     <ClCompile Include="..\Classes\Tool\FishingRod.cpp" />
     <ClCompile Include="..\Classes\Tool\Hoe.cpp" />
+    <ClCompile Include="..\Classes\Tool\WateringCan.cpp" />
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp" />
     <ClCompile Include="..\Classes\Tool\Scythe.cpp" />
     <ClCompile Include="..\Classes\Tool\Tool.cpp" />
@@ -196,7 +196,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Festival\Festival.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\Crop.h" />
-    <ClInclude Include="..\Classes\Map\Entity.h" />
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\Map\TileType.h" />
@@ -211,6 +210,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Tool\Axe.h" />
     <ClInclude Include="..\Classes\Tool\FishingRod.h" />
     <ClInclude Include="..\Classes\Tool\Hoe.h" />
+    <ClInclude Include="..\Classes\Tool\WateringCan.h" />
     <ClInclude Include="..\Classes\Tool\PickAxe.h" />
     <ClInclude Include="..\Classes\Tool\Scythe.h" />
     <ClInclude Include="..\Classes\Tool\Tool.h" />

@@ -206,7 +206,7 @@ void Farm::updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> 
 			newDialogue = "Not yet";
 			break;
 		case 2:
-			newDialogue = dateManage->getNextFestival();
+			newDialogue = this->getNextFestival();
 			break;
 		case 3:
 			//选择礼物，给出gift
@@ -277,34 +277,6 @@ void Farm::initMouseListener()
 			if (isDialogueVisible == false) {
 				Player::getInstance()->useCurrentTool();
 				Vec2 playerPosition = player->getPosition();
-
-				// 将这个坐标转化为瓦点地图中的坐标
-				const Size tileSize = farmMap->map->getTileSize();
-				const Size mapSize = farmMap->map->getMapSize();
-				playerPosition = playerPosition - farmMap->getPosition();
-				int x = playerPosition.x / tileSize.width;
-				int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
-				// 加入人物的朝向
-				if (player->getLastDirection() == Vec2(1, 0)) {
-					if (x + 1 < mapSize.width - 1) {
-						x++;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(0, 1)) {
-					if (y - 1 >= 0) {
-						y--;
-					}
-				}
-				else if (player->getLastDirection() == Vec2(-1, 0)) {
-					if (x - 1 >= 0) {
-						x--;
-					}
-				}
-				else {
-					if (y + 1 < mapSize.height - 1) {
-						y++;
-					}
-				}
 				farmMap->interactWithFarmMap();
 			}
 		}
@@ -385,4 +357,46 @@ void Farm::updateDate() {
 	dateLabel->setString(dateStream.str());
 
 	checkFestivalEvent();
+}
+
+// 动物管理
+void Farm::animalManager() {
+
+}
+
+// 获取节日
+std::string Farm::getNextFestival() {
+
+	// 获取日期单例
+	DateManage* dateManager = DateManage::getInstance();
+
+	std::string res = "Today is " + dateManager->getCurrentDate() + "!\n";
+	if (dateManager->isFestivalDay()) {
+		int dayInSeason = dateManager->getCurrentDay();
+		if (dateManager->getCurrentSeason() == "Spring" && dayInSeason == 7)
+			res += "Celebrate the arrival of Spring with games, food, and fun!\n";
+		else if (dateManager->getCurrentSeason() == "Summer" && dayInSeason == 15)
+			res += "The hot days of Summer are here! Time for the beach!\n";
+		else if (dateManager->getCurrentSeason() == "Fall" && dayInSeason == 5)
+			res += "Let's picking up the falling leaves!\n";
+		else if (dateManager->getCurrentSeason() == "Winter" && dayInSeason == 25)
+			res += "Merry Christmas and Happy Birthday to levi!\n";
+	}
+
+	FarmMap* farmMap = FarmMap::getInstance();
+	for (Festival* festival : farmMap->festivals) {
+		std::string season, day, curSeason;
+		std::istringstream stream(festival->getEventDate());
+		stream >> season; // 读取季节
+		stream >> day;    // 读取日期
+		int date = std::stoi(day);
+
+		std::istringstream streamCur(dateManager->getCurrentDate());
+		streamCur >> curSeason >> day;
+		if (season == dateManager->getCurrentSeason() && date > std::stoi(day))
+			return festival->getEventName() + "is coming soon!";
+		else if (season > dateManager->getCurrentSeason())
+			return festival->getEventName() + "is coming soon!";
+	}
+	return "waiting for next year..";
 }
