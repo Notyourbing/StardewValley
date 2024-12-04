@@ -43,6 +43,9 @@
     <Filter Include="Classes\Mybutton">
       <UniqueIdentifier>{e19c448f-f1fb-4714-8da8-0eac5346893c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Item">
+      <UniqueIdentifier>{2f7ab047-8ad2-49d1-bb30-25b9a88df3b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Scythe.cpp">
       <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item\Item.cpp">
+      <Filter>Classes\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +200,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Scythe.h">
       <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\Item.h">
+      <Filter>Classes\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
