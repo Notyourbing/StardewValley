@@ -9,6 +9,7 @@
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
 #include "../DateManage/DateManage.h"
+#include "../Map/Animal.h"
 
 class Farm : public cocos2d::Scene {
 public:
@@ -60,6 +61,15 @@ private:
 
 	// 初始化鼠标监听器
 	void initMouseListener();
+
+	// 存储农场中的动物
+	std::vector<Animal*> animals;
+
+	// 动物管理
+	void animalManager();
+
+	// 获取下一个节日
+	std::string getNextFestival();
 };
 
 #endif

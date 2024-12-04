@@ -152,10 +152,6 @@ bool FarmMap::isCollidable(const Vec2& position) const {
     }
 }
 
-void FarmMap::replaceTile(const Vec2& position, int GID) {
-    soilLayer->setTileGID(8, position);
-}
-
 // 玩家与农场的接口
 void FarmMap::interactWithFarmMap() {
     // 获取玩家以及地图实例
@@ -188,22 +184,12 @@ void FarmMap::interactWithFarmMap() {
     // 获得了要交互的位置
     Vec2 interactPosition = Vec2(x, y);
 
-    // 与土壤的交互
-    if (mapTileNode[x][y]->getTileType() == TileType::SOIL) {
-        
-        // 获得当前人物所使用的工具
-        std::string currentTool = player->getCurrentToolName();
-        mapTileNode[x][y]->interact(currentTool);
+    // 获得当前人物所使用的工具
+    std::string currentTool = player->getCurrentToolName();
 
-        // 更新图块
-        soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
-    }
+    // 与地图块的交互
+    mapTileNode[x][y]->interact(currentTool);
 
-
-    // 与石头的交互
- 
-    // 与水的交互
-
-
-    // 与箱子的交互
+    // 更新图块
+    soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
 }

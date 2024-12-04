@@ -81,9 +81,6 @@
     <ClCompile Include="..\Classes\Map\Crop.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\TileType.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
@@ -99,9 +96,6 @@
     <ClCompile Include="..\Classes\DateManage\DateManage.cpp">
       <Filter>Classes\DateManage</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\Entity.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Map\Animal.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
@@ -110,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Map\TileNode.cpp">
       <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\WateringCan.cpp">
+      <Filter>Classes\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp">
       <Filter>Classes\Mybutton</Filter>
@@ -176,9 +173,6 @@
     <ClInclude Include="..\Classes\DateManage\DateManage.h">
       <Filter>Classes\DateManage</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\Entity.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Map\Animal.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
@@ -188,6 +182,9 @@
     <ClInclude Include="..\Classes\Map\TileType.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\WateringCan.h">
+      <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MyButton\MyButton.h">
       <Filter>Classes\Mybutton</Filter>
