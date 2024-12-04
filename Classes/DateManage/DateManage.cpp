@@ -20,16 +20,6 @@ DateManage* DateManage::getInstance() {
     return instance;
 }
 
-// 创建新的 DateManage 实例，并指定开始年份和日期
-DateManage* DateManage::create(int startYear, int startDay) {
-    DateManage* instance = new DateManage();
-    if (instance && instance->init(startYear, startDay)) {
-        return instance;  // 如果初始化成功，则返回实例
-    }
-    delete instance;  // 否则删除实例
-    return nullptr;
-}
-
 // 初始化方法
 bool DateManage::init(int startYear, int startDay) {
     currentYear = startYear;

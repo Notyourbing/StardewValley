@@ -8,15 +8,20 @@ namespace ResPath {
 	// 背景框、按钮、字体
 	constexpr char BACKGROUND_IMAGE[] = "icon/background.png";
 	constexpr char NEW_GAME_ITEM[] = "icon/newGameButton.png";
+	constexpr char NEW_GAME_ON_ITEM[] = "icon/newGameButtonOn.png";
 	constexpr char LOAD_GAME_ITEM[] = "icon/loadGameButton.png";
+	constexpr char LOAD_GAME_ON_ITEM[] = "icon/loadGameButtonOn.png";
 	constexpr char COOPERATION_ITEM[] = "icon/cooperationButton.png";
+	constexpr char COOPERATION_ON_ITEM[] = "icon/cooperationButtonOn.png";
 	constexpr char EXIT_ITEM[] = "icon/exitButton.png";
+	constexpr char EXIT_ON_ITEM[] = "icon/exitButton.png";
 	constexpr char TITLE[] = "icon/title.png";
 	constexpr char FONT_TTF[] = "fonts/Marker Felt.ttf";
 	constexpr char COOP_BACKGROUND[] = "icon/coopBackground.png";
 	constexpr char COOP_PANEL[] = "icon/cooperationPanel.png";
 	constexpr char NAME_BAR[] = "icon/nameBar.png";
 	constexpr char OK_BUTTON[] = "icon/okButton.png";
+	constexpr char OK_BUTTON_ON[] = "icon/okButtonOn.png";
 	constexpr char BACK_BUTTON[] = "icon/backButton.png";
 	constexpr char UP_ARROW[] = "icon/upArrow.png";
 	constexpr char DOWN_ARROW[] = "icon/downArrow.png";
@@ -60,6 +65,30 @@ namespace ResPath {
 	constexpr char PICKAXE_DOWN_1[] = "tools/pickaxe/downUsePickaxe1.png";
 	constexpr char PICKAXE_DOWN_2[] = "tools/pickaxe/downUsePickaxe2.png";
 	constexpr char PICKAXE_DOWN_3[] = "tools/pickaxe/downUsePickaxe3.png";
+
+	// Scythe 动画帧路径
+	constexpr char SCYTHE_RIGHT_1[] = "tools/scythe/rightUseScythe1.png";
+	constexpr char SCYTHE_RIGHT_2[] = "tools/scythe/rightUseScythe2.png";
+	constexpr char SCYTHE_RIGHT_3[] = "tools/scythe/rightUseScythe3.png";
+	constexpr char SCYTHE_LEFT_1[] = "tools/scythe/leftUseScythe1.png";
+	constexpr char SCYTHE_LEFT_2[] = "tools/scythe/leftUseScythe2.png";
+	constexpr char SCYTHE_LEFT_3[] = "tools/scythe/leftUseScythe3.png";
+	constexpr char SCYTHE_UP_1[] = "tools/scythe/upUseScythe1.png";
+	constexpr char SCYTHE_UP_2[] = "tools/scythe/upUseScythe2.png";
+	constexpr char SCYTHE_UP_3[] = "tools/scythe/upUseScythe3.png";
+	constexpr char SCYTHE_DOWN_1[] = "tools/scythe/downUseScythe1.png";
+	constexpr char SCYTHE_DOWN_2[] = "tools/scythe/downUseScythe2.png";
+	constexpr char SCYTHE_DOWN_3[] = "tools/scythe/downUseScythe3.png";
+
+	//fising
+	constexpr char FISHING_OUT_1[] = "tools/fishing/out1.png";
+	constexpr char FISHING_OUT_2[] = "tools/fishing/out2.png";
+	constexpr char FISHING_OUT_3[] = "tools/fishing/out3.png";
+	constexpr char FISHING_OUT_4[] = "tools/fishing/out4.png";
+	constexpr char FISHING_WAITING_1[] = "tools/fishing/waiting1.png";
+	constexpr char FISHING_WAITING_2[] = "tools/fishing/waiting2.png";
+	constexpr char FISHING_IN_1[] = "tools/fishing/in1.png";
+	constexpr char FISHING_IN_2[] = "tools/fishing/in2.png";
 
 	// 玩家站立帧
 	constexpr char STAND_RIGHT[] = "playerWalkImages/standRight.png";
@@ -110,6 +139,30 @@ namespace ToolRects {
 	const cocos2d::Rect PICKAXE_DOWN_2(0, 0, 81, 203);
 	const cocos2d::Rect PICKAXE_DOWN_3(0, 0, 63, 132);
 
+	// Scythe动画帧
+	const cocos2d::Rect SCYTHE_RIGHT_1(0, 0, 105, 182);
+	const cocos2d::Rect SCYTHE_RIGHT_2(0, 0, 208, 155);
+	const cocos2d::Rect SCYTHE_RIGHT_3(0, 0, 159, 210);
+	const cocos2d::Rect SCYTHE_LEFT_1(0, 0, 105, 182);
+	const cocos2d::Rect SCYTHE_LEFT_2(0, 0, 203, 151);
+	const cocos2d::Rect SCYTHE_LEFT_3(0, 0, 178, 167);
+	const cocos2d::Rect SCYTHE_UP_1(0, 0, 163, 146);
+	const cocos2d::Rect SCYTHE_UP_2(0, 0, 98, 202);
+	const cocos2d::Rect SCYTHE_UP_3(0, 0, 178, 167);
+	const cocos2d::Rect SCYTHE_DOWN_1(0, 0, 176, 141);
+	const cocos2d::Rect SCYTHE_DOWN_2(0, 0, 162, 173);
+	const cocos2d::Rect SCYTHE_DOWN_3(0, 0, 290, 186);
+
+	// fishing
+	const cocos2d::Rect FISHING_OUT_1(0, 0, 67, 142);
+	const cocos2d::Rect FISHING_OUT_2(0, 0, 104, 292);
+	const cocos2d::Rect FISHING_OUT_3(0, 0, 92, 432);
+	const cocos2d::Rect FISHING_OUT_4(0, 0, 70, 163);
+	const cocos2d::Rect FISHING_WAITING_1(0, 0, 102, 377);
+	const cocos2d::Rect FISHING_WAITING_2(0, 0, 94, 321);
+	const cocos2d::Rect FISHING_IN_1(0, 0, 70, 174);
+	const cocos2d::Rect FISHING_IN_2(0, 0, 71, 217);
+
 	// 玩家站立帧 Rect
 	const cocos2d::Rect STAND_RIGHT(0, 0, 70, 120);
 	const cocos2d::Rect STAND_LEFT(0, 0, 70, 120);
@@ -127,6 +180,7 @@ constexpr float PLAYER_MOVE_SPEED = 200.0f;			// 玩家移动速度
 // WecomScene
 constexpr float MENU_ITEM_INTERVAL = 24.0f;			// 菜单项之间的间距
 constexpr float WELCOME_LABEL_SIZE = 24.0f;			// Weclome标签字体大小
+const cocos2d::Color3B PURPUL(15, 13, 38);			// 紫色
 
 // NewGameScene
 constexpr char DEFAULT_PLAYER_NAME[] = "Kuanye";	// 默认玩家名字

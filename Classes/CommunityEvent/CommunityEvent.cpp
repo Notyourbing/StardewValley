@@ -1,18 +1,5 @@
 #include "CommunityEvent.h"
 
-CommunityEvent* CommunityEvent::create(const std::string& name, const std::string& description, const std::string& date) {
-    // 创建 CommunityEvent 对象
-    CommunityEvent* newEvent = new CommunityEvent();
-    // 初始化对象
-    if (newEvent && newEvent->init(name, description, date)) {
-        return newEvent;
-    }
-    else {
-        delete newEvent;  // 初始化失败时，释放内存
-        return nullptr;
-    }
-}
-
 bool CommunityEvent::init(const std::string& name, const std::string& description, const std::string& date) {
     // 初始化属性
     eventName = name;
@@ -20,6 +7,7 @@ bool CommunityEvent::init(const std::string& name, const std::string& descriptio
     eventDate = date;
     return true;  // 如果初始化成功
 }
+
 void CommunityEvent::startEvent(DateManage* dateManage) {
     // 事件开始时的逻辑，显示活动详情
     displayEventDetails();

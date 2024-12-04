@@ -28,7 +28,7 @@ bool Welcome::init() {
 
 
     // 新游戏项
-    auto newGameItem = MenuItemImage::create(ResPath::NEW_GAME_ITEM, ResPath::NEW_GAME_ITEM,
+    auto newGameItem = MenuItemImage::create(ResPath::NEW_GAME_ITEM, ResPath::NEW_GAME_ON_ITEM,
         CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
     if (newGameItem) {
         const float x = -1.5 * (newGameItem->getContentSize().width + MENU_ITEM_INTERVAL);
@@ -36,7 +36,7 @@ bool Welcome::init() {
     }
 
     // 加载游戏项
-    auto loadGameItem = MenuItemImage::create(ResPath::LOAD_GAME_ITEM, ResPath::LOAD_GAME_ITEM,
+    auto loadGameItem = MenuItemImage::create(ResPath::LOAD_GAME_ITEM, ResPath::LOAD_GAME_ON_ITEM,
         CC_CALLBACK_1(Welcome::menuLoadGameCallback, this));
     if (loadGameItem) {
         const float x = -0.5 * (loadGameItem->getContentSize().width + MENU_ITEM_INTERVAL);
@@ -44,7 +44,7 @@ bool Welcome::init() {
     }
 
     // 合作项
-    auto cooperationItem = MenuItemImage::create(ResPath::COOPERATION_ITEM, ResPath::COOPERATION_ITEM,
+    auto cooperationItem = MenuItemImage::create(ResPath::COOPERATION_ITEM, ResPath::COOPERATION_ON_ITEM,
         CC_CALLBACK_1(Welcome::menuCooperationCallback, this));
     if (cooperationItem) {
         const float x = 0.5 * (cooperationItem->getContentSize().width + MENU_ITEM_INTERVAL);
@@ -52,7 +52,7 @@ bool Welcome::init() {
     }
 
     // 退出项
-    auto closeItem = MenuItemImage::create(ResPath::EXIT_ITEM, ResPath::EXIT_ITEM,
+    auto closeItem = MenuItemImage::create(ResPath::EXIT_ITEM, ResPath::EXIT_ON_ITEM,
         CC_CALLBACK_1(Welcome::menuExitCallback, this));
     if (closeItem) {
         const float x = 1.5 * (closeItem->getContentSize().width + MENU_ITEM_INTERVAL);
@@ -90,19 +90,22 @@ bool Welcome::init() {
 // 新游戏项回调函数
 void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
     auto newGameScene = NewGame::createScene();
-    Director::getInstance()->pushScene(newGameScene);
+    auto transition = TransitionFade::create(0.5f, newGameScene, PURPUL); // 0.5秒，淡入紫色背景
+    Director::getInstance()->pushScene(transition);
 }
 
 // 加载游戏项回调函数
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
     auto farmScene = Farm::createScene();
-    Director::getInstance()->pushScene(farmScene);
+    auto transition = TransitionFade::create(0.5f, farmScene, cocos2d::Color3B::WHITE); // 0.5秒，淡入白色背景
+    Director::getInstance()->pushScene(transition);
 }
 
 // 合作项回调函数
 void Welcome::menuCooperationCallback(Ref* pSender) {
     auto cooperationScene = Cooperation::createScene();
-    Director::getInstance()->pushScene(cooperationScene);
+    auto transition = TransitionFade::create(0.5f, cooperationScene, PURPUL); // 0.5秒，淡入紫色背景
+    Director::getInstance()->pushScene(transition);
 }
 
 // 关闭引用项回调函数

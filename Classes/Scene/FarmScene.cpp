@@ -6,6 +6,7 @@
 #include "../Bag/Bag.h"
 #include "../Tool/PickAxe.h"
 #include "../Tool/Axe.h"
+#include "../Tool/FishingRod.h"
 
 USING_NS_CC;
 
@@ -25,7 +26,7 @@ bool Farm::init() {
 		this->addChild(dateLabel, 5);
 	}
 
-	// ??定时器
+	// ??定时器 // check 为了测试节日和后续的季节更迭采用定时器来进行1秒1日的时间增加，后续功能完全后可以调整。
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this](float deltaTime) {
 		updateDate();
@@ -66,6 +67,8 @@ bool Farm::init() {
 	Bag* bag = Bag::getInstance();
 	this->addChild(bag, 4);
 
+	// auto exitButton = ui::Button::create()
+
 	createFestivals();
 
 	// 初始化键盘监听器
@@ -105,6 +108,7 @@ void Farm::updateMovement() {
 	auto farmDirection = -direction;
 	farmMap->moveMapByDirection(farmDirection);
 	player->moveByDirection(direction);
+	FishingRod::isUsed = false;
 }
 
 // 显示初始对话框
@@ -168,7 +172,7 @@ void Farm::showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* labe
 	const float optionY = dialogueBackground->getPositionY() + 120;  // 选项显示位置
 
 	// 创建选项按钮
-	for (int i = 0; i < options.size(); ++i) {
+	for (size_t i = 0; i < options.size(); ++i) {
 		auto optionButton = ui::Button::create();  // 创建按钮
 		optionButton->setTitleText(options[i]);
 		optionButton->setTitleFontSize(30);

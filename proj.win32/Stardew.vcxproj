@@ -170,6 +170,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\Crop.cpp" />
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
+    <ClCompile Include="..\Classes\Map\TileType.cpp" />
+    <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
     <ClCompile Include="..\Classes\Npc\Npc.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\AppDelegate.cpp" />
@@ -178,9 +180,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\NewGameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\WelcomeScene.cpp" />
     <ClCompile Include="..\Classes\Tool\Axe.cpp" />
+    <ClCompile Include="..\Classes\Tool\FishingRod.cpp" />
     <ClCompile Include="..\Classes\Tool\Hoe.cpp" />
     <ClCompile Include="..\Classes\Tool\WateringCan.cpp" />
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp" />
+    <ClCompile Include="..\Classes\Tool\Scythe.cpp" />
     <ClCompile Include="..\Classes\Tool\Tool.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -195,6 +199,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\Map\TileType.h" />
+    <ClInclude Include="..\Classes\MyButton\MyButton.h" />
     <ClInclude Include="..\Classes\Npc\Npc.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Scene\AppDelegate.h" />
@@ -203,9 +208,11 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\NewGameScene.h" />
     <ClInclude Include="..\Classes\Scene\WelcomeScene.h" />
     <ClInclude Include="..\Classes\Tool\Axe.h" />
+    <ClInclude Include="..\Classes\Tool\FishingRod.h" />
     <ClInclude Include="..\Classes\Tool\Hoe.h" />
     <ClInclude Include="..\Classes\Tool\WateringCan.h" />
     <ClInclude Include="..\Classes\Tool\PickAxe.h" />
+    <ClInclude Include="..\Classes\Tool\Scythe.h" />
     <ClInclude Include="..\Classes\Tool\Tool.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
