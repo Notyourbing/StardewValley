@@ -29,7 +29,11 @@ public:
 	// 显示背包
 	void updateDisplay();
 
+	// 当前所拥有的工具
 	std::vector<Tool*> tools;
+
+	// 工具栏的开启
+	void toggleToolBar(bool show);
 
 private:
 	// 单例实例
@@ -47,6 +51,9 @@ private:
 
 	// 背包容量
 	static const int capacity = 9;
+
+	// 所携带的工具总上限
+	static const int toolBar = 27;
 
 	// 当前选中的工具索引
 	int selectedIndex;

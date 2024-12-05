@@ -71,7 +71,8 @@ bool FarmMap::init(const std::string& tmxFile) {
                     mapTileNode[x][y] = new Soil(Vec2(x, y));
                 }
                 else {
-                    mapTileNode[x][y] = new Grass(Vec2(x, y));
+                    int GID = grassLayer->getTileGIDAt(Vec2(x, y));
+                    mapTileNode[x][y] = new Grass(Vec2(x, y),GID);
                 }
             }
         }

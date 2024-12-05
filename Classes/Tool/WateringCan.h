@@ -5,9 +5,17 @@
 
 // 水壶类
 class Kettle : public Tool {
+private:
+
+	// 水壶的含水量
+	int waterLevel;
+
 public:
 	// 静态创建方法
 	static Kettle* create();
+
+	// 水壶的构造函数
+	Kettle();
 
 	// 初始化水壶
 	bool init();
