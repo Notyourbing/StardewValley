@@ -1,6 +1,7 @@
 #ifndef __CONSTANT_H
 #define __CONSTANT_H
 #include "../Npc/Npc.h"
+//#include "../Bag/Bag.h"
 #include "cocos2d.h"
 
 // 资源路径
@@ -83,14 +84,47 @@ namespace ResPath {
 	constexpr char SCYTHE_DOWN_3[] = "tools/scythe/downUseScythe3.png";
 
 	//fising
-	constexpr char FISHING_OUT_1[] = "tools/fishing/out1.png";
-	constexpr char FISHING_OUT_2[] = "tools/fishing/out2.png";
-	constexpr char FISHING_OUT_3[] = "tools/fishing/out3.png";
-	constexpr char FISHING_OUT_4[] = "tools/fishing/out4.png";
-	constexpr char FISHING_WAITING_1[] = "tools/fishing/waiting1.png";
-	constexpr char FISHING_WAITING_2[] = "tools/fishing/waiting2.png";
-	constexpr char FISHING_IN_1[] = "tools/fishing/in1.png";
-	constexpr char FISHING_IN_2[] = "tools/fishing/in2.png";
+	constexpr char DOWN_FISHING_OUT_1[] = "tools/fishing/downOut1.png";
+	constexpr char DOWN_FISHING_OUT_2[] = "tools/fishing/downOut2.png";
+	constexpr char DOWN_FISHING_OUT_3[] = "tools/fishing/downOut3.png";
+	constexpr char DOWN_FISHING_OUT_4[] = "tools/fishing/downOut4.png";
+	constexpr char DOWN_FISHING_WAITING_1[] = "tools/fishing/downWaiting1.png";
+	constexpr char DOWN_FISHING_WAITING_2[] = "tools/fishing/downWaiting2.png";
+	constexpr char DOWN_FISHING_IN_1[] = "tools/fishing/downIn1.png";
+	constexpr char DOWN_FISHING_IN_2[] = "tools/fishing/downIn2.png";
+
+	constexpr char UP_FISHING_OUT_1[] = "tools/fishing/upOut1.png";
+	constexpr char UP_FISHING_OUT_2[] = "tools/fishing/upOut2.png";
+	constexpr char UP_FISHING_OUT_3[] = "tools/fishing/upOut3.png";
+	constexpr char UP_FISHING_WAITING_1[] = "tools/fishing/upWaiting1.png";
+	constexpr char UP_FISHING_WAITING_2[] = "tools/fishing/upWaiting2.png";
+	constexpr char UP_FISHING_IN_1[] = "tools/fishing/upIn1.png";
+	constexpr char UP_FISHING_IN_2[] = "tools/fishing/upIn2.png";
+	constexpr char UP_FISHING_IN_3[] = "tools/fishing/upIn3.png";
+
+	constexpr char LEFT_FISHING_OUT_1[] = "tools/fishing/leftOut1.png";
+	constexpr char LEFT_FISHING_OUT_2[] = "tools/fishing/leftOut2.png";
+	constexpr char LEFT_FISHING_OUT_3[] = "tools/fishing/leftOut3.png";
+	constexpr char LEFT_FISHING_OUT_4[] = "tools/fishing/leftOut4.png";
+	constexpr char LEFT_FISHING_WAITING_1[] = "tools/fishing/leftWaiting1.png";
+	constexpr char LEFT_FISHING_WAITING_2[] = "tools/fishing/leftWaiting2.png";
+	constexpr char LEFT_FISHING_IN_1[] = "tools/fishing/leftIn1.png";
+	constexpr char LEFT_FISHING_IN_2[] = "tools/fishing/leftIn2.png";
+	constexpr char LEFT_FISHING_IN_3[] = "tools/fishing/leftIn3.png";
+	constexpr char LEFT_FISHING_IN_4[] = "tools/fishing/leftIn4.png";
+	constexpr char LEFT_FISHING_IN_5[] = "tools/fishing/leftIn5.png";
+
+	constexpr char RIGHT_FISHING_OUT_1[] = "tools/fishing/rightOut1.png";
+	constexpr char RIGHT_FISHING_OUT_2[] = "tools/fishing/rightOut2.png";
+	constexpr char RIGHT_FISHING_OUT_3[] = "tools/fishing/rightOut3.png";
+	constexpr char RIGHT_FISHING_OUT_4[] = "tools/fishing/rightOut4.png";
+	constexpr char RIGHT_FISHING_WAITING_1[] = "tools/fishing/rightWaiting1.png";
+	constexpr char RIGHT_FISHING_WAITING_2[] = "tools/fishing/rightWaiting2.png";
+	constexpr char RIGHT_FISHING_IN_1[] = "tools/fishing/rightIn1.png";
+	constexpr char RIGHT_FISHING_IN_2[] = "tools/fishing/rightIn2.png";
+	constexpr char RIGHT_FISHING_IN_3[] = "tools/fishing/rightIn3.png";
+	constexpr char RIGHT_FISHING_IN_4[] = "tools/fishing/rightIn4.png";
+	constexpr char RIGHT_FISHING_IN_5[] = "tools/fishing/rightIn5.png";
 
 	// 玩家站立帧
 	constexpr char STAND_RIGHT[] = "playerWalkImages/standRight.png";
@@ -156,14 +190,47 @@ namespace ToolRects {
 	const cocos2d::Rect SCYTHE_DOWN_3(0, 0, 290, 186);
 
 	// fishing
-	const cocos2d::Rect FISHING_OUT_1(0, 0, 67, 142);
-	const cocos2d::Rect FISHING_OUT_2(0, 0, 104, 292);
-	const cocos2d::Rect FISHING_OUT_3(0, 0, 92, 432);
-	const cocos2d::Rect FISHING_OUT_4(0, 0, 70, 163);
-	const cocos2d::Rect FISHING_WAITING_1(0, 0, 102, 377);
-	const cocos2d::Rect FISHING_WAITING_2(0, 0, 94, 321);
-	const cocos2d::Rect FISHING_IN_1(0, 0, 70, 174);
-	const cocos2d::Rect FISHING_IN_2(0, 0, 71, 217);
+	const cocos2d::Rect DOWN_FISHING_OUT_1(0, 0, 67, 142);
+	const cocos2d::Rect DOWN_FISHING_OUT_2(0, 0, 92, 432);
+	const cocos2d::Rect DOWN_FISHING_OUT_3(0, 0, 71, 217);
+	const cocos2d::Rect DOWN_FISHING_OUT_4(0, 0, 70, 163);
+	const cocos2d::Rect DOWN_FISHING_WAITING_1(0, 0, 102, 377);
+	const cocos2d::Rect DOWN_FISHING_WAITING_2(0, 0, 94, 321);
+	const cocos2d::Rect DOWN_FISHING_IN_1(0, 0, 70, 174);
+	const cocos2d::Rect DOWN_FISHING_IN_2(0, 0, 71, 217);
+
+	const cocos2d::Rect LEFT_FISHING_OUT_1(0, 0, 212, 215);
+	const cocos2d::Rect LEFT_FISHING_OUT_2(0, 0, 181, 267);
+	const cocos2d::Rect LEFT_FISHING_OUT_3(0, 0, 245, 371);
+	const cocos2d::Rect LEFT_FISHING_OUT_4(0, 0, 303, 189);
+	const cocos2d::Rect LEFT_FISHING_WAITING_1(0, 0, 284, 160);
+	const cocos2d::Rect LEFT_FISHING_WAITING_2(0, 0, 284, 165);
+	const cocos2d::Rect LEFT_FISHING_IN_1(0, 0, 247, 181);
+	const cocos2d::Rect LEFT_FISHING_IN_2(0, 0, 188, 195);
+	const cocos2d::Rect LEFT_FISHING_IN_3(0, 0, 175, 178);
+	const cocos2d::Rect LEFT_FISHING_IN_4(0, 0, 197, 195);
+	const cocos2d::Rect LEFT_FISHING_IN_5(0, 0, 201, 175);
+
+	const cocos2d::Rect RIGHT_FISHING_OUT_1(0, 0, 212, 215);
+	const cocos2d::Rect RIGHT_FISHING_OUT_2(0, 0, 181, 267);
+	const cocos2d::Rect RIGHT_FISHING_OUT_3(0, 0, 245, 371);
+	const cocos2d::Rect RIGHT_FISHING_OUT_4(0, 0, 303, 189);
+	const cocos2d::Rect RIGHT_FISHING_WAITING_1(0, 0, 284, 160);
+	const cocos2d::Rect RIGHT_FISHING_WAITING_2(0, 0, 284, 165);
+	const cocos2d::Rect RIGHT_FISHING_IN_1(0, 0, 247, 181);
+	const cocos2d::Rect RIGHT_FISHING_IN_2(0, 0, 188, 195);
+	const cocos2d::Rect RIGHT_FISHING_IN_3(0, 0, 175, 178);
+	const cocos2d::Rect RIGHT_FISHING_IN_4(0, 0, 197, 195);
+	const cocos2d::Rect RIGHT_FISHING_IN_5(0, 0, 201, 175);
+
+	const cocos2d::Rect UP_FISHING_OUT_1(0, 0, 70, 163);
+	const cocos2d::Rect UP_FISHING_OUT_2(0, 0, 91, 268);
+	const cocos2d::Rect UP_FISHING_OUT_3(0, 0, 88, 259);
+	const cocos2d::Rect UP_FISHING_WAITING_1(0, 0, 91, 219);
+	const cocos2d::Rect UP_FISHING_WAITING_2(0, 0, 75, 225);
+	const cocos2d::Rect UP_FISHING_IN_1(0, 0, 102, 249);
+	const cocos2d::Rect UP_FISHING_IN_2(0, 0, 97, 270);
+	const cocos2d::Rect UP_FISHING_IN_3(0, 0, 70, 163);
 
 	// 玩家站立帧 Rect
 	const cocos2d::Rect STAND_RIGHT(0, 0, 70, 120);
