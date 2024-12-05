@@ -1,9 +1,8 @@
 #include "Player.h"
 #include "SimpleAudioEngine.h"
-#include "../Tool/Axe.h"
-#include "../Tool/Pickaxe.h"
 #include "../Map/FarmMap.h"
 #include "../Constant/Constant.h"
+#include "../Control/Control.h"
 
 USING_NS_CC;
 
@@ -47,18 +46,6 @@ bool Player::init() {
     // 初始速度为零
     velocity = Vec2::ZERO;
     
-    //// 创建工具（默认是斧头），但不添加到场景中
-    //currentTool = Axe::create();
-    //if (currentTool) {
-    //    // 初始时隐藏工具
-    //    currentTool->setVisible(false);
-    //    currentTool->setAnchorPoint(Vec2(0, 0));
-    //    // 工具作始终为玩家的子节点
-    //    addChild(currentTool);
-    //    currentTool->setPosition(0, 0);
-    //}
-
-
     loadStandFrames();
     // 每dt时间调用一次
     schedule([this](float dt) {
@@ -223,7 +210,7 @@ void Player::useCurrentTool() {
         currentTool->runAction(Sequence::create(
             DelayTime::create(0.5f),  // 等待工具使用完成
             CallFunc::create([this]() {
-                currentTool->setVisible(false); // 隐藏工具 
+                Control::updateMovement();
                 }),
             nullptr
         ));

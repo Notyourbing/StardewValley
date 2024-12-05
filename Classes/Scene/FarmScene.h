@@ -1,6 +1,5 @@
 #ifndef __FARM_SCENE_H__
 #define __FARM_SCENE_H__
-
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include "../Player/Player.h"
@@ -46,18 +45,9 @@ private:
 	// 用于显示日期的标签
 	cocos2d::Label* dateLabel; 
 
-	// 记录当前按下的键
-	std::set<cocos2d::EventKeyboard::KeyCode> keysPressed;
-
 	std::vector<ui::Button*> optionButtons;  // 存储对话选项按钮
 
 	void closeButtonClicked(Ref* pSender);
-
-	// 初始化键盘监听器
-	void initKeyboardListener();
-
-	// 根据按下的键来更新玩家和地图移动的方向
-	void updateMovement();
 
 	// 初始化鼠标监听器
 	void initMouseListener();
