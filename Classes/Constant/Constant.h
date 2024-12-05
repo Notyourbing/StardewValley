@@ -3,6 +3,8 @@
 #include "../Npc/Npc.h"
 //#include "../Bag/Bag.h"
 #include "cocos2d.h"
+#include <string>
+#include <unordered_map>
 
 // 资源路径
 namespace ResPath {
@@ -292,5 +294,14 @@ const Npc CLEANER("Cleaner Levi", "Winter 25",
 // Crop
 constexpr int WATER_SCARCITY_DAY = 5;
 constexpr int INFESTED_DAY = 5;
+
+// DateManage
+const std::unordered_map<std::string, int>
+SEASONINDEX = { {"Spring", 0}, {"Summer", 1}, {"Fall", 2}, {"Winter", 3} }; // 季节的索引
+const std::string SEASONNAME[] = { "Spring", "Summer", "Fall", "Winter" };  // 季节的名字
+constexpr int DAYSINSEASON = 28;											// 每个季节的天数
+constexpr int DAYSINYEAR = 112;												// 每年的天数（一年4季，每季28天）
+constexpr int DAYSINWEEK = 7;												// 每周的天数
+
 
 #endif __CONSTANT_H

@@ -287,7 +287,6 @@ void Farm::initMouseListener()
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
 				player->useCurrentTool();
-
 				farmMap->interactWithFarmMap();
 			}
 		}
@@ -335,12 +334,12 @@ void Farm::createFestivals() {
 // 检查是否是节日，并触发节日活动
 void Farm::checkFestivalEvent() {
 	auto dateManager = DateManage::getInstance();
-	std::string currentDate = dateManager->getCurrentDate();
+	const std::string currentDate = dateManager->getCurrentDate();
 	FarmMap* farmMap = FarmMap::getInstance();
 	for (auto& festival : farmMap->festivals) {
 		if (festival->getEventDate() == currentDate) {
 			// 当前日期与节日日期匹配，开始节日活动
-			festival->startEvent(dateManager);
+			festival->startEvent();
 			break;
 		}
 	}
@@ -356,7 +355,7 @@ void Farm::updateDate() {
 	// 获取当前的年份、季节和日期
 	int year = dateManager->getCurrentYear();
 	std::string season = dateManager->getCurrentSeason();
-	int day = dateManager->getCurrentDay();
+	int day = dateManager->getCurrentDayInSeason();
 
 	// 更新日期字符串
 	std::stringstream dateStream;
@@ -386,7 +385,7 @@ std::string Farm::getNextFestival() {
 
 	std::string res = "Today is " + dateManager->getCurrentDate() + "!\n";
 	if (dateManager->isFestivalDay()) {
-		int dayInSeason = dateManager->getCurrentDay();
+		int dayInSeason = dateManager->getCurrentDayInSeason();
 		if (dateManager->getCurrentSeason() == "Spring" && dayInSeason == 7)
 			res += "Celebrate the arrival of Spring with games, food, and fun!\n";
 		else if (dateManager->getCurrentSeason() == "Summer" && dayInSeason == 15)

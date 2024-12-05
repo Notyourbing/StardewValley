@@ -2,7 +2,6 @@
 #define __FESTIVAL_H__
 
 #include "../CommunityEvent/CommunityEvent.h"
-//#include "../DateManage/DateManage.h"
 
 class Festival : public CommunityEvent {
 public:
@@ -12,7 +11,7 @@ public:
     bool init(const std::string& name, const std::string& description, const std::string& date, bool isHoliday);
 
     // 重写事件开始逻辑
-    void startEvent(DateManage* dateManager) override;  
+    void startEvent() override;  
 
     bool isHoliday() const;
 

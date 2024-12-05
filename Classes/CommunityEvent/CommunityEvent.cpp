@@ -8,7 +8,7 @@ bool CommunityEvent::init(const std::string& name, const std::string& descriptio
     return true;  // 如果初始化成功
 }
 
-void CommunityEvent::startEvent(DateManage* dateManage) {
+void CommunityEvent::startEvent() {
     // 事件开始时的逻辑，显示活动详情
     displayEventDetails();
 }

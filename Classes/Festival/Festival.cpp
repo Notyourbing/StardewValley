@@ -1,5 +1,8 @@
 #include "Festival.h"
 #include "../Map/FarmMap.h"
+#include "../Constant/Constant.h"
+
+USING_NS_CC;
 
 static std::vector<Festival*> festivals;  // 静态成员变量
 
@@ -24,12 +27,8 @@ bool Festival::init(const std::string& name, const std::string& description, con
     holiday = isHoliday;
     return true;
 }
-void Festival::startEvent(DateManage* dateManage) {
 
-    // 获取屏幕尺寸
-    const auto visibleSize = Director::getInstance()->getVisibleSize();
-    const Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+void Festival::startEvent() {
     // 创建文本并设置内容
     std::string message = "The festival " + eventName + " has started!";
 
@@ -43,23 +42,23 @@ void Festival::startEvent(DateManage* dateManage) {
 
     FarmMap* farmMap = FarmMap::getInstance();
     // 创建一个新的 Label 来显示消息
-    auto label = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 46);
+    auto label = Label::createWithTTF(message, ResPath::FONT_TTF, 46);
     if (label) {
         // 设置位置为屏幕中央
-        label->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x - farmMap->getPosition().x, visibleSize.height / 2 + origin.y - farmMap->getPosition().y));
-        label->setTextColor(cocos2d::Color4B::WHITE);
+        label->setPosition(Vec2(WINSIZE.width / 2 - farmMap->getPosition().x, WINSIZE.height / 2 - farmMap->getPosition().y));
+        label->setTextColor(Color4B::WHITE);
 
         // 将 label 添加到场景中
         farmMap->addChild(label, 12);
 
         // 创建延迟 2 秒钟后移除文本的动作
-        auto delay = cocos2d::DelayTime::create(2.0f);
-        auto remove = cocos2d::CallFunc::create([label]() {
+        auto delay = DelayTime::create(2.0f);
+        auto remove = CallFunc::create([label]() {
             label->removeFromParent();
             });
 
         // 组合动作并运行
-        auto sequence = cocos2d::Sequence::create(delay, remove, nullptr);
+        auto sequence = Sequence::create(delay, remove, nullptr);
         label->runAction(sequence);
     }
 }
@@ -68,6 +67,4 @@ bool Festival::isHoliday() const {
     return holiday;
 }
 
-Festival::Festival()
-{
-}
+Festival::Festival() {}

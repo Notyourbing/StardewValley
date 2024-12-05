@@ -12,9 +12,17 @@ public:
     // 获取当前日期
     std::string getCurrentDate() const;
     std::string getCurrentSeason() const;
-    int getCurrentDay() const;
-    int getCurrentWeekday() const;
+
+    // 获取当前季的第几天
+    int getCurrentDayInSeason() const;
+
+    // 获取当前周的第几天
+    int getCurrentDayInWeek() const;
+
+    // 获取当前的年份
     int getCurrentYear() const;
+
+    // 获取总累计天数
     int getDay() const;
 
     // 日期推进
@@ -27,23 +35,20 @@ public:
 
     static DateManage* instance;  // 单例实例
 
+    // 获取季节的索引
     int getSeasonIndex(const std::string& season);
 
 private:
     // 私有构造函数，防止外部直接创建对象
     DateManage();
-    ~DateManage(); // 析构函数
+    ~DateManage();
 
     // 初始化方法
-    bool init(int startYear, int startDay);
+    bool init(const int startYear, const int startDay);
 
     // 存储日期、年份等信息
     int currentDay;
     int currentYear;
-
-    static const int daysInSeason = 28;  // 每个季节的天数
-    static const int daysInYear = 112;  // 每年的天数（4个季节，每季28天）
-    static const int daysInWeek = 7;  // 一周7天
 };
 
 #endif

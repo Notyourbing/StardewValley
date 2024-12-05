@@ -12,7 +12,6 @@
 #include <vector>
 #include <string>
 
-
 // 农场地图类
 class FarmMap : public cocos2d::Node {
 public:

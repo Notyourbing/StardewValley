@@ -12,7 +12,7 @@ public:
     virtual ~CommunityEvent() = default;
 
     // 公有方法：启动事件
-    virtual void startEvent(DateManage* dateManage) = 0;
+    virtual void startEvent() = 0;
 
     // 公有方法：显示活动详情
     void displayEventDetails() const;
