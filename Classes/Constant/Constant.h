@@ -293,4 +293,10 @@ const Npc CLEANER("Cleaner Levi", "Winter 25",
 constexpr int WATER_SCARCITY_DAY = 5;
 constexpr int INFESTED_DAY = 5;
 
+// TileNode
+constexpr int SOIL_GID = 36;
+constexpr int HOED_SOIL_GID = 96;
+constexpr int WATER_SOIL_GID = 64;
+constexpr int WATER_GID = 17;
+constexpr int STONE_GID = 22;
 #endif __CONSTANT_H

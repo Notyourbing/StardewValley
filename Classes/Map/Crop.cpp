@@ -41,7 +41,7 @@ void Crop::applyPesticide() {
 
 // Crop基类：获得当前图块的GID
 int Crop::getCurrentGID() {
-	return currentGID;
+	return cropGID;
 }
 
 // Apple子类：构造函数

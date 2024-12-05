@@ -120,6 +120,9 @@
     <ClCompile Include="..\Classes\Tool\Scythe.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Seed.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
     </ClCompile>
@@ -199,6 +202,9 @@
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Scythe.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Seed.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item\Item.h">

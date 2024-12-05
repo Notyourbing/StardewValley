@@ -79,39 +79,6 @@ bool DateManage::isFestivalDay() const {
     return false;
 }
 
-/*std::string DateManage::getNextFestival()
-{
-    std::string res = "Today is " + getCurrentDate() + "!\n";
-    if (isFestivalDay()) {
-        int dayInSeason = getCurrentDay();
-        if (getCurrentSeason() == "Spring" && dayInSeason == 7)
-            res += "Celebrate the arrival of Spring with games, food, and fun!\n";
-        else if (getCurrentSeason() == "Summer" && dayInSeason == 15)
-            res += "The hot days of Summer are here! Time for the beach!\n";
-        else if (getCurrentSeason() == "Fall" && dayInSeason == 5)
-            res += "Let's picking up the falling leaves!\n";
-        else if (getCurrentSeason() == "Winter" && dayInSeason == 25)
-            res += "Merry Christmas and Happy Birthday to levi!\n";
-    }
-        
-    //FarmMap* farmMap = FarmMap::getInstance();
-    for (Festival* festival : farmMap->festivals) {
-        std::string season, day, curSeason;
-        std::istringstream stream(festival->getEventDate());
-        stream >> season; // 读取季节
-        stream >> day;    // 读取日期
-        int date = std::stoi(day);
-
-        std::istringstream streamCur(getCurrentDate());
-        streamCur >> curSeason >> day;
-        if (season == getCurrentSeason() && date > std::stoi(day))
-            return festival->getEventName() + "is coming soon!";
-        else if (season > getCurrentSeason())
-            return festival->getEventName() + "is coming soon!";
-    }
-    return "waiting for next year..";
-}*/
-
 int DateManage::getSeasonIndex(const std::string& season) {
     // 映射季节字符串到整数
     static std::map<std::string, int> seasonMap = {

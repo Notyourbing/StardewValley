@@ -30,6 +30,7 @@ public:
 	// 显示背包
 	void updateDisplay();
 
+	// 当前所拥有的工具
 	std::vector<Tool*> tools;
 
 	//向背包中加入物品
