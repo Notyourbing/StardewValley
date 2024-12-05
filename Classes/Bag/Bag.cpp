@@ -6,7 +6,7 @@
 #include "../Tool/FishingRod.h"
 #include "../Tool/WateringCan.h"
 #include "../Player/Player.h"
-
+#include "../Tool/Seed.h"
 
 USING_NS_CC;
 
@@ -78,6 +78,8 @@ bool Bag::init() {
 	addTool(scythe);
 	Tool* kettle = Kettle::create();
 	addTool(kettle);
+	Tool* seed = Seed::create();
+	addTool(seed);
 	selectTool(0);
 
 	return true;

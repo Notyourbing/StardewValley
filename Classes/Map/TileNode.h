@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Crop.h"
+#include "../Constant/Constant.h"
 #include "string"
 
 // 有哪几种瓦片地图的节点
@@ -24,31 +25,30 @@ private:
 	// 存储该节点的类型
 	TileType tileType;
 
-	// 当前这个瓦点的GID
-	int currentGID;
+	// 更新当前节点的GID
+	virtual void updateGID();
 
 protected:
-	// 更新当前节点的GID
-	void updateGID(int newGID) {
-		currentGID = newGID;
-	}
+
+	// 当前这个瓦点的GID
+	int currentGID;
 
 public:
 	// 瓦片地图节点基类的构造函数
 	TileNode(const cocos2d::Vec2& position, const TileType& tileType, const int& currentGID);
 
 	// 获取该节点的类型
-	TileType getTileType() const{
-		return tileType;
-	}
+	TileType getTileType() const;
 
 	// 返回给土壤块的GID
-	int getCurrentGID() const {
-		return currentGID;
-	}
+	int getCurrentGID() const;
+
+	// 获取该TileNode节点的位置
+	cocos2d::Vec2 getPosition() const;
 
 	// TileNode节点与左键的交互
-	virtual void interact(std::string toolName) {};
+	virtual void interact(const std::string& toolName) {};
+
 };
 
 // Grass类表示草，从TileNode类继承而来
@@ -56,10 +56,10 @@ class Grass : public TileNode {
 public:
 
 	// Grass类的构造函数
-	Grass::Grass(const cocos2d::Vec2& position);
+	Grass::Grass(const cocos2d::Vec2& position,const int& GID);
 
 	// 草地的养殖交互函数的实现
-	void interact(std::string toolName) override;
+	void interact(const std::string& toolName) override;
 };
 
 // Soil类表示土壤，从TileNode类继承而来
@@ -95,21 +95,26 @@ private:
 	// 土壤的种植
 	void plantCrop(std::string seedName);
 
+	// updateGID的重写
+	void updateGID() override;
 public:
 	// 土壤类的构造函数
 	Soil(const cocos2d::Vec2& position);
 
-
 	//	土壤的交互函数
-	void interact(std::string toolName) override;
+	void interact(const std::string& toolName) override;
+
 };
 
 // Water类表示水，从TileNode类继承而来
 class Water : public TileNode {
 public:
-	Water(const cocos2d::Vec2& position) :
-		TileNode(position, TileType::WATER,17)
-	{}
+
+	// Water类表示水
+	Water(const cocos2d::Vec2& position);
+
+	// Water类的交互函数
+	void interact(const std::string& toolName) override;
 };
 
 // Obstacle类表示障碍，从TileNode类继承而来
@@ -131,9 +136,8 @@ public:
 // STONE类表示障碍，从TileNode类继承而来
 class Stone : public TileNode {
 public:
-	Stone(const cocos2d::Vec2& position) :
-		TileNode(position, TileType::STONE,22)
-	{}
+	// 构造函数
+	Stone(const cocos2d::Vec2& position);
 };
 
 #endif

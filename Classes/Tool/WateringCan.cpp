@@ -19,6 +19,11 @@ bool Kettle::init() {
 	return Tool::init("wateringCan");
 }
 
+// Kettle类：构造函数
+Kettle::Kettle() {
+	waterLevel = 10;
+}
+
 // 使用工具
 void Kettle::useTool() {
 
