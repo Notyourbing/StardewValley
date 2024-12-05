@@ -41,7 +41,7 @@ void Grass::interact(const std::string& toolName) {
 
 // Soil类：构造函数
 Soil::Soil(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::SOIL, 36), crop(nullptr),
+	TileNode(position, TileType::SOIL, HOED_SOIL_GID), crop(nullptr),
 	isWatered(false), isFertilized(false), isHoed(false),
 	waterLevel(0), fertilizeLevel(0)
 {}
@@ -51,17 +51,17 @@ void Soil::updateGID() {
 
 	// 根据土壤的条件更新GID
 	if (isHoed == false) {
-		currentGID = 36;
+		currentGID = SOIL_GID;
 		return;
 	}
 
 	// 判断是否有作物
 	if (crop == nullptr) {
 		if (isWatered == true) {
-			currentGID = 96;
+			currentGID = HOED_SOIL_GID;
 		}
 		else {
-			currentGID = 64;
+			currentGID = WATER_SOIL_GID;
 		}
 	}
 	else {
@@ -137,7 +137,7 @@ void Soil::interact(const std::string& toolName) {
 
 // Water类：构造函数
 Water::Water(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::WATER, 17){}
+	TileNode(position, TileType::WATER, WATER_GID){}
 
 // Water类：交互函数
 void Water::interact(const std::string& toolName) {
@@ -146,4 +146,4 @@ void Water::interact(const std::string& toolName) {
 
 // Stone类：构造函数
 Stone::Stone(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::STONE, 22) {}
+	TileNode(position, TileType::STONE, STONE_GID) {}

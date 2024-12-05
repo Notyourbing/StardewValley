@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Crop.h"
+#include "../Constant/Constant.h"
 #include "string"
 
 // 有哪几种瓦片地图的节点
