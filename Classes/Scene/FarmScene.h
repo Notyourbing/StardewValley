@@ -21,35 +21,11 @@ public:
 	//该地图上所有npc
 	std::vector<Npc*> npcs;
 
-	// 显示初始对话框
-	void showInitialDialogue(Npc* npc);
-
-	// 显示对话选项
-	void showDialogueOptions(Npc* npc, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
-
-	// 根据选择的选项更新对话内容
-	 void updateDialogueAfterOptionSelected(Npc* npc, std::vector<ui::Button*> optionButtons, int optionIndex, Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel) ;
-
-	// 关闭对话框和所有对话文字
-	void closeDialogue(Sprite* dialogueBackground, Label* label, Sprite* npcTalkImage, Label* nameLabel, cocos2d::EventListenerMouse* lastListener);
-	
-	void createFestivals();
-
-	void checkFestivalEvent();
-
-	bool isDialogueVisible;
-
-	void updateDate();
-
 private:
-	// 用于显示日期的标签
-	cocos2d::Label* dateLabel; 
-
-	std::vector<ui::Button*> optionButtons;  // 存储对话选项按钮
 
 	void closeButtonClicked(Ref* pSender);
 
-	// 初始化鼠标监听器
+	// 初始化鼠标监听器(使用工具和打开对话框)
 	void initMouseListener();
 
 	// 存储农场中的动物
@@ -57,9 +33,6 @@ private:
 
 	// 动物管理
 	void animalManager();
-
-	// 获取下一个节日
-	std::string getNextFestival();
 };
 
 #endif

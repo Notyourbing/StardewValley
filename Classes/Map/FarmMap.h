@@ -6,11 +6,9 @@
 #include "../Npc/Npc.h"
 #include "TileNode.h"
 #include "../Festival/Festival.h"
-//#include "../Tool/Tool.h"
 #include <string>
 #include <memory>
 #include <vector>
-#include <string>
 
 // 农场地图类
 class FarmMap : public cocos2d::Node {
@@ -20,9 +18,6 @@ public:
 
 	// 初始化地图
 	bool init(const std::string& tmxFile);
-
-	// 存在的节日
-	std::vector<Festival*> festivals;
 
 	//随地图创建npc
 	bool npcInit(const Vec2& position, Npc* npc);

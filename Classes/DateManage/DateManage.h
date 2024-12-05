@@ -6,6 +6,11 @@
 
 class DateManage {
 public:
+    // 用于显示日期的标签
+    cocos2d::Label* dateLabel;
+    // 存在的节日
+    std::vector<Festival*> festivals;
+
     // 获取单例实例
     static DateManage* getInstance();
 
@@ -31,13 +36,16 @@ public:
     // 判断是否是节日
     bool isFestivalDay() const;
 
-    //std::string getNextFestival();
+    //开始节日
+    void checkFestivalEvent();
 
     static DateManage* instance;  // 单例实例
 
     // 获取季节的索引
     int getSeasonIndex(const std::string& season);
 
+    //时间增加
+    void updateDate();
 private:
     // 私有构造函数，防止外部直接创建对象
     DateManage();
