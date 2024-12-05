@@ -193,3 +193,7 @@ void FarmMap::interactWithFarmMap() {
     // ¸üÐÂÍ¼¿é
     soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
 }
+
+void FarmMap::stopMoving() {
+    velocity = Vec2::ZERO;
+}

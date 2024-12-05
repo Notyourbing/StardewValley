@@ -40,6 +40,8 @@ public:
 	// 用于鼠标左键与农场的交互逻辑
 	void interactWithFarmMap();
 
+	void stopMoving();
+
 	// 瓦片地图对象
 	cocos2d::TMXTiledMap* map;
 	

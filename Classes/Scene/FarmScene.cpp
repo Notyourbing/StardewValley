@@ -282,10 +282,11 @@ void Farm::initMouseListener()
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();
 		FarmMap* farmMap = FarmMap::getInstance();
+		player->stopMoving();
+		farmMap->stopMoving();
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
-				Player::getInstance()->useCurrentTool();
-				Vec2 playerPosition = player->getPosition();
+				player->useCurrentTool();
 
 				farmMap->interactWithFarmMap();
 			}
@@ -293,8 +294,6 @@ void Farm::initMouseListener()
 		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : npcs) {
 				// 计算玩家与NPC的距离
-				Player* player = Player::getInstance();
-				FarmMap* farmMap = FarmMap::getInstance();
 				const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
 				// 设定一个合适的距离阈值
 				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
