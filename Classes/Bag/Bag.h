@@ -2,6 +2,7 @@
 #define __BAG_H__
 #include "cocos2d.h"
 #include "../Tool/Tool.h"
+#include "../Item/Item.h"
 
 class Bag : public cocos2d::Node {
 public:
@@ -32,12 +33,17 @@ public:
 	// 当前所拥有的工具
 	std::vector<Tool*> tools;
 
-	// 工具栏的开启
-	void toggleToolBar(bool show);
+	//向背包中加入物品
+	bool addItem(Item* item);
+
+	// 获取背包中的物品
+	const std::vector<Item*>& getItems() const;
 
 private:
 	// 单例实例
 	static Bag* instance;
+
+	std::vector<Item*> items;        // 背包中的物品
 
 	// 私有构造函数，防止多次实例化，确保唯一性
 	Bag();
@@ -49,11 +55,11 @@ private:
 
 	// 存储工具的容器
 
-	// 背包容量
+	// 背包放工具的容量
 	static const int capacity = 9;
 
-	// 所携带的工具总上限
-	static const int toolBar = 27;
+	// 背包总容量
+	static const int allCapacity = 9;
 
 	// 当前选中的工具索引
 	int selectedIndex;

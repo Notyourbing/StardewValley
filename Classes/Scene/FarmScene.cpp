@@ -7,6 +7,7 @@
 #include "../Tool/PickAxe.h"
 #include "../Tool/Axe.h"
 #include "../Tool/FishingRod.h"
+#include "../MyButton/MyButton.h"
 
 USING_NS_CC;
 
@@ -26,7 +27,6 @@ bool Farm::init() {
 		this->addChild(dateLabel, 5);
 	}
 
-	// ??定时器 // check 为了测试节日和后续的季节更迭采用定时器来进行1秒1日的时间增加，后续功能完全后可以调整。
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this](float deltaTime) {
 		updateDate();
@@ -65,9 +65,18 @@ bool Farm::init() {
 
 	// 背包
 	Bag* bag = Bag::getInstance();
-	this->addChild(bag, 4);
+	if (bag) {
+		this->addChild(bag, 4);
+	}
 
-	// auto exitButton = ui::Button::create()
+	// 退出按钮
+	auto closeButton = MyButton::create(ResPath::CLOSE_BUTTON_NORMAL, ResPath::CLOSE_BUTTON_HOVER);
+	if (closeButton) {
+		const auto closeButtonSize = closeButton->getContentSize();
+		closeButton->setPosition(Vec2(closeButtonSize.width / 2, WINSIZE.height - closeButtonSize.height / 2)); // 放在左上角
+		this->addChild(closeButton, 4);
+		closeButton->addClickEventListener(CC_CALLBACK_1(Farm::closeButtonClicked, this));
+	}
 
 	createFestivals();
 
@@ -273,18 +282,18 @@ void Farm::initMouseListener()
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();
 		FarmMap* farmMap = FarmMap::getInstance();
+		player->stopMoving();
+		farmMap->stopMoving();
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (isDialogueVisible == false) {
-				Player::getInstance()->useCurrentTool();
-				Vec2 playerPosition = player->getPosition();
+				player->useCurrentTool();
+
 				farmMap->interactWithFarmMap();
 			}
 		}
 		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : npcs) {
 				// 计算玩家与NPC的距离
-				Player* player = Player::getInstance();
-				FarmMap* farmMap = FarmMap::getInstance();
 				const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
 				// 设定一个合适的距离阈值
 				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
@@ -357,6 +366,11 @@ void Farm::updateDate() {
 	dateLabel->setString(dateStream.str());
 
 	checkFestivalEvent();
+}
+
+// 关闭按钮的回调函数
+void Farm::closeButtonClicked(Ref* pSender) {
+	Director::getInstance()->popScene();
 }
 
 // 动物管理

@@ -4,7 +4,6 @@
 #include <string>
 #include "cocos2d.h"
 
-// ?? .h文件中一般不要加命名空间 // check 已删除 无影响
 class DateManage; // 前向声明 DateManage 类
 
 class CommunityEvent {

@@ -6,7 +6,7 @@
 #include "../Npc/Npc.h"
 #include "TileNode.h"
 #include "../Festival/Festival.h"
-#include "../Tool/Tool.h"
+//#include "../Tool/Tool.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -39,6 +39,8 @@ public:
 
 	// 用于鼠标左键与农场的交互逻辑
 	void interactWithFarmMap();
+
+	void stopMoving();
 
 	// 瓦片地图对象
 	cocos2d::TMXTiledMap* map;

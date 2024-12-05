@@ -6,7 +6,6 @@
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
-using namespace CocosDenshion;
 
 
 // 初始化静态成员变量
@@ -33,7 +32,11 @@ Player::Player()
     lastDirection(Vec2::ZERO) {
 }
 
-Player::~Player() {}
+Player::~Player() {
+    if (instance != nullptr) {
+        instance = nullptr;
+    }
+}
 
 // 初始化
 bool Player::init() {
@@ -44,16 +47,16 @@ bool Player::init() {
     // 初始速度为零
     velocity = Vec2::ZERO;
     
-    // 创建工具（默认是斧头），但不添加到场景中
-    currentTool = Axe::create();
-    if (currentTool) {
-        // 初始时隐藏工具
-        currentTool->setVisible(false);
-        currentTool->setAnchorPoint(Vec2(0, 0));
-        // 工具作始终为玩家的子节点
-        addChild(currentTool);
-        currentTool->setPosition(0, 0);
-    }
+    //// 创建工具（默认是斧头），但不添加到场景中
+    //currentTool = Axe::create();
+    //if (currentTool) {
+    //    // 初始时隐藏工具
+    //    currentTool->setVisible(false);
+    //    currentTool->setAnchorPoint(Vec2(0, 0));
+    //    // 工具作始终为玩家的子节点
+    //    addChild(currentTool);
+    //    currentTool->setPosition(0, 0);
+    //}
 
 
     loadStandFrames();

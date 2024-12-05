@@ -27,7 +27,12 @@ Bag* Bag::getInstance() {
 }
 
 Bag::Bag(): selectedIndex(0) {}
-Bag::~Bag() {}
+
+Bag::~Bag() {
+	if (instance != nullptr) {
+		instance = nullptr;
+	}
+}
 
 bool Bag::init() {
 	if (!Node::init()) {
@@ -126,7 +131,7 @@ Tool* Bag::getSelectedTool() const {
 void Bag::updateDisplay() {
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
- 	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
+	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
 
 	// 更新工具图标
 	for (int i = 0; i < capacity; ++i) {
@@ -135,27 +140,57 @@ void Bag::updateDisplay() {
 			icon->setTexture("tools/" + tools[i]->getToolName() + ".png");
 			icon->setVisible(true);
 		}
-		else {
+		else
 			icon->setVisible(false);
-		}
 
-		// 设置位置
-		icon->setPosition(Vec2(
-			startX + i * (iconSize + spacing) + iconSize / 2,
-			startY + iconSize / 2
-		));
+			// 设置位置
+			icon->setPosition(Vec2(
+				startX + i * (iconSize + spacing) + iconSize / 2,
+				startY + iconSize / 2
+			));
 
-		// 如果是选中工具,添加高亮
-		if (i == selectedIndex) {
-			icon->setColor(Color3B::YELLOW);
-		}
-		else {
-			icon->setColor(Color3B::WHITE);
+			// 如果是选中工具,添加高亮
+			if (i == selectedIndex) {
+				icon->setColor(Color3B::YELLOW);
+			}
+			else {
+				icon->setColor(Color3B::WHITE);
+			}
+	}
+
+	//更新item图标
+	for (int i = 0; i < items.size(); i++) {
+		if (i + tools.size() < capacity) {
+			items[i]->setPosition(Vec2(
+				startX + i * (iconSize + spacing) + iconSize / 2,
+				startY + iconSize / 2
+			));
 		}
 	}
 }
 
-// 工具栏的开启
-void Bag::toggleToolBar(bool show) {
+bool Bag::addItem(Item* item) {
+	// 判断背包中是否已经存在相同的物品
+	for (auto& existingItem : items) {
+		if (existingItem->isSameItem(*item)) {
+			// 如果物品存在，增加数量
+			existingItem->increaseCount();
+			updateDisplay();  // 更新显示
+			return true;
+		}
+	}
 
+	// 如果没有找到相同的物品，添加新的物品
+	if (tools.size() + items.size() < capacity) {
+		items.push_back(item);  // 添加新物品
+		addChild(item);         // 将物品添加到场景中
+		updateDisplay();        // 更新显示
+		return true;
+	}
+	return false;
+}
+
+const std::vector<Item*>& Bag::getItems() const
+{
+	return items;
 }

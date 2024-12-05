@@ -10,7 +10,9 @@ FarmMap* FarmMap::instance = nullptr;
 
 FarmMap::FarmMap() : velocity(Vec2::ZERO) {}
 
-FarmMap::~FarmMap() {}
+FarmMap::~FarmMap() {
+    instance = nullptr;
+}
 
 FarmMap* FarmMap::getInstance() {
     if (!instance) {
@@ -191,4 +193,8 @@ void FarmMap::interactWithFarmMap() {
 
     // ¸üÐÂÍ¼¿é
     soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
+}
+
+void FarmMap::stopMoving() {
+    velocity = Vec2::ZERO;
 }

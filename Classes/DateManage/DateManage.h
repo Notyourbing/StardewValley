@@ -9,8 +9,6 @@ public:
     // 获取单例实例
     static DateManage* getInstance();
 
-    // ?? 单例实例为什么会有create()方法，参考Player.h // check 已删除
-
     // 获取当前日期
     std::string getCurrentDate() const;
     std::string getCurrentSeason() const;
