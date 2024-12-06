@@ -245,8 +245,8 @@ namespace ToolRects {
 const cocos2d::Size WINSIZE(1280.0f, 720.0f);
 
 // 全局移动速度
-constexpr float MAP_MOVE_SPEED = 400.0f;			// 地图移动速度
-constexpr float PLAYER_MOVE_SPEED = 200.0f;			// 玩家移动速度
+constexpr float MAP_MOVE_SPEED = 300.0f;			// 地图移动速度
+constexpr float PLAYER_MOVE_SPEED = 300.0f;			// 玩家移动速度
 
 // WecomScene
 constexpr float MENU_ITEM_INTERVAL = 24.0f;			// 菜单项之间的间距
