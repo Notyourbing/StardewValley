@@ -31,8 +31,38 @@ bool FishingRod::init()
 
 void FishingRod::useTool()
 {
-    // 获取玩家实例
+    // 获取玩家以及地图实例
     Player* player = Player::getInstance();
+    FarmMap* farmMap = FarmMap::getInstance();
+
+    // 获取要交互的土块位置
+    Vec2 playerPosition = player->getPosition();
+    const Size tileSize = farmMap->map->getTileSize();
+    const Size mapSize = farmMap->map->getMapSize();
+    playerPosition = playerPosition - farmMap->getPosition();
+    playerPosition.y = playerPosition.y - player->getContentSize().height / 2 + 10.0f;
+    int x = playerPosition.x / tileSize.width;
+    int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
+    Vec2 lastDirection = player->getLastDirection();
+
+    if (lastDirection == Vec2(1, 0) && x + 1 < mapSize.width - 1) {
+        x++;
+    }
+    else if (lastDirection == Vec2(0, 1) && y - 1 >= 0) {
+        y--;
+    }
+    else if (lastDirection == Vec2(-1, 0) && x - 1 >= 0) {
+        x--;
+    }
+    else if (lastDirection == Vec2(0, -1) && y + 1 < mapSize.height - 1) {
+        y++;
+    }
+
+    TileNode* tileNode = farmMap->getTileNode(x, y);
+
+    if (tileNode->getTileType() != TileType::WATER)
+        return;
+
     // 创建动画帧
     Vector<SpriteFrame*> frames;
 

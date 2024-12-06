@@ -8,6 +8,11 @@ USING_NS_CC;
 // ³õÊ¼»¯¾²Ì¬ÊµÀý
 FarmMap* FarmMap::instance = nullptr;
 
+TileNode* FarmMap::getTileNode(int x, int y)
+{
+    return mapTileNode[x][y];
+}
+
 FarmMap::FarmMap() : velocity(Vec2::ZERO) {}
 
 FarmMap::~FarmMap() {

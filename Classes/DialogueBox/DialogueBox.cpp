@@ -125,7 +125,7 @@ void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
     auto listener = EventListenerMouse::create();
     listener->onMouseDown = [=](Event* event) {
         auto mouseEvent = dynamic_cast<EventMouse*>(event);
-        if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+        if (isDialogueVisible && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
             closeDialogue(listener);
         };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -135,21 +135,6 @@ void DialogueBox::closeDialogue(EventListenerMouse* lastListener) {
     _eventDispatcher->removeEventListener(lastListener);
     isDialogueVisible = false;
     this->removeFromParent();  // 移除对话框
-}
-
-void DialogueBox::initMouseListener() {
-    // 创建鼠标事件监听器
-    mouseListener = EventListenerMouse::create();
-    mouseListener->onMouseDown = [this](Event* event) {
-        auto mouseEvent = dynamic_cast<EventMouse*>(event);
-        if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-            // 点击对话框以外的区域关闭对话框
-            if (!this->getBoundingBox().containsPoint(mouseEvent->getLocation())) {
-                closeDialogue(mouseListener);
-            }
-        }
-        };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
 
 // 获取节日

@@ -92,7 +92,6 @@ void Player::moveByDirection(const Vec2& direction) {
     if (direction.lengthSquared() == 0) {
         return;
     }
-
     velocity = direction * PLAYER_MOVE_SPEED;
 
     if (direction.x > 0) {

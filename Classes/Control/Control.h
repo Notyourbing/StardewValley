@@ -2,6 +2,8 @@
 #define __CONTROL_H__
 
 #include "../Npc/Npc.h"
+#include "../Scene/FarmScene.h"
+#include "../DialogueBox/DialogueBox.h"
 #include <set>
 
 // 控制类， 控制人物的移动，地图的移动，人物和npc的交互
@@ -24,7 +26,8 @@ private:
 	// 初始化键盘监听器
 	void initKeyboardListener();
 
-	// todo: 等对话框和npcs组件写好了加入初始化鼠标监听器
+	// 初始化鼠标监听器
+	void initMouseListener();
 };
 
 

@@ -29,15 +29,14 @@ public:
     // 关闭对话框
     void closeDialogue(EventListenerMouse* lastListener);
 
-    // 用于鼠标事件监听
-    void initMouseListener();
-
     // 获取下个节日
     std::string getNextFestival();
 
     static bool isDialogueVisible;  // 对话框是否显示
 
 private:
+    // 单例实例
+    static DialogueBox* instance;
     Npc* npc;                                           // 当前与之对话的 NPC
     cocos2d::Label* dialogueLabel;                      //对话内容
     cocos2d::Label* nameLabel;                          //npc名字
