@@ -2,16 +2,23 @@
 #define ITEM_H
 
 #include "cocos2d.h"
-#include <string>
+#include "../Constant/Constant.h"
 
 class Item : public cocos2d::Sprite {
 public:
-    std::string name;         // 物品的名称
-    std::string imagePath;    // 物品的图标路径
+    const char* name;         // 物品的名称
+    const char* imagePath;    // 物品的图标路径
     int quantity;             // 物品的数量
+    bool isEdible;                // 是否可食用
 
-    // 构造函数
-    Item(const std::string& itemName, const std::string& itemImagePath, int itemQuantity = 1);
+    // 默认构造函数
+    Item()
+        : name(nullptr), imagePath(nullptr), quantity(0), isEdible(false) {}
+
+    static Item* create(const FishInfo& fish_info);
+
+    // 初始化方法
+    bool init(const FishInfo& fish_info);
 
     // 增加物品数量
     void addQuantity(int count);

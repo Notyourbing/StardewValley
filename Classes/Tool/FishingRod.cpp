@@ -6,6 +6,8 @@
 #include "cocos2d.h"
 #include "cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h"
 #include "ui/CocosGUI.h"
+#include <string>
+
 
 USING_NS_CC;
 
@@ -124,7 +126,7 @@ void FishingRod::reelInRod()
     Vec2 direction = player->getLastDirection();
     // 每个方向帧数不同不能复用
     if (direction.x > 0) { // 玩家面向右侧
-        // 创建扔出鱼竿的动画
+        // 创建收回鱼竿的动画
         frames.pushBack(SpriteFrame::create(ResPath::RIGHT_FISHING_IN_1, ToolRects::RIGHT_FISHING_IN_1));
         frames.pushBack(SpriteFrame::create(ResPath::RIGHT_FISHING_IN_2, ToolRects::RIGHT_FISHING_IN_2));
         frames.pushBack(SpriteFrame::create(ResPath::RIGHT_FISHING_IN_3, ToolRects::RIGHT_FISHING_IN_3));
@@ -160,23 +162,22 @@ void FishingRod::reelInRod()
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            // 随机选择钓到的鱼
-            const Item pufferFish("pufferFish", "items/pufferFish.png");
-            const Item tuna("tuna", "items/tuna.png");
-            const Item anchovy("anchovy", "items/anchovy.png");
-
-            const std::vector<Item> fishList = {
+            Item* pufferFish = Item::create(PUFFER_FISH);
+            Item* tuna = Item::create(TUNA);
+            Item* anchovy = Item::create(ANCHOVY);
+            // 定义鱼类的列表
+            std::vector<Item*> fishList = {
                 pufferFish,
                 tuna,
                 anchovy
             };
             int randomIndex = rand() % fishList.size();  // 随机索引
-            Item fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
+            Item* fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
 
             Bag* bag = Bag::getInstance();
-            bag->addItem(&fishCaught);
+            bag->addItem(fishCaught);
             // 在玩家上方显示钓到的鱼的提示
-            auto label = Label::createWithTTF(fishCaught.name + " Caught!", "fonts/Marker Felt.ttf", 24);
+            auto label = Label::createWithTTF(std::string(fishCaught->name) + " Caught!", "fonts/Marker Felt.ttf", 24);
             label->setPosition(player->getPosition() + Vec2(0, 100));  // 显示在玩家上方
             label->setTextColor(Color4B::WHITE);
             player->getParent()->addChild(label);
