@@ -49,6 +49,9 @@
     <Filter Include="Classes\Control">
       <UniqueIdentifier>{ee7b4a1e-1c73-4786-8428-07bb13a98425}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\DialogueBox">
+      <UniqueIdentifier>{a9041023-321b-4e55-bc31-71a2baba0979}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -131,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Control\Control.cpp">
       <Filter>Classes\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DialogueBox\DialogueBox.cpp">
+      <Filter>Classes\DialogueBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Control\Control.h">
       <Filter>Classes\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DialogueBox\DialogueBox.h">
+      <Filter>Classes\DialogueBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
