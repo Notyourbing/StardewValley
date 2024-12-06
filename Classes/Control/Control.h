@@ -28,6 +28,8 @@ private:
 
 	// ³õÊ¼»¯Êó±ê¼àÌıÆ÷
 	void initMouseListener();
+
+	
 };
 
 

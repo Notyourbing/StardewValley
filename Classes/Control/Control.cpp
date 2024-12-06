@@ -101,16 +101,18 @@ void Control::initMouseListener()
 				farmMap->interactWithFarmMap();
 			}
 		}
-		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
+		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : Farm::npcs) {
 				// 计算玩家与NPC的距离
 				const float distance = player->getPosition().distance(npc->getPosition() + farmMap->getPosition());
+
 				// 当距离小于交互距离并且此时对话框没有显示
 				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
 					if (!DialogueBox::isDialogueVisible) {
 						DialogueBox* dialogueBox = DialogueBox::create(npc);
 						this->addChild(dialogueBox, 5);
 						dialogueBox->showInitialDialogue();
+						// DialogueBox::isDialogueVisible = false;
 						break;
 					}
 				}

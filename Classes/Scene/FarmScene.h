@@ -27,8 +27,6 @@ private:
 
 	// 存储农场中的动物
 	std::vector<Animal*> animals;
-
-
 };
 
 #endif

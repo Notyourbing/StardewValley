@@ -32,9 +32,9 @@ bool Farm::init() {
 	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
+	// 加入两个NPC
 	Npc* wizard = Npc::create(WIZARD_INFO);
 	Npc* cleaner = Npc::create(CLEANER_INFO);
-
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 	farmMap->npcInit(Vec2(WIZARD_X, WIZARD_Y), wizard);

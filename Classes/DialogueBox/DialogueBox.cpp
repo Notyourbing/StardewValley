@@ -128,13 +128,14 @@ void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
         if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
             closeDialogue(listener);
         };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getParent());
+    
 }
 
 void DialogueBox::closeDialogue(EventListenerMouse* lastListener) {
     _eventDispatcher->removeEventListener(lastListener);
-    isDialogueVisible = false;
     this->removeFromParent();  // 移除对话框
+    isDialogueVisible = false;
 }
 
 // 获取节日
