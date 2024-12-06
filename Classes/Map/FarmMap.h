@@ -20,7 +20,7 @@ public:
 	bool init(const std::string& tmxFile);
 
 	//随地图创建npc
-	bool npcInit(const Vec2& position, Npc* npc);
+	bool npcInit(const cocos2d::Vec2& position, Npc* npc);
 
 	// 更新地图位置
 	void moveMapByDirection(const cocos2d::Vec2& direction);

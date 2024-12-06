@@ -4,8 +4,7 @@
 #include "cocos2d.h"
 #include <string>
 #include <vector>
-#include <map>
-using namespace cocos2d;
+#include "../Constant/Constant.h"
 
 enum class RelationshipStatus {
     None,       // 陌生
@@ -13,7 +12,7 @@ enum class RelationshipStatus {
     Romance     // 浪漫
 };
 
-class Npc : public cocos2d::Node {
+class Npc : public cocos2d::Sprite {
 private:
     std::string name;                   // NPC的名字
     std::string birthday;               // NPC的生日
@@ -21,26 +20,19 @@ private:
     std::vector<std::string> gifts;     // NPC喜欢的礼物
     std::vector<std::string> dislikes;  // NPC讨厌的礼物
     std::vector<std::string> dialogues; // NPC的对话列表
-    std::string image;
+    std::string image;                  // 图像的路径
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
 
     // 对话框相关成员
-    Sprite* dialogueBox;                // 对话框背景
-    Label* dialogueLabel;               // 对话框中的文本标签
+    cocos2d::Sprite* dialogueBox;                // 对话框背景
+    cocos2d::Label* dialogueLabel;               // 对话框中的文本标签
     bool isDialogueVisible;             // 用于标记对话框是否显示
 
 public:
 
-    Sprite* sprite;                     // NPC的图像（作为精灵）
-    // 构造函数
-    Npc(const std::string& name, const std::string& birthdate,
-        const std::vector<std::string>& favoriteGifts,
-        const std::vector<std::string>& dislikedGifts,
-        const std::vector<std::string>& dialogues,
-        const std::string& imagePath);
-    // 创建精灵的构造函数
-    Npc(const Npc& other);
-    Npc();
+    static Npc* create(const NpcInfo& npc_info);
+
+    bool init(const NpcInfo& npc_info);
 
     // 获取NPC的名字
     std::string getNpcName() const;
@@ -67,10 +59,10 @@ public:
     bool dislikesGift(const std::string& gift) const;
 
     // 增加NPC的亲密度
-    void increaseFriendship(int amount);
+    void increaseFriendship(const int amount);
 
     // 减少NPC的亲密度
-    void decreaseFriendship(int amount);
+    void decreaseFriendship(const int amount);
 
     // 获取NPC的所有喜欢的礼物
     std::vector<std::string> getGifts() const;

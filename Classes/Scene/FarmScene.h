@@ -31,8 +31,7 @@ private:
 	// 存储农场中的动物
 	std::vector<Animal*> animals;
 
-	// 动物管理
-	void animalManager();
+
 };
 
 #endif

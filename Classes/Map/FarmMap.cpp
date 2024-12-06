@@ -109,8 +109,8 @@ bool FarmMap::init(const std::string& tmxFile) {
 
 bool FarmMap::npcInit(const Vec2& position, Npc* npc)
 {
-    npc->sprite->setPosition(position);
-    this->addChild(npc->sprite, 5);
+    npc->setPosition(position);
+    this->addChild(npc, 5);
 
     return true;
 }

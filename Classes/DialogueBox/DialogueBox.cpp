@@ -4,17 +4,13 @@ USING_NS_CC;
 
 bool DialogueBox::isDialogueVisible = false;
 
-DialogueBox::DialogueBox() {
-    optionButtons.clear();
-}
-
 DialogueBox* DialogueBox::create(Npc* npc) {
     DialogueBox* ret = new DialogueBox();
     if (ret && ret->init(npc)) {
         ret->autorelease();
         return ret;
     }
-    delete ret;
+    CC_SAFE_DELETE(ret);
     return nullptr;
 }
 
@@ -33,7 +29,7 @@ bool DialogueBox::init(Npc* npc) {
     dialogueBackground->setPosition(Vec2(TALKING_BOX_X, TALKING_BOX_Y));  // 设置对话框位置
 
     // 创建并显示NPC的对话内容
-    dialogueLabel = Label::createWithTTF(npc->printDialogue(), "fonts/Marker Felt.ttf", 44);
+    dialogueLabel = Label::createWithTTF(npc->printDialogue(), ResPath::FONT_TTF, 44);
     // 设置文字框
     dialogueLabel->setDimensions(LABEL_WIDTH, LABEL_HEIGHT);
     dialogueLabel->setPosition(Vec2(dialogueBackground->getPositionX() - 240, dialogueBackground->getPositionY()));
@@ -49,6 +45,7 @@ bool DialogueBox::init(Npc* npc) {
     nameLabel = Label::createWithTTF(npc->getNpcName(), ResPath::FONT_TTF, 40);
     nameLabel->setPosition(Vec2(dialogueBackground->getPositionX() + 360, dialogueBackground->getPositionY() - 140));
     nameLabel->setTextColor(Color4B::WHITE);
+
     return true;
 }
 

@@ -48,7 +48,7 @@ bool DateManage::init(const int startYear, const int startDay) {
     currentYear = startYear;
     currentDay = startDay;
 
-    dateLabel = Label::createWithTTF("", ResPath::FONT_TTF, 24);
+    dateLabel = cocos2d::Label::createWithTTF("", ResPath::FONT_TTF, 24);
 
     return true;
 }

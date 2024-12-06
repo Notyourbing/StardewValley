@@ -93,7 +93,7 @@ public:
 };
 
 // Corn类：表示玉米
-class Corn : public Crop {		// 适合种植的季节
+class Corn : public Crop {
 private:
 	std::vector<Season> season;				// 适合种植的季节
 public:
@@ -106,7 +106,7 @@ public:
 };
 
 // Carrot类：表述胡萝卜
-class Carrot : public Crop {	// 适合种植的季节
+class Carrot : public Crop {
 private:
 	std::vector<Season> season;				// 适合种植的季节
 public:

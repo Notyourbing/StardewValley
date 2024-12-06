@@ -16,13 +16,13 @@ public:
 	bool addTool(Tool* tool);
 
 	// 移除工具
-	void removeTool(int index);
+	void removeTool(const int index);
 
 	// 获取某个工具
-	Tool* getTool(int index) const;
+	Tool* getTool(const int index) const;
 
 	// 设置选中的工具
-	void selectTool(int index);
+	void selectTool(const int index);
 
 	// 获取当前选中的工具
 	Tool* getSelectedTool() const;
@@ -53,22 +53,16 @@ private:
 	Bag(const Bag&) = delete;
 	Bag& operator=(const Bag&) = delete;
 
-	// 存储工具的容器
-
-	// 背包放工具的容量
-	static const int capacity = 9;
-
-	// 背包总容量
-	static const int allCapacity = 9;
-
 	// 当前选中的工具索引
 	int selectedIndex;
 
 	// 用于显示背包的矩形框和工具
-	cocos2d::Sprite* bagBackground; // 背景框
+	cocos2d::Sprite* bagBackground;			 // 背景框
 	std::vector<cocos2d::Sprite*> toolIcons; // 工具图标
 
-	static const int iconSize = 54; // 每个图标的宽度/高度
-	static const int spacing = 10; // 图标间距
+	static const int capacity = 9;			// 背包放工具的容量
+	static const int allCapacity = 9;		// 背包总容量
+	static const int iconSize = 54;			// 每个图标的宽度/高度
+	static const int spacing = 10;			// 图标间距
 };
 #endif __BAG_H__

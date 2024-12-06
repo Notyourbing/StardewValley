@@ -28,9 +28,10 @@ int Crop::getMaturedDay() const {
 bool Crop::isMature() const{
 
 	// 已经超过作物成熟所需要的天数以及及时处理
-	if (growedDay >= this->getMaturedDay() && growedDay <= this->maxAliveDay) {
+	if (growedDay >= getMaturedDay() && growedDay <= maxAliveDay) {
 		return true;
 	}
+	return false;
 }
 
 // Crop基类：使用农药
@@ -68,7 +69,7 @@ void Apple::grow() {
 		growedDay += 1;
 	}
 
-	if (growedDay >= 0 && growedDay <= this->getMaturedDay() / 3) {
+	if (growedDay >= 0 && growedDay <= getMaturedDay() / 3) {
 		growthStage = 1;
 		this->updateGID();
 	}

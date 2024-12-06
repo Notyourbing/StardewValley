@@ -7,6 +7,7 @@
 #include "../Tool/WateringCan.h"
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
+#include "../Constant/Constant.h"
 
 USING_NS_CC;
 
@@ -26,7 +27,7 @@ Bag* Bag::getInstance() {
 	return instance;
 }
 
-Bag::Bag(): selectedIndex(0) {}
+Bag::Bag() {}
 
 Bag::~Bag() {
 	if (instance != nullptr) {
@@ -48,7 +49,7 @@ bool Bag::init() {
 	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
 
 
-	bagBackground = Sprite::create("icon/bagBackground.png");
+	bagBackground = Sprite::create(ResPath::BAG_BACKGROUND);
 	if (bagBackground) {
 		bagBackground->setPosition(Vec2(startX + (capacity * (iconSize + spacing)) / 2, startY + iconSize / 2));
 		this->addChild(bagBackground, 0);
@@ -98,7 +99,7 @@ bool Bag::addTool(Tool* tool) {
 	return false;
 }
 
-void Bag::removeTool(int index) {
+void Bag::removeTool(const int index) {
 	if (index >= 0 && index < capacity && tools[index]) {
 		removeChild(tools[index]);
 		tools[index] = nullptr;
@@ -106,14 +107,14 @@ void Bag::removeTool(int index) {
 	}
 }
 
-Tool* Bag::getTool(int index) const {
+Tool* Bag::getTool(const int index) const {
 	if (index >= 0 && index < capacity) {
 		return tools[index];
 	}
 	return nullptr;
 }
 
-void Bag::selectTool(int index) {
+void Bag::selectTool(const int index) {
 	if (index >= 0 && index < capacity && tools[index]) {
 		selectedIndex = index;
 		Player::getInstance()->setCurrentTool(tools[index]);
@@ -159,7 +160,7 @@ void Bag::updateDisplay() {
 	}
 
 	//更新item图标
-	for (int i = 0; i < items.size(); i++) {
+	for (size_t i = 0; i < items.size(); i++) {
 		if (i + tools.size() < capacity) {
 			items[i]->setPosition(Vec2(
 				startX + i * (iconSize + spacing) + iconSize / 2,

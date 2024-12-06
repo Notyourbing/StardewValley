@@ -30,10 +30,9 @@ bool Farm::init() {
 	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
-	// 创建 NPC 示例
-	Npc* wizard = new Npc(WIZARD);
-	Npc* cleaner = new Npc(CLEANER);
-	cleaner->increaseFriendship(90); // 亲密度90
+	Npc* wizard = Npc::create(WIZARD_INFO);
+	Npc* cleaner = Npc::create(CLEANER_INFO);
+
 	npcs.push_back(cleaner);
 	npcs.push_back(wizard);
 	farmMap->npcInit(Vec2(WIZARD_X, WIZARD_Y), wizard);
@@ -103,10 +102,9 @@ void Farm::initMouseListener()
 		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : npcs) {
 				// 计算玩家与NPC的距离
-				const float distance = player->getPosition().distance(npc->sprite->getPosition() + farmMap->getPosition());
-				// 设定一个合适的距离阈值
-				const float interactionRange = 100.0f;  // 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
-				if (distance < interactionRange && DialogueBox::isDialogueVisible == false) {
+				const float distance = player->getPosition().distance(npc->getPosition() + farmMap->getPosition());
+				// 当距离小于交互距离并且此时对话框没有显示
+				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
 					if (!DialogueBox::isDialogueVisible) {
 						DialogueBox* dialogueBox = DialogueBox::create(npc);
 						this->addChild(dialogueBox, 5);
@@ -126,9 +124,4 @@ void Farm::initMouseListener()
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {
 	Director::getInstance()->popScene();
-}
-
-// 动物管理
-void Farm::animalManager() {
-
 }

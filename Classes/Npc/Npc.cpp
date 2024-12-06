@@ -1,29 +1,33 @@
 #include "Npc.h"
 #include <iostream>
-#include <map>
 
-// 构造函数，初始化 NPC 的名字、生日、亲密度、喜欢的礼物、讨厌的礼物、对话
-Npc::Npc(const std::string& name, const std::string& birthday,
-    const std::vector<std::string>& favorateGifts,
-    const std::vector<std::string>& dislikedGifts,
-    const std::vector<std::string>& dialogues,
-    const std::string& imagePath)
-    : name(name), birthday(birthday), friendshipLevel(0), gifts(favorateGifts), dislikes( dislikedGifts), dialogues(dialogues), image(imagePath), playerRelation(RelationshipStatus::None) {
+USING_NS_CC;
+
+// 静态创建函数
+Npc* Npc::create(const NpcInfo& npc_info) {
+    Npc* npc = new (std::nothrow) Npc;
+    if (npc && npc->init(npc_info)) {
+        npc->autorelease();
+        return npc;
+    }
+    CC_SAFE_DELETE(npc);
+    return nullptr;
 }
 
-Npc::Npc(const Npc& other)
-    : name(other.name),
-    birthday(other.birthday),
-    friendshipLevel(other.friendshipLevel),
-    playerRelation(other.playerRelation),
-    gifts(other.gifts), 
-    dislikes(other.dislikes),
-    dialogues(other.dialogues) {
-    // 创建精灵
-    sprite = Sprite::create(other.image);
-}
+bool Npc::init(const NpcInfo& npc_info) {
+    if (!Sprite::initWithFile(npc_info.image)) {
+        return false;
+    }
+    name = npc_info.name;
+    birthday = npc_info.birthdate;
+    friendshipLevel = npc_info.friendshipLevel;
+    gifts = npc_info.gifts;
+    dislikes = npc_info.dislikes;
+    dialogues = npc_info.dialogues;
+    image = npc_info.image;
 
-Npc::Npc(){}
+    return true;
+}
 
 // 获取 NPC 的名字
 std::string Npc::getNpcName() const {
@@ -96,7 +100,7 @@ bool Npc::dislikesGift(const std::string& gift) const {
 }
 
 // 增加 NPC 的亲密度
-void Npc::increaseFriendship(int amount) {
+void Npc::increaseFriendship(const int amount) {
     friendshipLevel += amount;
     if (friendshipLevel > 100) {
         friendshipLevel = 100;
@@ -104,7 +108,7 @@ void Npc::increaseFriendship(int amount) {
 }
 
 // 减少 NPC 的亲密度
-void Npc::decreaseFriendship(int amount) {
+void Npc::decreaseFriendship(const int amount) {
     friendshipLevel -= amount;
     if (friendshipLevel < 0) {
         friendshipLevel = 0;

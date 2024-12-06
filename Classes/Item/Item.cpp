@@ -42,6 +42,7 @@ Item& Item::operator=(const Item& other) {
 void Item::increaseCount() {
     quantity++;
 }
+
 bool Item::isSameItem(const Item& other) const {
     return name == other.name;
 }

@@ -1,7 +1,5 @@
 #ifndef __CONSTANT_H
 #define __CONSTANT_H
-#include "../Npc/Npc.h"
-//#include "../Bag/Bag.h"
 #include "cocos2d.h"
 #include <string>
 #include <unordered_map>
@@ -30,6 +28,7 @@ namespace ResPath {
 	constexpr char DOWN_ARROW[] = "icon/downArrow.png";
 	constexpr char CLOSE_BUTTON_NORMAL[] = "CloseNormal.png";
 	constexpr char CLOSE_BUTTON_HOVER[] = "CloseHover.png";
+	constexpr char BAG_BACKGROUND[] = "icon/bagBackground.png";
 
 	// Axe 动画帧
 	constexpr char AXE_RIGHT_1[] = "tools/axe/rightUseAxe1.png";
@@ -268,7 +267,37 @@ constexpr float MOVE_BY_DISTANCE = 50.0f;			// 翻页按钮移动的像素距离
 constexpr char COOP_TEXT_CONTENT[] = "Connecting to online services...";
 
 // NPC
-constexpr float interactionRange = 100.0f;			// 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
+struct NpcInfo {
+	const std::string name;
+	const std::string birthdate;
+	const int friendshipLevel;
+	const std::vector<std::string> gifts;
+	const std::vector<std::string> dislikes;
+	const std::vector<std::string> dialogues;
+	const std::string image;
+};
+
+const NpcInfo WIZARD_INFO = {
+	"Wizard Yuuu",
+	"Fall 5",
+	90,
+	{ "Magic Essence", "Diamond" },
+	{ "Milk" },
+	{ "Get out of my way.", "It's nice to see you here.", "I like to spend time with you." },
+	"npcImages/wizard.png"
+};
+
+const NpcInfo CLEANER_INFO = {
+	"Cleaner Levi",
+	"Winter 25",
+	10,
+	{ "Milk", "Cleaning tools" },
+	{ "Clay" },
+	{ "...", "Ahh, hi.", "Come and have some black-tea with me." },
+	"npcImages/cleaner.png"
+};
+
+constexpr float INTERACTION_RANGE = 100.0f;			// 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
 constexpr int WIZARD_X = 300;
 constexpr int WIZARD_Y = 300;
 constexpr int CLEANER_X = 500;
@@ -279,16 +308,9 @@ constexpr int TALKING_BOX_X = 640;
 constexpr int TALKING_BOX_Y = 200;
 constexpr int LABEL_WIDTH = 720;
 constexpr int LABEL_HEIGHT = 390;
-const Npc WIZARD("Wizard Yuuu", "Fall 5",
-	{ "Magic Essence", "Diamond" },
-	{ "Milk" },
-	{ "Get out of my way.", "It's nice to see you here.", "I like to spend time with you." },
-	"npcImages/wizard.png");
-const Npc CLEANER("Cleaner Levi", "Winter 25",
-	{ "Milk", "Cleaning tools" },
-	{ "Clay" },
-	{ "...", "Ahh, hi.", "Come and have some black-tea with me." },
-	"npcImages/cleaner.png");
+
+
+// Bag
 
 
 // Crop
