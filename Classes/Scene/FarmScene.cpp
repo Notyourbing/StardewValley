@@ -7,6 +7,8 @@
 
 USING_NS_CC;
 
+std::vector<Npc*> Farm::npcs;
+
 Scene* Farm::createScene() {
 	return Farm::create();
 }
@@ -73,7 +75,7 @@ bool Farm::init() {
 	this->addChild(control, 4);
 
 	 // 初始化鼠标监听器
-	 initMouseListener();
+	 // initMouseListener();
 	 // 创建显示日期的标签
 	 if (dateManage->dateLabel) {
 		 dateManage->dateLabel->setPosition(Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
@@ -81,45 +83,6 @@ bool Farm::init() {
 	 }
 	return true;
 }
-
-void Farm::initMouseListener()
-{
-	// 创建鼠标事件监听器
-	auto listener = EventListenerMouse::create();
-
-	listener->onMouseDown = [this](Event* event) {
-		auto mouseEvent = dynamic_cast<EventMouse*>(event);
-		Player* player = Player::getInstance();
-		FarmMap* farmMap = FarmMap::getInstance();
-		player->stopMoving();
-		farmMap->stopMoving();
-		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-			if (DialogueBox::isDialogueVisible == false) {
-				player->useCurrentTool();
-				farmMap->interactWithFarmMap();
-			}
-		}
-		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
-			for (auto npc : npcs) {
-				// 计算玩家与NPC的距离
-				const float distance = player->getPosition().distance(npc->getPosition() + farmMap->getPosition());
-				// 当距离小于交互距离并且此时对话框没有显示
-				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
-					if (!DialogueBox::isDialogueVisible) {
-						DialogueBox* dialogueBox = DialogueBox::create(npc);
-						this->addChild(dialogueBox, 5);
-						dialogueBox->showInitialDialogue();
-						break;
-					}
-				}
-			}
-		}
-		};
-	
-	// 添加鼠标事件监听器到事件分发器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}
-
 
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {

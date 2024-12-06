@@ -1,14 +1,29 @@
 #include "Item.h"
 
-Item::Item(const std::string& itemName, const std::string& itemImagePath, int itemQuantity)
-    : name(itemName), imagePath(itemImagePath), quantity(itemQuantity) {
-    // 使用图片路径创建精灵
-    if (!this->initWithFile(imagePath)) {
-        CCLOG("Failed to load image: %s", imagePath.c_str());
+// create方法：用于创建并返回初始化的Item对象
+Item* Item::create(const FishInfo& fish_info) {
+    Item* item = new Item();
+    if (item && item->init(fish_info)) {
+        return item;
     }
+    delete item;  // 初始化失败时，删除对象
+    return nullptr;
+}
+
+// init方法：用于初始化Item对象的内部状态
+bool Item::init(const FishInfo& fish_info) {
+    this->name = fish_info.name;
+    this->imagePath = fish_info.image;
+    this->quantity = fish_info.quantity;
+    this->isEdible = fish_info.isEdible;
+
+    // 使用图片路径创建精灵
+    this->initWithFile(imagePath);
 
     // 初始化数量显示（可以使用一个 Label 来显示数量）
     this->updateQuantityDisplay();
+
+    return true;  // 返回true表示初始化成功
 }
 
 void Item::addQuantity(int count) {

@@ -10,7 +10,6 @@ USING_NS_CC;
 
 std::set<cocos2d::EventKeyboard::KeyCode> Control::keysPressed;
 
-
 Control* Control::create() {
 	Control* control = new(std::nothrow) Control();
 	if (control && control->init()) {
@@ -26,6 +25,7 @@ bool Control::init() {
 		return false;
 	}
 	initKeyboardListener();
+	initMouseListener();
 	return true;
 }
 
@@ -81,5 +81,43 @@ void Control::initKeyboardListener() {
 		};
 
 	// 添加监听器到事件分发器
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void Control::initMouseListener()
+{
+	// 创建鼠标事件监听器
+	auto listener = EventListenerMouse::create();
+
+	listener->onMouseDown = [this](Event* event) {
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		Player* player = Player::getInstance();
+		FarmMap* farmMap = FarmMap::getInstance();
+		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+			if (DialogueBox::isDialogueVisible == false) {
+				player->stopMoving();
+				farmMap->stopMoving();
+				player->useCurrentTool();
+				farmMap->interactWithFarmMap();
+			}
+		}
+		else if (static_cast<EventMouse*>(event)->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
+			for (auto npc : Farm::npcs) {
+				// 计算玩家与NPC的距离
+				const float distance = player->getPosition().distance(npc->getPosition() + farmMap->getPosition());
+				// 当距离小于交互距离并且此时对话框没有显示
+				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
+					if (!DialogueBox::isDialogueVisible) {
+						DialogueBox* dialogueBox = DialogueBox::create(npc);
+						this->addChild(dialogueBox, 5);
+						dialogueBox->showInitialDialogue();
+						break;
+					}
+				}
+			}
+		}
+		};
+
+	// 添加鼠标事件监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }

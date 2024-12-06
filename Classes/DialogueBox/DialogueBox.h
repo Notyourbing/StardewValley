@@ -29,9 +29,6 @@ public:
     // 关闭对话框
     void closeDialogue(EventListenerMouse* lastListener);
 
-    // 用于鼠标事件监听
-    void initMouseListener();
-
     // 获取下个节日
     std::string getNextFestival();
 

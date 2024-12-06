@@ -39,7 +39,7 @@ Player::~Player() {
 
 // 初始化
 bool Player::init() {
-    if (!Sprite::initWithFile("playerWalkImages/standDown.png")) {
+    if (!Sprite::initWithFile(ResPath::STAND_DOWN)) {
         return false;
     }
 
@@ -92,7 +92,6 @@ void Player::moveByDirection(const Vec2& direction) {
     if (direction.lengthSquared() == 0) {
         return;
     }
-
     velocity = direction * PLAYER_MOVE_SPEED;
 
     if (direction.x > 0) {
@@ -140,10 +139,10 @@ Vec2 Player::getLastDirection() const {
 // 加载全部站立帧的纹理
 void Player::loadStandFrames() {
     SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();
-    createStandFrame("playerWalkImages/standDown.png", "standDown");
-    createStandFrame("playerWalkImages/standUp.png", "standUp");
-    createStandFrame("playerWalkImages/standLeft.png", "standLeft");
-    createStandFrame("playerWalkImages/standRight.png", "standRight");
+    createStandFrame(ResPath::STAND_DOWN, "standDown");
+    createStandFrame(ResPath::STAND_UP, "standUp");
+    createStandFrame(ResPath::STAND_LEFT, "standLeft");
+    createStandFrame(ResPath::STAND_RIGHT, "standRight");
 
 }
 

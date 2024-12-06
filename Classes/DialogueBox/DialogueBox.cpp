@@ -21,7 +21,7 @@ bool DialogueBox::init(Npc* npc) {
 
     this->npc = npc;
     // 创建对话框背景
-    dialogueBackground = Sprite::create("npcImages/dialogueBox.png");
+    dialogueBackground = Sprite::create(DIALOGUE_BACKGROUND);
     if (!dialogueBackground) {
         return false;
     }
@@ -77,7 +77,6 @@ void DialogueBox::showDialogueOptions(EventListenerMouse* lastListener) {
     auto listener = EventListenerMouse::create();
     // 创建选项按钮
     // 选项文本内容
-    std::vector<std::string> options = { "Relationship between us", "Any tasks?", "Community Celebrations", "I have a gift for you" };
     for (size_t i = 0; i < options.size(); ++i) {
         auto optionButton = ui::Button::create();
         optionButton->setTitleText(options[i]);
@@ -138,21 +137,6 @@ void DialogueBox::closeDialogue(EventListenerMouse* lastListener) {
     this->removeFromParent();  // 移除对话框
 }
 
-void DialogueBox::initMouseListener() {
-    // 创建鼠标事件监听器
-    mouseListener = EventListenerMouse::create();
-    mouseListener->onMouseDown = [this](Event* event) {
-        auto mouseEvent = dynamic_cast<EventMouse*>(event);
-        if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-            // 点击对话框以外的区域关闭对话框
-            if (!this->getBoundingBox().containsPoint(mouseEvent->getLocation())) {
-                closeDialogue(mouseListener);
-            }
-        }
-        };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
-}
-
 // 获取节日
 std::string DialogueBox::getNextFestival() {
 
@@ -163,13 +147,13 @@ std::string DialogueBox::getNextFestival() {
     if (dateManager->isFestivalDay()) {
         int dayInSeason = dateManager->getCurrentDayInSeason();
         if (dateManager->getCurrentSeason() == "Spring" && dayInSeason == 7)
-            res += "Celebrate the arrival of Spring with games, food, and fun!\n";
+            res += SPRING_CONVERSATION;
         else if (dateManager->getCurrentSeason() == "Summer" && dayInSeason == 15)
-            res += "The hot days of Summer are here! Time for the beach!\n";
+            res += SUMMER_CONVERSATION;
         else if (dateManager->getCurrentSeason() == "Fall" && dayInSeason == 5)
-            res += "Let's picking up the falling leaves!\n";
+            res += FALL_CONVERSATION;
         else if (dateManager->getCurrentSeason() == "Winter" && dayInSeason == 25)
-            res += "Merry Christmas and Happy Birthday to levi!\n";
+            res += WINTER_CONVERSATION;
     }
 
     FarmMap* farmMap = FarmMap::getInstance();

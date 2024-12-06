@@ -39,6 +39,9 @@ public:
 	// 瓦片地图对象
 	cocos2d::TMXTiledMap* map;
 	
+	//获取当前位置地图的类
+	TileNode* getTileNode(int x, int y);
+
 private:
 
 	// 构造函数和析构函数私有化

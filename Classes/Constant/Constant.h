@@ -2,6 +2,7 @@
 #define __CONSTANT_H
 #include "cocos2d.h"
 #include <string>
+#include <array>
 #include <unordered_map>
 
 // ×ÊÔ´Â·¾¶
@@ -266,6 +267,14 @@ constexpr float DOWN_BUTTON_OFFSET_Y = -50.0f;		// ÏòÏÂ¼ýÍ·°´Å¥YÖáÆ«ÒÆ
 constexpr float MOVE_BY_DISTANCE = 50.0f;			// ·­Ò³°´Å¥ÒÆ¶¯µÄÏñËØ¾àÀë
 constexpr char COOP_TEXT_CONTENT[] = "Connecting to online services...";
 
+//¶Ô»°¿ò
+constexpr char DIALOGUE_BACKGROUND[] = "npcImages/dialogueBox.png";
+constexpr std::array<const char*, 4> options = {
+	"Relationship between us",
+	"Any tasks?",
+	"Community Celebrations",
+	"I have a gift for you"
+};
 // NPC
 struct NpcInfo {
 	const std::string name;
@@ -309,7 +318,6 @@ constexpr int TALKING_BOX_Y = 200;
 constexpr int LABEL_WIDTH = 720;
 constexpr int LABEL_HEIGHT = 390;
 
-
 // Bag
 
 
@@ -325,7 +333,10 @@ const std::string SEASONNAME[] = { "Spring", "Summer", "Fall", "Winter" };  // ¼
 constexpr int DAYSINSEASON = 28;											// Ã¿¸ö¼¾½ÚµÄÌìÊý
 constexpr int DAYSINYEAR = 112;												// Ã¿ÄêµÄÌìÊý£¨Ò»Äê4¼¾£¬Ã¿¼¾28Ìì£©
 constexpr int DAYSINWEEK = 7;												// Ã¿ÖÜµÄÌìÊý
-
+constexpr char SPRING_CONVERSATION[] = "Celebrate the arrival of Spring with games, food, and fun!\n";
+constexpr char SUMMER_CONVERSATION[] = "The hot days of Summer are here! Time for the beach!\n";
+constexpr char FALL_CONVERSATION[] = "Let's picking up the falling leaves!\n";
+constexpr char WINTER_CONVERSATION[] = "Merry Christmas and Happy Birthday to levi!\n";
 
 // TileNode
 constexpr int SOIL_GID = 36;
@@ -333,5 +344,35 @@ constexpr int HOED_SOIL_GID = 96;
 constexpr int WATER_SOIL_GID = 64;
 constexpr int WATER_GID = 17;
 constexpr int STONE_GID = 22;
+
+// fish
+struct FishInfo {
+	const char* name;             // ÓãµÄÃû³Æ
+	const char* image;            // ÓãµÄÍ¼Æ¬Â·¾¶
+	const int quantity;             // ÊýÁ¿
+	const bool isEdible;                // ÊÇ·ñ¿ÉÊ³ÓÃ
+};
+
+// Ê¾ÀýÓãÀàÊý¾Ý
+constexpr FishInfo PUFFER_FISH = {
+	"Puffer Fish",               // ÓãµÄÃû³Æ
+	"items/pufferFish.png",      // Í¼Æ¬Â·¾¶
+	1,
+	true                         // ¿ÉÊ³ÓÃ
+};
+
+constexpr FishInfo TUNA = {
+	"Tuna",                      // ÓãµÄÃû³Æ
+	"items/tuna.png",            // Í¼Æ¬Â·¾¶
+	1,
+	true                         // ¿ÉÊ³ÓÃ
+};
+
+constexpr FishInfo ANCHOVY = {
+	"Anchovy",                   // ÓãµÄÃû³Æ
+	"items/anchovy.png",         // Í¼Æ¬Â·¾¶
+	1,
+	true                         // ¿ÉÊ³ÓÃ
+};
 
 #endif __CONSTANT_H

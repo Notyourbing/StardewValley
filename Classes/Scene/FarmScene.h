@@ -19,14 +19,11 @@ public:
 	CREATE_FUNC(Farm);
 
 	//该地图上所有npc
-	std::vector<Npc*> npcs;
+	static std::vector<Npc*> npcs;
 
 private:
 
 	void closeButtonClicked(Ref* pSender);
-
-	// 初始化鼠标监听器(使用工具和打开对话框)
-	void initMouseListener();
 
 	// 存储农场中的动物
 	std::vector<Animal*> animals;
