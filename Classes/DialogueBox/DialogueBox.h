@@ -35,8 +35,6 @@ public:
     static bool isDialogueVisible;  // 对话框是否显示
 
 private:
-    // 单例实例
-    static DialogueBox* instance;
     Npc* npc;                                           // 当前与之对话的 NPC
     cocos2d::Label* dialogueLabel;                      //对话内容
     cocos2d::Label* nameLabel;                          //npc名字

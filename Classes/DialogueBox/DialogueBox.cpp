@@ -125,7 +125,7 @@ void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
     auto listener = EventListenerMouse::create();
     listener->onMouseDown = [=](Event* event) {
         auto mouseEvent = dynamic_cast<EventMouse*>(event);
-        if (isDialogueVisible && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
+        if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
             closeDialogue(listener);
         };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
