@@ -104,7 +104,6 @@ bool FarmMap::init(const std::string& tmxFile) {
             setPosition(position);
             }, "farm_map");
     }
-
     return true;
 }
 
