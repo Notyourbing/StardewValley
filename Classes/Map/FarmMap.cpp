@@ -149,7 +149,7 @@ bool FarmMap::isCollidable(const Vec2& position) const {
 
     // 碰撞检测
     TileType tileType = mapTileNode[x][y]->getTileType();
-    if (tileType == TileType::STONE || tileType == TileType::OBSTACLE || tileType == TileType::WATER||tileType == TileType::MOLD) {
+    if (tileType == TileType::Stone || tileType == TileType::Obstacle || tileType == TileType::Water||tileType == TileType::Mold) {
         return true;
     }
     else {
@@ -159,9 +159,10 @@ bool FarmMap::isCollidable(const Vec2& position) const {
 
 // 玩家与农场的接口
 void FarmMap::interactWithFarmMap() {
-    // 获取玩家以及地图实例
+    // 获取玩家、地图、背包实例
     Player* player = Player::getInstance();
     FarmMap* farmMap = FarmMap::getInstance();
+    Bag* bag = Bag::getInstance();
 
     // 获取要交互的土块位置
     Vec2 playerPosition = player->getPosition();
@@ -193,6 +194,27 @@ void FarmMap::interactWithFarmMap() {
     std::string currentTool = player->getCurrentToolName();
 
     // 与地图块的交互
+    if (currentTool == "pickaxe" && mapTileNode[x][y]->getTileType() == TileType::Stone) {      // 当前是石头层
+        dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();                                   // 敲击一次石头
+        if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken() == true) {                      // 判断石头是否击碎
+            delete mapTileNode[x][y];
+            mapTileNode[x][y] = nullptr;
+            mapTileNode[x][y] = new Soil(Vec2(x, y)); 
+            stoneLayer->setTileGID(0, Vec2(x, y));
+            soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
+        }
+    }
+    else if (currentTool == "wateringcan" && mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
+        int wateringCanIndex = bag->getToolIndex("wateringcan");
+        int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->tools[wateringCanIndex])->getCurrentWaterLevel();
+        if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
+
+        }
+    }
+
+
+
+    // 与地图块的交互
     mapTileNode[x][y]->interact(currentTool);
 
     // 更新图块
@@ -201,4 +223,19 @@ void FarmMap::interactWithFarmMap() {
 
 void FarmMap::stopMoving() {
     velocity = Vec2::ZERO;
+}
+
+// 地图随时间的更新
+void FarmMap::farmMapUpdateByTime() {
+    
+    // 先完成作物随着时间的增长
+    for (int x = 0; x < FARMMAP_WIDTH; x++) {
+        for (int y = 0; y < FARMMAP_HEIGHT; y++) {
+            if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
+                mapTileNode[x][y]->updateByTime();
+                soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(),Vec2(x,y));
+                //CCLOG("%d", mapTileNode[x][y]->getCurrentGID());
+            }
+        }
+    }
 }

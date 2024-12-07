@@ -338,12 +338,21 @@ constexpr char SUMMER_CONVERSATION[] = "The hot days of Summer are here! Time fo
 constexpr char FALL_CONVERSATION[] = "Let's picking up the falling leaves!\n";
 constexpr char WINTER_CONVERSATION[] = "Merry Christmas and Happy Birthday to levi!\n";
 
+// FarmMap
+constexpr int FARMMAP_WIDTH = 31;
+constexpr int FARMMAP_HEIGHT = 17;
+
 // TileNode
 constexpr int SOIL_GID = 36;
 constexpr int HOED_SOIL_GID = 96;
 constexpr int WATER_SOIL_GID = 64;
 constexpr int WATER_GID = 17;
 constexpr int STONE_GID = 22;
+constexpr int MAX_WATER_RESOURCE = 1000;
+
+// TOOL
+constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量
+constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 
 // fish
 struct FishInfo {

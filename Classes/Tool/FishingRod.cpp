@@ -60,7 +60,7 @@ void FishingRod::useTool()
 
     TileNode* tileNode = farmMap->getTileNode(x, y);
 
-    if (tileNode->getTileType() != TileType::WATER)
+    if (tileNode->getTileType() != TileType::Water)
         return;
 
     // ´´½¨¶¯»­Ö¡

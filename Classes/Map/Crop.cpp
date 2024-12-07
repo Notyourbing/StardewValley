@@ -5,7 +5,7 @@ Crop::Crop(const CropType& cropType, const int& maxGrowthDay, const int& cropGID
 	cropType(cropType), maxGrowthDay(maxGrowthDay), growthStage(0),
 	isInfested(false), isDrought(false), isFertilized(false),
 	cropGID(cropGID), position(position), infestedDay(0), 
-	droughtDay(0) {}
+	droughtDay(0),growedDay(0) {}
 
 // Crop基类：浇水
 void Crop::irrigate() {
@@ -47,10 +47,7 @@ int Crop::getCurrentGID() {
 
 // Apple子类：构造函数
 Apple::Apple(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 28, 34, position) {
-	season.push_back(Season::SPRING);
-	season.push_back(Season::SUMMER);
-	season.push_back(Season::AUTUMN);
+	Crop(CropType::Apple, 28, 34, position) {
 }
 
 // Apple子类：生长函数
@@ -90,14 +87,18 @@ void Apple::updateGID() {
 
 // Corn子类：构造函数
 Corn::Corn(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 36, 34, position) {
-	season.push_back(Season::SPRING);
-	season.push_back(Season::SUMMER);
+	Crop(CropType::Apple, 36, 34, position) {
 }
 
 // Carrot子类：构造函数
 Carrot::Carrot(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 40, 34, position) {
-	season.push_back(Season::SPRING);
+	Crop(CropType::Apple, 40, 34, position) {
 }
 
+// Carrot子类：生长函数
+void Carrot::grow() {
+	growedDay++;
+	if (growedDay >= 10) {
+		cropGID = 33;
+	}
+}

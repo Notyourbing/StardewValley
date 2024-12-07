@@ -1,5 +1,5 @@
 #include "TileNode.h"
-
+#include <algorithm>
 
 // TileNode基类：构造函数
 TileNode::TileNode(const cocos2d::Vec2& position, const TileType& tileType, const int& currentGID) :
@@ -30,7 +30,7 @@ void TileNode::updateGID() {
 
 // Grass类：构造函数
 Grass::Grass(const cocos2d::Vec2& position,const int& GID) :
-	TileNode(position, TileType::GRASS, GID) {
+	TileNode(position, TileType::Grass, GID) {
 
 }
 
@@ -41,7 +41,7 @@ void Grass::interact(const std::string& toolName) {
 
 // Soil类：构造函数
 Soil::Soil(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::SOIL, HOED_SOIL_GID), crop(nullptr),
+	TileNode(position, TileType::Soil, SOIL_GID), crop(nullptr),
 	isWatered(false), isFertilized(false), isHoed(false),
 	waterLevel(0), fertilizeLevel(0)
 {}
@@ -132,18 +132,65 @@ void Soil::interact(const std::string& toolName) {
 	else if (toolName == "seed") {				// 如果是种子，那么进行种植
 		plantCrop("carrot");
 	}
-	this->updateGID();
+	updateGID();
+}
+
+// 土壤类随时间变化的更新函数
+void Soil::updateByTime() {
+	if (crop == nullptr) {
+		return;
+	}
+	else {
+		crop->grow();
+		updateGID();
+	}
 }
 
 // Water类：构造函数
 Water::Water(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::WATER, WATER_GID){}
+	TileNode(position, TileType::Water, WATER_GID){}
 
-// Water类：交互函数
-void Water::interact(const std::string& toolName) {
-
+// Water类：判断水资源
+bool Water::isWaterDepleted() const {
+	return waterResource == 0;
 }
+
+// Water类：抽水
+void Water::pumpWater(int water) {
+	waterResource -= water;
+}
+
+// Water类：下雨补充水资源
+void Water::rechargeWaterResource() {
+	waterResource = (waterResource+200)<MAX_WATER_RESOURCE ? waterResource+200:MAX_WATER_RESOURCE;
+}
+
+// Water类：获得当前水资源
+int Water::getCurrentWaterResource() const {
+	return waterResource;
+}
+
+// Obstacle类：构造函数
+Obstacle::Obstacle(const cocos2d::Vec2& position) :
+	TileNode(position, TileType::Obstacle, 100)
+{}
 
 // Stone类：构造函数
 Stone::Stone(const cocos2d::Vec2& position) :
-	TileNode(position, TileType::STONE, STONE_GID) {}
+	TileNode(position, TileType::Stone, STONE_GID),stoneSolidity(3)
+{}
+
+// Stone类：敲击石头
+void Stone::knockRock() {
+	stoneSolidity--;
+}
+
+// Stone类：判断是否击碎
+bool Stone::isBroken() const{
+	return stoneSolidity == 0;
+}
+
+// Mold类：构造函数
+Mold::Mold(const cocos2d::Vec2& position) :
+	TileNode(position, TileType::Mold, 200)
+{}

@@ -7,17 +7,17 @@
 
 // 作物的种类
 enum class CropType {
-	APPLE,
-	CORN,
-	CARROT,
+	Apple,
+	Corn,
+	Carrot,
 };
 
 // 季节
 enum class Season {
-	SPRING,
-	SUMMER,
-	AUTUMN,
-	WINTER,
+	Sring,
+	Summer,
+	Autumn,
+	Winter,
 };
 
 // 作物的基类
@@ -26,7 +26,6 @@ private:
 	int maxGrowthDay;		// 最长的成熟天数
 
 protected:
-	int currentGID;			// 作物当前的GID值
 	CropType cropType;		// 作物的种类
 	int growedDay;			// 已经成长的天数
 	int growthStage;		// 当前的成长阶段
@@ -116,6 +115,9 @@ public:
 
 	// 更新图块的重写
 	void updateGID() override {};
+
+	// 胡萝卜生长函数的重写
+	void grow() override;
 };
 
 #endif

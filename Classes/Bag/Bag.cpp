@@ -195,3 +195,13 @@ const std::vector<Item*>& Bag::getItems() const
 {
 	return items;
 }
+
+// 获取工具的索引
+int Bag::getToolIndex(std::string toolName) {
+	// 遍历存储工具的位置
+	for (int i = 0; i < static_cast<int>(tools.size()); i++) {
+		if (tools[i]->getToolName() == toolName) {
+			return i;
+		}
+	}
+}
