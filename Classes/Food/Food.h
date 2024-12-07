@@ -1,21 +1,20 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef __FOOD_H_
+#define __FOOD_H_
 
 #include "cocos2d.h"
 #include "../Constant/Constant.h"
 
-class Item : public cocos2d::Sprite {
+class Food : public cocos2d::Sprite {
 public:
     const char* name;         // 物品的名称
     const char* imagePath;    // 物品的图标路径
     int quantity;             // 物品的数量
-    bool isEdible;                // 是否可食用
 
     // 默认构造函数
-    Item()
-        : name(nullptr), imagePath(nullptr), quantity(0), isEdible(false) {}
+    Food()
+        : name(nullptr), imagePath(nullptr), quantity(0) {}
 
-    static Item* create(const FishInfo& fish_info);
+    static Food* create(const FishInfo& fish_info);
 
     // 初始化方法
     bool init(const FishInfo& fish_info);
@@ -26,11 +25,11 @@ public:
     // 设置物品数量显示
     void updateQuantityDisplay();
 
-    Item(const Item& other);
+    Food(const Food& other);
 
-    Item& operator=(const Item& other);
+    Food& operator=(const Food& other);
     void increaseCount();
-    bool isSameItem(const Item& other) const;
+    bool isSameItem(const Food& other) const;
 };
 
 #endif // ITEM_H

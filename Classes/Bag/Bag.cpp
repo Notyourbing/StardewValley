@@ -159,39 +159,39 @@ void Bag::updateDisplay() {
 			}
 	}
 
-	//更新item图标
-	for (size_t i = 0; i < items.size(); i++) {
-		if (i + tools.size() < capacity) {
-			items[i]->setPosition(Vec2(
-				startX + i * (iconSize + spacing) + iconSize / 2,
-				startY + iconSize / 2
-			));
-		}
-	}
+	////更新food图标
+	//for (size_t i = 0; i < items.size(); i++) {
+	//	if (i + tools.size() < capacity) {
+	//		items[i]->setPosition(Vec2(
+	//			startX + i * (iconSize + spacing) + iconSize / 2,
+	//			startY + iconSize / 2
+	//		));
+	//	}
+	//}
 }
 
-bool Bag::addItem(Item* item) {
-	// 判断背包中是否已经存在相同的物品
-	for (auto& existingItem : items) {
-		if (existingItem->isSameItem(*item)) {
-			// 如果物品存在，增加数量
-			existingItem->increaseCount();
-			updateDisplay();  // 更新显示
-			return true;
-		}
-	}
+//bool Bag::addItem(Food* food) {
+//	// 判断背包中是否已经存在相同的物品
+//	for (auto& existingItem : items) {
+//		if (existingItem->isSameItem(*food)) {
+//			// 如果物品存在，增加数量
+//			existingItem->increaseCount();
+//			updateDisplay();  // 更新显示
+//			return true;
+//		}
+//	}
+//
+//	// 如果没有找到相同的物品，添加新的物品
+//	if (tools.size() + items.size() < capacity) {
+//		items.push_back(food);  // 添加新物品
+//		addChild(food);         // 将物品添加到场景中
+//		updateDisplay();        // 更新显示
+//		return true;
+//	}
+//	return false;
+//}
 
-	// 如果没有找到相同的物品，添加新的物品
-	if (tools.size() + items.size() < capacity) {
-		items.push_back(item);  // 添加新物品
-		addChild(item);         // 将物品添加到场景中
-		updateDisplay();        // 更新显示
-		return true;
-	}
-	return false;
-}
-
-const std::vector<Item*>& Bag::getItems() const
-{
-	return items;
-}
+//const std::vector<Food*>& Bag::getItems() const
+//{
+//	return items;
+//}

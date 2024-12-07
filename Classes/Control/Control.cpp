@@ -112,7 +112,6 @@ void Control::initMouseListener()
 						DialogueBox* dialogueBox = DialogueBox::create(npc);
 						this->addChild(dialogueBox, 5);
 						dialogueBox->showInitialDialogue();
-						// DialogueBox::isDialogueVisible = false;
 						break;
 					}
 				}

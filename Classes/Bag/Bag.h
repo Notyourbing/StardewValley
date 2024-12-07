@@ -2,7 +2,7 @@
 #define __BAG_H__
 #include "cocos2d.h"
 #include "../Tool/Tool.h"
-#include "../Item/Item.h"
+#include "../Food/Food.h"
 
 class Bag : public cocos2d::Node {
 public:
@@ -14,7 +14,7 @@ public:
 
 	// 添加工具到背包
 	bool addTool(Tool* tool);
-
+		
 	// 移除工具
 	void removeTool(const int index);
 
@@ -33,17 +33,17 @@ public:
 	// 当前所拥有的工具
 	std::vector<Tool*> tools;
 
-	//向背包中加入物品
-	bool addItem(Item* item);
+	////向背包中加入食物
+	//bool addItem(Food* food);
 
-	// 获取背包中的物品
-	const std::vector<Item*>& getItems() const;
+	//// 获取背包中的食物
+	//const std::vector<Food*>& getItems() const;
 
 private:
 	// 单例实例
 	static Bag* instance;
 
-	std::vector<Item*> items;        // 背包中的物品
+	//std::vector<Food*> items;        // 背包中的食物
 
 	// 私有构造函数，防止多次实例化，确保唯一性
 	Bag();

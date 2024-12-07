@@ -350,7 +350,6 @@ struct FishInfo {
 	const char* name;             // 鱼的名称
 	const char* image;            // 鱼的图片路径
 	const int quantity;             // 数量
-	const bool isEdible;                // 是否可食用
 };
 
 // 示例鱼类数据
@@ -358,21 +357,18 @@ constexpr FishInfo PUFFER_FISH = {
 	"Puffer Fish",               // 鱼的名称
 	"items/pufferFish.png",      // 图片路径
 	1,
-	true                         // 可食用
 };
 
 constexpr FishInfo TUNA = {
 	"Tuna",                      // 鱼的名称
 	"items/tuna.png",            // 图片路径
 	1,
-	true                         // 可食用
 };
 
 constexpr FishInfo ANCHOVY = {
 	"Anchovy",                   // 鱼的名称
 	"items/anchovy.png",         // 图片路径
 	1,
-	true                         // 可食用
 };
 
 #endif __CONSTANT_H

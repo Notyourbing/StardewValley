@@ -192,20 +192,19 @@ void FishingRod::reelInRod()
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            Item* pufferFish = Item::create(PUFFER_FISH);
-            Item* tuna = Item::create(TUNA);
-            Item* anchovy = Item::create(ANCHOVY);
+            Food* pufferFish = Food::create(PUFFER_FISH);
+            Food* tuna = Food::create(TUNA);
+            Food* anchovy = Food::create(ANCHOVY);
             // 定义鱼类的列表
-            std::vector<Item*> fishList = {
+            std::vector<Food*> fishList = {
                 pufferFish,
                 tuna,
                 anchovy
             };
             int randomIndex = rand() % fishList.size();  // 随机索引
-            Item* fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
+            Food* fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
 
             Bag* bag = Bag::getInstance();
-            bag->addItem(fishCaught);
             // 在玩家上方显示钓到的鱼的提示
             auto label = Label::createWithTTF(std::string(fishCaught->name) + " Caught!", "fonts/Marker Felt.ttf", 24);
             label->setPosition(player->getPosition() + Vec2(0, 100));  // 显示在玩家上方
