@@ -41,7 +41,7 @@ bool Bag::init() {
 	}
 
 	// 初始化工具
-	tools.resize(capacity, nullptr);
+	items.resize(capacity, nullptr);
 	selectedIndex = 0;
 
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -61,37 +61,37 @@ bool Bag::init() {
 		auto icon = Sprite::create(); // 空白图标
 		icon->setVisible(false);
 		addChild(icon);
-		toolIcons.push_back(icon);
+		itemIcons.push_back(icon);
 	}
 
 	// 更新显示
 	updateDisplay();
 
 	Tool* axe = Axe::create();
-	addTool(axe);
+	addItem(axe);
 	Tool* pickaxe = Pickaxe::create();
-	addTool(pickaxe);
+	addItem(pickaxe);
 	Tool* hoe = Hoe::create();
-	addTool(hoe);
+	addItem(hoe);
 	Tool* fisingRod = FishingRod::create();
-	addTool(fisingRod);
+	addItem(fisingRod);
 	Tool* scythe = Scythe::create();
-	addTool(scythe);
+	addItem(scythe);
 	Tool* kettle = Kettle::create();
-	addTool(kettle);
+	addItem(kettle);
 	Tool* seed = Seed::create();
-	addTool(seed);
-	selectTool(0);
+	addItem(seed);
+	selectItem(0);
 
 	return true;
 }
 
-bool Bag::addTool(Tool* tool) {
+bool Bag::addItem(Item* item) {
 	// 检查是否有空位
 	for (int i = 0; i < capacity; ++i) {
-		if (tools[i] == nullptr) {
-			tools[i] = tool;
-			addChild(tool);
+		if (items[i] == nullptr) {
+			items[i] = item;
+			addChild(item);
 			updateDisplay();
 			return true;
 		}
@@ -99,32 +99,32 @@ bool Bag::addTool(Tool* tool) {
 	return false;
 }
 
-void Bag::removeTool(const int index) {
-	if (index >= 0 && index < capacity && tools[index]) {
-		removeChild(tools[index]);
-		tools[index] = nullptr;
+void Bag::removeItem(const int index) {
+	if (index >= 0 && index < capacity && items[index]) {
+		removeChild(items[index]);
+		items[index] = nullptr;
 		updateDisplay();
 	}
 }
 
-Tool* Bag::getTool(const int index) const {
+Item* Bag::getItem(const int index) const {
 	if (index >= 0 && index < capacity) {
-		return tools[index];
+		return items[index];
 	}
 	return nullptr;
 }
 
-void Bag::selectTool(const int index) {
-	if (index >= 0 && index < capacity && tools[index]) {
+void Bag::selectItem(const int index) {
+	if (index >= 0 && index < capacity && items[index]) {
 		selectedIndex = index;
-		Player::getInstance()->setCurrentTool(tools[index]);
+		Player::getInstance()->setCurrentItem(items[index]);
 	}
 	updateDisplay();
 }
 
-Tool* Bag::getSelectedTool() const {
-	if (selectedIndex >= 0 && selectedIndex < capacity && tools[selectedIndex]) {
-		return tools[selectedIndex];
+Item* Bag::getSelectedItem() const {
+	if (selectedIndex >= 0 && selectedIndex < capacity && items[selectedIndex]) {
+		return items[selectedIndex];
 	}
 	return nullptr;
 }
@@ -136,62 +136,26 @@ void Bag::updateDisplay() {
 
 	// 更新工具图标
 	for (int i = 0; i < capacity; ++i) {
-		auto icon = toolIcons[i];
-		if (tools[i]) {
-			icon->setTexture("tools/" + tools[i]->getToolName() + ".png");
+		auto icon = itemIcons[i];
+		if (items[i]) {
+			icon->setTexture("tools/" + items[i]->getItemName() + ".png");
 			icon->setVisible(true);
 		}
 		else
 			icon->setVisible(false);
 
-			// 设置位置
-			icon->setPosition(Vec2(
-				startX + i * (iconSize + spacing) + iconSize / 2,
-				startY + iconSize / 2
-			));
+		// 设置位置
+		icon->setPosition(Vec2(
+			startX + i * (iconSize + spacing) + iconSize / 2,
+			startY + iconSize / 2
+		));
 
-			// 如果是选中工具,添加高亮
-			if (i == selectedIndex) {
-				icon->setColor(Color3B::YELLOW);
-			}
-			else {
-				icon->setColor(Color3B::WHITE);
-			}
+		// 如果是选中工具,添加高亮
+		if (i == selectedIndex) {
+			icon->setColor(Color3B::YELLOW);
+		}
+		else {
+			icon->setColor(Color3B::WHITE);
+		}
 	}
-
-	////更新food图标
-	//for (size_t i = 0; i < items.size(); i++) {
-	//	if (i + tools.size() < capacity) {
-	//		items[i]->setPosition(Vec2(
-	//			startX + i * (iconSize + spacing) + iconSize / 2,
-	//			startY + iconSize / 2
-	//		));
-	//	}
-	//}
 }
-
-//bool Bag::addItem(Food* food) {
-//	// 判断背包中是否已经存在相同的物品
-//	for (auto& existingItem : items) {
-//		if (existingItem->isSameItem(*food)) {
-//			// 如果物品存在，增加数量
-//			existingItem->increaseCount();
-//			updateDisplay();  // 更新显示
-//			return true;
-//		}
-//	}
-//
-//	// 如果没有找到相同的物品，添加新的物品
-//	if (tools.size() + items.size() < capacity) {
-//		items.push_back(food);  // 添加新物品
-//		addChild(food);         // 将物品添加到场景中
-//		updateDisplay();        // 更新显示
-//		return true;
-//	}
-//	return false;
-//}
-
-//const std::vector<Food*>& Bag::getItems() const
-//{
-//	return items;
-//}

@@ -10,10 +10,10 @@ public:
 	static Axe* create();
 
 	// 初始化斧头
-	bool init();
+	bool init() override;
 
 	// 使用工具
-	void useTool() override;
+	void useItem() override;
 };
 
 #endif

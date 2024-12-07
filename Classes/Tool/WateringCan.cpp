@@ -25,6 +25,6 @@ Kettle::Kettle() {
 }
 
 // 使用工具
-void Kettle::useTool() {
+void Kettle::useItem() {
 
 }

@@ -15,7 +15,7 @@ public:
 	bool init();
 
 	// 使用工具
-	void useTool() override;
+	void useItem() override;
 };
 
 #endif

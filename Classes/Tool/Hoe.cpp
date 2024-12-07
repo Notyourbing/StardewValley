@@ -19,7 +19,7 @@ bool Hoe::init() {
 	return Tool::init("hoe");
 }
 
-void Hoe::useTool() {
+void Hoe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
 

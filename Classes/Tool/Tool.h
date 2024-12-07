@@ -1,30 +1,19 @@
 #ifndef __TOOL_H__
 #define __TOOL_H__
-
+#include "../Item/Item.h"
 #include "cocos2d.h"
-#include "../Map/FarmMap.h"
 #include <string>
 
 // 工具类
-class Tool : public cocos2d::Sprite {
+class Tool : public Item {
 public:
-	// 静态创建方法
-	static Tool* create(const std::string& name);
-
 	// 初始化
-	virtual bool init(const std::string& name);
+	virtual bool init(const std::string& name) override;
 
 	// 使用工具
-	virtual void useTool();
+	// virtual void useItem() override;
 
-	// 获取工具名称
-	std::string getToolName() {
-		return toolName;
-	}
-
-protected:
-	// 工具名称
-	std::string toolName;
+	virtual ~Tool() {}
 };
 
 #endif

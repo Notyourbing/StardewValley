@@ -29,7 +29,7 @@ bool FishingRod::init()
     return Tool::init("fishingRod");
 }
 
-void FishingRod::useTool()
+void FishingRod::useItem()
 {
     // 获取玩家以及地图实例
     Player* player = Player::getInstance();

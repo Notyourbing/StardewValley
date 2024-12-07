@@ -190,7 +190,7 @@ void FarmMap::interactWithFarmMap() {
     Vec2 interactPosition = Vec2(x, y);
 
     // 获得当前人物所使用的工具
-    std::string currentTool = player->getCurrentToolName();
+    std::string currentTool = player->getCurrentItemName();
 
     // 与地图块的交互
     mapTileNode[x][y]->interact(currentTool);
