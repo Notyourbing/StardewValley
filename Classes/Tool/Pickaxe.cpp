@@ -19,7 +19,7 @@ bool Pickaxe::init() {
 	return Tool::init("pickaxe");
 }
 
-void Pickaxe::useTool() {
+void Pickaxe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
     // 创建动画帧

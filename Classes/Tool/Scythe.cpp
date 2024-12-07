@@ -19,7 +19,7 @@ bool Scythe::init() {
     return Tool::init("scythe");
 }
 
-void Scythe::useTool() {
+void Scythe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
     // 创建动画帧

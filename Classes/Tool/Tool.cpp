@@ -1,25 +1,16 @@
 #include "Tool.h"
+#include "../Map/FarmMap.h"
 
 
 USING_NS_CC;
 
-Tool* Tool::create(const std::string& name) {
-	Tool* tool = new (std::nothrow) Tool();
-	if (tool && tool->init(name)) {
-		tool->autorelease();
-		return tool;
-	}
-	CC_SAFE_DELETE(tool);
-	return nullptr;
-}
-
-void Tool::useTool() {}
 
 bool Tool::init(const std::string& name) {
-	toolName = name;
-	if (!Sprite::initWithFile("tools/" + toolName + ".png")) {
-		return false;
-	}
-	this->setVisible(false);
-	return true;
+	itemName = name;
+	return Sprite::initWithFile("tools/" + name + ".png");
 }
+
+
+//void Tool::useItem() {
+//	
+//}

@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\DateManage\DateManage.cpp" />
     <ClCompile Include="..\Classes\DialogueBox\DialogueBox.cpp" />
     <ClCompile Include="..\Classes\Festival\Festival.cpp" />
+    <ClCompile Include="..\Classes\Food\Food.cpp" />
     <ClCompile Include="..\Classes\Item\Item.cpp" />
     <ClCompile Include="..\Classes\Map\Animal.cpp" />
     <ClCompile Include="..\Classes\Map\Crop.cpp" />
@@ -202,6 +203,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\DateManage\DateManage.h" />
     <ClInclude Include="..\Classes\DialogueBox\DialogueBox.h" />
     <ClInclude Include="..\Classes\Festival\Festival.h" />
+    <ClInclude Include="..\Classes\Food\Food.h" />
     <ClInclude Include="..\Classes\Item\Item.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\Crop.h" />

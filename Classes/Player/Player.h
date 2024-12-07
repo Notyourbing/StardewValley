@@ -32,20 +32,20 @@ public:
 	// 获取人物最后朝向
 	cocos2d::Vec2 getLastDirection() const;
 
-	// 设置当前工具
-	void setCurrentTool(Tool* tool);
+	// 设置当前物品
+	void setCurrentItem(Item* item);
 
-	// 使用当前工具
-	void useCurrentTool();
+	// 使用当前物品
+	void useCurrentItem();
 
 	// 获取人当前的速度
 	cocos2d::Vec2 getVelocity() {
 		return velocity;
 	}
 
-	// 获得当前工具名称
-	std::string getCurrentToolName() const {
-		return currentTool->getToolName();
+	// 获得当前物品名称
+	std::string getCurrentItemName() const {
+		return currentItem->getItemName();
 	}
 
 	// 设置站立动作
@@ -67,8 +67,8 @@ private:
 	// 玩家的最后的朝向
 	Vec2 lastDirection;
 	
-	// 当前工具
-	Tool* currentTool;
+	// 当前物品
+	Item* currentItem;
 
 	// 私有构造函数，防止多次实例化，确保唯一性
 	Player();

@@ -1,36 +1,28 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef __Item_H__
+#define __Item_H__
 
 #include "cocos2d.h"
-#include "../Constant/Constant.h"
+#include <string>
 
+// 物品类，是一个抽象类
 class Item : public cocos2d::Sprite {
 public:
-    const char* name;         // 物品的名称
-    const char* imagePath;    // 物品的图标路径
-    int quantity;             // 物品的数量
-    bool isEdible;                // 是否可食用
+	// 初始化（子类实现）
+	virtual bool init(const std::string& name) = 0;
 
-    // 默认构造函数
-    Item()
-        : name(nullptr), imagePath(nullptr), quantity(0), isEdible(false) {}
+	// 使用物品（纯虚函数，子类必须实现）
+	virtual void useItem() = 0;
 
-    static Item* create(const FishInfo& fish_info);
+	// 获取工具名称，内联函数，直接实现
+	std::string getItemName() const {
+		return itemName;
+	}
 
-    // 初始化方法
-    bool init(const FishInfo& fish_info);
-
-    // 增加物品数量
-    void addQuantity(int count);
-
-    // 设置物品数量显示
-    void updateQuantityDisplay();
-
-    Item(const Item& other);
-
-    Item& operator=(const Item& other);
-    void increaseCount();
-    bool isSameItem(const Item& other) const;
+	// 虚析构函数
+	virtual ~Item() {}
+protected:
+	// 工具名称
+	std::string itemName;
 };
 
-#endif // ITEM_H
+#endif

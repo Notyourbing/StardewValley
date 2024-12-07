@@ -18,6 +18,6 @@ bool Seed::init() {
     return Tool::init("seed");
 }
 
-void Seed::useTool() {
+void Seed::useItem() {
     return;
 }

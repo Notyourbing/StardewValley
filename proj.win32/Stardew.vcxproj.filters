@@ -43,14 +43,17 @@
     <Filter Include="Classes\Mybutton">
       <UniqueIdentifier>{e19c448f-f1fb-4714-8da8-0eac5346893c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Item">
-      <UniqueIdentifier>{2f7ab047-8ad2-49d1-bb30-25b9a88df3b1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Control">
       <UniqueIdentifier>{ee7b4a1e-1c73-4786-8428-07bb13a98425}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\DialogueBox">
       <UniqueIdentifier>{a9041023-321b-4e55-bc31-71a2baba0979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Food">
+      <UniqueIdentifier>{d4593804-0ee5-4d8b-a27e-5ace6672b7d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Item">
+      <UniqueIdentifier>{2b8df5e3-73d3-4c1f-a076-cc5a4d866b32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,14 +132,17 @@
     <ClCompile Include="..\Classes\Tool\Seed.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Item\Item.cpp">
-      <Filter>Classes\Item</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Control\Control.cpp">
       <Filter>Classes\Control</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\DialogueBox\DialogueBox.cpp">
       <Filter>Classes\DialogueBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Food\Food.cpp">
+      <Filter>Classes\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item\Item.cpp">
+      <Filter>Classes\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,14 +224,17 @@
     <ClInclude Include="..\Classes\Tool\Seed.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Item\Item.h">
-      <Filter>Classes\Item</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Control\Control.h">
       <Filter>Classes\Control</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\DialogueBox\DialogueBox.h">
       <Filter>Classes\DialogueBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food\Food.h">
+      <Filter>Classes\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\Item.h">
+      <Filter>Classes\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

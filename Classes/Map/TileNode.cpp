@@ -146,6 +146,8 @@ void Soil::updateByTime() {
 	}
 }
 
+int Water::waterResource = MAX_WATER_RESOURCE;
+
 // Water类：构造函数
 Water::Water(const cocos2d::Vec2& position) :
 	TileNode(position, TileType::Water, WATER_GID){}

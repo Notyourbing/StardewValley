@@ -66,7 +66,7 @@ void Control::initKeyboardListener() {
 	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
 			const int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
-			Bag::getInstance()->selectTool(index);
+			Bag::getInstance()->selectItem(index);
 		}
 		keysPressed.insert(keyCode);
 		updateMovement(); // 根据当前按下的键计算方向
@@ -97,7 +97,7 @@ void Control::initMouseListener()
 			if (DialogueBox::isDialogueVisible == false) {
 				player->stopMoving();
 				farmMap->stopMoving();
-				player->useCurrentTool();
+				player->useCurrentItem();
 				farmMap->interactWithFarmMap();
 			}
 		}
@@ -112,7 +112,6 @@ void Control::initMouseListener()
 						DialogueBox* dialogueBox = DialogueBox::create(npc);
 						this->addChild(dialogueBox, 5);
 						dialogueBox->showInitialDialogue();
-						// DialogueBox::isDialogueVisible = false;
 						break;
 					}
 				}

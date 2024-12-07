@@ -191,7 +191,7 @@ void FarmMap::interactWithFarmMap() {
     Vec2 interactPosition = Vec2(x, y);
 
     // 获得当前人物所使用的工具
-    std::string currentTool = player->getCurrentToolName();
+    std::string currentTool = player->getCurrentItemName();
 
     // 与地图块的交互
     if (currentTool == "pickaxe" && mapTileNode[x][y]->getTileType() == TileType::Stone) {      // 当前是石头层
@@ -206,7 +206,7 @@ void FarmMap::interactWithFarmMap() {
     }
     else if (currentTool == "wateringcan" && mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
         int wateringCanIndex = bag->getToolIndex("wateringcan");
-        int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->tools[wateringCanIndex])->getCurrentWaterLevel();
+        int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel();
         if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
 
         }

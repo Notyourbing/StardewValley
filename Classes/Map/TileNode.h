@@ -127,9 +127,6 @@ public:
 	// 判断水资源是否枯竭
 	bool isWaterDepleted() const;
 
-	// Water类的交互函数
-	void interact(const std::string& toolName) override;
-
 	// 取水
 	void pumpWater(int water);
 

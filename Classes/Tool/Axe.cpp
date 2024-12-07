@@ -18,7 +18,7 @@ bool Axe::init() {
 	return Tool::init("axe");
 }
 
-void Axe::useTool() {
+void Axe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
     // 创建动画帧

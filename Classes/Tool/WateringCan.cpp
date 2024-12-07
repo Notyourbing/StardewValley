@@ -25,9 +25,7 @@ Kettle::Kettle() {
 }
 
 // 使用工具
-void Kettle::useTool() {
-	// 每次使用一次，水壶里的水会变少
-	waterLevel -= AMOUNT_OF_WATER_PER_USE;
+void Kettle::useItem() {
 }
 
 // 获得当前水壶里的水量

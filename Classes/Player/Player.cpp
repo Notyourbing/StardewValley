@@ -201,12 +201,12 @@ void Player::setStandPose(const std::string& standPoseName) {
 }
 
 // 使用当前工具
-void Player::useCurrentTool() {
-    if (currentTool) {
+void Player::useCurrentItem() {
+    if (currentItem) {
         // 使用工具
-        currentTool->useTool();  // 触发工具的动画
+        currentItem->useItem();  // 触发工具的动画
         // 使用完成后将工具重新添加回玩家，并恢复玩家状态
-        currentTool->runAction(Sequence::create(
+        currentItem->runAction(Sequence::create(
             DelayTime::create(0.5f),  // 等待工具使用完成
             CallFunc::create([this]() {
                 Control::updateMovement();
@@ -218,8 +218,8 @@ void Player::useCurrentTool() {
 }
 
 // 设置当前工具
-void Player::setCurrentTool(Tool* tool) {
-    if (tool) {
-        currentTool = tool;
+void Player::setCurrentItem(Item* item) {
+    if (item) {
+        currentItem = item;
     }
 }

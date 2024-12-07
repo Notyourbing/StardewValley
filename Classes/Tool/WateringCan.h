@@ -22,13 +22,13 @@ public:
 	bool init();
 
 	// 使用工具
-	void useTool() override;
+	void useItem() override;
 
-	// 获得当前水壶水量
-	int getCurrentWaterLevel() const;
+	// 获得当前水壶里的水量
+	int Kettle::getCurrentWaterLevel() const;
 
-	// 水壶补水
-	void refillWateringCan(int water);
+	// 补充当前水壶里的水量
+	void Kettle::refillWateringCan(int water);
 };
 
 #endif
