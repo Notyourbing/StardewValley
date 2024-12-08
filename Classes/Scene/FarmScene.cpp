@@ -18,15 +18,17 @@ bool Farm::init() {
 		return false;
 	}
 	DateManage* dateManage = DateManage::getInstance();
-	// 启动一个定时器，每秒调用一次 updateDate 方法
-	schedule([this, dateManage](float deltaTime) {
-		dateManage->updateDate();
-		}, 1.0f, "update_date_key");
 
-	auto farmMap = FarmMap::getInstance();
+	FarmMap* farmMap = FarmMap::getInstance();
 	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
 		return false;
 	}
+
+	// 启动一个定时器，每秒调用一次 updateDate 方法
+	schedule([this, dateManage,farmMap](float deltaTime) {
+		dateManage->updateDate();
+		farmMap->farmMapUpdateByTime();
+		}, 1.0f, "update_date_key");
 
 	const auto farmMapSize = farmMap->getMapSize();
 	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
@@ -68,14 +70,9 @@ bool Farm::init() {
 		closeButton->addClickEventListener(CC_CALLBACK_1(Farm::closeButtonClicked, this));
 	}
 
-	// 初始化键盘监听器
-	// initKeyboardListener();
-
 	Control* control = Control::create();
 	this->addChild(control, 4);
 
-	 // 初始化鼠标监听器
-	 // initMouseListener();
 	 // 创建显示日期的标签
 	 if (dateManage->dateLabel) {
 		 dateManage->dateLabel->setPosition(Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置

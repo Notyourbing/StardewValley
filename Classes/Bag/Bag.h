@@ -34,6 +34,9 @@ public:
 	std::vector<Item*> items;
 
 
+	// 获取背包中物品地索引
+	int getToolIndex(std::string toolName);
+
 private:
 	// 单例实例
 	static Bag* instance;

@@ -22,7 +22,7 @@ enum ProductType {
 };
 
 // 动物的基类
-class Animal : public Sprite{
+class Animal : public cocos2d::Sprite{
 private:
 	AnimalType animalType;				// 动物的种类
 	int age;							// 动物的年龄

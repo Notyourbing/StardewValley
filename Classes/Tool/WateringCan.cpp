@@ -21,10 +21,19 @@ bool Kettle::init() {
 
 // Kettle类：构造函数
 Kettle::Kettle() {
-	waterLevel = 10;
+	waterLevel = MAX_WATERINGCAN_CAPACITY;
 }
 
 // 使用工具
 void Kettle::useItem() {
+}
 
+// 获得当前水壶里的水量
+int Kettle::getCurrentWaterLevel() const {
+	return waterLevel;
+}
+
+// 补充当前水壶里的水量
+void Kettle::refillWateringCan(int water) {
+	waterLevel += water;
 }

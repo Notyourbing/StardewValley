@@ -44,9 +44,7 @@ public:
 	}
 
 	// 获得当前物品名称
-	std::string getCurrentItemName() const {
-		return currentItem->getItemName();
-	}
+	std::string getCurrentItemName() const;
 
 	// 设置站立动作
 	void setStandPose(const std::string& standPoseName);

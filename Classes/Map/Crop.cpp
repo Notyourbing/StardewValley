@@ -1,11 +1,32 @@
 #include "Crop.h"
 
 // Crop基类：构造函数
-Crop::Crop(const CropType& cropType, const int& maxGrowthDay, const int& cropGID, cocos2d::Vec2 position) :
-	cropType(cropType), maxGrowthDay(maxGrowthDay), growthStage(0),
+Crop::Crop(const CropType& cropType,  const int& cropGID, cocos2d::Vec2 position) :
+	cropType(cropType), growthStage(0),
 	isInfested(false), isDrought(false), isFertilized(false),
 	cropGID(cropGID), position(position), infestedDay(0), 
-	droughtDay(0) {}
+	droughtDay(0),growedDay(0) {
+	switch (cropType) {
+	case CropType::Apple:						// 苹果在不同季节的生长天数
+		seasonGrowDay[Season::Spring] = 4;
+		seasonGrowDay[Season::Summer] = 3;
+		seasonGrowDay[Season::Autumn] = 6;
+		seasonGrowDay[Season::Winter] = 7;
+		break;
+	case CropType::Corn:						// 玉米在不同季节的生长天数
+		seasonGrowDay[Season::Spring] = 5;
+		seasonGrowDay[Season::Summer] = 4;
+		seasonGrowDay[Season::Autumn] = 7;
+		seasonGrowDay[Season::Winter] = 8;
+		break;
+	case CropType::Carrot:						// 胡萝卜在不同季节的生长天数
+		seasonGrowDay[Season::Spring] = 6;
+		seasonGrowDay[Season::Summer] = 5;
+		seasonGrowDay[Season::Autumn] = 8;
+		seasonGrowDay[Season::Winter] = 9;
+		break;
+	}
+}
 
 // Crop基类：浇水
 void Crop::irrigate() {
@@ -19,21 +40,6 @@ void Crop::fertilize() {
 	isFertilized = true;
 }
 
-// Crop基类：获取成长所需要的天数
-int Crop::getMaturedDay() const {
-	return maxGrowthDay;
-}
-
-// Crop基类：判断是否成熟
-bool Crop::isMature() const{
-
-	// 已经超过作物成熟所需要的天数以及及时处理
-	if (growedDay >= getMaturedDay() && growedDay <= maxAliveDay) {
-		return true;
-	}
-	return false;
-}
-
 // Crop基类：使用农药
 void Crop::applyPesticide() {
 	isInfested = false;
@@ -45,34 +51,27 @@ int Crop::getCurrentGID() {
 	return cropGID;
 }
 
-// Apple子类：构造函数
-Apple::Apple(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 28, 34, position) {
-	season.push_back(Season::SPRING);
-	season.push_back(Season::SUMMER);
-	season.push_back(Season::AUTUMN);
+// Crop基类：获得当前季节生长天数
+int Crop::getCurrentSeasonGrowDay(Season season) {
+	switch (season) {
+	case Season::Spring:
+		return seasonGrowDay[Season::Spring];
+		break;
+	case Season::Summer:
+		return seasonGrowDay[Season::Summer];
+		break;
+	case Season::Autumn:
+		return seasonGrowDay[Season::Autumn];
+		break;
+	case Season::Winter:
+		return seasonGrowDay[Season::Winter];
+		break;
+	}
 }
 
-// Apple子类：生长函数
-void Apple::grow() {
-
-	// 判断是否缺水或者遭受虫害
-	if (isDrought || isInfested) {
-		return;
-	}
-	
-	// 判断是否是施肥
-	if (isFertilized) {
-		growedDay += 2;
-	}
-	else {
-		growedDay += 1;
-	}
-
-	if (growedDay >= 0 && growedDay <= getMaturedDay() / 3) {
-		growthStage = 1;
-		this->updateGID();
-	}
+// Apple子类：构造函数
+Apple::Apple(const cocos2d::Vec2& posiiton) :
+	Crop(CropType::Apple, SEED_GID, position) {
 }
 
 // Apple子类：更新函数重写
@@ -88,16 +87,84 @@ void Apple::updateGID() {
 	}
 }
 
+// Apple子类：grow函数的重写
+void Apple::grow() {
+	// 待完善
+	growedDay++;
+	DateManage* dateManage = DateManage::getInstance();
+	Season currentSeason;
+	if (dateManage->getCurrentSeason() == "Spring") {
+		currentSeason = Season::Spring;
+	}
+	else if (dateManage->getCurrentSeason() == "Summer") {
+		currentSeason = Season::Summer;
+	}
+	else if (dateManage->getCurrentSeason() == "Autumn") {
+		currentSeason = Season::Autumn;
+	}
+	else {
+		currentSeason = Season::Winter;
+	}
+	growedDay++;
+	if (growedDay >= getCurrentSeasonGrowDay(currentSeason)) {
+		cropGID = APPLE_GID;
+	}
+}
+
 // Corn子类：构造函数
 Corn::Corn(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 36, 34, position) {
-	season.push_back(Season::SPRING);
-	season.push_back(Season::SUMMER);
+	Crop(CropType::Corn, SEED_GID, position) {
+}
+
+// Corn子类：grow函数的重写
+void Corn::grow() {
+	// 待完善
+	growedDay++;
+	DateManage* dateManage = DateManage::getInstance();
+	Season currentSeason;
+	if (dateManage->getCurrentSeason() == "Spring") {
+		currentSeason = Season::Spring;
+	}
+	else if (dateManage->getCurrentSeason() == "Summer") {
+		currentSeason = Season::Summer;
+	}
+	else if (dateManage->getCurrentSeason() == "Autumn") {
+		currentSeason = Season::Autumn;
+	}
+	else {
+		currentSeason = Season::Winter;
+	}
+	growedDay++;
+	if (growedDay >= getCurrentSeasonGrowDay(currentSeason)) {
+		cropGID = CORN_GID;
+	}
 }
 
 // Carrot子类：构造函数
 Carrot::Carrot(const cocos2d::Vec2& posiiton) :
-	Crop(CropType::APPLE, 40, 34, position) {
-	season.push_back(Season::SPRING);
+	Crop(CropType::Carrot,SEED_GID, position) {
 }
 
+// Carrot子类：生长函数
+void Carrot::grow() {
+	// 待完善
+	growedDay++;
+	DateManage* dateManage = DateManage::getInstance();
+	Season currentSeason;
+	if (dateManage->getCurrentSeason() == "Spring") {
+		currentSeason = Season::Spring;
+	}
+	else if (dateManage->getCurrentSeason() == "Summer") {
+		currentSeason = Season::Summer;
+	}
+	else if (dateManage->getCurrentSeason() == "Autumn") {
+		currentSeason = Season::Autumn;
+	}
+	else {
+		currentSeason = Season::Winter;
+	}
+	growedDay++;
+	if (growedDay >= getCurrentSeasonGrowDay(currentSeason)) {
+		cropGID = CARROT_GID;
+	}
+}

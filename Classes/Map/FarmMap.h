@@ -6,6 +6,9 @@
 #include "../Npc/Npc.h"
 #include "TileNode.h"
 #include "../Festival/Festival.h"
+#include "../Constant/Constant.h"
+#include "../Bag/Bag.h"
+#include "../Tool/WateringCan.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -34,6 +37,7 @@ public:
 	// 用于鼠标左键与农场的交互逻辑
 	void interactWithFarmMap();
 
+	// 地图停止移动
 	void stopMoving();
 
 	// 瓦片地图对象
@@ -41,6 +45,9 @@ public:
 	
 	//获取当前位置地图的类
 	TileNode* getTileNode(int x, int y);
+
+	// 地图随着时间的更新
+	void farmMapUpdateByTime();
 
 private:
 
@@ -62,7 +69,7 @@ private:
 	static FarmMap* instance;
 
 	// 存储地图上每个节点的类
-	TileNode* mapTileNode[31][17];
+	TileNode* mapTileNode[FARMMAP_WIDTH][FARMMAP_HEIGHT];
 
 	// 用来存储TMX地图的各个层
 	cocos2d::TMXLayer* grassLayer;

@@ -2,6 +2,7 @@
 #define __KETTLE_H__
 
 #include "Tool.h"
+#include "../Constant/Constant.h"
 
 // 水壶类
 class Kettle : public Tool {
@@ -22,6 +23,12 @@ public:
 
 	// 使用工具
 	void useItem() override;
+
+	// 获得当前水壶里的水量
+	int Kettle::getCurrentWaterLevel() const;
+
+	// 补充当前水壶里的水量
+	void Kettle::refillWateringCan(int water);
 };
 
 #endif
