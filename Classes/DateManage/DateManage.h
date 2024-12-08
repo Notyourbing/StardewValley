@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "../Festival/Festival.h"
 
-class DateManage {
+class DateManage : public cocos2d::Node {
 public:
     // 用于显示日期的标签
     cocos2d::Label* dateLabel;
@@ -46,6 +46,7 @@ public:
 
     //时间增加
     void updateDate();
+
 private:
     // 私有构造函数，防止外部直接创建对象
     DateManage();

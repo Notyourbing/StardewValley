@@ -1,6 +1,5 @@
 #include "DateManage.h"
 #include "../Constant/Constant.h"
-//#include "../Map/FarmMap.h"
 #include "cocos2d.h"
 DateManage* DateManage::instance = nullptr;  // 定义并初始化为 nullptr
 
@@ -16,10 +15,14 @@ DateManage::~DateManage() {
 // 获取单例实例
 DateManage* DateManage::getInstance() {
     if (instance == nullptr) {
-        instance = new DateManage();  // 如果实例不存在，创建一个新的实例
-        instance->init(1, 1);  // 默认初始化年份为1，日期为第 1 天
+        instance = new (std::nothrow) DateManage();
+        if (instance && instance->init(1, 1)) {
+            instance->autorelease();
+        }
+        else {
+            CC_SAFE_DELETE(instance);
+        }
     }
-
     return instance;
 }
 
@@ -49,7 +52,8 @@ bool DateManage::init(const int startYear, const int startDay) {
     currentDay = startDay;
 
     dateLabel = cocos2d::Label::createWithTTF("", ResPath::FONT_TTF, 24);
-
+    addChild(dateLabel);
+    dateLabel->setPosition(cocos2d::Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
     return true;
 }
 
