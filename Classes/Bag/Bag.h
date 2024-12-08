@@ -57,7 +57,6 @@ private:
 	std::vector<cocos2d::Sprite*> itemIcons; // 物品图标
 
 	static const int capacity = 9;			// 背包放物品的容量
-	static const int allCapacity = 9;		// 背包总容量
 	static const int iconSize = 54;			// 每个图标的宽度/高度
 	static const int spacing = 10;			// 图标间距
 };

@@ -54,6 +54,7 @@ bool DateManage::init(const int startYear, const int startDay) {
     dateLabel = cocos2d::Label::createWithTTF("", ResPath::FONT_TTF, 24);
     addChild(dateLabel);
     dateLabel->setPosition(cocos2d::Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // срио╫гн╩жц
+
     return true;
 }
 

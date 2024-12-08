@@ -2,7 +2,6 @@
 #define __KETTLE_H__
 
 #include "Tool.h"
-#include "../Constant/Constant.h"
 
 // 水壶类
 class Kettle : public Tool {
@@ -19,7 +18,7 @@ public:
 	Kettle();
 
 	// 初始化水壶
-	bool init();
+	bool init() override;
 
 	// 使用工具
 	void useItem() override;

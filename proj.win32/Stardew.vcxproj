@@ -191,7 +191,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Tool\FishingRod.cpp" />
     <ClCompile Include="..\Classes\Tool\Hoe.cpp" />
     <ClCompile Include="..\Classes\Tool\Seed.cpp" />
-    <ClCompile Include="..\Classes\Tool\WateringCan.cpp" />
+    <ClCompile Include="..\Classes\Tool\Kettle.cpp" />
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp" />
     <ClCompile Include="..\Classes\Tool\Scythe.cpp" />
     <ClCompile Include="..\Classes\Tool\Tool.cpp" />
@@ -225,7 +225,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Tool\FishingRod.h" />
     <ClInclude Include="..\Classes\Tool\Hoe.h" />
     <ClInclude Include="..\Classes\Tool\Seed.h" />
-    <ClInclude Include="..\Classes\Tool\WateringCan.h" />
+    <ClInclude Include="..\Classes\Tool\Kettle.h" />
     <ClInclude Include="..\Classes\Tool\PickAxe.h" />
     <ClInclude Include="..\Classes\Tool\Scythe.h" />
     <ClInclude Include="..\Classes\Tool\Tool.h" />

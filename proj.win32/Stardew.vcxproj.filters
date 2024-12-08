@@ -120,7 +120,7 @@
     <ClCompile Include="..\Classes\Map\TileNode.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Tool\WateringCan.cpp">
+    <ClCompile Include="..\Classes\Tool\Kettle.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp">
@@ -218,7 +218,7 @@
     <ClInclude Include="..\Classes\Map\TileNode.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Tool\WateringCan.h">
+    <ClInclude Include="..\Classes\Tool\Kettle.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MyButton\MyButton.h">

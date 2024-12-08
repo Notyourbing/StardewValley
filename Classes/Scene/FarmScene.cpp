@@ -17,13 +17,10 @@ bool Farm::init() {
 	if (!Scene::init()) {
 		return false;
 	}
-
-
 	FarmMap* farmMap = FarmMap::getInstance();
 	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
 		return false;
 	}
-
 
 	const auto farmMapSize = farmMap->getMapSize();
 	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
