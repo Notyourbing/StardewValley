@@ -207,8 +207,8 @@ void FarmMap::interactWithFarmMap() {
         }
     }
     else if (mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
-        if (currentItemName == "wateringcan") {
-            int wateringCanIndex = bag->getToolIndex("wateringcan");
+        if (currentItemName == "kettle") {
+            int wateringCanIndex = bag->getToolIndex("kettle");
             int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel();
             if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
                 dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->refillWateringCan(waterShortageAmount);
@@ -224,7 +224,7 @@ void FarmMap::interactWithFarmMap() {
         if (currentItemName == "hoe") {
             dynamic_cast<Soil*>(mapTileNode[x][y])->hoe();
         }
-        else if (currentItemName == "wateringCan") {
+        else if (currentItemName == "kettle") {
             dynamic_cast<Soil*>(mapTileNode[x][y])->water();
         }
         else if (currentItemName == "appleSeed" || currentItemName == "cornSeed" || currentItemName == "carrotSeed") {

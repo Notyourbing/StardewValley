@@ -1,28 +1,33 @@
 #include "Food.h"
 
 // create方法：用于创建并返回初始化的Food对象
-Food* Food::create(const FishInfo& fish_info) {
+Food* Food::create(const ItemInfo& item_info) {
     Food* food = new Food();
-    if (food && food->init(fish_info)) {
+
+    // 使用 item_info 初始化 Food 的状态
+    if (food && food->init(item_info)) {
+
+        // 初始化数量显示
+        food->updateQuantityDisplay();
+
         return food;
     }
+
     delete food;  // 初始化失败时，删除对象
     return nullptr;
 }
 
+
 // init方法：用于初始化Food对象的内部状态
-bool Food::init(const FishInfo& fish_info) {
-    name = fish_info.name;
-    imagePath = fish_info.image;
-    quantity = fish_info.quantity;
-
-    // 使用图片路径创建精灵
-    initWithFile(imagePath);
-
-    // 初始化数量显示（可以使用一个 Label 来显示数量）
-    updateQuantityDisplay();
-
+bool Food::init(const ItemInfo& item_info) {
+    itemName = item_info.name;
+    itemImage = item_info.image;
+    quantity = item_info.quantity;
     return true;  // 返回true表示初始化成功
+}
+
+void Food::useItem()
+{
 }
 
 void Food::addQuantity(int count) {
@@ -39,24 +44,24 @@ void Food::updateQuantityDisplay() {
     }
 }
 
-// 拷贝构造函数
-Food::Food(const Food& other)
-    : name(other.name), imagePath(other.imagePath) {
-}
-
-// 赋值操作符
-Food& Food::operator=(const Food& other) {
-    if (this != &other) {
-        name = other.name;
-        imagePath = other.imagePath;
-    }
-    return *this;
-}
+//// 拷贝构造函数
+//Food::Food(const Food& other)
+//    : itemName(other.itemName), itemImage(other.itemImage) {
+//}
+//
+//// 赋值操作符
+//Food& Food::operator=(const Food& other) {
+//    if (this != &other) {
+//        name = other.name;
+//        imagePath = other.imagePath;
+//    }
+//    return *this;
+//}
 
 void Food::increaseCount() {
     quantity++;
 }
 
 bool Food::isSameItem(const Food& other) const {
-    return name == other.name;
+    return itemName == other.itemName;
 }

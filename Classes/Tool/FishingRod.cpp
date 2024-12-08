@@ -26,7 +26,7 @@ FishingRod* FishingRod::create() {
 bool FishingRod::init()
 {
     // 调用基类的初始化方法
-    return Tool::init("fishingRod");
+    return Tool::init({ "fishingRod", FISHING_ROD, 1});
 }
 
 void FishingRod::useItem()
@@ -206,7 +206,8 @@ void FishingRod::reelInRod()
 
             Bag* bag = Bag::getInstance();
             // 在玩家上方显示钓到的鱼的提示
-            auto label = Label::createWithTTF(std::string(fishCaught->name) + " Caught!", "fonts/Marker Felt.ttf", 24);
+            auto label = Label::createWithTTF(std::string(fishCaught->getItemName()) + " Caught!", "fonts/Marker Felt.ttf", 24);
+            bag->addItem(fishCaught);
             label->setPosition(player->getPosition() + Vec2(0, 100));  // 显示在玩家上方
             label->setTextColor(Color4B::WHITE);
             player->getParent()->addChild(label);
