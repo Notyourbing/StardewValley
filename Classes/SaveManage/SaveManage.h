@@ -4,10 +4,12 @@
 #include <vector>
 #include "cocos2d.h"
 
+// 用来保存玩家数据的结构
 struct PlayerSaveData {
 	float posX;
 	float posY;
-	float direction;
+	float dirX;
+	float dirY;
 };
 
 class SaveManage {
@@ -26,7 +28,7 @@ private:
 	
 	std::string serializeToJson(const PlayerSaveData& data);
 
-	bool deserilizeFromJson(const std::string& jsonStr, PlayerSaveData& data);
+	bool deserializeFromJson(const std::string& jsonStr, PlayerSaveData& data);
 
 	static const std::string SAVE_FILE_NAME; // "player_save.json"
 };

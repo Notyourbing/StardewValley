@@ -91,8 +91,10 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 		playerName = DEFAULT_PLAYER_NAME;
 	}
 
-	// 将名字设置到Player单例中
-	Player::getInstance()->setPlayerName(playerName);
+	// 人物数据设置
+	auto player = Player::getInstance();
+	player->setPlayerName(playerName);
+	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2);
 
 	// 进入FramScene
 	auto farmScene = Farm::create();

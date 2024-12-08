@@ -136,6 +136,23 @@ Vec2 Player::getLastDirection() const {
     return lastDirection;
 }
 
+void Player::setLastDirection(const Vec2& direction) {
+    lastDirection = direction;
+    // 根据最后移动的方向设置站立姿势
+    if (lastDirection.equals(Vec2(1, 0))) {
+        setStandPose("standRight");
+    }
+    else if (lastDirection.equals(Vec2(-1, 0))) {
+        setStandPose("standLeft");
+    }
+    else if (lastDirection.equals(Vec2(0, 1))) {
+        setStandPose("standUp");
+    }
+    else if (lastDirection.equals(Vec2(0, -1))) {
+        setStandPose("standDown");
+    }
+}
+
 // 加载全部站立帧的纹理
 void Player::loadStandFrames() {
     SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();

@@ -4,6 +4,7 @@
 #include "../MyButton/MyButton.h"
 #include "../Control/Control.h"
 #include "../DialogueBox/DialogueBox.h"
+#include "../SaveManage/SaveManage.h"
 
 USING_NS_CC;
 
@@ -37,7 +38,7 @@ bool Farm::init() {
 
 	// 玩家
 	auto player = Player::getInstance();
-	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 玩家初始位置在屏幕中央
+	// player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 玩家初始位置在屏幕中央
 	this->addChild(player, 3);
 
 	// 玩家名字
@@ -78,5 +79,21 @@ bool Farm::init() {
 
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {
+	savePlayer();
 	Director::getInstance()->popScene();
+}
+
+void Farm::savePlayer() {
+	auto player = Player::getInstance();
+	cocos2d::Vec2 position = player->getPosition();
+	cocos2d::Vec2 direction = player->getLastDirection();
+
+	PlayerSaveData data;
+	data.posX = position.x;
+	data.posY = position.y;
+	data.dirX = direction.x;
+	data.dirY = direction.y;
+
+	SaveManage::getInstance()->savePlayerData(data);
+	CCLOG("Player state saved!");
 }
