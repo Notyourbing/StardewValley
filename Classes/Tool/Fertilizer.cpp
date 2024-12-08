@@ -15,7 +15,7 @@ Fertilizer* Fertilizer::create() {
 // 
 bool Fertilizer::init() {
 	// 调用基类的初始化方法
-	return Tool::init("fertilizer");
+	return Tool::init({ "fertilizer", FERTILIZER, 1});
 }
 
 // 使用肥料

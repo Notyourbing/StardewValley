@@ -8,7 +8,7 @@
 class Tool : public Item {
 public:
 	// 初始化
-	virtual bool init(const std::string& name) override;
+	virtual bool init(const ItemInfo& item_info) override;
 
 	// 使用工具
 	// virtual void useItem() override;

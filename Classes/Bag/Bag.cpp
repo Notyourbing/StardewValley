@@ -4,7 +4,7 @@
 #include "../Tool/Hoe.h"
 #include "../Tool/Scythe.h"
 #include "../Tool/FishingRod.h"
-#include "../Tool/WateringCan.h"
+#include "../Tool/Kettle.h"
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
 #include "../Tool/Fertilizer.h"
@@ -61,8 +61,8 @@ bool Bag::init() {
 	for (int i = 0; i < capacity; ++i) {
 		auto icon = Sprite::create(); // 空白图标
 		icon->setVisible(false);
-		addChild(icon);
 		itemIcons.push_back(icon);
+		addChild(icon);
 	}
 
 	// 更新显示
@@ -99,6 +99,9 @@ bool Bag::addItem(Item* item) {
 		if (items[i] == nullptr) {
 			items[i] = item;
 			addChild(item);
+			auto icon = Sprite::create(item->getItemImage());
+			itemIcons[i] = icon;
+			addChild(icon);
 			updateDisplay();
 			return true;
 		}

@@ -2,22 +2,19 @@
 #define __FOOD_H_
 
 #include "cocos2d.h"
+#include "../Item/Item.h"
 #include "../Constant/Constant.h"
 
-class Food : public cocos2d::Sprite {
+class Food : public Item {
 public:
-    const char* name;         // 物品的名称
-    const char* imagePath;    // 物品的图标路径
-    int quantity;             // 物品的数量
+    Food() {};
 
-    // 默认构造函数
-    Food()
-        : name(nullptr), imagePath(nullptr), quantity(0) {}
-
-    static Food* create(const FishInfo& fish_info);
+    static Food* create(const ItemInfo& item_info);
 
     // 初始化方法
-    bool init(const FishInfo& fish_info);
+    virtual bool init(const ItemInfo& item_info) override;
+
+    virtual void useItem() override;
 
     // 增加物品数量
     void addQuantity(int count);
