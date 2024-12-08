@@ -25,9 +25,6 @@ private:
 	// 存储该节点的类型
 	TileType tileType;
 
-	// 更新当前节点的GID
-	virtual void updateGID();
-
 protected:
 
 	// 当前这个瓦点的GID
@@ -46,24 +43,19 @@ public:
 	// 获取该TileNode节点的位置
 	cocos2d::Vec2 getPosition() const;
 
-	// TileNode节点与左键的交互
-	virtual void interact(const std::string& toolName) {};
+	// 瓦片随时间更新函数
+	virtual void gidUpdateByTime() {};
 
-	// 土壤的更新函数
-	virtual void updateByTime() {};
+	// 瓦片随时间更新函数
+	virtual void gidUpdateByEvent() {};
 };
 
-/* Grass类表示草，从TileNode类继承而来
-** 用来在草地上养殖动物
-*/
+// Grass类表示草，从TileNode类继承而来
 class Grass : public TileNode {
 public:
 
 	// Grass类的构造函数
 	Grass::Grass(const cocos2d::Vec2& position,const int& GID);
-
-	// 草地的养殖交互函数的实现
-	void interact(const std::string& toolName) override;
 };
 
 // Soil类表示土壤，从TileNode类继承而来
@@ -87,29 +79,30 @@ private:
 	// 土壤的含肥量
 	int fertilizeLevel;
 
-	// 土壤的锄地
-	void hoe();
-
+public:
 	// 土壤的浇水
 	void water();
 
-	// 土壤的施肥
-	void fertilize();
+	// 土壤的锄地
+	void hoe();
 
 	// 土壤的种植
 	void plantCrop(std::string seedName);
 
-	// updateGID的重写
-	void updateGID() override;
-public:
 	// 土壤类的构造函数
 	Soil(const cocos2d::Vec2& position);
 
-	//	土壤的交互函数
-	void interact(const std::string& toolName) override;
+	// 土壤时间更新函数
+	void gidUpdateByTime() override;
 
-	// 土壤的更新函数
-	void updateByTime() override;
+	// 土壤事件更新函数
+	void gidUpdateByEvent() override;
+
+	// 土壤的施肥
+	void fertilize();
+
+	// 土壤作物的收获
+	void harvest();
 
 	// 土壤状态对作物的影响
 	void influenceCropStatus();
@@ -135,6 +128,12 @@ public:
 
 	// 获得当前水资源
 	int getCurrentWaterResource() const;
+
+	// Water类随时间变化函数
+	void gidUpdateByTime() override;
+
+	// Water类随事件变化
+	void gidUpdateByEvent() override;
 };
 
 // Obstacle类：障碍

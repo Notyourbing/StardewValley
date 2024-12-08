@@ -7,6 +7,7 @@
 #include "../Tool/WateringCan.h"
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
+#include "../Tool/Fertilizer.h"
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
@@ -79,8 +80,14 @@ bool Bag::init() {
 	addItem(scythe);
 	Tool* kettle = Kettle::create();
 	addItem(kettle);
-	Tool* seed = Seed::create();
-	addItem(seed);
+	Tool* appleSeed = AppleSeed::create();
+	addItem(appleSeed);
+	Tool* cornSeed = CornSeed::create();
+	addItem(cornSeed);
+	Tool* carrotSeed = CarrotSeed::create();
+	addItem(carrotSeed);
+	Tool* fertilizer = Fertilizer::create();
+	addItem(fertilizer);
 	selectItem(0);
 
 	return true;

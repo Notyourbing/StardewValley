@@ -22,21 +22,9 @@ cocos2d::Vec2 TileNode::getPosition() const {
 	return position;
 }
 
-// TileNode基类：更新图块的GID
-// 思路根据状态去更新
-void TileNode::updateGID() {
-	return;
-}
-
 // Grass类：构造函数
 Grass::Grass(const cocos2d::Vec2& position,const int& GID) :
 	TileNode(position, TileType::Grass, GID) {
-
-}
-
-// Grass类的交互函数
-void Grass::interact(const std::string& toolName) {
-	
 }
 
 // Soil类：构造函数
@@ -45,30 +33,6 @@ Soil::Soil(const cocos2d::Vec2& position) :
 	isWatered(false), isFertilized(false), isHoed(false),
 	waterLevel(0), fertilizeLevel(0)
 {}
-
-// Soil类：根据当前的状态更新GID
-void Soil::updateGID() {
-
-	// 根据土壤的条件更新GID
-	if (isHoed == false) {
-		currentGID = SOIL_GID;
-		return;
-	}
-
-	// 判断是否有作物
-	if (crop == nullptr) {
-		if (isWatered == true) {
-			currentGID = HOED_SOIL_GID;
-		}
-		else {
-			currentGID = WATER_SOIL_GID;
-		}
-	}
-	else {
-		currentGID=crop->getCurrentGID();
-		CCLOG("%d",currentGID);
-	}
-}
 
 // Soil类：锄地
 void Soil::hoe() {
@@ -96,53 +60,61 @@ void Soil::fertilize() {
 
 // Soil类：种植
 void Soil::plantCrop(std::string seedName) {
-	
-	// 判断土地是否种植
-	if (isHoed == false) {
+	// 未开垦和已经种植的话返回
+	if (isHoed == false || crop != nullptr) {
 		return;
 	}
 
-	// 当土壤上没有作物的时候
-	if (crop == nullptr) {
-		if (seedName == "apple") {		// 种植苹果
-
-		}
-		else if(seedName=="corn"){		// 种植玉米
-
-		}
-		else if(seedName=="carrot"){	// 种植胡萝卜
-			crop = new Carrot(this->getPosition());
-		}
+	// 根据种子的类别种不同的作物
+	if (seedName == "appleSeed") {
+		crop = new Apple(getPosition());
+	}
+	else if (seedName == "cornSeed") {
+		crop = new Corn(getPosition());
+	}
+	else if (seedName == "carrotSeed") {
+		crop = new Carrot(getPosition());
 	}
 }
 
-// Soil类：
-void Soil::interact(const std::string& toolName) {
-	
-	// 土壤与工具的交互
-	if (toolName=="hoe") {						// 如果是锄头，那么进行锄地
-		hoe();
-	}
-	else if (toolName == "wateringCan") {		// 如果是水壶，那么进行浇水
-		water();
-	}
-	else if (toolName == "fertilizer") {		// 如果是肥料，那么进行施肥
-		fertilize();
-	}
-	else if (toolName == "seed") {				// 如果是种子，那么进行种植
-		plantCrop("carrot");
-	}
-	updateGID();
+// Soil类：收获
+void Soil::harvest() {
+	// 有待完善 需要增加
 }
 
 // 土壤类随时间变化的更新函数
-void Soil::updateByTime() {
+void Soil::gidUpdateByTime() {
 	if (crop == nullptr) {
 		return;
 	}
 	else {
 		crop->grow();
-		updateGID();
+		currentGID = crop->getCurrentGID();
+	}
+}
+
+// Soil类：随事件变化的更新函数
+void Soil::gidUpdateByEvent() {
+	if (isHoed == false) {
+		currentGID = SOIL_GID;
+	}
+	else {
+		if (isWatered) {
+			if (crop == nullptr) {
+				currentGID = WATER_SOIL_GID;
+			}
+			else {
+				currentGID = crop->getCurrentGID();
+			}
+		}
+		else {
+			if (crop == nullptr) {
+				currentGID = HOED_SOIL_GID;
+			}
+			else {
+				currentGID = crop->getCurrentGID();
+			}
+		}
 	}
 }
 
@@ -164,12 +136,28 @@ void Water::pumpWater(int water) {
 
 // Water类：下雨补充水资源
 void Water::rechargeWaterResource() {
-	waterResource = (waterResource+200)<MAX_WATER_RESOURCE ? waterResource+200:MAX_WATER_RESOURCE;
+	waterResource = (waterResource+RANIY_REPLENISH)<MAX_WATER_RESOURCE ? waterResource+RANIY_REPLENISH:MAX_WATER_RESOURCE;
 }
 
 // Water类：获得当前水资源
 int Water::getCurrentWaterResource() const {
 	return waterResource;
+}
+
+// Water类：随时间变化
+void Water::gidUpdateByTime() {
+	// 判断当前水资源是否枯竭
+	if (waterResource) {
+		currentGID = WATER_GID;
+	}
+}
+
+// Water类：随时间变化
+void Water::gidUpdateByEvent() {
+	// 判断当前水资源是否枯竭
+	if (waterResource == 0) {
+		currentGID = SOIL_GID;
+	}
 }
 
 // Obstacle类：构造函数

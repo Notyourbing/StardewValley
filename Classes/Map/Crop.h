@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "../DateManage/DateManage.h"
 #include "../Constant/Constant.h"
+#include <map>
 
 // 作物的种类
 enum class CropType {
@@ -14,7 +15,7 @@ enum class CropType {
 
 // 季节
 enum class Season {
-	Sring,
+	Spring,
 	Summer,
 	Autumn,
 	Winter,
@@ -23,8 +24,8 @@ enum class Season {
 // 作物的基类
 class Crop {
 private:
-	int maxGrowthDay;		// 最长的成熟天数
 
+	std::map<Season, int> seasonGrowDay;			// 每个季节的生长天数
 protected:
 	CropType cropType;		// 作物的种类
 	int growedDay;			// 已经成长的天数
@@ -40,13 +41,10 @@ protected:
 public:
 
 	// 构造函数
-	Crop(const CropType& cropType, const int& maxGrowthDay,const int& cropGID, cocos2d::Vec2 position);
+	Crop(const CropType& cropType,const int& cropGID, cocos2d::Vec2 position);
 
 	// 处理作物的生长,虚函数
 	virtual void grow() {};
-
-	// 获取当前作物需要的成熟天数
-	int getMaturedDay() const;
 
 	// 判断是否成熟
 	bool isMature() const;
@@ -66,8 +64,8 @@ public:
 	// 获取当前的GID
 	int getCurrentGID();
 
-	// 作物每天的更新
-	void cropUpdateByDay();
+	// 获取当前季节的成长时间
+	int getCurrentSeasonGrowDay(Season season);
 
 	// 更新当前图块的GID
 	virtual void updateGID() {};
@@ -78,7 +76,7 @@ public:
 // Apple类：表示苹果
 class Apple : public Crop {
 private:
-	std::vector<Season> season;				// 适合种植的季节
+
 public:
 	
 	// 构造函数
@@ -94,11 +92,13 @@ public:
 // Corn类：表示玉米
 class Corn : public Crop {
 private:
-	std::vector<Season> season;				// 适合种植的季节
 public:
 	
 	// 构造函数
 	Corn(const cocos2d::Vec2& position);
+
+	// 玉米的生成函数
+	void grow() override;
 
 	// 更新图块的重合
 	void updateGID() override{}
@@ -107,7 +107,6 @@ public:
 // Carrot类：表述胡萝卜
 class Carrot : public Crop {
 private:
-	std::vector<Season> season;				// 适合种植的季节
 public:
 
 	// 构造函数
