@@ -55,6 +55,9 @@
     <Filter Include="Classes\Item">
       <UniqueIdentifier>{2b8df5e3-73d3-4c1f-a076-cc5a4d866b32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\SaveManage">
+      <UniqueIdentifier>{fd50e063-7c10-4b3d-91f2-9ea0d9b1fb8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SaveManage\SaveManage.cpp">
+      <Filter>Classes\SaveManage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SaveManage\SaveManage.h">
+      <Filter>Classes\SaveManage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
