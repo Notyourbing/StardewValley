@@ -1,6 +1,6 @@
 #include "DateManage.h"
 #include "../Constant/Constant.h"
-#include "../Map/FarmMap.h"
+//#include "../Map/FarmMap.h"
 #include "cocos2d.h"
 DateManage* DateManage::instance = nullptr;  // 定义并初始化为 nullptr
 

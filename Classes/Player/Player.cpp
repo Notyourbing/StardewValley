@@ -200,6 +200,11 @@ void Player::setStandPose(const std::string& standPoseName) {
     }
 }
 
+// 获取当前物品名称
+std::string Player::getCurrentItemName() const {
+    return currentItem->getItemName();
+}
+
 // 使用当前工具
 void Player::useCurrentItem() {
     if (currentItem) {

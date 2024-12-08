@@ -149,7 +149,7 @@ bool FarmMap::isCollidable(const Vec2& position) const {
 
     // 碰撞检测
     TileType tileType = mapTileNode[x][y]->getTileType();
-    if (tileType == TileType::STONE || tileType == TileType::OBSTACLE || tileType == TileType::WATER||tileType == TileType::MOLD) {
+    if (tileType == TileType::Stone || tileType == TileType::Obstacle || tileType == TileType::Water||tileType == TileType::Mold) {
         return true;
     }
     else {
@@ -159,9 +159,10 @@ bool FarmMap::isCollidable(const Vec2& position) const {
 
 // 玩家与农场的接口
 void FarmMap::interactWithFarmMap() {
-    // 获取玩家以及地图实例
+    // 获取玩家、地图、背包实例
     Player* player = Player::getInstance();
     FarmMap* farmMap = FarmMap::getInstance();
+    Bag* bag = Bag::getInstance();
 
     // 获取要交互的土块位置
     Vec2 playerPosition = player->getPosition();
@@ -169,36 +170,100 @@ void FarmMap::interactWithFarmMap() {
     const Size mapSize = farmMap->map->getMapSize();
     playerPosition = playerPosition - farmMap->getPosition();
     playerPosition.y = playerPosition.y - player->getContentSize().height / 2 + 10.0f;
-    int x = playerPosition.x / tileSize.width;
-    int y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
-    Vec2 lastDirection = player->getLastDirection();
+    playerPosition.x = playerPosition.x / tileSize.width;
+    playerPosition.y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
+    const Vec2 lastDirection = player->getLastDirection();
 
-    if (lastDirection == Vec2(1, 0) && x + 1 < mapSize.width - 1) {
-        x++;
+    if (lastDirection == Vec2(1, 0) && playerPosition.x + 1 < mapSize.width - 1) {
+        playerPosition.x++;
     }
-    else if (lastDirection == Vec2(0, 1) && y - 1 >= 0) {
-        y--;
+    else if (lastDirection == Vec2(0, 1) && playerPosition.y - 1 >= 0) {
+        playerPosition.y--;
     }
-    else if (lastDirection == Vec2(-1, 0) && x - 1 >= 0) {
-        x--;
+    else if (lastDirection == Vec2(-1, 0) && playerPosition.x - 1 >= 0) {
+        playerPosition.x--;
     }
-    else if (lastDirection == Vec2(0, -1) && y + 1 < mapSize.height - 1) {
-        y++;
+    else if (lastDirection == Vec2(0, -1) && playerPosition.y + 1 < mapSize.height - 1) {
+        playerPosition.y++;
     }
 
-    // 获得了要交互的位置
-    Vec2 interactPosition = Vec2(x, y);
+    const int x = playerPosition.x;
+    const int y = playerPosition.y;
 
     // 获得当前人物所使用的工具
-    std::string currentTool = player->getCurrentItemName();
+    std::string currentItemName = player->getCurrentItemName();
 
     // 与地图块的交互
-    mapTileNode[x][y]->interact(currentTool);
+    if (mapTileNode[x][y]->getTileType() == TileType::Stone) {      // 当前是石头层
+        if (currentItemName == "pickaxe") {
+            dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();                                   // 敲击一次石头
+            if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken() == true) {                      // 判断石头是否击碎
+                delete mapTileNode[x][y];
+                mapTileNode[x][y] = nullptr;
+                mapTileNode[x][y] = new Soil(Vec2(x, y));
+                stoneLayer->setTileGID(0, Vec2(x, y));
+                soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
+            }
+        }
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
+        if (currentItemName == "wateringcan") {
+            int wateringCanIndex = bag->getToolIndex("wateringcan");
+            int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel();
+            if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
+                dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->refillWateringCan(waterShortageAmount);
+                dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(waterShortageAmount);
+            }
+            else {
+                dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->refillWateringCan(dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel());
+                dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel());
+            }
+        }
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Soil) {   // 当前交互的是土壤层
+        if (currentItemName == "hoe") {
+            dynamic_cast<Soil*>(mapTileNode[x][y])->hoe();
+        }
+        else if (currentItemName == "wateringCan") {
+            dynamic_cast<Soil*>(mapTileNode[x][y])->water();
+        }
+        else if (currentItemName == "appleSeed" || currentItemName == "cornSeed" || currentItemName == "carrotSeed") {
+            dynamic_cast<Soil*>(mapTileNode[x][y])->plantCrop(currentItemName);
+        }
+        else if (currentItemName == "fertilize") {
+            dynamic_cast<Soil*>(mapTileNode[x][y])->fertilize();
+        }
+        else if (currentItemName == "scythe") {
+            // 有待完善 这里背包的物品需要去添加
+            dynamic_cast<Soil*>(mapTileNode[x][y])->harvest();
+        }
+        dynamic_cast<Soil*>(mapTileNode[x][y])->gidUpdateByEvent();
+        // 更新图块
+        soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
+        
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Mold) {
 
-    // 更新图块
-    soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(), Vec2(x, y));
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Obstacle) {
+
+    }
 }
 
 void FarmMap::stopMoving() {
     velocity = Vec2::ZERO;
+}
+
+// 地图随时间的更新
+void FarmMap::farmMapUpdateByTime() {
+    
+    // 先完成作物随着时间的增长
+    for (int x = 0; x < FARMMAP_WIDTH; x++) {
+        for (int y = 0; y < FARMMAP_HEIGHT; y++) {
+            if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
+                dynamic_cast<Soil*>(mapTileNode[x][y])->gidUpdateByTime();
+                soilLayer->setTileGID(mapTileNode[x][y]->getCurrentGID(),Vec2(x,y));
+            }
+        }
+    }
 }
