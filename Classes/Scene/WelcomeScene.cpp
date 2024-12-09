@@ -90,7 +90,6 @@ bool Welcome::init() {
 
 // 新游戏项回调函数
 void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
-
     auto newGameScene = NewGame::createScene();
     auto transition = TransitionFade::create(0.5f, newGameScene, PURPUL); // 0.5秒，淡入紫色背景
     Director::getInstance()->pushScene(transition);
@@ -98,22 +97,10 @@ void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
 
 // 加载游戏项回调函数
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
-    // 尝试加载存档数据
-    PlayerSaveData data;
-    bool loadSuccess = SaveManage::getInstance()->loadPlayerData(data);
+    // 加载存档数据
+    SaveManage::getInstance()->loadData();
 
-    // 如果加载成功，将玩家位置和朝向设置回玩家单例
-    if (loadSuccess) {
-        auto player = Player::getInstance();
-        player->setPosition(cocos2d::Vec2(data.posX, data.posY));
-        player->setLastDirection(cocos2d::Vec2(data.dirX, data.dirY));
-        
-        CCLOG("Load game success! Player position and direction restored.");
-    }
-    else {
-        CCLOG("No saved data found. Starting a new game state.");
-    }
-
+    // 创建农场场景
     auto farmScene = Farm::createScene();
     auto transition = TransitionFade::create(0.5f, farmScene, cocos2d::Color3B::WHITE); // 0.5秒，淡入白色背景
     Director::getInstance()->pushScene(transition);

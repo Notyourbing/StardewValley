@@ -12,6 +12,12 @@ struct PlayerSaveData {
 	float dirY;
 };
 
+// 用来保存地图位置数据的结构
+struct MapSaveData {
+	float posX;
+	float posY;
+};
+
 class SaveManage {
 public:
 	static SaveManage* getInstance();
@@ -21,6 +27,9 @@ public:
 
 	// 从玩家中加载玩家数据
 	bool loadPlayerData(PlayerSaveData& data);
+
+	// 加载数据的接口
+	void loadData();
 
 private:
 	SaveManage() = default;

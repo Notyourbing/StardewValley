@@ -38,7 +38,6 @@ bool Farm::init() {
 
 	// 玩家
 	auto player = Player::getInstance();
-	// player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 玩家初始位置在屏幕中央
 	this->addChild(player, 3);
 
 	// 玩家名字
@@ -96,4 +95,8 @@ void Farm::savePlayer() {
 
 	SaveManage::getInstance()->savePlayerData(data);
 	CCLOG("Player state saved!");
+}
+
+Farm::~Farm() {
+	npcs.clear();
 }
