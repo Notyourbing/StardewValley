@@ -42,12 +42,13 @@ bool Bag::init() {
 	}
 
 	// 初始化工具
-	items.resize(capacity, nullptr);
+	items.resize(row * capacity, nullptr);
+	quantities.resize(row * capacity, 0);
 	selectedIndex = 0;
 
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
 	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
-	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
+	const float startY = 60.0f; // 背包显示在屏幕底部，距底部 60 像素
 
 
 	bagBackground = Sprite::create(ResPath::BAG_BACKGROUND);
@@ -58,11 +59,15 @@ bool Bag::init() {
 
 
 	// 初始化工具图标
-	for (int i = 0; i < capacity; ++i) {
+	for (int i = 0; i < row * capacity; ++i) {
 		auto icon = Sprite::create(); // 空白图标
 		icon->setVisible(false);
 		itemIcons.push_back(icon);
-		addChild(icon);
+		auto label = Label::createWithTTF(std::to_string(quantities[i]), "fonts/arial.ttf", 30);
+		label->setVisible(false);
+		itemLabels.push_back(label);
+		addChild(icon, 1);
+		addChild(label, 2);
 	}
 
 	// 更新显示
@@ -95,9 +100,15 @@ bool Bag::init() {
 
 bool Bag::addItem(Item* item) {
 	// 检查是否有空位
-	for (int i = 0; i < capacity; ++i) {
+	for (int i = 0; i < row * capacity; ++i) {
+		if (items[i] && (item->getItemName() == items[i]->getItemName())) {
+			quantities[i]++;
+			updateDisplay();
+			return true;
+		}
 		if (items[i] == nullptr) {
 			items[i] = item;
+			quantities[i] = item->getQuantity();
 			addChild(item);
 			auto icon = Sprite::create(item->getItemImage());
 			itemIcons[i] = icon;
@@ -110,7 +121,7 @@ bool Bag::addItem(Item* item) {
 }
 
 void Bag::removeItem(const int index) {
-	if (index >= 0 && index < capacity && items[index]) {
+	if (index >= 0 && index < row * capacity && items[index]) {
 		removeChild(items[index]);
 		items[index] = nullptr;
 		updateDisplay();
@@ -118,14 +129,14 @@ void Bag::removeItem(const int index) {
 }
 
 Item* Bag::getItem(const int index) const {
-	if (index >= 0 && index < capacity) {
+	if (index >= 0 && index < row * capacity) {
 		return items[index];
 	}
 	return nullptr;
 }
 
 void Bag::selectItem(const int index) {
-	if (index >= 0 && index < capacity && items[index]) {
+	if (index >= 0 && index < row * capacity && items[index]) {
 		selectedIndex = index;
 		Player::getInstance()->setCurrentItem(items[index]);
 	}
@@ -141,25 +152,34 @@ Item* Bag::getSelectedItem() const {
 
 void Bag::updateDisplay() {
 	const auto visibleSize = Director::getInstance()->getVisibleSize();
-	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
-	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
+	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 2) * spacing) / 2;
+	const float startY = 100.0f; // 背包显示在屏幕底部，距底部 100 像素
 
 	// 更新工具图标
-	for (int i = 0; i < capacity; ++i) {
+	for (int i = 0; i < row * capacity; ++i) {
 		auto icon = itemIcons[i];
+		auto label = itemLabels[i];
 		if (items[i]) {
 			icon->setTexture("tools/" + items[i]->getItemName() + ".png");
 			icon->setVisible(true);
+
+			// 设置数量显示
+			if (quantities[i] > 1) {
+				label->setString(std::to_string(quantities[i]));
+				label->setVisible(true);
+				
+			}
+
 		}
 		else
 			icon->setVisible(false);
 
 		// 设置位置
 		icon->setPosition(Vec2(
-			startX + i * (iconSize + spacing) + iconSize / 2,
-			startY + iconSize / 2
+			startX + i % capacity * (iconSize + spacing)  + iconSize / 2,
+			startY + iconSize / 2 - (iconSize + spacing) * (i / capacity)
 		));
-
+		label->setPosition(icon->getPosition() + Vec2(20, 20));  // 显示在图标的右上角
 		// 如果是选中工具,添加高亮
 		if (i == selectedIndex) {
 			icon->setColor(Color3B::YELLOW);

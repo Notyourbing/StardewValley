@@ -201,6 +201,7 @@ void FishingRod::reelInRod()
                 tuna,
                 anchovy
             };
+            srand(static_cast<unsigned int>(time(NULL)));
             int randomIndex = rand() % fishList.size();  // 随机索引
             Food* fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
 

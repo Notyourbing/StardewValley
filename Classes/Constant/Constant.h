@@ -415,7 +415,7 @@ constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 struct ItemInfo {
 	const char* name;             // 名称
 	const char* image;            // 图片路径
-	const int quantity;             // 数量
+	int quantity;                 // 数量
 };
 
 // fish
