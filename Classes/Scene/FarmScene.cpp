@@ -19,12 +19,11 @@ bool Farm::init() {
 		return false;
 	}
 	FarmMap* farmMap = FarmMap::getInstance();
-	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
+	if (!farmMap) {
 		return false;
 	}
 
-	const auto farmMapSize = farmMap->getMapSize();
-	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
+
 	this->addChild(farmMap, 0);
 
 	// 加入两个NPC
@@ -78,24 +77,10 @@ bool Farm::init() {
 
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {
-	savePlayer();
+	SaveManage::getInstance()->saveGameData();
 	Director::getInstance()->popScene();
 }
 
-void Farm::savePlayer() {
-	auto player = Player::getInstance();
-	cocos2d::Vec2 position = player->getPosition();
-	cocos2d::Vec2 direction = player->getLastDirection();
-
-	PlayerSaveData data;
-	data.posX = position.x;
-	data.posY = position.y;
-	data.dirX = direction.x;
-	data.dirY = direction.y;
-
-	SaveManage::getInstance()->savePlayerData(data);
-	CCLOG("Player state saved!");
-}
 
 Farm::~Farm() {
 	npcs.clear();

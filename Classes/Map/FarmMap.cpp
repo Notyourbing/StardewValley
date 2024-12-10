@@ -22,7 +22,7 @@
     FarmMap* FarmMap::getInstance() {
         if (!instance) {
             instance = new (std::nothrow) FarmMap();
-            if (instance) {
+            if (instance && instance->init("Maps/farmSpring11_28/farmMap.tmx")) {
                 instance->autorelease();
             }
             else {
@@ -46,6 +46,9 @@
                 return false;
             }
             this->addChild(map);
+
+            const auto farmMapSize = getMapSize();
+            setPosition(WINSIZE.width / 2 - farmMapSize.width / 2, WINSIZE.height / 2 - farmMapSize.height / 2);
 
             // 获取地图的各个图层
             grassLayer = map->getLayer("Grass");

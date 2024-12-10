@@ -18,26 +18,28 @@ struct MapSaveData {
 	float posY;
 };
 
+struct SaveData {
+	PlayerSaveData playerData;
+	MapSaveData mapData;	
+};
+
 class SaveManage {
 public:
 	static SaveManage* getInstance();
 
-	// 保存玩家数据到文件
-	bool savePlayerData(const PlayerSaveData& data);
+	// 保存数据的公用接口
+	bool saveGameData();
 
-	// 从玩家中加载玩家数据
-	bool loadPlayerData(PlayerSaveData& data);
-
-	// 加载数据的接口
-	void loadData();
+	// 加载数据的公用接口
+	bool loadGameData();
 
 private:
 	SaveManage() = default;
 	~SaveManage() = default;
 	
-	std::string serializeToJson(const PlayerSaveData& data);
+	std::string SaveManage::serializeToJson(const SaveData& data);
 
-	bool deserializeFromJson(const std::string& jsonStr, PlayerSaveData& data);
+	bool deserializeFromJson(const std::string& jsonStr, SaveData& data);
 
 	static const std::string SAVE_FILE_NAME; // "player_save.json"
 };

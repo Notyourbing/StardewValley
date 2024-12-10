@@ -98,7 +98,7 @@ void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
 // 加载游戏项回调函数
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
     // 加载存档数据
-    SaveManage::getInstance()->loadData();
+    SaveManage::getInstance()->loadGameData();
 
     // 创建农场场景
     auto farmScene = Farm::createScene();

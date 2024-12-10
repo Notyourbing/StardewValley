@@ -4,6 +4,7 @@
 #include "json/stringbuffer.h"
 #include "json/rapidjson.h"
 #include "../Player/Player.h"
+#include "../Map/FarmMap.h"
 
 USING_NS_CC;
 
@@ -14,31 +15,24 @@ SaveManage* SaveManage::getInstance() {
 	return &instance;
 }
 
-bool SaveManage::savePlayerData(const PlayerSaveData& data) {
-	std::string jsonStr = serializeToJson(data);
-	std::string path = FileUtils::getInstance()->getDefaultResourceRootPath() + SAVE_FILE_NAME;
-	return FileUtils::getInstance()->writeStringToFile(jsonStr, path);
-}
-
-bool SaveManage::loadPlayerData(PlayerSaveData& data) {
-	std::string path = FileUtils::getInstance()->getDefaultResourceRootPath() + SAVE_FILE_NAME;
-	if (!FileUtils::getInstance()->isFileExist(path)) {
-		return false;
-	}
-	std::string jsonStr = FileUtils::getInstance()->getStringFromFile(path);
-	return deserializeFromJson(jsonStr, data);
-}
-
-std::string SaveManage::serializeToJson(const PlayerSaveData& data) {
+std::string SaveManage::serializeToJson(const SaveData& data) {
 	rapidjson::Document doc;
 	doc.SetObject();
 	auto& alloc = doc.GetAllocator();
 
 	// 存储玩家位置和朝向
-	doc.AddMember("posX", data.posX, alloc);
-	doc.AddMember("posY", data.posY, alloc);
-	doc.AddMember("dirX", data.dirX, alloc);
-	doc.AddMember("dirY", data.dirY, alloc);
+	rapidjson::Value playerObj(rapidjson::kObjectType);
+	playerObj.AddMember("posX", data.playerData.posX, alloc);
+	playerObj.AddMember("posY", data.playerData.posY, alloc);
+	playerObj.AddMember("dirX", data.playerData.dirX, alloc);
+	playerObj.AddMember("dirY", data.playerData.dirY, alloc);
+	doc.AddMember("playerData", playerObj, alloc);
+
+	rapidjson::Value mapObj(rapidjson::kObjectType);
+	mapObj.AddMember("posX", data.mapData.posX, alloc);
+	mapObj.AddMember("posY", data.mapData.posY, alloc);
+	doc.AddMember("mapData", mapObj, alloc);
+
 
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
@@ -47,7 +41,7 @@ std::string SaveManage::serializeToJson(const PlayerSaveData& data) {
 	return buffer.GetString();
 }
 
-bool SaveManage::deserializeFromJson(const std::string& jsonStr, PlayerSaveData& data) {
+bool SaveManage::deserializeFromJson(const std::string& jsonStr, SaveData& data) {
 	rapidjson::Document doc;
 	if (doc.Parse(jsonStr.c_str()).HasParseError()) {
 		return false;
@@ -55,31 +49,76 @@ bool SaveManage::deserializeFromJson(const std::string& jsonStr, PlayerSaveData&
 	if (!doc.IsObject()) {
 		return false;
 	}
-	if (doc.HasMember("posX") && doc["posX"].IsNumber()) {
-		data.posX = doc["posX"].GetFloat();
+	// 玩家数据
+	if (doc.HasMember("playerData") && doc["playerData"].IsObject()) {
+		const rapidjson::Value& playerObj = doc["playerData"];
+		if (playerObj.HasMember("posX") && playerObj["posX"].IsNumber()) {
+			data.playerData.posX = playerObj["posX"].GetFloat();
+		}
+		if (playerObj.HasMember("posY") && playerObj["posY"].IsNumber()) {
+			data.playerData.posY = playerObj["posY"].GetFloat();
+		}
+		if (playerObj.HasMember("dirX") && playerObj["dirX"].IsNumber()) {
+			data.playerData.dirX = playerObj["dirX"].GetFloat();
+		}
+		if (playerObj.HasMember("dirY") && playerObj["dirY"].IsNumber()) {
+			data.playerData.dirY = playerObj["dirY"].GetFloat();
+		}
 	}
-	if (doc.HasMember("posY") && doc["posY"].IsNumber()) {
-		data.posY = doc["posY"].GetFloat();
+	if (doc.HasMember("mapData") && doc["mapData"].IsObject()) {
+		const rapidjson::Value& mapObj = doc["mapData"];
+		if (mapObj.HasMember("posX") && mapObj["posX"].IsNumber()) {
+			data.mapData.posX = mapObj["posX"].GetFloat();
+		}
+		if (mapObj.HasMember("posY") && mapObj["posY"].IsNumber()) {
+			data.mapData.posY = mapObj["posY"].GetFloat();
+		}
 	}
-	if (doc.HasMember("dirX") && doc["dirX"].IsNumber()) {
-		data.dirX = doc["dirX"].GetFloat();
-	}
-	if (doc.HasMember("dirY") && doc["dirY"].IsNumber()) {
-		data.dirY = doc["dirY"].GetFloat();
-	}
+
 
 	return true;
 }
 
-void SaveManage::loadData() {
-	// 尝试加载存档数据
-	PlayerSaveData data;
-	bool loadSuccess = loadPlayerData(data);
+bool SaveManage::saveGameData() {
+	SaveData data;
 
-	// 如果加载成功，将玩家位置和朝向设置回玩家单例
-	if (loadSuccess) {
-		auto player = Player::getInstance();
-		player->setPosition(cocos2d::Vec2(data.posX, data.posY));
-		player->setLastDirection(cocos2d::Vec2(data.dirX, data.dirY));
+	// 获取玩家数据
+	Player* player = Player::getInstance();
+	data.playerData.posX = player->getPositionX();
+	data.playerData.posY = player->getPositionY();
+	data.playerData.dirX = player->getLastDirection().x;
+	data.playerData.dirY = player->getLastDirection().y;
+	
+	// 获取地图数据
+	FarmMap* farmMap = FarmMap::getInstance();
+	data.mapData.posX = farmMap->getPositionX();
+	data.mapData.posY = farmMap->getPositionY();
+
+	// 序列化
+	std::string jsonStr = serializeToJson(data);
+	std::string path = FileUtils::getInstance()->getWritablePath() + SAVE_FILE_NAME;
+
+	return FileUtils::getInstance()->writeStringToFile(jsonStr, path);
+}
+
+
+bool SaveManage::loadGameData() {
+	// 尝试加载存档数据
+	std::string path = FileUtils::getInstance()->getWritablePath() + SAVE_FILE_NAME;
+
+	std::string jsonStr = FileUtils::getInstance()->getStringFromFile(path);
+	SaveData data;
+
+	bool success = deserializeFromJson(jsonStr, data);
+	if (success) {
+		Player* player = Player::getInstance();
+		player->setPosition(Vec2(data.playerData.posX, data.playerData.posY));
+		player->setLastDirection(Vec2(data.playerData.dirX, data.playerData.dirY));
+		
+		FarmMap* farmMap = FarmMap::getInstance();
+		Vec2 temp = Vec2(data.mapData.posX, data.mapData.posY);
+		farmMap->setPosition(Vec2(data.mapData.posX, data.mapData.posY));
+		return true;
 	}
+	return false;
 }

@@ -27,8 +27,6 @@ public:
 private:
 	void closeButtonClicked(Ref* pSender);
 	
-	// 保存玩家数据
-	void savePlayer();
 };
 
 #endif
