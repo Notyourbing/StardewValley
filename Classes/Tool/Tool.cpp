@@ -11,8 +11,3 @@ bool Tool::init(const ItemInfo& item_info) {
 	itemImage = (std::string)item_info.image;
 	return Sprite::initWithFile(item_info.image);
 }
-
-
-//void Tool::useItem() {
-//	
-//}

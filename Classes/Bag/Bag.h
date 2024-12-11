@@ -29,15 +29,23 @@ public:
 
 	// 显示背包
 	void updateDisplay();
+	
+	// 获取背包大小，也就是不同物品的个数
+	int getSize();
+
+	// 获取背包中物品的索引
+	int getToolIndex(const std::string& toolName);
+
+	// 获取当前选中物品的索引
+	int getSelectedIndex() {
+		return selectedIndex;
+	}
 
 	// 当前所拥有的物品
 	std::vector<Item*> items;
 
-	//物品数量
+	// 物品数量
 	std::vector<int> quantities;
-
-	// 获取背包中物品地索引
-	int getToolIndex(std::string toolName);
 
 private:
 	// 单例实例
@@ -56,12 +64,11 @@ private:
 
 	// 用于显示背包的矩形框和物品
 	cocos2d::Sprite* bagBackground;			 // 背景框
-	std::vector<cocos2d::Sprite*> itemIcons; // 物品图标
 	std::vector<cocos2d::Label*> itemLabels; // 物品数量标签
 
-	static const int capacity = 9;			// 背包放物品的一行容量
-	static const int row = 2;				// 2行
-	static const int iconSize = 54;			// 每个图标的宽度/高度
-	static const int spacing = 10;			// 图标间距
+	static const int capacity = 9;			 // 背包放物品的一行容量
+	static const int row = 2;				 // 2行
+	static const int iconSize = 54;			 // 每个图标的宽度/高度
+	static const int spacing = 10;			 // 图标间距
 };
 #endif __BAG_H__

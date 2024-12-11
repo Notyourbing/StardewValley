@@ -89,6 +89,20 @@ void Control::initMouseListener()
 	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 
+	listener->onMouseScroll = [this](Event* event) {
+		auto mouseEvent = dynamic_cast<EventMouse*>(event);
+		const int scrollY = static_cast<int>(mouseEvent->getScrollY()); // 垂直滚轮值
+		auto bag = Bag::getInstance();
+		int targetIndex = bag->getSelectedIndex() + scrollY;
+		if (targetIndex < 0) {
+			targetIndex = 0;
+		}
+		if (targetIndex > bag->getSize() - 1) {
+			targetIndex = bag->getSize() - 1;
+		}
+		bag->selectItem(targetIndex);
+		};
+
 	listener->onMouseDown = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();
