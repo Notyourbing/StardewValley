@@ -5,6 +5,7 @@
 #include "FarmScene.h"
 #include "../Constant/Constant.h"
 #include "../SaveManage/SaveManage.h"
+#include "../MyButton/MyButton.h"
 
 USING_NS_CC;
 
@@ -27,48 +28,43 @@ bool Welcome::init() {
     }
     this->addChild(background, -1);     // 将背景添加到场景中
 
-
-    // 新游戏项
-    auto newGameItem = MenuItemImage::create(ResPath::NEW_GAME_ITEM, ResPath::NEW_GAME_ON_ITEM,
-        CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
-    if (newGameItem) {
-        const float x = -1.5 * (newGameItem->getContentSize().width + MENU_ITEM_INTERVAL);
-        newGameItem->setPosition(Vec2(x, 0.0f));
+    const float baseX = WINSIZE.width / 2;;
+    const float baseY = WINSIZE.height / 6;
+    auto newGameButton = MyButton::create(ResPath::NEW_GAME_ITEM, ResPath::NEW_GAME_ON_ITEM);
+    if (newGameButton) {
+        const float x = baseX - 1.5f * (newGameButton->getContentSize().width + MENU_ITEM_INTERVAL);
+        const float y = baseY;
+        newGameButton->setPosition(Vec2(x, y));
+        newGameButton->addClickEventListener(CC_CALLBACK_1(Welcome::menuNewGameCallback, this));
+        addChild(newGameButton, 2);
     }
 
-    // 加载游戏项
-    auto loadGameItem = MenuItemImage::create(ResPath::LOAD_GAME_ITEM, ResPath::LOAD_GAME_ON_ITEM,
-        CC_CALLBACK_1(Welcome::menuLoadGameCallback, this));
-    if (loadGameItem) {
-        const float x = -0.5 * (loadGameItem->getContentSize().width + MENU_ITEM_INTERVAL);
-        loadGameItem->setPosition(Vec2(x, 0.0f));
+    auto loadGameButton = MyButton::create(ResPath::LOAD_GAME_ITEM, ResPath::LOAD_GAME_ON_ITEM);
+    if (loadGameButton) {
+        const float x = baseX - 0.5f * (loadGameButton->getContentSize().width + MENU_ITEM_INTERVAL);
+        const float y = baseY;
+        loadGameButton->setPosition(Vec2(x, y));
+        loadGameButton->addClickEventListener(CC_CALLBACK_1(Welcome::menuLoadGameCallback, this));
+        addChild(loadGameButton, 2);
     }
 
-    // 合作项
-    auto cooperationItem = MenuItemImage::create(ResPath::COOPERATION_ITEM, ResPath::COOPERATION_ON_ITEM,
-        CC_CALLBACK_1(Welcome::menuCooperationCallback, this));
-    if (cooperationItem) {
-        const float x = 0.5 * (cooperationItem->getContentSize().width + MENU_ITEM_INTERVAL);
-        cooperationItem->setPosition(Vec2(x, 0.0f));
+    auto cooperationButton = MyButton::create(ResPath::COOPERATION_ITEM, ResPath::COOPERATION_ON_ITEM);
+    if (cooperationButton) {
+        const float x = baseX + 0.5f * (cooperationButton->getContentSize().width + MENU_ITEM_INTERVAL);
+        const float y = baseY;
+        cooperationButton->setPosition(Vec2(x, y));
+        cooperationButton->addClickEventListener(CC_CALLBACK_1(Welcome::menuCooperationCallback, this));
+        addChild(cooperationButton, 2);
     }
 
-    // 退出项
-    auto closeItem = MenuItemImage::create(ResPath::EXIT_ITEM, ResPath::EXIT_ON_ITEM,
-        CC_CALLBACK_1(Welcome::menuExitCallback, this));
-    if (closeItem) {
-        const float x = 1.5 * (closeItem->getContentSize().width + MENU_ITEM_INTERVAL);
-        closeItem->setPosition(Vec2(x, 0.0f));
+    auto closeButton = MyButton::create(ResPath::EXIT_ITEM, ResPath::EXIT_ON_ITEM);
+    if (closeButton) {
+        const float x = baseX + 1.5f * (closeButton->getContentSize().width + MENU_ITEM_INTERVAL);
+        const float y = baseY;
+        closeButton->setPosition(Vec2(x, y));
+        closeButton->addClickEventListener(CC_CALLBACK_1(Welcome::menuExitCallback, this));
+        addChild(closeButton, 2);
     }
-
-    // 创建菜单容器
-    auto menu = Menu::create(closeItem, NULL);
-    menu->addChild(newGameItem);
-    menu->addChild(loadGameItem);
-    menu->addChild(cooperationItem);
-    const float menuX = WINSIZE.width / 2;
-    const float menuY = WINSIZE.height / 6;
-    menu->setPosition(Vec2(menuX, menuY));
-    this->addChild(menu, 1);
 
     // 欢迎标签
     auto label = Label::createWithTTF("Welcome!", ResPath::FONT_TTF, 24);

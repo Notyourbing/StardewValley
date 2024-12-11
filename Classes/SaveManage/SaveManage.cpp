@@ -83,14 +83,14 @@ bool SaveManage::saveGameData() {
 	SaveData data;
 
 	// 获取玩家数据
-	Player* player = Player::getInstance();
+	const Player* player = Player::getInstance();
 	data.playerData.posX = player->getPositionX();
 	data.playerData.posY = player->getPositionY();
 	data.playerData.dirX = player->getLastDirection().x;
 	data.playerData.dirY = player->getLastDirection().y;
 	
 	// 获取地图数据
-	FarmMap* farmMap = FarmMap::getInstance();
+	const FarmMap* farmMap = FarmMap::getInstance();
 	data.mapData.posX = farmMap->getPositionX();
 	data.mapData.posY = farmMap->getPositionY();
 
@@ -116,9 +116,9 @@ bool SaveManage::loadGameData() {
 		player->setLastDirection(Vec2(data.playerData.dirX, data.playerData.dirY));
 		
 		FarmMap* farmMap = FarmMap::getInstance();
-		Vec2 temp = Vec2(data.mapData.posX, data.mapData.posY);
 		farmMap->setPosition(Vec2(data.mapData.posX, data.mapData.posY));
 		return true;
 	}
+
 	return false;
 }

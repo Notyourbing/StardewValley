@@ -63,6 +63,8 @@ bool NewGame::init() {
 		this->addChild(okButton, 3);
 	}
 
+	auto backButton = MyButton::create(ResPath::BACK_BUTTON, ResPath::BACK_BUTTON);
+
 	// ·µ»ØÏî
 	auto backItem = MenuItemImage::create(ResPath::BACK_BUTTON, ResPath::BACK_BUTTON, CC_CALLBACK_1(NewGame::backCallBack, this));
 	if (backItem) {

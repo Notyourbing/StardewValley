@@ -16,7 +16,7 @@ namespace ResPath {
 	constexpr char COOPERATION_ITEM[] = "icon/cooperationButton.png";
 	constexpr char COOPERATION_ON_ITEM[] = "icon/cooperationButtonOn.png";
 	constexpr char EXIT_ITEM[] = "icon/exitButton.png";
-	constexpr char EXIT_ON_ITEM[] = "icon/exitButton.png";
+	constexpr char EXIT_ON_ITEM[] = "icon/exitButtonOn.png";
 	constexpr char TITLE[] = "icon/title.png";
 	constexpr char FONT_TTF[] = "fonts/Marker Felt.ttf";
 	constexpr char COOP_BACKGROUND[] = "icon/coopBackground.png";

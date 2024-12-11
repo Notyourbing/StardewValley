@@ -40,7 +40,7 @@ bool Farm::init() {
 	this->addChild(player, 3);
 
 	// 玩家名字
-	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", "fonts/Marker Felt.ttf", 24);
+	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", ResPath::FONT_TTF, 24);
 	if (nameLabel) {
 		nameLabel->setPosition(Vec2(WINSIZE.width / 2, WINSIZE.height - 50));
 		this->addChild(nameLabel, 4);
@@ -66,6 +66,7 @@ bool Farm::init() {
 
 	DateManage* dateManage = DateManage::getInstance();
 	addChild(dateManage, 5);
+
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this, dateManage, farmMap](float deltaTime) {
 		dateManage->updateDate();
@@ -80,7 +81,6 @@ void Farm::closeButtonClicked(Ref* pSender) {
 	SaveManage::getInstance()->saveGameData();
 	Director::getInstance()->popScene();
 }
-
 
 Farm::~Farm() {
 	npcs.clear();
