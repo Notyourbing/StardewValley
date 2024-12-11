@@ -26,6 +26,11 @@ public:
 	std::string getItemImage() const {
 		return itemImage;
 	}
+
+	//获取数量
+	int getQuantity() const {
+		return quantity;
+	}
 protected:
 	// 名称
 	std::string itemName;
