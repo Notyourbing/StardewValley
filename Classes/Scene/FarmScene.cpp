@@ -70,7 +70,6 @@ bool Farm::init() {
 	WeatherManager* weatherManager = WeatherManager::create();
 	addChild(weatherManager, 5);
 
-
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this, dateManage, farmMap,weatherManager](float deltaTime) {
 		dateManage->updateDate();

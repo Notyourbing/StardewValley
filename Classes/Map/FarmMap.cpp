@@ -162,7 +162,9 @@
         Player* player = Player::getInstance();
         FarmMap* farmMap = FarmMap::getInstance();
         Bag* bag = Bag::getInstance();
-
+        if (!player->getUseItemEnable()) {
+            return;
+        }
         // 获取要交互的土块位置
         Vec2 playerPosition = player->getPosition();
         const Size tileSize = farmMap->map->getTileSize();

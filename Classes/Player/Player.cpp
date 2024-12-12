@@ -26,6 +26,7 @@ Player* Player::getInstance() {
 Player::Player()
     : velocity(Vec2::ZERO),
     name(""),
+    useItemEnable(true),
     currentAnimationName(""),
     lastDirection(Vec2::ZERO) {
 }
@@ -42,9 +43,6 @@ bool Player::init() {
         return false;
     }
 
-    // 初始速度为零
-    velocity = Vec2::ZERO;
-    
     loadStandFrames();
     // 每dt时间调用一次
     schedule([this](float dt) {
@@ -238,7 +236,7 @@ std::string Player::getCurrentItemName() const {
 
 // 使用当前工具
 void Player::useCurrentItem() {
-    if (currentItem) {
+    if (currentItem && useItemEnable) {
         // 使用工具
         currentItem->useItem();  // 触发工具的动画
         // 使用完成后将工具重新添加回玩家，并恢复玩家状态
@@ -258,4 +256,12 @@ void Player::setCurrentItem(Item* item) {
     if (item) {
         currentItem = item;
     }
+}
+
+bool Player::getUseItemEnable() {
+    return useItemEnable;
+}
+
+void Player::setUseItemEnable(const bool enable) {
+    useItemEnable = enable;
 }

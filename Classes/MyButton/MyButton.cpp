@@ -16,7 +16,7 @@ bool MyButton::init(const std::string& normalImage, const std::string& hoverImag
 	if (!Button::init(normalImage)) {
 		return false;
 	}
-
+	hoverState = false;
 	normal = normalImage;
 	hover = hoverImage;
 
@@ -37,10 +37,16 @@ void MyButton::onMouseMove(Event* event) {
 	// 判断鼠标是否在按钮范围内
 	if (mouseEvent && buttonRect.containsPoint(this->getParent()->convertToNodeSpace(mousePos))) {
 		this->loadTextureNormal(hover); // 鼠标悬浮时切换为hover图片
+		hoverState = true;
 	}
 	else {
 		this->loadTextureNormal(normal); // 鼠标离开时切换回normal图片
+		hoverState = false;
 	}
+}
+
+bool MyButton::isHover() {
+	return hoverState;
 }
 
 

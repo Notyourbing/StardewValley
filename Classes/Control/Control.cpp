@@ -5,6 +5,7 @@
 #include "../Player/Player.h"
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
+#include "../Skill/SkillTreeUI.h"
 
 USING_NS_CC;
 
@@ -26,6 +27,7 @@ bool Control::init() {
 	}
 	initKeyboardListener();
 	initMouseListener();
+
 	return true;
 }
 
@@ -63,7 +65,22 @@ void Control::initKeyboardListener() {
 	// 创建键盘事件监听器
 	auto listener = EventListenerKeyboard::create();
 
-	listener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event) {
+	auto skillTreeLayer = SkillTreeUI::getInstance();
+	addChild(skillTreeLayer);
+	listener->onKeyPressed = [this, skillTreeLayer](EventKeyboard::KeyCode keyCode, Event* event) {
+		if (keyCode == EventKeyboard::KeyCode::KEY_E) {
+			if (SkillTreeUI::isOpen == false) {
+				skillTreeLayer->setVisible(true);
+				skillTreeLayer->openSkill();
+				SkillTreeUI::isOpen = true;
+				Player::getInstance()->setUseItemEnable(false);
+			}
+			else {
+				skillTreeLayer->setVisible(false);
+				SkillTreeUI::isOpen = false;
+				Player::getInstance()->setUseItemEnable(true);
+			}
+		}
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
 			const int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
 			Bag::getInstance()->selectItem(index);

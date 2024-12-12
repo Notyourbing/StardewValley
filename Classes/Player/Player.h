@@ -51,6 +51,12 @@ public:
 
 	// 设置站立动作
 	void setStandPose(const std::string& standPoseName);
+
+	// 设置能否使用当前物品
+	void setUseItemEnable(const bool enable);
+
+	bool getUseItemEnable();
+
 private:
 	// 单例实例
 	static Player* instance;
@@ -70,6 +76,9 @@ private:
 	
 	// 当前物品
 	Item* currentItem;
+
+	// 能否使用物品
+	bool useItemEnable;
 
 	// 私有构造函数，防止多次实例化，确保唯一性
 	Player();
