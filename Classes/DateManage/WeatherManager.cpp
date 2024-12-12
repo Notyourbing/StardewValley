@@ -28,7 +28,7 @@ void WeatherManager::updateWeather(Weather weather) {
 
     // 移除现有的天气粒子系统
     if (currentWeatherSystem) {
-        this->removeChild(currentWeatherSystem);
+        removeChild(currentWeatherSystem);
         currentWeatherSystem = nullptr;
     }
 
@@ -45,7 +45,7 @@ void WeatherManager::updateWeather(Weather weather) {
 
         // 删除背景遮罩
         if (backgroundMask) {
-            this->removeChild(backgroundMask);
+            removeChild(backgroundMask);
             backgroundMask = nullptr;
         }
         break;
@@ -64,7 +64,7 @@ void WeatherManager::updateWeather(Weather weather) {
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 32));			// 半透明黑色
-            this->addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
+            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
         }
         break;
 
@@ -83,7 +83,7 @@ void WeatherManager::updateWeather(Weather weather) {
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 64));			// 更深的半透明黑色
-            this->addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
+            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
         }
         break;
 
@@ -102,19 +102,19 @@ void WeatherManager::updateWeather(Weather weather) {
 
     // 添加粒子系统到场景
     if (currentWeatherSystem) {
-        this->addChild(currentWeatherSystem, 100);
+        addChild(currentWeatherSystem, 100);
     }
 }
 
 // 移除当前天气效果
 void WeatherManager::removeWeatherEffect() {
     if (currentWeatherSystem) {
-        this->removeChild(currentWeatherSystem);
+        removeChild(currentWeatherSystem);
         currentWeatherSystem = nullptr;
     }
 
     if (backgroundMask) {
-        this->removeChild(backgroundMask);
+        removeChild(backgroundMask);
         backgroundMask = nullptr;
     }
 }

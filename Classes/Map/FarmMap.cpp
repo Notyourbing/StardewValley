@@ -22,7 +22,7 @@
     FarmMap* FarmMap::getInstance() {
         if (!instance) {
             instance = new (std::nothrow) FarmMap();
-            if (instance && instance->init("Maps/farmSpring11_28/farmMap.tmx")) {
+            if (instance && instance->init("Maps/farmSpring/farmMap.tmx")) {
                 instance->autorelease();
             }
             else {
@@ -45,7 +45,7 @@
             if (!map) {
                 return false;
             }
-            this->addChild(map);
+            addChild(map);
 
             const auto farmMapSize = getMapSize();
             setPosition(WINSIZE.width / 2 - farmMapSize.width / 2, WINSIZE.height / 2 - farmMapSize.height / 2);
@@ -89,8 +89,6 @@
 
             // 这个lambda函数会在FarmMap的生存期内每dt时间调用一次
             schedule([this](float dt) {
-                // 获取界面尺寸
-                const auto visibleSize = Director::getInstance()->getVisibleSize();
 
                 // 检查目标位置是否是障碍物
                 auto player = Player::getInstance();
@@ -106,8 +104,8 @@
                 }
                 auto position = getPosition() + velocity * dt;
                 // max保证大于等于下界， min保证小于等于上界
-                position.x = std::max(visibleSize.width - getMapSize().width, std::min(position.x, 0.0f));
-                position.y = std::max(visibleSize.height - getMapSize().height, std::min(position.y, 0.0f));
+                position.x = std::max(WINSIZE.width - getMapSize().width, std::min(position.x, 0.0f));
+                position.y = std::max(WINSIZE.height - getMapSize().height, std::min(position.y, 0.0f));
 
                 setPosition(position);
                 }, "farm_map");
@@ -115,11 +113,9 @@
         return true;
     }
 
-    bool FarmMap::npcInit(const Vec2& position, Npc* npc)
-    {
+    bool FarmMap::npcInit(const Vec2& position, Npc* npc) {
         npc->setPosition(position);
-        this->addChild(npc, 5);
-
+        addChild(npc, 5);
         return true;
     }
 
@@ -212,7 +208,7 @@
         else if (mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
             if (currentItemName == "kettle") {
                 int wateringCanIndex = bag->getItemIndex("kettle");
-                int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel();
+                int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->getCurrentWaterLevel();
                 if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
                     dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->refillWateringCan(waterShortageAmount);
                     dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(waterShortageAmount);

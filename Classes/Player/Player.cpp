@@ -6,7 +6,6 @@
 
 USING_NS_CC;
 
-
 // 初始化静态成员变量
 Player* Player::instance = nullptr;
 

@@ -58,7 +58,6 @@ void Pickaxe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            //CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
             // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
