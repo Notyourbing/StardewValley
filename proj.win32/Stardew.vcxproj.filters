@@ -55,7 +55,10 @@
     <Filter Include="Classes\Item">
       <UniqueIdentifier>{2b8df5e3-73d3-4c1f-a076-cc5a4d866b32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\SaveManage">
+    <Filter Include="Classes\Skill">
+      <UniqueIdentifier>{5174faea-d06c-4d18-8bd6-a88960f2571b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene\SaveManage">
       <UniqueIdentifier>{fd50e063-7c10-4b3d-91f2-9ea0d9b1fb8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -148,13 +151,22 @@
       <Filter>Classes\Item</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SaveManage\SaveManage.cpp">
-      <Filter>Classes\SaveManage</Filter>
+      <Filter>Classes\Scene\SaveManage</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Fertilizer.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\DateManage\WeatherManager.cpp">
       <Filter>Classes\DateManage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\SkillTree.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\Skill.cpp">
+      <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill\SkillTreeUI.cpp">
+      <Filter>Classes\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,13 +261,22 @@
       <Filter>Classes\Item</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SaveManage\SaveManage.h">
-      <Filter>Classes\SaveManage</Filter>
+      <Filter>Classes\Scene\SaveManage</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Fertilizer.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\DateManage\WeatherManager.h">
       <Filter>Classes\DateManage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\Skill.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\SkillTree.h">
+      <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill\SkillTreeUI.h">
+      <Filter>Classes\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

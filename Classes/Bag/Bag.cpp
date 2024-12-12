@@ -201,7 +201,7 @@ void Bag::updateDisplay() {
 
 		// 获取标签并显示标签
 		auto label = itemLabels[i];
-		if (label && quantities[i]) {
+		if (label && quantities[i] > 1) {
 			label->setString(std::to_string(quantities[i])); // 设置数量显示
 			const float dPosition = 4.0f;
 			label->setPosition(icon->getPosition() + Vec2(iconSize / 2 - dPosition, -iconSize / 2 + dPosition));  // 显示在图标的右下角
