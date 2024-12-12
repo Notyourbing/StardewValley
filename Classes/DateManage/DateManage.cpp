@@ -55,6 +55,9 @@ bool DateManage::init(const int startYear, const int startDay) {
     addChild(dateLabel);
     dateLabel->setPosition(cocos2d::Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
 
+    // 初始化天气为晴天
+    currentWeater = Weather::Sunny;
+
     return true;
 }
 
@@ -151,4 +154,40 @@ void DateManage::updateDate() {
     dateLabel->setString(dateStream.str());
 
     checkFestivalEvent();
+
+    // 更新天气
+    updateCurrentWeather();
+}
+
+// 获取当前的天气
+Weather DateManage::getCurrentWeather() const{
+    return currentWeater;
+}
+
+// 更新每天的天气
+void DateManage::updateCurrentWeather() {
+    // 获取当前的天气
+    std::string currentSeason = getCurrentSeason();
+
+    // 每个天气发生的概率
+    float sunnyProb = 0.6f;
+    float lightRainProb = 0.2f;
+    float heavyRainProb = (currentSeason == "Winter") ? 0.1f : 0.2f;
+
+    // 生成随机数
+    float randomValue = static_cast<float>(rand()) / RAND_MAX;
+
+    // 根据随机数判断天气
+    if (randomValue < sunnyProb) {
+        currentWeater = Weather::Sunny;
+    }
+    else if (randomValue < sunnyProb + lightRainProb) {
+        currentWeater = Weather::LightRain;
+    }
+    else if (randomValue < sunnyProb + lightRainProb + heavyRainProb) {
+        currentWeater = Weather::HeavyRain;
+    }
+    else {
+        currentWeater = Weather::Snowy;
+    }
 }
