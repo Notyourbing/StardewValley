@@ -392,6 +392,7 @@ constexpr char WINTER_CONVERSATION[] = "Merry Christmas and Happy Birthday to le
 // FarmMap
 constexpr int FARMMAP_WIDTH = 31;
 constexpr int FARMMAP_HEIGHT = 17;
+constexpr int SUN_OFFSET = 100;
 
 // TileNode
 constexpr int SOIL_GID = 36;

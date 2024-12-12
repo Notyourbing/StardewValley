@@ -8,7 +8,6 @@
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
 #include "../DateManage/DateManage.h"
-#include "../Map/Animal.h"
 
 class Farm : public cocos2d::Scene {
 public:
@@ -21,12 +20,11 @@ public:
 	//该地图上所有npc，静态成员变量
 	static std::vector<Npc*> npcs;
 
-	// 析构函数，负责管理静态成员变量的内存
+	// 析构函数
 	~Farm();
-
 private:
+
 	void closeButtonClicked(Ref* pSender);
-	
 };
 
 #endif

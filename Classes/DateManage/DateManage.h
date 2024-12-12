@@ -4,7 +4,15 @@
 #include "cocos2d.h"
 #include "../Festival/Festival.h"
 
-class DateManage : public cocos2d::Node{
+// 天气的枚举类
+enum class Weather {
+    Sunny,
+    LightRain,
+    HeavyRain,
+    Snowy,
+};
+
+class DateManage : public cocos2d::Node {
 public:
     // 用于显示日期的标签
     cocos2d::Label* dateLabel;
@@ -46,6 +54,12 @@ public:
 
     //时间增加
     void updateDate();
+
+    // 获得当前的天气
+    Weather getCurrentWeather() const;
+
+    // 更新每天的天气
+    void updateCurrentWeather();
 private:
     // 私有构造函数，防止外部直接创建对象
     DateManage();
@@ -57,6 +71,9 @@ private:
     // 存储日期、年份等信息
     int currentDay;
     int currentYear;
+
+    // 存储当前的天气
+    Weather currentWeater;
 };
 
 #endif

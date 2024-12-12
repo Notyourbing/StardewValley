@@ -4,6 +4,7 @@
 #include "../MyButton/MyButton.h"
 #include "../Control/Control.h"
 #include "../DialogueBox/DialogueBox.h"
+#include "../DateManage/WeatherManager.h"
 #include "../SaveManage/SaveManage.h"
 
 USING_NS_CC;
@@ -22,7 +23,6 @@ bool Farm::init() {
 	if (!farmMap) {
 		return false;
 	}
-
 
 	this->addChild(farmMap, 0);
 
@@ -67,10 +67,15 @@ bool Farm::init() {
 	DateManage* dateManage = DateManage::getInstance();
 	addChild(dateManage, 5);
 
+	WeatherManager* weatherManager = WeatherManager::create();
+	this->addChild(weatherManager, 5);
+
+
 	// 启动一个定时器，每秒调用一次 updateDate 方法
-	schedule([this, dateManage, farmMap](float deltaTime) {
+	schedule([this, dateManage, farmMap,weatherManager](float deltaTime) {
 		dateManage->updateDate();
 		farmMap->farmMapUpdateByTime();
+		weatherManager->updateWeather(dateManage->getCurrentWeather());
 		}, 1.0f, "update_date_key");
 
 	return true;
