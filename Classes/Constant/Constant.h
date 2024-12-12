@@ -16,9 +16,10 @@ namespace ResPath {
 	constexpr char COOPERATION_ITEM[] = "icon/cooperationButton.png";
 	constexpr char COOPERATION_ON_ITEM[] = "icon/cooperationButtonOn.png";
 	constexpr char EXIT_ITEM[] = "icon/exitButton.png";
-	constexpr char EXIT_ON_ITEM[] = "icon/exitButton.png";
+	constexpr char EXIT_ON_ITEM[] = "icon/exitButtonOn.png";
 	constexpr char TITLE[] = "icon/title.png";
 	constexpr char FONT_TTF[] = "fonts/Marker Felt.ttf";
+	constexpr char FONT_ARIAL[] = "fonts/arial.ttf";
 	constexpr char COOP_BACKGROUND[] = "icon/coopBackground.png";
 	constexpr char COOP_PANEL[] = "icon/cooperationPanel.png";
 	constexpr char NAME_BAR[] = "icon/nameBar.png";
@@ -85,7 +86,7 @@ namespace ResPath {
 	constexpr char SCYTHE_DOWN_2[] = "tools/scythe/downUseScythe2.png";
 	constexpr char SCYTHE_DOWN_3[] = "tools/scythe/downUseScythe3.png";
 
-	//fising
+	//fishing
 	constexpr char DOWN_FISHING_OUT_1[] = "tools/fishing/downOut1.png";
 	constexpr char DOWN_FISHING_OUT_2[] = "tools/fishing/downOut2.png";
 	constexpr char DOWN_FISHING_OUT_3[] = "tools/fishing/downOut3.png";
@@ -128,12 +129,38 @@ namespace ResPath {
 	constexpr char RIGHT_FISHING_IN_4[] = "tools/fishing/rightIn4.png";
 	constexpr char RIGHT_FISHING_IN_5[] = "tools/fishing/rightIn5.png";
 
+	//KETTLE
+	constexpr char KETTLE_RIGHT_1[] = "tools/kettle/rightUseKettle1.png";
+	constexpr char KETTLE_RIGHT_2[] = "tools/kettle/rightUseKettle2.png";
+	constexpr char KETTLE_RIGHT_3[] = "tools/kettle/rightUseKettle3.png";
+	constexpr char KETTLE_RIGHT_4[] = "tools/kettle/rightUseKettle4.png";
+	constexpr char KETTLE_RIGHT_5[] = "tools/kettle/rightUseKettle5.png";
+	constexpr char KETTLE_LEFT_1[] = "tools/kettle/leftUseKettle1.png";
+	constexpr char KETTLE_LEFT_2[] = "tools/kettle/leftUseKettle2.png";
+	constexpr char KETTLE_LEFT_3[] = "tools/kettle/leftUseKettle3.png";
+	constexpr char KETTLE_LEFT_4[] = "tools/kettle/leftUseKettle4.png";
+	constexpr char KETTLE_LEFT_5[] = "tools/kettle/leftUseKettle5.png";
+	constexpr char KETTLE_UP_1[] = "tools/kettle/upUseKettle1.png";
+	constexpr char KETTLE_UP_2[] = "tools/kettle/upUseKettle2.png";
+	constexpr char KETTLE_UP_3[] = "tools/kettle/upUseKettle3.png";
+	constexpr char KETTLE_UP_4[] = "tools/kettle/upUseKettle4.png";
+	constexpr char KETTLE_DOWN_1[] = "tools/kettle/downUseKettle1.png";
+	constexpr char KETTLE_DOWN_2[] = "tools/kettle/downUseKettle2.png";
+	constexpr char KETTLE_DOWN_3[] = "tools/kettle/downUseKettle3.png";
+
 	// 玩家站立帧
 	constexpr char STAND_RIGHT[] = "playerWalkImages/standRight.png";
 	constexpr char STAND_LEFT[] = "playerWalkImages/standLeft.png";
 	constexpr char STAND_UP[] = "playerWalkImages/standUp.png";
 	constexpr char STAND_DOWN[] = "playerWalkImages/standDown.png";
 }
+//工具图片
+constexpr char AXE[] = "tools/axe.png";
+constexpr char FISHING_ROD[] = "tools/fishingRod.png";
+constexpr char HOE[] = "tools/hoe.png";
+constexpr char PICKAXE[] = "tools/pickaxe.png";
+constexpr char SCYTHE[] = "tools/scythe.png";
+constexpr char KETTLE[] = "tools/kettle.png";
 
 // 工具动画帧的裁剪区域
 namespace ToolRects {
@@ -234,6 +261,25 @@ namespace ToolRects {
 	const cocos2d::Rect UP_FISHING_IN_2(0, 0, 97, 270);
 	const cocos2d::Rect UP_FISHING_IN_3(0, 0, 70, 163);
 
+	//kettle
+	const cocos2d::Rect KETTLE_RIGHT_1(0, 0, 176, 150);
+	const cocos2d::Rect KETTLE_RIGHT_2(0, 0, 195, 141);
+	const cocos2d::Rect KETTLE_RIGHT_3(0, 0, 162, 166);
+	const cocos2d::Rect KETTLE_RIGHT_4(0, 0, 156, 182);
+	const cocos2d::Rect KETTLE_RIGHT_5(0, 0, 155, 177);
+	const cocos2d::Rect KETTLE_LEFT_1(0, 0, 176, 150);
+	const cocos2d::Rect KETTLE_LEFT_2(0, 0, 195, 141);
+	const cocos2d::Rect KETTLE_LEFT_3(0, 0, 162, 166);
+	const cocos2d::Rect KETTLE_LEFT_4(0, 0, 156, 182);
+	const cocos2d::Rect KETTLE_LEFT_5(0, 0, 155, 177);
+	const cocos2d::Rect KETTLE_UP_1(0, 0, 106, 130);
+	const cocos2d::Rect KETTLE_UP_2(0, 0, 92, 182);
+	const cocos2d::Rect KETTLE_UP_3(0, 0, 122, 188);
+	const cocos2d::Rect KETTLE_UP_4(0, 0, 118, 149);
+	const cocos2d::Rect KETTLE_DOWN_1(0, 0, 95, 131);
+	const cocos2d::Rect KETTLE_DOWN_2(0, 0, 91, 160);
+	const cocos2d::Rect KETTLE_DOWN_3(0, 0, 163, 235);
+
 	// 玩家站立帧 Rect
 	const cocos2d::Rect STAND_RIGHT(0, 0, 70, 120);
 	const cocos2d::Rect STAND_LEFT(0, 0, 70, 120);
@@ -325,6 +371,11 @@ constexpr int LABEL_HEIGHT = 390;
 constexpr int WATER_SCARCITY_DAY = 5;
 constexpr int INFESTED_DAY = 5;
 
+//SEED
+constexpr char APPLE_SEED[] = "tools/appleSeed.png";
+constexpr char CARROT_SEED[] = "tools/carrotSeed.png";
+constexpr char CORN_SEED[] = "tools/cornSeed.png";
+constexpr char FERTILIZER[] = "tools/fertilizer.png";
 
 // DateManage
 const std::unordered_map<std::string, int>
@@ -362,29 +413,30 @@ constexpr int CORN_GID = 3;
 constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量
 constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 
+//Item
+struct ItemInfo {
+	const char* name;             // 名称
+	const char* image;            // 图片路径
+	int quantity;                 // 数量
+};
+
 // fish
-struct FishInfo {
-	const char* name;             // 鱼的名称
-	const char* image;            // 鱼的图片路径
-	const int quantity;             // 数量
-};
-
 // 示例鱼类数据
-constexpr FishInfo PUFFER_FISH = {
-	"Puffer Fish",               // 鱼的名称
-	"items/pufferFish.png",      // 图片路径
+constexpr ItemInfo PUFFER_FISH = {
+	"pufferFish",               // 鱼的名称
+	"tools/pufferFish.png",      // 图片路径
 	1,
 };
 
-constexpr FishInfo TUNA = {
-	"Tuna",                      // 鱼的名称
-	"items/tuna.png",            // 图片路径
+constexpr ItemInfo TUNA = {
+	"tuna",                      // 鱼的名称
+	"tools/tuna.png",            // 图片路径
 	1,
 };
 
-constexpr FishInfo ANCHOVY = {
-	"Anchovy",                   // 鱼的名称
-	"items/anchovy.png",         // 图片路径
+constexpr ItemInfo ANCHOVY = {
+	"anchovy",                   // 鱼的名称
+	"tools/anchovy.png",         // 图片路径
 	1,
 };
 

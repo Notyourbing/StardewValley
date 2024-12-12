@@ -63,6 +63,8 @@ bool NewGame::init() {
 		this->addChild(okButton, 3);
 	}
 
+	auto backButton = MyButton::create(ResPath::BACK_BUTTON, ResPath::BACK_BUTTON);
+
 	// 返回项
 	auto backItem = MenuItemImage::create(ResPath::BACK_BUTTON, ResPath::BACK_BUTTON, CC_CALLBACK_1(NewGame::backCallBack, this));
 	if (backItem) {
@@ -91,8 +93,10 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 		playerName = DEFAULT_PLAYER_NAME;
 	}
 
-	// 将名字设置到Player单例中
-	Player::getInstance()->setPlayerName(playerName);
+	// 人物数据设置
+	auto player = Player::getInstance();
+	player->setPlayerName(playerName);
+	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2);
 
 	// 进入FramScene
 	auto farmScene = Farm::create();

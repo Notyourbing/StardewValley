@@ -55,6 +55,9 @@
     <Filter Include="Classes\Item">
       <UniqueIdentifier>{2b8df5e3-73d3-4c1f-a076-cc5a4d866b32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\SaveManage">
+      <UniqueIdentifier>{fd50e063-7c10-4b3d-91f2-9ea0d9b1fb8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -117,7 +120,7 @@
     <ClCompile Include="..\Classes\Map\TileNode.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Tool\WateringCan.cpp">
+    <ClCompile Include="..\Classes\Tool\Kettle.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SaveManage\SaveManage.cpp">
+      <Filter>Classes\SaveManage</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Fertilizer.cpp">
       <Filter>Classes\Tool</Filter>
@@ -212,7 +218,7 @@
     <ClInclude Include="..\Classes\Map\TileNode.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Tool\WateringCan.h">
+    <ClInclude Include="..\Classes\Tool\Kettle.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MyButton\MyButton.h">
@@ -238,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SaveManage\SaveManage.h">
+      <Filter>Classes\SaveManage</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Fertilizer.h">
       <Filter>Classes\Tool</Filter>

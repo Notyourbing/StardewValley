@@ -17,20 +17,21 @@ public:
 
 	CREATE_FUNC(Farm);
 
-	// 该地图上所有npc
+	//该地图上所有npc，静态成员变量
 	static std::vector<Npc*> npcs;
 
+	// 析构函数
+	~Farm();
+private:
 	// 当前天气系统
 	ParticleSystemQuad* currentWeatherSystem = nullptr;
 
 	// 背景遮罩
 	LayerColor* backgroundMask = nullptr;
 
-private:
-	// 更新地图中的天气
-	void updateWeather(Weather weather);
-
 	void closeButtonClicked(Ref* pSender);
+	
+	void updateWeather(Weather weather);
 };
 
 #endif

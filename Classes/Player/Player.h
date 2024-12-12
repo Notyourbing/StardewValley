@@ -32,6 +32,9 @@ public:
 	// 获取人物最后朝向
 	cocos2d::Vec2 getLastDirection() const;
 
+	// 设置人物最后朝向
+	void setLastDirection(const cocos2d::Vec2& direction);
+
 	// 设置当前物品
 	void setCurrentItem(Item* item);
 

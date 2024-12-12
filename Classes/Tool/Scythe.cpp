@@ -16,7 +16,7 @@ Scythe* Scythe::create() {
 
 bool Scythe::init() {
     // 调用基类的初始化方法
-    return Tool::init("scythe");
+    return Tool::init({ "scythe", SCYTHE, 1});
 }
 
 void Scythe::useItem() {

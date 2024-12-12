@@ -4,7 +4,7 @@
 #include "../Tool/Hoe.h"
 #include "../Tool/Scythe.h"
 #include "../Tool/FishingRod.h"
-#include "../Tool/WateringCan.h"
+#include "../Tool/Kettle.h"
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
 #include "../Tool/Fertilizer.h"
@@ -42,13 +42,13 @@ bool Bag::init() {
 	}
 
 	// 初始化工具
-	items.resize(capacity, nullptr);
+	items.resize(row * capacity, nullptr);
+	quantities.resize(row * capacity, 0);
 	selectedIndex = 0;
 
-	const auto visibleSize = Director::getInstance()->getVisibleSize();
-	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
-	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
-
+	// 背包的左下角位置
+	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
+	const float startY = 60.0f; // 背包显示在屏幕底部，距底部 60 像素
 
 	bagBackground = Sprite::create(ResPath::BAG_BACKGROUND);
 	if (bagBackground) {
@@ -56,18 +56,15 @@ bool Bag::init() {
 		this->addChild(bagBackground, 0);
 	}
 
-
 	// 初始化工具图标
-	for (int i = 0; i < capacity; ++i) {
-		auto icon = Sprite::create(); // 空白图标
-		icon->setVisible(false);
-		addChild(icon);
-		itemIcons.push_back(icon);
+	for (int i = 0; i < row * capacity; ++i) {
+		auto label = Label::createWithTTF(std::to_string(quantities[i]), ResPath::FONT_TTF, 30);
+		label->setVisible(false);
+		itemLabels.push_back(label);
+		addChild(label, 2);
 	}
 
-	// 更新显示
-	updateDisplay();
-
+	// 添加初始化的物品
 	Tool* axe = Axe::create();
 	addItem(axe);
 	Tool* pickaxe = Pickaxe::create();
@@ -90,14 +87,44 @@ bool Bag::init() {
 	addItem(fertilizer);
 	selectItem(0);
 
+	// 创建一个 DrawNode 对象
+	auto drawNode = DrawNode::create();
+
+	// 定义正方形的四个顶点
+	Vec2 bottomLeft(0,0);									// 左下角顶点
+	Vec2 bottomRight = bottomLeft + Vec2(iconSize, 0.0f);	// 右下角定点
+	Vec2 topRight = bottomLeft + Vec2(iconSize, iconSize);	// 右上角顶点
+	Vec2 topLeft = bottomLeft + Vec2(0.0f, iconSize);		// 左上角顶点
+
+	// 使用 drawPolygon 绘制红色边框的正方形
+	Vec2 vertices[] = { bottomLeft, bottomRight, topRight, topLeft };
+	drawNode->drawPolygon(
+		vertices,               // 顶点数组
+		4,                      // 顶点个数
+		Color4F(0, 0, 0, 0),    // 填充颜色（透明）
+		2.0f,                   // 边框宽度
+		Color4F::RED            // 边框颜色（红色）
+	);
+	addChild(drawNode, 2, "drawNode");
+
+	// 更新显示
+	updateDisplay();
 	return true;
 }
 
 bool Bag::addItem(Item* item) {
-	// 检查是否有空位
-	for (int i = 0; i < capacity; ++i) {
+	// 遍历整个背包
+	for (int i = 0; i < row * capacity; ++i) {
+		// 要加入的物品已经在背包中存在
+		if (items[i] && (item->getItemName() == items[i]->getItemName())) {
+			quantities[i]++;
+			updateDisplay();
+			return true;
+		}
+		// 找到了一个空位
 		if (items[i] == nullptr) {
 			items[i] = item;
+			quantities[i] = item->getQuantity();
 			addChild(item);
 			updateDisplay();
 			return true;
@@ -107,7 +134,7 @@ bool Bag::addItem(Item* item) {
 }
 
 void Bag::removeItem(const int index) {
-	if (index >= 0 && index < capacity && items[index]) {
+	if (index >= 0 && index < row * capacity && items[index]) {
 		removeChild(items[index]);
 		items[index] = nullptr;
 		updateDisplay();
@@ -115,14 +142,14 @@ void Bag::removeItem(const int index) {
 }
 
 Item* Bag::getItem(const int index) const {
-	if (index >= 0 && index < capacity) {
+	if (index >= 0 && index < row * capacity) {
 		return items[index];
 	}
 	return nullptr;
 }
 
 void Bag::selectItem(const int index) {
-	if (index >= 0 && index < capacity && items[index]) {
+	if (index >= 0 && index < row * capacity && items[index]) {
 		selectedIndex = index;
 		Player::getInstance()->setCurrentItem(items[index]);
 	}
@@ -137,29 +164,44 @@ Item* Bag::getSelectedItem() const {
 }
 
 void Bag::updateDisplay() {
-	const auto visibleSize = Director::getInstance()->getVisibleSize();
-	const float startX = visibleSize.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
-	const float startY = 50.0f; // 背包显示在屏幕底部，距底部 50 像素
+	const auto WINSIZE = Director::getInstance()->getVisibleSize();
+	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 2) * spacing) / 2;
+	const float startY = 100.0f; // 背包显示在屏幕底部，距底部 100 像素
 
 	// 更新工具图标
-	for (int i = 0; i < capacity; ++i) {
-		auto icon = itemIcons[i];
-		if (items[i]) {
-			icon->setTexture("tools/" + items[i]->getItemName() + ".png");
-			icon->setVisible(true);
+	for (int i = 0; i < row * capacity; ++i) {
+		auto icon = items[i];
+		if (icon == nullptr) {
+			continue;
 		}
-		else
-			icon->setVisible(false);
+		const auto iconPositon = Vec2(
+			startX + i % capacity * (iconSize + spacing) + iconSize / 2,
+			startY + iconSize / 2 - (iconSize + spacing) * (i / capacity));
 
+		auto label = itemLabels[i];
+		icon->setVisible(true);
+	
 		// 设置位置
-		icon->setPosition(Vec2(
-			startX + i * (iconSize + spacing) + iconSize / 2,
-			startY + iconSize / 2
-		));
+		icon->setPosition(iconPositon);
+		if (label) {
+			label->setPosition(icon->getPosition() + Vec2(20, 20));  // 显示在图标的右上角
+			// 数量超过一个
+			if (quantities[i] > 1) {
+				label->setString(std::to_string(quantities[i])); // 设置数量显示
+			}
+		}
 
-		// 如果是选中工具,添加高亮
+		// 红色矩形框
 		if (i == selectedIndex) {
-			icon->setColor(Color3B::YELLOW);
+			auto drawNode = getChildByName("drawNode");
+			if (drawNode) {
+				drawNode->setPosition(iconPositon - Vec2(iconSize / 2, iconSize / 2));
+			}
+		}
+
+		// 如果是选中物品,添加高亮
+		if (i == selectedIndex) {
+			icon->setColor(Color3B::ORANGE);
 		}
 		else {
 			icon->setColor(Color3B::WHITE);
@@ -168,11 +210,21 @@ void Bag::updateDisplay() {
 }
 
 // 获取工具的索引
-int Bag::getToolIndex(std::string toolName) {
+int Bag::getToolIndex(const std::string& toolName) {
 	// 遍历存储工具的位置
 	for (int i = 0; i < static_cast<int>(items.size()); i++) {
 		if (items[i]->getItemName() == toolName) {
 			return i;
 		}
 	}
+	return 0; // 没找到就默认第一个
+}
+
+int Bag::getSize() {
+	for (int i = 0; i < row * capacity; ++i) {
+		if (items[i] == nullptr) {
+			return i;
+		}
+	}
+	return row * capacity;
 }

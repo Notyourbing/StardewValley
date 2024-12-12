@@ -5,6 +5,7 @@
 #include "../Control/Control.h"
 #include "../DialogueBox/DialogueBox.h"
 #include "../DateManage/Weather.h"
+#include "../SaveManage/SaveManage.h"
 
 USING_NS_CC;
 
@@ -18,25 +19,14 @@ bool Farm::init() {
 	if (!Scene::init()) {
 		return false;
 	}
-	DateManage* dateManage = DateManage::getInstance();
-
 	FarmMap* farmMap = FarmMap::getInstance();
-	if (!farmMap->init("Maps/farmSpring11_28/farmMap.tmx")) {
+	if (!farmMap) {
 		return false;
 	}
 
 	currentWeatherSystem = nullptr;
 	backgroundMask = nullptr;
 
-	// 启动一个定时器，每秒调用一次 updateDate 方法
-	schedule([this, dateManage,farmMap](float deltaTime) {
-		dateManage->updateDate();
-		farmMap->farmMapUpdateByTime();
-		this->updateWeather(dateManage->getCurrentWeather());
-		}, 1.0f, "update_date_key");
-
-	const auto farmMapSize = farmMap->getMapSize();
-	farmMap->setPosition(WINSIZE.width / 2 -farmMapSize.width / 2, WINSIZE.height / 2 -farmMapSize.height / 2);
 	this->addChild(farmMap, 0);
 
 	// 加入两个NPC
@@ -50,11 +40,10 @@ bool Farm::init() {
 
 	// 玩家
 	auto player = Player::getInstance();
-	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 玩家初始位置在屏幕中央
 	this->addChild(player, 3);
 
 	// 玩家名字
-	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", "fonts/Marker Felt.ttf", 24);
+	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", ResPath::FONT_TTF, 24);
 	if (nameLabel) {
 		nameLabel->setPosition(Vec2(WINSIZE.width / 2, WINSIZE.height - 50));
 		this->addChild(nameLabel, 4);
@@ -78,11 +67,15 @@ bool Farm::init() {
 	Control* control = Control::create();
 	this->addChild(control, 4);
 
-	 // 创建显示日期的标签
-	 if (dateManage->dateLabel) {
-		 dateManage->dateLabel->setPosition(Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
-		 this->addChild(dateManage->dateLabel, 5);
-	 }
+	DateManage* dateManage = DateManage::getInstance();
+	addChild(dateManage, 5);
+
+	// 启动一个定时器，每秒调用一次 updateDate 方法
+	schedule([this, dateManage, farmMap](float deltaTime) {
+		dateManage->updateDate();
+		farmMap->farmMapUpdateByTime();
+		}, 1.0f, "update_date_key");
+
 	return true;
 }
 
@@ -169,5 +162,10 @@ void Farm::updateWeather(Weather weather) {
 }
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {
+	SaveManage::getInstance()->saveGameData();
 	Director::getInstance()->popScene();
+}
+
+Farm::~Farm() {
+	npcs.clear();
 }
