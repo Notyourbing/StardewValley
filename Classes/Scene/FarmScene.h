@@ -23,15 +23,8 @@ public:
 	// 析构函数
 	~Farm();
 private:
-	// 当前天气系统
-	ParticleSystemQuad* currentWeatherSystem = nullptr;
-
-	// 背景遮罩
-	LayerColor* backgroundMask = nullptr;
 
 	void closeButtonClicked(Ref* pSender);
-	
-	void updateWeather(Weather weather);
 };
 
 #endif
