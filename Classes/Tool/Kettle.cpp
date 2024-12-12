@@ -16,7 +16,7 @@ Kettle* Kettle ::create() {
 
 bool Kettle::init() {
 	// 调用基类的初始化方法
-    return Tool::init({"kettle", KETTLE, 1});
+    return Tool::init({"kettle", KETTLE});
 }
 
 // 获得当前水壶里的水量

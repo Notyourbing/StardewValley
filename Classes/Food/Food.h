@@ -7,25 +7,16 @@
 
 class Food : public Item {
 public:
-    Food() {};
-
+    // 静态创建函数
     static Food* create(const ItemInfo& item_info);
 
     // 初始化方法
     virtual bool init(const ItemInfo& item_info) override;
 
+    // 重写使用物品
     virtual void useItem() override;
 
-    // 增加物品数量
-    void addQuantity(int count);
-
-    // 设置物品数量显示
-    void updateQuantityDisplay();
-
-    Food(const Food& other);
-
-    Food& operator=(const Food& other);
-    void increaseCount();
+    // 判断是否是相同物品，建议放到Item类中（我不知道为什么放在这里，如果是这个类独有的最好起名isSameFood）
     bool isSameItem(const Food& other) const;
 };
 

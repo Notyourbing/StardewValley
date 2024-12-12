@@ -26,7 +26,7 @@ FishingRod* FishingRod::create() {
 bool FishingRod::init()
 {
     // 调用基类的初始化方法
-    return Tool::init({ "fishingRod", FISHING_ROD, 1});
+    return Tool::init({ "fishingRod", FISHING_ROD});
 }
 
 void FishingRod::useItem()

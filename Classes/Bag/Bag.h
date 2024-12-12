@@ -34,18 +34,21 @@ public:
 	int getSize();
 
 	// 获取背包中物品的索引
-	int getToolIndex(const std::string& toolName);
+	int getItemIndex(const std::string& itemName);
 
 	// 获取当前选中物品的索引
 	int getSelectedIndex() {
 		return selectedIndex;
 	}
 
+	// 重写基类成员函数getContentSize()
+	const cocos2d::Size& getContentSize() const override;
+
+
 	// 当前所拥有的物品
 	std::vector<Item*> items;
 
-	// 物品数量
-	std::vector<int> quantities;
+
 
 private:
 	// 单例实例
@@ -66,6 +69,8 @@ private:
 	cocos2d::Sprite* bagBackground;			 // 背景框
 	std::vector<cocos2d::Label*> itemLabels; // 物品数量标签
 
+	// 每个物品的数量
+	std::vector<int> quantities;
 	static const int capacity = 9;			 // 背包放物品的一行容量
 	static const int row = 2;				 // 2行
 	static const int iconSize = 54;			 // 每个图标的宽度/高度

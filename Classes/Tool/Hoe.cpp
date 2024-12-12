@@ -16,7 +16,7 @@ Hoe* Hoe::create() {
 
 bool Hoe::init() {
 	// 调用基类的初始化方法
-    return Tool::init({ "hoe", HOE, 1});
+    return Tool::init({ "hoe", HOE});
 }
 
 void Hoe::useItem() {

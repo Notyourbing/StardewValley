@@ -416,27 +416,23 @@ constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 struct ItemInfo {
 	const char* name;             // 名称
 	const char* image;            // 图片路径
-	int quantity;                 // 数量
 };
 
 // fish
 // 示例鱼类数据
 constexpr ItemInfo PUFFER_FISH = {
 	"pufferFish",               // 鱼的名称
-	"tools/pufferFish.png",      // 图片路径
-	1,
+	"tools/pufferFish.png"      // 图片路径
 };
 
 constexpr ItemInfo TUNA = {
 	"tuna",                      // 鱼的名称
 	"tools/tuna.png",            // 图片路径
-	1,
 };
 
 constexpr ItemInfo ANCHOVY = {
 	"anchovy",                   // 鱼的名称
 	"tools/anchovy.png",         // 图片路径
-	1,
 };
 
 #endif __CONSTANT_H

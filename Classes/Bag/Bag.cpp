@@ -41,27 +41,21 @@ bool Bag::init() {
 		return false;
 	}
 
-	// 初始化工具
+	// 初始化背包大小
 	items.resize(row * capacity, nullptr);
 	quantities.resize(row * capacity, 0);
+	itemLabels.resize(row * capacity, nullptr);
 	selectedIndex = 0;
 
-	// 背包的左下角位置
+	// 背包左下角的位置
 	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
 	const float startY = 60.0f; // 背包显示在屏幕底部，距底部 60 像素
 
+	// 背包背景
 	bagBackground = Sprite::create(ResPath::BAG_BACKGROUND);
 	if (bagBackground) {
 		bagBackground->setPosition(Vec2(startX + (capacity * (iconSize + spacing)) / 2, startY + iconSize / 2));
-		this->addChild(bagBackground, 0);
-	}
-
-	// 初始化工具图标
-	for (int i = 0; i < row * capacity; ++i) {
-		auto label = Label::createWithTTF(std::to_string(quantities[i]), ResPath::FONT_TTF, 30);
-		label->setVisible(false);
-		itemLabels.push_back(label);
-		addChild(label, 2);
+		this->addChild(bagBackground, 0, "bagBackground");
 	}
 
 	// 添加初始化的物品
@@ -81,20 +75,27 @@ bool Bag::init() {
 	addItem(appleSeed);
 	Tool* cornSeed = CornSeed::create();
 	addItem(cornSeed);
+	//Tool* cornSeed2 = CornSeed::create();
+	//addItem(cornSeed2);
 	Tool* carrotSeed = CarrotSeed::create();
 	addItem(carrotSeed);
 	Tool* fertilizer = Fertilizer::create();
 	addItem(fertilizer);
+	Food* tuna = Food::create(TUNA);
+	addItem(tuna);
+
 	selectItem(0);
+
 
 	// 创建一个 DrawNode 对象
 	auto drawNode = DrawNode::create();
 
 	// 定义正方形的四个顶点
-	Vec2 bottomLeft(0,0);									// 左下角顶点
-	Vec2 bottomRight = bottomLeft + Vec2(iconSize, 0.0f);	// 右下角定点
-	Vec2 topRight = bottomLeft + Vec2(iconSize, iconSize);	// 右上角顶点
-	Vec2 topLeft = bottomLeft + Vec2(0.0f, iconSize);		// 左上角顶点
+	const float expand = 4.0f;
+	Vec2 bottomLeft(-expand, -expand * 1.5f);									// 左下角顶点
+	Vec2 bottomRight = bottomLeft + Vec2(iconSize + 2 * expand, 0.0f);	// 右下角定点
+	Vec2 topRight = bottomLeft + Vec2(iconSize + 2 * expand, iconSize + 2 * expand);	// 右上角顶点
+	Vec2 topLeft = bottomLeft + Vec2(0.0f, iconSize + 2 * expand);		// 左上角顶点
 
 	// 使用 drawPolygon 绘制红色边框的正方形
 	Vec2 vertices[] = { bottomLeft, bottomRight, topRight, topLeft };
@@ -124,8 +125,13 @@ bool Bag::addItem(Item* item) {
 		// 找到了一个空位
 		if (items[i] == nullptr) {
 			items[i] = item;
-			quantities[i] = item->getQuantity();
 			addChild(item);
+			quantities[i] = 1;
+
+			// 创建标签并加入背包
+			auto label = Label::createWithTTF(std::to_string(quantities[i]), ResPath::FONT_TTF, 14);
+			itemLabels[i] = label;
+			addChild(label, 3);
 			updateDisplay();
 			return true;
 		}
@@ -133,10 +139,23 @@ bool Bag::addItem(Item* item) {
 	return false;
 }
 
+// 从背包中移出物品item
 void Bag::removeItem(const int index) {
 	if (index >= 0 && index < row * capacity && items[index]) {
+		// 移出当前物体
 		removeChild(items[index]);
+		removeChild(itemLabels[index]);
 		items[index] = nullptr;
+		quantities[index] = 0;
+		// 后面的每一个物品向前移
+		for (int i = index + 1; i < row * capacity - 1; ++i) {
+			if (!items[i]) {
+				break;
+			}
+			items[i - 1] = items[i];
+			quantities[i - 1] = quantities[i];
+			itemLabels[i - 1] = itemLabels[i];
+		}
 		updateDisplay();
 	}
 }
@@ -164,7 +183,6 @@ Item* Bag::getSelectedItem() const {
 }
 
 void Bag::updateDisplay() {
-	const auto WINSIZE = Director::getInstance()->getVisibleSize();
 	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 2) * spacing) / 2;
 	const float startY = 100.0f; // 背包显示在屏幕底部，距底部 100 像素
 
@@ -178,17 +196,15 @@ void Bag::updateDisplay() {
 			startX + i % capacity * (iconSize + spacing) + iconSize / 2,
 			startY + iconSize / 2 - (iconSize + spacing) * (i / capacity));
 
-		auto label = itemLabels[i];
 		icon->setVisible(true);
-	
-		// 设置位置
 		icon->setPosition(iconPositon);
-		if (label) {
-			label->setPosition(icon->getPosition() + Vec2(20, 20));  // 显示在图标的右上角
-			// 数量超过一个
-			if (quantities[i] > 1) {
-				label->setString(std::to_string(quantities[i])); // 设置数量显示
-			}
+
+		// 获取标签并显示标签
+		auto label = itemLabels[i];
+		if (label && quantities[i]) {
+			label->setString(std::to_string(quantities[i])); // 设置数量显示
+			const float dPosition = 4.0f;
+			label->setPosition(icon->getPosition() + Vec2(iconSize / 2 - dPosition, -iconSize / 2 + dPosition));  // 显示在图标的右下角
 		}
 
 		// 红色矩形框
@@ -210,10 +226,10 @@ void Bag::updateDisplay() {
 }
 
 // 获取工具的索引
-int Bag::getToolIndex(const std::string& toolName) {
+int Bag::getItemIndex(const std::string& itemName) {
 	// 遍历存储工具的位置
 	for (int i = 0; i < static_cast<int>(items.size()); i++) {
-		if (items[i]->getItemName() == toolName) {
+		if (items[i]->getItemName() == itemName) {
 			return i;
 		}
 	}
@@ -227,4 +243,10 @@ int Bag::getSize() {
 		}
 	}
 	return row * capacity;
+}
+
+const Size& Bag::getContentSize() const {
+	// 背包的图像大小就是背包背景的大小
+	auto bagBackground = getChildByName("bagBackground");
+	return bagBackground->getContentSize();
 }

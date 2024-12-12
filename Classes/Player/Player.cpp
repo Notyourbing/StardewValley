@@ -72,6 +72,21 @@ bool Player::init() {
         position.x = std::max(playerSize.x / 2, std::min(position.x, visibleSize.width - playerSize.x / 2));
         position.y = std::max(playerSize.y / 2, std::min(position.y, visibleSize.height - playerSize.y / 2));
         setPosition(position);
+        
+        // 背包位置
+        auto bag = Bag::getInstance();
+        const float bagHeight = bag->getContentSize().height;
+        const float dHeight = 22.0f; // 修正偏移量，向上调整一些
+        if (position.y < bagHeight) {
+            if (bag->getPosition() != Vec2(0.0f, WINSIZE.height - bagHeight + dHeight))
+                bag->setPosition(Vec2(0.0f, WINSIZE.height - bagHeight + dHeight));
+        }
+        else {
+            if (bag->getPosition() != Vec2::ZERO) {
+                bag->setPosition(Vec2::ZERO);
+            }
+        }
+
         }, "playerMovement");
 
     return true;

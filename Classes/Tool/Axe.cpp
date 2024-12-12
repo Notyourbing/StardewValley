@@ -15,7 +15,7 @@ Axe* Axe::create() {
 
 bool Axe::init() {
 	// 调用基类的初始化方法
-    return Tool::init({ "axe", AXE, 1});
+    return Tool::init({ "axe", AXE});
 }
 
 void Axe::useItem() {

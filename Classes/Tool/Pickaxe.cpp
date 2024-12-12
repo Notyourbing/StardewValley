@@ -16,7 +16,7 @@ Pickaxe* Pickaxe::create() {
 
 bool Pickaxe::init() {
 	// 调用基类的初始化方法
-    return Tool::init({ "pickaxe", PICKAXE, 1});
+    return Tool::init({ "pickaxe", PICKAXE});
 }
 
 void Pickaxe::useItem() {

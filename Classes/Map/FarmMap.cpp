@@ -211,15 +211,15 @@
         }
         else if (mapTileNode[x][y]->getTileType() == TileType::Water) {  // 当前交互的是水层
             if (currentItemName == "kettle") {
-                int wateringCanIndex = bag->getToolIndex("kettle");
+                int wateringCanIndex = bag->getItemIndex("kettle");
                 int waterShortageAmount = MAX_WATERINGCAN_CAPACITY - dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel();
                 if (waterShortageAmount <= dynamic_cast<Water*>(mapTileNode[x][y])->getCurrentWaterResource()) {
-                    dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->refillWateringCan(waterShortageAmount);
+                    dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->refillWateringCan(waterShortageAmount);
                     dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(waterShortageAmount);
                 }
                 else {
-                    dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->refillWateringCan(dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel());
-                    dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(dynamic_cast<Kettle*>(bag->items[wateringCanIndex])->getCurrentWaterLevel());
+                    dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->refillWateringCan(dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->getCurrentWaterLevel());
+                    dynamic_cast<Water*>(mapTileNode[x][y])->pumpWater(dynamic_cast<Kettle*>(bag->getItem(wateringCanIndex))->getCurrentWaterLevel());
                 }
             }
         }

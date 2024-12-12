@@ -27,17 +27,11 @@ public:
 		return itemImage;
 	}
 
-	//获取数量
-	int getQuantity() const {
-		return quantity;
-	}
 protected:
 	// 名称
 	std::string itemName;
 	// 图片位置
 	std::string itemImage;
-	// 数量
-	int quantity;
 };
 
 #endif

@@ -9,15 +9,15 @@ bool Seed::init(const SeedType& seedType) {
     switch (seedType){ 
     case SeedType::AppleSeed:
         seedName = "appleSeed";
-        return Tool::init({ "appleSeed", APPLE_SEED, 1});
+        return Tool::init({ "appleSeed", APPLE_SEED});
         break;
     case SeedType::CornSeed:
         seedName = "cornSeed";
-        return Tool::init({ "cornSeed", CORN_SEED, 1});
+        return Tool::init({ "cornSeed", CORN_SEED});
         break;
     case SeedType::CarrotSeed:
         seedName = "carrotSeed";
-        return Tool::init({ "carrotSeed", CARROT_SEED, 1});
+        return Tool::init({ "carrotSeed", CARROT_SEED});
         break;
     }
    
