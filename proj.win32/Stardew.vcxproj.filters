@@ -290,7 +290,6 @@
     <ClInclude Include="..\Classes\DateManage\WeatherManager.h">
       <Filter>Classes\DateManage</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="..\Classes\Map\AnimalManager.h">
       <Filter>Classes\Map</Filter>
     </ClInclude>
@@ -308,7 +307,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Animal\AnimalItem.h">
       <Filter>Classes\Animal</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="..\Classes\Skill\Skill.h">
       <Filter>Classes\Skill</Filter>
     </ClInclude>
@@ -317,7 +316,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Skill\SkillTreeUI.h">
       <Filter>Classes\Skill</Filter>
->>>>>>> 5f6bb302c99d19e6d080d7a7a1e73749649ccb54
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

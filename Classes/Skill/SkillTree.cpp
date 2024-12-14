@@ -62,8 +62,7 @@ Skill* SkillTree::getSkill(const std::string& name) const {
     return nullptr;
 }
 
-const std::map<std::string, Skill*>& SkillTree::getAllSkills() const
-{
+const std::map<std::string, Skill*>& SkillTree::getAllSkills() const {
     return skills;
 }
 

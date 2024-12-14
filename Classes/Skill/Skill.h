@@ -22,6 +22,6 @@ public:
 private:
     std::string name;                 // 技能名称
     int maxLevel;                     // 技能的最大等级
-    int currentLevel = 0;             // 当前技能等级
+    int currentLevel;             // 当前技能等级
     std::function<void(int)> effect;  // 技能效果，传入当前等级
 };
