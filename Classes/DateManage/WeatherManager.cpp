@@ -3,15 +3,17 @@
 
 USING_NS_CC;
 
-
+// WeatherManager类：构造函数
 WeatherManager::WeatherManager()
     : currentWeatherSystem(nullptr), backgroundMask(nullptr) {
 }
 
+// WeatherManager类：析构函数
 WeatherManager::~WeatherManager() {
     removeWeatherEffect();
 }
 
+// WeatherManager类：静态创建对象
 WeatherManager* WeatherManager::create() {
     WeatherManager* weatherManger = new WeatherManager();
     if (weatherManger && weatherManger->init()) {
@@ -108,11 +110,12 @@ void WeatherManager::updateWeather(Weather weather) {
 
 // 移除当前天气效果
 void WeatherManager::removeWeatherEffect() {
+    // 移除当前天气粒子系统
     if (currentWeatherSystem) {
         removeChild(currentWeatherSystem);
         currentWeatherSystem = nullptr;
     }
-
+    // 移除当前背景遮罩
     if (backgroundMask) {
         removeChild(backgroundMask);
         backgroundMask = nullptr;

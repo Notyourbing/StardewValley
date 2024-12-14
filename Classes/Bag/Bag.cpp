@@ -8,6 +8,7 @@
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
 #include "../Tool/Fertilizer.h"
+#include "../Animal/AnimalItem.h"
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
@@ -83,6 +84,15 @@ bool Bag::init() {
 	addItem(fertilizer);
 	Food* tuna = Food::create(TUNA);
 	addItem(tuna);
+	// 添加几种动物
+	AnimalItem* cowItem = CowItem::create();
+	addItem(cowItem);
+	AnimalItem* chickenItem = ChickenItem::create();
+	addItem(chickenItem);
+	AnimalItem* sheepItem = SheepItem::create();
+	addItem(sheepItem);
+	AnimalItem* pigItem = PigItem::create();
+	addItem(pigItem);
 
 	selectItem(0);
 

@@ -8,6 +8,7 @@
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
 #include "../Bag/Bag.h"
+#include "AnimalManager.h"
 #include "../Tool/Kettle.h"
 #include <string>
 #include <memory>
@@ -78,6 +79,9 @@ private:
 	cocos2d::TMXLayer* moldLayer;
 	cocos2d::TMXLayer* waterLayer;
 	cocos2d::TMXLayer* stoneLayer;
+
+	// 动物对象
+	AnimalManager* animalManager;
 };
 
 #endif

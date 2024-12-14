@@ -412,6 +412,12 @@ constexpr int APPLE_GID = 1;
 constexpr int CARROT_GID = 2;
 constexpr int CORN_GID = 3;
 
+// Animal
+constexpr char COW[] = "Animal/Cow.png";
+constexpr char CHICKEN[] = "Animal/Chicken.png";
+constexpr char SHEEP[] = "Animal/Sheep.png";
+constexpr char PIG[] = "Animal/Pig.png";
+
 // TOOL
 constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量
 constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
@@ -420,6 +426,27 @@ constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 struct ItemInfo {
 	const char* name;             // 名称
 	const char* image;            // 图片路径
+};
+
+// AnimalItem
+constexpr ItemInfo COW_ITEM = {
+	"cow",
+	"tools/cow.png"
+};
+
+constexpr ItemInfo CHICKEN_ITEM = {
+	"chicken",
+	"tools/chicken.png"
+};
+
+constexpr ItemInfo SHEEP_ITEM = {
+	"sheep",
+	"tools/sheep.png"
+};
+
+constexpr ItemInfo PIG_ITEM = {
+	"pig",
+	"tools/pig.png"
 };
 
 // fish
