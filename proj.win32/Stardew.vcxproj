@@ -165,6 +165,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ResourceCompile Include="game.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\Animal\AnimalItem.cpp" />
     <ClCompile Include="..\Classes\Bag\Bag.cpp" />
     <ClCompile Include="..\Classes\CommunityEvent\CommunityEvent.cpp" />
     <ClCompile Include="..\Classes\Control\Control.cpp" />
@@ -175,8 +176,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Food\Food.cpp" />
     <ClCompile Include="..\Classes\Item\Item.cpp" />
     <ClCompile Include="..\Classes\Map\Animal.cpp" />
+    <ClCompile Include="..\Classes\Map\AnimalManager.cpp" />
+    <ClCompile Include="..\Classes\Map\Chicken.cpp" />
+    <ClCompile Include="..\Classes\Map\Cow.cpp" />
     <ClCompile Include="..\Classes\Map\Crop.cpp" />
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
+    <ClCompile Include="..\Classes\Map\Pig.cpp" />
+    <ClCompile Include="..\Classes\Map\Sheep.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
     <ClCompile Include="..\Classes\Npc\Npc.cpp" />
@@ -199,6 +205,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\Animal\AnimalItem.h" />
     <ClInclude Include="..\Classes\Bag\Bag.h" />
     <ClInclude Include="..\Classes\CommunityEvent\CommunityEvent.h" />
     <ClInclude Include="..\Classes\Constant\Constant.h" />
@@ -210,8 +217,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Food\Food.h" />
     <ClInclude Include="..\Classes\Item\Item.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
+    <ClInclude Include="..\Classes\Map\AnimalManager.h" />
+    <ClInclude Include="..\Classes\Map\Chicken.h" />
+    <ClInclude Include="..\Classes\Map\Cow.h" />
     <ClInclude Include="..\Classes\Map\Crop.h" />
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
+    <ClInclude Include="..\Classes\Map\Pig.h" />
+    <ClInclude Include="..\Classes\Map\Sheep.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\MyButton\MyButton.h" />
     <ClInclude Include="..\Classes\Npc\Npc.h" />

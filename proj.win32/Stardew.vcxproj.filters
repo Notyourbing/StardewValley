@@ -58,6 +58,9 @@
     <Filter Include="Classes\SaveManage">
       <UniqueIdentifier>{fd50e063-7c10-4b3d-91f2-9ea0d9b1fb8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Animal">
+      <UniqueIdentifier>{411d41fe-469e-4620-a920-5dd2f58bfa0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -155,6 +158,24 @@
     </ClCompile>
     <ClCompile Include="..\Classes\DateManage\WeatherManager.cpp">
       <Filter>Classes\DateManage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\AnimalManager.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Cow.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Chicken.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Sheep.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\Pig.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\AnimalItem.cpp">
+      <Filter>Classes\Animal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +277,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\DateManage\WeatherManager.h">
       <Filter>Classes\DateManage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\AnimalManager.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Cow.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Chicken.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Sheep.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\Pig.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\AnimalItem.h">
+      <Filter>Classes\Animal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

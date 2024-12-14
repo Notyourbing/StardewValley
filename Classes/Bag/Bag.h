@@ -48,8 +48,6 @@ public:
 	// 当前所拥有的物品
 	std::vector<Item*> items;
 
-
-
 private:
 	// 单例实例
 	static Bag* instance;
