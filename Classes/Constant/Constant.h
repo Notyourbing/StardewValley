@@ -31,6 +31,9 @@ namespace ResPath {
 	constexpr char CLOSE_BUTTON_NORMAL[] = "CloseNormal.png";
 	constexpr char CLOSE_BUTTON_HOVER[] = "CloseHover.png";
 	constexpr char BAG_BACKGROUND[] = "icon/bagBackground.png";
+	constexpr char SKILL_BACKGROUND[] = "icon/allScreenButton.png";
+	constexpr char SKILL_CLOSE[] = "icon/closeButton.png";
+	constexpr char SKILL_CLOSE_ON[] = "icon/closeButtonOn.png";
 
 	// Axe ¶¯»­Ö¡
 	constexpr char AXE_RIGHT_1[] = "tools/axe/rightUseAxe1.png";

@@ -44,10 +44,6 @@ public:
 	// 重写基类成员函数getContentSize()
 	const cocos2d::Size& getContentSize() const override;
 
-
-	// 当前所拥有的物品
-	std::vector<Item*> items;
-
 private:
 	// 单例实例
 	static Bag* instance;
@@ -59,6 +55,9 @@ private:
 	// 禁止拷贝和赋值
 	Bag(const Bag&) = delete;
 	Bag& operator=(const Bag&) = delete;
+
+	// 当前所拥有的物品
+	std::vector<Item*> items;
 
 	// 当前选中的物品索引
 	int selectedIndex;

@@ -24,7 +24,7 @@ bool Farm::init() {
 		return false;
 	}
 
-	this->addChild(farmMap, 0);
+	addChild(farmMap, 0);
 
 	// 加入两个NPC
 	Npc* wizard = Npc::create(WIZARD_INFO);
@@ -37,19 +37,19 @@ bool Farm::init() {
 
 	// 玩家
 	auto player = Player::getInstance();
-	this->addChild(player, 3);
+	addChild(player, 3);
 
 	// 玩家名字
 	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", ResPath::FONT_TTF, 24);
 	if (nameLabel) {
 		nameLabel->setPosition(Vec2(WINSIZE.width / 2, WINSIZE.height - 50));
-		this->addChild(nameLabel, 4);
+		addChild(nameLabel, 4);
 	}
 
 	// 背包
 	Bag* bag = Bag::getInstance();
 	if (bag) {
-		this->addChild(bag, 4);
+		addChild(bag, 4);
 	}
 
 	// 退出按钮
@@ -57,19 +57,18 @@ bool Farm::init() {
 	if (closeButton) {
 		const auto closeButtonSize = closeButton->getContentSize();
 		closeButton->setPosition(Vec2(closeButtonSize.width / 2, WINSIZE.height - closeButtonSize.height / 2)); // 放在左上角
-		this->addChild(closeButton, 4);
+		addChild(closeButton, 4);
 		closeButton->addClickEventListener(CC_CALLBACK_1(Farm::closeButtonClicked, this));
 	}
 
 	Control* control = Control::create();
-	this->addChild(control, 4);
+	addChild(control, 4);
 
 	DateManage* dateManage = DateManage::getInstance();
 	addChild(dateManage, 5);
 
 	WeatherManager* weatherManager = WeatherManager::create();
-	this->addChild(weatherManager, 5);
-
+	addChild(weatherManager, 5);
 
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this, dateManage, farmMap,weatherManager](float deltaTime) {

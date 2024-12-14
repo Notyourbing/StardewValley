@@ -66,7 +66,7 @@ void WeatherManager::updateWeather(Weather weather) {
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 32));			// 半透明黑色
-            addChild(backgroundMask, 99);									    // 添加到场景，层级低于粒子效果
+            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
         }
         break;
 
@@ -85,7 +85,7 @@ void WeatherManager::updateWeather(Weather weather) {
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 64));			// 更深的半透明黑色
-            addChild(backgroundMask, 99);									    // 添加到场景，层级低于粒子效果
+            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
         }
         break;
 

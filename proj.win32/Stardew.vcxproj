@@ -193,6 +193,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\FarmScene.cpp" />
     <ClCompile Include="..\Classes\Scene\NewGameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\WelcomeScene.cpp" />
+    <ClCompile Include="..\Classes\Skill\Skill.cpp" />
+    <ClCompile Include="..\Classes\Skill\SkillTree.cpp" />
+    <ClCompile Include="..\Classes\Skill\SkillTreeUI.cpp" />
     <ClCompile Include="..\Classes\Tool\Axe.cpp" />
     <ClCompile Include="..\Classes\Tool\Fertilizer.cpp" />
     <ClCompile Include="..\Classes\Tool\FishingRod.cpp" />
@@ -234,6 +237,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\FarmScene.h" />
     <ClInclude Include="..\Classes\Scene\NewGameScene.h" />
     <ClInclude Include="..\Classes\Scene\WelcomeScene.h" />
+    <ClInclude Include="..\Classes\Skill\Skill.h" />
+    <ClInclude Include="..\Classes\Skill\SkillTree.h" />
+    <ClInclude Include="..\Classes\Skill\SkillTreeUI.h" />
     <ClInclude Include="..\Classes\Tool\Axe.h" />
     <ClInclude Include="..\Classes\Tool\Fertilizer.h" />
     <ClInclude Include="..\Classes\Tool\FishingRod.h" />

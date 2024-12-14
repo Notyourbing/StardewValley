@@ -8,6 +8,8 @@
 class MyButton : public cocos2d::ui::Button {
 public:
 	static MyButton* create(const std::string& normalImage, const std::string& hoverImage);
+	bool isHover();
+
 
 private:
 	bool init(const std::string& normalImage, const std::string& hoverImage);
@@ -19,6 +21,8 @@ private:
 
 	// 鼠标移动事件的处理函数
 	void onMouseMove(cocos2d::Event* event);
+
+	bool hoverState;
 };
 
 #endif
