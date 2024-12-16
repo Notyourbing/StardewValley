@@ -46,8 +46,6 @@ bool Player::init() {
     loadStandFrames();
     // 每dt时间调用一次
     schedule([this](float dt) {
-        // 获取界面尺寸和玩家尺寸
-        const auto visibleSize = Director::getInstance()->getVisibleSize();
 
         const Vec2 playerSize(Player::getInstance()->getContentSize());
 
@@ -66,8 +64,8 @@ bool Player::init() {
         
         auto position = getPosition() + velocity * dt;
         // 边界检测，防止玩家移出屏幕
-        position.x = std::max(playerSize.x / 2, std::min(position.x, visibleSize.width - playerSize.x / 2));
-        position.y = std::max(playerSize.y / 2, std::min(position.y, visibleSize.height - playerSize.y / 2));
+        position.x = std::max(playerSize.x / 2, std::min(position.x, WINSIZE.width - playerSize.x / 2));
+        position.y = std::max(playerSize.y / 2, std::min(position.y, WINSIZE.height - playerSize.y / 2));
         setPosition(position);
         
         // 背包位置

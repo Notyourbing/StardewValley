@@ -368,7 +368,24 @@ constexpr int LABEL_WIDTH = 720;
 constexpr int LABEL_HEIGHT = 390;
 
 // Bag
-
+	// 添加初始化的物品
+const std::vector<std::string> INIT_ITEMS =
+{	"axe",
+	"pickaxe",
+	"hoe",
+	"fishingRod",
+	"scythe",
+	"kettle",
+	"appleSeed",
+	"cornSeed",
+	"carrotSeed",
+	"fertilizer",
+	"tuna",
+	"cow",
+	"chicken",
+	"sheep",
+	"pig"
+};
 
 // Crop
 constexpr int WATER_SCARCITY_DAY = 5;

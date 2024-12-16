@@ -221,3 +221,58 @@ const Size& Bag::getContentSize() const {
 	auto bagBackground = getChildByName("bagBackground");
 	return bagBackground->getContentSize();
 }
+
+// 清除背包
+void Bag::clearBag() {
+	for (int i = 0; i < row * capacity; ++i) {
+		if (items[i]) {
+			removeChild(items[i]);
+			items[i] = nullptr;
+			quantities[i] = 0;
+		}
+		if (itemLabels[i]) {
+			removeChild(itemLabels[i]);
+			itemLabels[i] = nullptr;
+		}
+	}
+	selectedIndex = -1;
+	updateDisplay();
+}
+
+// 设置物品
+void Bag::setItem(const int index, Item* item, const int quantity) {
+	if (index >= 0 && index < row * capacity) {
+		// 移除现有物品
+		if (items[index]) {
+			removeChild(items[index]);
+		}
+		if (itemLabels[index]) {
+			removeChild(itemLabels[index]);
+		}
+		// 设置新物品和数量
+		items[index] = item;
+		quantities[index] = quantity;
+		addChild(item);
+
+		// 创建标签
+		auto label = Label::createWithTTF(std::to_string(quantity), ResPath::FONT_TTF, 14);
+		itemLabels[index] = label;
+		addChild(label, 3);
+		updateDisplay();
+	}
+}
+
+// 获取总容量
+int Bag::getTotalCapacity() const { 
+	return row * capacity; 
+}
+
+// 获取所有物品的向量
+const std::vector<Item*>& Bag::getItems() const { 
+	return items; 
+}
+
+// 获取所有物品的数量
+const std::vector<int>& Bag::getQuantities() const { 
+	return quantities; 
+}

@@ -18,50 +18,56 @@
 class ItemFactory {
 public:
     static Item* createItem(const std::string& itemName) {
-        if (itemName == "Axe") {
+        if (itemName == "axe") {
             return Axe::create();
         }
-        else if (itemName == "Pickaxe") {
+        else if (itemName == "pickaxe") {
             return Pickaxe::create();
         }
-        else if (itemName == "Hoe") {
+        else if (itemName == "hoe") {
             return Hoe::create();
         }
-        else if (itemName == "Scythe") {
+        else if (itemName == "scythe") {
             return Scythe::create();
         }
-        else if (itemName == "FishingRod") {
+        else if (itemName == "fishingRod") {
             return FishingRod::create();
         }
-        else if (itemName == "Kettle") {
+        else if (itemName == "kettle") {
             return Kettle::create();
         }
-        else if (itemName == "AppleSeed") {
+        else if (itemName == "appleSeed") {
             return AppleSeed::create();
         }
-        else if (itemName == "CornSeed") {
+        else if (itemName == "cornSeed") {
             return CornSeed::create();
         }
-        else if (itemName == "CarrotSeed") {
+        else if (itemName == "carrotSeed") {
             return CarrotSeed::create();
         }
-        else if (itemName == "Fertilizer") {
+        else if (itemName == "fertilizer") {
             return Fertilizer::create();
         }
-        else if (itemName == "Tuna") {
-            return Food::create(TUNA);
-        }
-        else if (itemName == "Cow") {
+        else if (itemName == "cow") {
             return CowItem::create();
         }
-        else if (itemName == "Chicken") {
+        else if (itemName == "chicken") {
             return ChickenItem::create();
         }
-        else if (itemName == "Sheep") {
+        else if (itemName == "sheep") {
             return SheepItem::create();
         }
-        else if (itemName == "Pig") {
+        else if (itemName == "pig") {
             return PigItem::create();
+        }
+        else if (itemName == "tuna") {
+            return Food::create(TUNA);
+        }
+        else if (itemName == "anchovy") {
+            return Food::create(ANCHOVY);
+        }
+        else if (itemName == "pufferFish") {
+            return Food::create(PUFFER_FISH);
         }
         else {
             CCLOG("Unknown item name: %s", itemName.c_str());

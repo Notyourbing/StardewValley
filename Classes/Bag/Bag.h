@@ -50,6 +50,15 @@ public:
 	//设置物品到指定索引
 	void setItem(const int index, Item* item, const int quantity);
 
+	// 获取总容量
+	int getTotalCapacity() const;
+
+	// 获取所有物品的向量
+	const std::vector<Item*>& getItems() const;
+
+	// 获取所有物品的数量
+	const std::vector<int>& getQuantities() const;
+
 private:
 	// 单例实例
 	static Bag* instance;
@@ -62,18 +71,22 @@ private:
 	Bag(const Bag&) = delete;
 	Bag& operator=(const Bag&) = delete;
 
-	// 当前所拥有的物品
-	std::vector<Item*> items;
-
 	// 当前选中的物品索引
 	int selectedIndex;
 
-	// 用于显示背包的矩形框和物品
-	cocos2d::Sprite* bagBackground;			 // 背景框
-	std::vector<cocos2d::Label*> itemLabels; // 物品数量标签
+	// 背景框
+	cocos2d::Sprite* bagBackground;
+
+	// 当前所拥有的物品
+	std::vector<Item*> items;
+
+	// 物品数量标签
+	std::vector<cocos2d::Label*> itemLabels;
 
 	// 每个物品的数量
 	std::vector<int> quantities;
+
+	// 静态常量
 	static const int capacity = 9;			 // 背包放物品的一行容量
 	static const int row = 2;				 // 2行
 	static const int iconSize = 54;			 // 每个图标的宽度/高度
