@@ -22,7 +22,7 @@ public:
 	Item* getItem(const int index) const;
 
 	// 设置选中的物品
-	void selectItem(const int index);
+	void setSelectedItem(const int index);
 
 	// 获取当前选中的物品
 	Item* getSelectedItem() const;
@@ -43,6 +43,12 @@ public:
 
 	// 重写基类成员函数getContentSize()
 	const cocos2d::Size& getContentSize() const override;
+
+	// 清空背包
+	void clearBag();
+
+	//设置物品到指定索引
+	void setItem(const int index, Item* item, const int quantity);
 
 private:
 	// 单例实例

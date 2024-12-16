@@ -26,7 +26,6 @@ private:
 	TileType tileType;
 
 protected:
-
 	// 当前这个瓦点的GID
 	int currentGID;
 
@@ -87,7 +86,7 @@ public:
 	void hoe();
 
 	// 土壤的种植
-	void plantCrop(std::string seedName);
+	void plantCrop(const std::string& seedName);
 
 	// 土壤类的构造函数
 	Soil(const cocos2d::Vec2& position);
@@ -111,10 +110,11 @@ public:
 // Water类表示水，从TileNode类继承而来
 class Water : public TileNode {
 private:
-	static int waterResource;				// 表示当前水库中的水资源,所有的水资源都共用一个waterResource
+	// 表示当前水库中的水资源,所有的水资源都共用一个waterResource
+	static int waterResource;
 public:
 
-	// Water类表示水
+	// 构造函数
 	Water(const cocos2d::Vec2& position);
 
 	// 判断水资源是否枯竭

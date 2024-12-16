@@ -317,6 +317,9 @@
     <ClInclude Include="..\Classes\Skill\SkillTreeUI.h">
       <Filter>Classes\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Item\ItemFactory.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

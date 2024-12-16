@@ -18,13 +18,16 @@ struct MapSaveData {
 	float posY;
 };
 
+// 用来保存所有需要保存的数据的结构
 struct SaveData {
 	PlayerSaveData playerData;
 	MapSaveData mapData;	
 };
 
+// 存储管理类
 class SaveManage {
 public:
+	// 静态函数，获取单例实例
 	static SaveManage* getInstance();
 
 	// 保存数据的公用接口
@@ -34,6 +37,7 @@ public:
 	bool loadGameData();
 
 private:
+	// 默认构造函数和析构函数
 	SaveManage() = default;
 	~SaveManage() = default;
 	

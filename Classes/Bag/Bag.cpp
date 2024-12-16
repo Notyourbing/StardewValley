@@ -1,15 +1,7 @@
 #include "Bag.h"
-#include "../Tool/Axe.h"
-#include "../Tool/PickAxe.h"
-#include "../Tool/Hoe.h"
-#include "../Tool/Scythe.h"
-#include "../Tool/FishingRod.h"
-#include "../Tool/Kettle.h"
 #include "../Player/Player.h"
-#include "../Tool/Seed.h"
-#include "../Tool/Fertilizer.h"
-#include "../Animal/AnimalItem.h"
 #include "../Constant/Constant.h"
+#include "../Item/ItemFactory.h"
 
 USING_NS_CC;
 
@@ -46,7 +38,6 @@ bool Bag::init() {
 	items.resize(row * capacity, nullptr);
 	quantities.resize(row * capacity, 0);
 	itemLabels.resize(row * capacity, nullptr);
-	selectedIndex = 0;
 
 	// 背包左下角的位置
 	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 1) * spacing) / 2;
@@ -59,55 +50,25 @@ bool Bag::init() {
 		this->addChild(bagBackground, 0, "bagBackground");
 	}
 
-	// 添加初始化的物品
-	Tool* axe = Axe::create();
-	addItem(axe);
-	Tool* pickaxe = Pickaxe::create();
-	addItem(pickaxe);
-	Tool* hoe = Hoe::create();
-	addItem(hoe);
-	Tool* fisingRod = FishingRod::create();
-	addItem(fisingRod);
-	Tool* scythe = Scythe::create();
-	addItem(scythe);
-	Tool* kettle = Kettle::create();
-	addItem(kettle);
-	Tool* appleSeed = AppleSeed::create();
-	addItem(appleSeed);
-	Tool* cornSeed = CornSeed::create();
-	addItem(cornSeed);
-	//Tool* cornSeed2 = CornSeed::create();
-	//addItem(cornSeed2);
-	Tool* carrotSeed = CarrotSeed::create();
-	addItem(carrotSeed);
-	Tool* fertilizer = Fertilizer::create();
-	addItem(fertilizer);
-	Food* tuna = Food::create(TUNA);
-	addItem(tuna);
-	// 添加几种动物
-	AnimalItem* cowItem = CowItem::create();
-	addItem(cowItem);
-	AnimalItem* chickenItem = ChickenItem::create();
-	addItem(chickenItem);
-	AnimalItem* sheepItem = SheepItem::create();
-	addItem(sheepItem);
-	AnimalItem* pigItem = PigItem::create();
-	addItem(pigItem);
+	// 添加一些物品
+	const std::vector<std::string> initItems = INIT_ITEMS;
+	for (auto itemName : initItems) {
+		auto item = ItemFactory::createItem(itemName);
+		if (item) {
+			addItem(item);
+		}
+	}
 
-	selectItem(0);
+	// 默认当前选中第一个物品
+	setSelectedItem(0);
 
-
-	// 创建一个 DrawNode 对象
+	// 红色正方形框，用于显示当前的物品
 	auto drawNode = DrawNode::create();
-
-	// 定义正方形的四个顶点
 	const float expand = 4.0f;
-	Vec2 bottomLeft(-expand, -expand * 1.5f);									// 左下角顶点
-	Vec2 bottomRight = bottomLeft + Vec2(iconSize + 2 * expand, 0.0f);	// 右下角定点
+	Vec2 bottomLeft(-expand, -expand * 1.5f);											// 左下角顶点
+	Vec2 bottomRight = bottomLeft + Vec2(iconSize + 2 * expand, 0.0f);					// 右下角定点
 	Vec2 topRight = bottomLeft + Vec2(iconSize + 2 * expand, iconSize + 2 * expand);	// 右上角顶点
-	Vec2 topLeft = bottomLeft + Vec2(0.0f, iconSize + 2 * expand);		// 左上角顶点
-
-	// 使用 drawPolygon 绘制红色边框的正方形
+	Vec2 topLeft = bottomLeft + Vec2(0.0f, iconSize + 2 * expand);						// 左上角顶点
 	Vec2 vertices[] = { bottomLeft, bottomRight, topRight, topLeft };
 	drawNode->drawPolygon(
 		vertices,               // 顶点数组
@@ -177,7 +138,7 @@ Item* Bag::getItem(const int index) const {
 	return nullptr;
 }
 
-void Bag::selectItem(const int index) {
+void Bag::setSelectedItem(const int index) {
 	if (index >= 0 && index < row * capacity && items[index]) {
 		selectedIndex = index;
 		Player::getInstance()->setCurrentItem(items[index]);

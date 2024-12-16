@@ -10,11 +10,13 @@ USING_NS_CC;
 
 const std::string SaveManage::SAVE_FILE_NAME = "playerSave.json";
 
+// 获取单例实例
 SaveManage* SaveManage::getInstance() {
 	static SaveManage instance;
 	return &instance;
 }
 
+// 序列化到json文件
 std::string SaveManage::serializeToJson(const SaveData& data) {
 	rapidjson::Document doc;
 	doc.SetObject();
@@ -28,11 +30,11 @@ std::string SaveManage::serializeToJson(const SaveData& data) {
 	playerObj.AddMember("dirY", data.playerData.dirY, alloc);
 	doc.AddMember("playerData", playerObj, alloc);
 
+	// 存储地图的位置
 	rapidjson::Value mapObj(rapidjson::kObjectType);
 	mapObj.AddMember("posX", data.mapData.posX, alloc);
 	mapObj.AddMember("posY", data.mapData.posY, alloc);
 	doc.AddMember("mapData", mapObj, alloc);
-
 
 	rapidjson::StringBuffer buffer;
 	rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
@@ -41,6 +43,8 @@ std::string SaveManage::serializeToJson(const SaveData& data) {
 	return buffer.GetString();
 }
 
+
+// 从json文件中反序列化
 bool SaveManage::deserializeFromJson(const std::string& jsonStr, SaveData& data) {
 	rapidjson::Document doc;
 	if (doc.Parse(jsonStr.c_str()).HasParseError()) {

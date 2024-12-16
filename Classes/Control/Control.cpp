@@ -83,7 +83,7 @@ void Control::initKeyboardListener() {
 		}
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
 			const int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
-			Bag::getInstance()->selectItem(index);
+			Bag::getInstance()->setSelectedItem(index);
 		}
 		keysPressed.insert(keyCode);
 		updateMovement(); // 根据当前按下的键计算方向
@@ -118,7 +118,7 @@ void Control::initMouseListener()
 		if (targetIndex > bag->getSize() - 1) {
 			targetIndex = bag->getSize() - 1;
 		}
-		bag->selectItem(targetIndex);
+		bag->setSelectedItem(targetIndex);
 		};
 
 	// 监听鼠标按下

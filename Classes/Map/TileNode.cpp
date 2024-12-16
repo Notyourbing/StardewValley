@@ -4,7 +4,6 @@
 // TileNode基类：构造函数
 TileNode::TileNode(const cocos2d::Vec2& position, const TileType& tileType, const int& currentGID) :
 	position(position), tileType(tileType), currentGID(currentGID) {
-
 }
 
 // 获取该节点的类型
@@ -59,7 +58,7 @@ void Soil::fertilize() {
 }
 
 // Soil类：种植
-void Soil::plantCrop(std::string seedName) {
+void Soil::plantCrop(const std::string& seedName) {
 	// 未开垦和已经种植的话返回
 	if (isHoed == false || crop != nullptr) {
 		return;

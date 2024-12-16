@@ -219,6 +219,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Festival\Festival.h" />
     <ClInclude Include="..\Classes\Food\Food.h" />
     <ClInclude Include="..\Classes\Item\Item.h" />
+    <ClInclude Include="..\Classes\Item\ItemFactory.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\AnimalManager.h" />
     <ClInclude Include="..\Classes\Map\Chicken.h" />

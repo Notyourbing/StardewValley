@@ -91,7 +91,6 @@ void DialogueBox::showDialogueOptions(EventListenerMouse* lastListener) {
     }
 }
 
-
 void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
     // 隐藏所有选项按钮
     for (auto button : optionButtons) {

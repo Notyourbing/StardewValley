@@ -1,3 +1,6 @@
+#ifndef __SCYTHE_H__
+#define __SCYTHE_H__
+
 #include "Tool.h"
 
 // 镰刀类
@@ -12,3 +15,5 @@ public:
 	// 使用工具
 	void useItem() override;
 };
+
+#endif
