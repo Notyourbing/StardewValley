@@ -37,8 +37,8 @@ void FishingRod::useItem()
 
     // 获取要交互的土块位置
     Vec2 playerPosition = player->getPosition();
-    const Size tileSize = farmMap->map->getTileSize();
-    const Size mapSize = farmMap->map->getMapSize();
+    const Size tileSize = farmMap->getTiledMap()->getTileSize();
+    const Size mapSize = farmMap->getTiledMap()->getMapSize();
     playerPosition = playerPosition - farmMap->getPosition();
     playerPosition.y = playerPosition.y - player->getContentSize().height / 2 + 10.0f;
     int x = playerPosition.x / tileSize.width;

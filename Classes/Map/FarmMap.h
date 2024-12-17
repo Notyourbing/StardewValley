@@ -1,15 +1,14 @@
 #ifndef __FARMMAP_H__
 #define __FARMMAP_H__
-
 #include "cocos2d.h"
 #include "Crop.h"
-#include "../Npc/Npc.h"
 #include "TileNode.h"
+#include "AnimalManager.h"
+#include "../Npc/Npc.h"
+#include "../Bag/Bag.h"
+#include "../Tool/Kettle.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
-#include "../Bag/Bag.h"
-#include "AnimalManager.h"
-#include "../Tool/Kettle.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -30,7 +29,7 @@ public:
 	void moveMapByDirection(const cocos2d::Vec2& direction);
 
 	// 获取地图大小
-	cocos2d::Size getMapSize() const;
+	const cocos2d::Size& getMapSize() const;
 
 	// 碰撞检测：检查给定位置是否是障碍物
 	bool isCollidable(const cocos2d::Vec2& position) const;
@@ -41,16 +40,15 @@ public:
 	// 地图停止移动
 	void stopMoving();
 
-	// 瓦片地图对象
-	cocos2d::TMXTiledMap* map;
-	
+	// 获取地图的瓦片地图对象
+	cocos2d::TMXTiledMap* getTiledMap();
+
 	//获取当前位置地图的类
-	TileNode* getTileNode(int x, int y);
+	TileNode* getTileNode(const int x, const int y) const;
 
 	// 地图时间更新
 	void farmMapTimeUpdate();
 private:
-
 	// 构造函数和析构函数私有化
 	FarmMap();
 	~FarmMap();
@@ -59,14 +57,15 @@ private:
 	FarmMap(const FarmMap&) = delete;
 	FarmMap& operator=(const FarmMap&) = delete;
 
-	// 地图当前的偏移位置
-	cocos2d::Vec2 currentPosition;
+
+	// 单例实例
+	static FarmMap* instance;
 
 	// 地图的偏移速度
 	cocos2d::Vec2 velocity;
 
-	// 单例实例
-	static FarmMap* instance;
+	// 瓦片地图对象
+	cocos2d::TMXTiledMap* tiledMap;
 
 	// 存储地图上每个节点的类
 	TileNode* mapTileNode[FARMMAP_WIDTH][FARMMAP_HEIGHT];

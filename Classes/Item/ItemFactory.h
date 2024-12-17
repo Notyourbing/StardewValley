@@ -80,4 +80,4 @@ public:
     }
 };
 
-#endif // __ITEM_FACTORY_H__
+#endif

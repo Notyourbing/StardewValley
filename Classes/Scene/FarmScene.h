@@ -21,6 +21,9 @@ public:
 	//该地图上所有npc，静态成员变量
 	static std::vector<Npc*> npcs;
 
+	// 根据人物的位置自动从农场场景切换到其他四个场景
+	void changeSceneAuto();
+
 	// 析构函数，负责npcs的内存管理
 	~Farm();
 private:

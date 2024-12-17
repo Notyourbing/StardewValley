@@ -1,4 +1,5 @@
 #include "FarmScene.h"
+#include "../Map/BeachMap.h"
 #include "../Constant/Constant.h"
 #include "../Bag/Bag.h"
 #include "../MyButton/MyButton.h"
@@ -29,7 +30,7 @@ bool Farm::init() {
 	if (farmMap) {
 		addChild(farmMap, 0);
 	}
-
+	                                                               
 	// 两个NPC
 	Npc* wizard = Npc::create(WIZARD_INFO);
 	Npc* cleaner = Npc::create(CLEANER_INFO);
@@ -63,7 +64,7 @@ bool Farm::init() {
 	// 退出按钮
 	auto closeButton = MyButton::create(ResPath::CLOSE_BUTTON_NORMAL, ResPath::CLOSE_BUTTON_HOVER);
 	if (closeButton) {
-		const auto closeButtonSize = closeButton->getContentSize();
+		const Size closeButtonSize = closeButton->getContentSize();
 		closeButton->setPosition(Vec2(closeButtonSize.width / 2, WINSIZE.height - closeButtonSize.height / 2)); // 放在左上角
 		addChild(closeButton, 4);
 		closeButton->addClickEventListener(CC_CALLBACK_1(Farm::closeButtonClicked, this));
@@ -92,7 +93,12 @@ bool Farm::init() {
 		dateManage->updateDate();
 		farmMap->farmMapTimeUpdate();
 		weatherManager->updateWeather(dateManage->getCurrentWeather());
-		}, 1.0f, "update_date_key");
+		}, 5.0f, "update_date_key");
+
+	// 每帧检测是否要切换场景
+	schedule([this](float dt) {
+		// this->changeSceneAuto();
+		}, "change_scene");
 
 	return true;
 }
@@ -106,4 +112,21 @@ void Farm::closeButtonClicked(Ref* pSender) {
 // 析构函数，防止npcs中存在野指针
 Farm::~Farm() {
 	npcs.clear();
+}
+
+// 根据人物的位置自动从农场场景切换到其他四个场景
+void Farm::changeSceneAuto() {
+	// 计算人物在地图中的位置
+	auto player = Player::getInstance();
+	auto farmMap = FarmMap::getInstance();
+	const auto positionInMap = player->getPosition() - farmMap->getPosition();
+
+	// 人物的朝向
+	const auto playerDirection = player->getLastDirection();
+
+	// 人物走向下边界
+	if (playerDirection == Vec2(0, -1) && positionInMap.y < 80.0f && !(this->getChildByName("beach_map"))) {
+		auto beachMap = BeachMap::getInstance();
+		addChild(beachMap, 1, "beach_map");
+	}
 }
