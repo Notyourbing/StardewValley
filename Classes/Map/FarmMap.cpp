@@ -94,7 +94,7 @@ bool FarmMap::init(const std::string& tmxFile) {
         }
     }
 
-    // 这个lambda函数会在FarmMap的生存期内每dt时间调用一次
+    // 这个lambda函数会在FarmMap的生存期内每帧时间调用一次
     schedule([this](float dt) {
 
         // 检查目标位置是否是障碍物
@@ -248,8 +248,8 @@ void FarmMap::farmMapTimeUpdate() {
 
     // 植物生长
     // 获取瓦点地图的长宽
-    int width = map->getMapSize().width;
-    int height = map->getMapSize().height;
+    int width = tiledMap->getMapSize().width;
+    int height = tiledMap->getMapSize().height;
     for (int x = 0; x < width; x++) {
         for (int y = 0; y < height; y++) {
             if (mapTileNode[x][y]->getTileType() == TileType::Soil) {

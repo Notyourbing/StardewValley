@@ -93,8 +93,12 @@ bool Farm::init() {
 		dateManage->updateDate();
 		farmMap->farmMapTimeUpdate();
 		weatherManager->updateWeather(dateManage->getCurrentWeather());
-		this->changeSceneAuto();
-		}, 1.0f, "update_date_key");
+		}, 5.0f, "update_date_key");
+
+	// 每帧检测是否要切换场景
+	schedule([this](float dt) {
+		// this->changeSceneAuto();
+		}, "change_scene");
 
 	return true;
 }
@@ -121,8 +125,8 @@ void Farm::changeSceneAuto() {
 	const auto playerDirection = player->getLastDirection();
 
 	// 人物走向下边界
-	if (playerDirection == Vec2(0, -1) && positionInMap.y < 80.0f) {
+	if (playerDirection == Vec2(0, -1) && positionInMap.y < 80.0f && !(this->getChildByName("beach_map"))) {
 		auto beachMap = BeachMap::getInstance();
-		addChild(beachMap, 1);
+		addChild(beachMap, 1, "beach_map");
 	}
 }

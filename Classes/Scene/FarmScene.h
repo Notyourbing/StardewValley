@@ -32,8 +32,6 @@ private:
 
 	// 关闭按钮的回调函数
 	void closeButtonClicked(Ref* pSender);
-
-
 };
 
 #endif

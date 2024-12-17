@@ -180,6 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Item\Item.cpp" />
     <ClCompile Include="..\Classes\Map\Animal.cpp" />
     <ClCompile Include="..\Classes\Map\AnimalManager.cpp" />
+    <ClCompile Include="..\Classes\Map\BeachMap.cpp" />
     <ClCompile Include="..\Classes\Map\CarrotCrop.cpp" />
     <ClCompile Include="..\Classes\Map\Chicken.cpp" />
     <ClCompile Include="..\Classes\Map\CornCrop.cpp" />
@@ -189,6 +190,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
     <ClCompile Include="..\Classes\Map\FarmResourceManager.cpp" />
     <ClCompile Include="..\Classes\Map\Pig.cpp" />
+    <ClCompile Include="..\Classes\Map\SceneMap.cpp" />
     <ClCompile Include="..\Classes\Map\Sheep.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
@@ -234,6 +236,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Item\ItemFactory.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\AnimalManager.h" />
+    <ClInclude Include="..\Classes\Map\BeachMap.h" />
     <ClInclude Include="..\Classes\Map\CarrotCrop.h" />
     <ClInclude Include="..\Classes\Map\Chicken.h" />
     <ClInclude Include="..\Classes\Map\Cow.h" />
@@ -243,6 +246,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
     <ClInclude Include="..\Classes\Map\FarmResourceManager.h" />
     <ClInclude Include="..\Classes\Map\Pig.h" />
+    <ClInclude Include="..\Classes\Map\SceneMap.h" />
     <ClInclude Include="..\Classes\Map\Sheep.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\MyButton\MyButton.h" />
