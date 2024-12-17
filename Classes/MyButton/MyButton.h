@@ -10,10 +10,9 @@ public:
 	static MyButton* create(const std::string& normalImage, const std::string& hoverImage);
 	bool isHover();
 
-
 private:
 	bool init(const std::string& normalImage, const std::string& hoverImage);
-	
+
 	std::string normal; // 正常状态下按钮图片路径
 	std::string hover;  // 鼠标悬浮状态下按钮图片路径
 

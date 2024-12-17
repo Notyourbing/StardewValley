@@ -2,7 +2,7 @@
 
 // 构造函数
 Skill::Skill(const std::string& name, int maxLevel, std::function<void(int)> effect)
-    : name(name), maxLevel(maxLevel), effect(effect) {
+    : name(name), maxLevel(maxLevel), effect(effect), currentLevel(0) {
 }
 
 // 获取技能名称

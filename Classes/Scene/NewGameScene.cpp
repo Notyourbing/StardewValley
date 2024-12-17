@@ -98,6 +98,9 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 	player->setPlayerName(playerName);
 	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2);
 
+	// 背包数据设置
+	auto bag = Bag::getInstance();
+
 	// 进入FramScene
 	auto farmScene = Farm::create();
 	auto transition = TransitionFade::create(0.5f, farmScene, cocos2d::Color3B::WHITE); // 0.7秒，淡入紫色背景

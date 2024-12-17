@@ -371,6 +371,9 @@
     <ClInclude Include="..\Classes\Food\CornFood.h">
       <Filter>Classes\Food</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Item\ItemFactory.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

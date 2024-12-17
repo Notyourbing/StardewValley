@@ -64,14 +64,14 @@ void Control::updateMovement() {
 void Control::initKeyboardListener() {
 	// 创建键盘事件监听器
 	auto listener = EventListenerKeyboard::create();
-
+	// 获取技能树UI界面层
 	auto skillTreeLayer = SkillTreeUI::getInstance();
 	addChild(skillTreeLayer);
 	listener->onKeyPressed = [this, skillTreeLayer](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode == EventKeyboard::KeyCode::KEY_E) {
 			if (SkillTreeUI::isOpen == false) {
 				skillTreeLayer->setVisible(true);
-				skillTreeLayer->openSkill();
+				skillTreeLayer->openSkillUI();
 				SkillTreeUI::isOpen = true;
 				Player::getInstance()->setUseItemEnable(false);
 			}
@@ -83,7 +83,7 @@ void Control::initKeyboardListener() {
 		}
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
 			const int index = static_cast<int>(keyCode) - static_cast<int>(EventKeyboard::KeyCode::KEY_1);
-			Bag::getInstance()->selectItem(index);
+			Bag::getInstance()->setSelectedItem(index);
 		}
 		keysPressed.insert(keyCode);
 		updateMovement(); // 根据当前按下的键计算方向
@@ -106,6 +106,7 @@ void Control::initMouseListener()
 	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 
+	// 监听鼠标滚轮
 	listener->onMouseScroll = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		const int scrollY = static_cast<int>(mouseEvent->getScrollY()); // 垂直滚轮值
@@ -117,9 +118,10 @@ void Control::initMouseListener()
 		if (targetIndex > bag->getSize() - 1) {
 			targetIndex = bag->getSize() - 1;
 		}
-		bag->selectItem(targetIndex);
+		bag->setSelectedItem(targetIndex);
 		};
 
+	// 监听鼠标按下
 	listener->onMouseDown = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();

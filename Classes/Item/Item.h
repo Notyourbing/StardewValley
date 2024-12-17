@@ -8,7 +8,7 @@
 // 物品类，是一个抽象类
 class Item : public cocos2d::Sprite {
 public:
-	// 初始化（子类实现）
+	// 初始化（纯虚函数，子类必须实现）
 	virtual bool init(const ItemInfo& item_info) = 0;
 
 	// 使用物品（纯虚函数，子类必须实现）
@@ -19,14 +19,13 @@ public:
 		return itemName;
 	}
 
-	// 虚析构函数
-	virtual ~Item() {}
-
 	//获取图片位置
 	std::string getItemImage() const {
 		return itemImage;
 	}
 
+	// 虚析构函数
+	virtual ~Item() {}
 protected:
 	// 名称
 	std::string itemName;

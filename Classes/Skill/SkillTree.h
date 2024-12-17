@@ -26,11 +26,15 @@ public:
     const std::map<std::string, Skill*>& getAllSkills() const;
 
 private:
-    SkillTree() = default;  // 构造函数私有化，禁止外部直接创建
+    // 构造函数私有化，禁止外部直接创建
+    SkillTree() = default;
 
-    static SkillTree* instance; // 静态实例
-
-    std::map<std::string, Skill*> skills; // 技能存储
-
+    // 析构函数
     ~SkillTree();
+
+    // 静态实例
+    static SkillTree* instance;
+
+    // 技能存储
+    std::map<std::string, Skill*> skills;
 };

@@ -18,13 +18,30 @@ struct MapSaveData {
 	float posY;
 };
 
-struct SaveData {
-	PlayerSaveData playerData;
-	MapSaveData mapData;	
+// 用来保存背包物品数据的结构
+struct BagItemData {
+	int index;
+	std::string itemName;
+	int quantity;
 };
 
+// 用来保存背包数据的结构
+struct BagSaveData {
+	std::vector<BagItemData> items;
+	int selectedIndex;
+};
+
+// 用来保存所有需要保存的数据的结构
+struct SaveData {
+	PlayerSaveData playerData;
+	MapSaveData mapData;
+	BagSaveData bagData;
+};
+
+// 存储管理类
 class SaveManage {
 public:
+	// 静态函数，获取单例实例
 	static SaveManage* getInstance();
 
 	// 保存数据的公用接口
@@ -34,15 +51,14 @@ public:
 	bool loadGameData();
 
 private:
+	// 默认构造函数和析构函数
 	SaveManage() = default;
 	~SaveManage() = default;
 	
+	// 序列化与反序列化
 	std::string SaveManage::serializeToJson(const SaveData& data);
-
 	bool deserializeFromJson(const std::string& jsonStr, SaveData& data);
 
-	static const std::string SAVE_FILE_NAME; // "player_save.json"
 };
 
 #endif
-

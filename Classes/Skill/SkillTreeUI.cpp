@@ -90,16 +90,6 @@ void SkillTreeUI::setupUI() {
         setVisible(false);
     }
 
-
-
-
-    //// 关闭按钮：放置在背景的右上角
-    //auto closeButton = MenuItemImage::create(ResPath::SKILL_CLOSE, ResPath::SKILL_CLOSE_ON,
-    //    CC_CALLBACK_1(SkillTreeUI::closeCallback, this));
-    //closeButton->setPosition(bg->getPositionX() + bgWidth / 2 - 25, bg->getPositionY() + bgHeight / 2 - 25); // 调整关闭按钮位置
-    //auto menu = Menu::create(closeButton, nullptr);
-    //menu->setPosition(Vec2::ZERO);
-    //addChild(menu);
 }
 
 
@@ -112,9 +102,9 @@ void SkillTreeUI::closeCallback(EventListenerMouse* listener) {
     Player::getInstance()->setUseItemEnable(true);
 }
 
-void SkillTreeUI::openSkill() {
+void SkillTreeUI::openSkillUI() {
     Player::getInstance()->setUseItemEnable(false);
-
+    // 创建关闭按钮
     auto closeButton = MyButton::create(ResPath::SKILL_CLOSE, ResPath::SKILL_CLOSE_ON);
     closeButton->setPosition(Vec2(WINSIZE.width * 3 / 4 - 25, WINSIZE.height * 3 / 4 - 25));
     addChild(closeButton, 2);
@@ -126,6 +116,7 @@ void SkillTreeUI::openSkill() {
             closeCallback(listener);
         };
     if (this->getParent()) {
+        // 添加到父节点Control对象的目的是为了降低该监听器接受事件的优先级，使得Player useItemEnable的锁生效
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getParent());
     }
 }
