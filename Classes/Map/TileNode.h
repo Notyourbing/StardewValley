@@ -1,5 +1,5 @@
 #ifndef __TILE_NODE_H__
-#define __TIEL_NODE_H__
+#define __TILE_NODE_H__
 
 #include "cocos2d.h"
 #include "Crop.h"

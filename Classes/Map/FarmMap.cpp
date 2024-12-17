@@ -1,11 +1,9 @@
 #include "FarmMap.h"
-#include "../Player/Player.h"
-#include "../Constant/Constant.h"
-#include "AnimalManager.h"
 #include "Cow.h"
 #include "Chicken.h"
 #include "Sheep.h"
 #include "Pig.h"
+#include "../Player/Player.h"
 #include<string>
 
 USING_NS_CC;
@@ -13,8 +11,7 @@ USING_NS_CC;
 // 初始化静态实例
 FarmMap* FarmMap::instance = nullptr;
 
-TileNode* FarmMap::getTileNode(int x, int y)
-{
+TileNode* FarmMap::getTileNode(const int x, const int y) const {
     return mapTileNode[x][y];
 }
 
@@ -26,17 +23,17 @@ FarmMap::~FarmMap() {
 }
 
 FarmMap* FarmMap::getInstance() {
-        if (!instance) {
-            instance = new (std::nothrow) FarmMap();
-            if (instance && instance->init("Maps/farmSpring/farmMap.tmx")) {
-                instance->autorelease();
-            }
-            else {
-                CC_SAFE_DELETE(instance);
-            }
+    if (!instance) {
+        instance = new (std::nothrow) FarmMap();
+        if (instance && instance->init("Maps/farmSpring/farmMap.tmx")) {
+            instance->autorelease();
         }
-        return instance;
+        else {
+            CC_SAFE_DELETE(instance);
+        }
     }
+    return instance;
+}
 
 bool FarmMap::init(const std::string& tmxFile) {
     if (!Node::init()) {
@@ -47,29 +44,30 @@ bool FarmMap::init(const std::string& tmxFile) {
 
         // 如果传入了文件名,加载地图
     if (!tmxFile.empty()) {
-        map = TMXTiledMap::create(tmxFile);
-        if (!map) {
+        tiledMap = TMXTiledMap::create(tmxFile);
+        if (!tiledMap) {
             return false;
+        }
     }
-    addChild(map);
+    addChild(tiledMap);
 
-    const auto farmMapSize = getMapSize();
+    const Size farmMapSize = getMapSize();
     setPosition(WINSIZE.width / 2 - farmMapSize.width / 2, WINSIZE.height / 2 - farmMapSize.height / 2);
 
     // 获取地图的各个图层
-    grassLayer = map->getLayer("Grass");
-    soilLayer = map->getLayer("Soil");
-    obstacleLayer = map->getLayer("Obstacles");
-    moldLayer = map->getLayer("Mold");
-    waterLayer = map->getLayer("Water");
-    stoneLayer = map->getLayer("Stone");
+    grassLayer = tiledMap->getLayer("Grass");
+    soilLayer = tiledMap->getLayer("Soil");
+    obstacleLayer = tiledMap->getLayer("Obstacles");
+    moldLayer = tiledMap->getLayer("Mold");
+    waterLayer = tiledMap->getLayer("Water");
+    stoneLayer = tiledMap->getLayer("Stone");
 
     animalManager = AnimalManager::create();
     addChild(animalManager);
 
     // 获取瓦点地图的长宽
-    int width = map->getMapSize().width;
-    int height = map->getMapSize().height;
+    int width = tiledMap->getMapSize().width;
+    int height = tiledMap->getMapSize().height;
         
     // 遍历图层为每一个图层
     for (int y = 0; y < height; y++) {
@@ -118,7 +116,6 @@ bool FarmMap::init(const std::string& tmxFile) {
 
         setPosition(position);
         }, "farm_map");
-    }
     return true;
 }
 
@@ -132,19 +129,15 @@ void FarmMap::moveMapByDirection(const Vec2& direction) {
     velocity = direction * MAP_MOVE_SPEED;
 }
 
-Size FarmMap::getMapSize() const {
-    return map->getContentSize();
+const Size& FarmMap::getMapSize() const {
+    return tiledMap->getContentSize();
 }
 
 // 碰撞检测：检查给定位置是否是障碍物, positon是人物在地图坐标系（原点在左下角）中的坐标
 bool FarmMap::isCollidable(const Vec2& position) const {
-    if (!obstacleLayer) {
-        return false;
-    }
-
     // 获取地图的瓦片大小
-    const Size tileSize = map->getTileSize();
-    const Size mapSize = map->getMapSize();
+    const Size tileSize = tiledMap->getTileSize();
+    const Size mapSize = tiledMap->getMapSize();
 
     // 将人物在地图中的坐标转换为瓦片地图坐标（原点在左上角）
     int x = position.x / tileSize.width;
@@ -178,8 +171,8 @@ void FarmMap::interactWithFarmMap() {
 
     // 获取要交互的土块位置
     Vec2 playerPosition = player->getPosition();
-    const Size tileSize = farmMap->map->getTileSize();
-    const Size mapSize = farmMap->map->getMapSize();
+    const Size tileSize = farmMap->tiledMap->getTileSize();
+    const Size mapSize = farmMap->tiledMap->getMapSize();
     playerPosition = playerPosition - farmMap->getPosition();
     playerPosition.y = playerPosition.y - player->getContentSize().height / 2 + 10.0f;
     playerPosition.x = playerPosition.x / tileSize.width;
@@ -207,7 +200,7 @@ void FarmMap::interactWithFarmMap() {
     std::string currentItemName = player->getCurrentItemName();
 
         // 与地图块的交互
-        if (mapTileNode[x][y]->getTileType() == TileType::Stone) {      // 当前是石头层
+        if (mapTileNode[x][y]->getTileType() == TileType::Stone) {                                      // 当前是石头层
             if (currentItemName == "pickaxe") {
                 dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();                                   // 敲击一次石头
                 if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken() == true) {                      // 判断石头是否击碎
@@ -305,4 +298,8 @@ void FarmMap::farmMapUpdateByTime() {
             }
         }
     }
+}
+
+TMXTiledMap* FarmMap::getTiledMap() {
+    return tiledMap;
 }

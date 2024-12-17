@@ -414,6 +414,10 @@ constexpr int FARMMAP_WIDTH = 31;
 constexpr int FARMMAP_HEIGHT = 17;
 constexpr int SUN_OFFSET = 100;
 
+// BeachMap
+constexpr int BEACHMAP_WIDTH = 48;
+constexpr int BEACHMAP_HEIGHT = 24;
+
 // TileNode
 constexpr int SOIL_GID = 36;
 constexpr int HOED_SOIL_GID = 64;

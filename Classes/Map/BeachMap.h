@@ -1,29 +1,21 @@
-#ifndef __FARMMAP_H__
-#define __FARMMAP_H__
+#ifndef __BEACHMAP_H__
+#define __BEACHMAP_H__
+
 #include "cocos2d.h"
-#include "Crop.h"
 #include "TileNode.h"
-#include "AnimalManager.h"
-#include "../Npc/Npc.h"
-#include "../Bag/Bag.h"
-#include "../Tool/Kettle.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
-#include <string>
-#include <memory>
-#include <vector>
+#include "../Bag/Bag.h"
 
-// 农场地图类
-class FarmMap : public cocos2d::Node {
+
+// 海滩地图
+class BeachMap : public cocos2d::Node {
 public:
 	// 获取单例实例
-	static FarmMap* getInstance();
+	static BeachMap* getInstance();
 
 	// 初始化地图
 	bool init(const std::string& tmxFile);
-
-	//随地图创建npc
-	bool npcInit(const cocos2d::Vec2& position, Npc* npc);
 
 	// 更新地图位置
 	void moveMapByDirection(const cocos2d::Vec2& direction);
@@ -34,8 +26,8 @@ public:
 	// 碰撞检测：检查给定位置是否是障碍物
 	bool isCollidable(const cocos2d::Vec2& position) const;
 
-	// 用于鼠标左键与农场的交互逻辑
-	void interactWithFarmMap();
+	// 用于鼠标左键与海滩的交互逻辑
+	void interactWithBeachMap();
 
 	// 地图停止移动
 	void stopMoving();
@@ -47,40 +39,31 @@ public:
 	TileNode* getTileNode(const int x, const int y) const;
 
 	// 地图随着时间的更新
-	void farmMapUpdateByTime();
+	void beachMapUpdateByTime();
 
 private:
 	// 构造函数和析构函数私有化
-	FarmMap();
-	~FarmMap();
+	BeachMap();
+	~BeachMap();
 
 	// 禁用拷贝构造和赋值操作
-	FarmMap(const FarmMap&) = delete;
-	FarmMap& operator=(const FarmMap&) = delete;
-
-
-	// 单例实例
-	static FarmMap* instance;
+	BeachMap(const BeachMap&) = delete;
+	BeachMap& operator=(const BeachMap&) = delete;
 
 	// 地图的偏移速度
 	cocos2d::Vec2 velocity;
+
+	// 单例实例
+	static BeachMap* instance;
 
 	// 瓦片地图对象
 	cocos2d::TMXTiledMap* tiledMap;
 
 	// 存储地图上每个节点的类
-	TileNode* mapTileNode[FARMMAP_WIDTH][FARMMAP_HEIGHT];
+	TileNode* mapTileNode[BEACHMAP_WIDTH][BEACHMAP_HEIGHT];
 
 	// 用来存储TMX地图的各个层
-	cocos2d::TMXLayer* grassLayer;
-	cocos2d::TMXLayer* soilLayer;
-	cocos2d::TMXLayer* obstacleLayer;
-	cocos2d::TMXLayer* moldLayer;
+	cocos2d::TMXLayer* backgroundLayer;
 	cocos2d::TMXLayer* waterLayer;
-	cocos2d::TMXLayer* stoneLayer;
-
-	// 动物对象
-	AnimalManager* animalManager;
 };
-
 #endif
