@@ -1,5 +1,10 @@
 #include "Bag.h"
 #include "../Player/Player.h"
+#include "../Tool/Seed.h"
+#include "../Tool/Fertilizer.h"
+#include "../Tool/MilkingPail.h"
+#include "../Tool/Agrochemical.h"
+#include "../Animal/AnimalItem.h"
 #include "../Constant/Constant.h"
 #include "../Item/ItemFactory.h"
 

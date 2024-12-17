@@ -147,9 +147,6 @@
     <ClCompile Include="..\Classes\DialogueBox\DialogueBox.cpp">
       <Filter>Classes\DialogueBox</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Food\Food.cpp">
-      <Filter>Classes\Food</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
     </ClCompile>
@@ -188,6 +185,36 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Skill\SkillTreeUI.cpp">
       <Filter>Classes\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\MilkingPail.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\DogbaneCrop.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\CornCrop.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\CarrotCrop.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\FarmResourceManager.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tool\Agrochemical.cpp">
+      <Filter>Classes\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Food\Food.cpp">
+      <Filter>Classes\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Food\DogbaneFood.cpp">
+      <Filter>Classes\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Food\CarrotFood.cpp">
+      <Filter>Classes\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Food\CornFood.cpp">
+      <Filter>Classes\Food</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,9 +302,6 @@
     <ClInclude Include="..\Classes\DialogueBox\DialogueBox.h">
       <Filter>Classes\DialogueBox</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Food\Food.h">
-      <Filter>Classes\Food</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
     </ClInclude>
@@ -316,6 +340,36 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Skill\SkillTreeUI.h">
       <Filter>Classes\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\MilkingPail.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\DogbaneCrop.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\CornCrop.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\CarrotCrop.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\FarmResourceManager.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tool\Agrochemical.h">
+      <Filter>Classes\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food\Food.h">
+      <Filter>Classes\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food\DogbaneFood.h">
+      <Filter>Classes\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food\CarrotFood.h">
+      <Filter>Classes\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food\CornFood.h">
+      <Filter>Classes\Food</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item\ItemFactory.h">
       <Filter>Classes\Item</Filter>

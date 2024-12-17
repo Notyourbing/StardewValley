@@ -7,7 +7,7 @@
 
 class Food : public Item {
 public:
-    // 静态创建函数
+    // 静态创建方法
     static Food* create(const ItemInfo& item_info);
 
     // 初始化方法
@@ -18,6 +18,8 @@ public:
 
     // 判断是否是相同物品，建议放到Item类中（我不知道为什么放在这里，如果是这个类独有的最好起名isSameFood）
     bool isSameItem(const Food& other) const;
+
+    virtual ~Food() {}
 };
 
 #endif // ITEM_H

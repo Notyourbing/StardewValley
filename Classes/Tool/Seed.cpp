@@ -8,8 +8,8 @@ bool Seed::init(const SeedType& seedType) {
     // 对于不同的种类进行初始化
     switch (seedType){ 
     case SeedType::AppleSeed:
-        seedName = "appleSeed";
-        return Tool::init({ "appleSeed", APPLE_SEED});
+        seedName = "dogbaneSeed";
+        return Tool::init({ "dogbaneSeed", APPLE_SEED});
         break;
     case SeedType::CornSeed:
         seedName = "cornSeed";

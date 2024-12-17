@@ -11,6 +11,7 @@
 #include "../Tool/Kettle.h"
 #include "../Tool/Seed.h"
 #include "../Tool/Fertilizer.h"
+#include "../Tool/Agrochemical.h"
 #include "../Food/Food.h"
 #include "../Animal/AnimalItem.h"
 
@@ -44,6 +45,9 @@ public:
         }
         else if (itemName == "carrotSeed") {
             return CarrotSeed::create();
+        }
+        else if (itemName == "agrochemical") {
+            return Agrochemical::create();
         }
         else if (itemName == "fertilizer") {
             return Fertilizer::create();

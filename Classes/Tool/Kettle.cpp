@@ -4,6 +4,7 @@
 
 USING_NS_CC;
 
+// Kettle类：静态创建对象
 Kettle* Kettle ::create() {
 	Kettle *kettle = new(std::nothrow) Kettle();
 	if (kettle && kettle->init()) {
@@ -86,4 +87,9 @@ void Kettle::useItem() {
             nullptr
             );
     player->runAction(sequence);  // 播放动画
+
+    // 减少水壶里的水
+    if (waterLevel >= AMOUNT_OF_WATER_PER_USE) {
+        waterLevel -= AMOUNT_OF_WATER_PER_USE;
+    }
 }
