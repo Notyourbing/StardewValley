@@ -164,6 +164,8 @@ constexpr char HOE[] = "tools/hoe.png";
 constexpr char PICKAXE[] = "tools/pickaxe.png";
 constexpr char SCYTHE[] = "tools/scythe.png";
 constexpr char KETTLE[] = "tools/kettle.png";
+constexpr char MILKPAIL[] = "tools/milkPail.png";
+constexpr char AGROCHEMICAL[] = "tools/agrochemical.png";
 
 // 工具动画帧的裁剪区域
 namespace ToolRects {
@@ -324,6 +326,7 @@ constexpr std::array<const char*, 4> options = {
 	"Community Celebrations",
 	"I have a gift for you"
 };
+
 // NPC
 struct NpcInfo {
 	const std::string name;
@@ -373,9 +376,37 @@ constexpr int LABEL_HEIGHT = 390;
 // Crop
 constexpr int WATER_SCARCITY_DAY = 5;
 constexpr int INFESTED_DAY = 5;
+constexpr int DOGBANE_SPRING_STAGE_FIRST = 2;
+constexpr int DOGBANE_SPRING_STAGE_SECOND = 2;
+constexpr int DOGBANE_SPRING_STAGE_THIRD = 2;
+constexpr int DOGBANE_SUMMER_STAGE_FIRST = 1;
+constexpr int DOGBANE_SUMMER_STAGE_SECOND = 1;
+constexpr int DOGBANE_SUMMER_STAGE_THIRD = 1;
+constexpr int DOGBANE_AUTUMN_STAGE_FIRST = 3;
+constexpr int DOGBANE_AUTUMN_STAGE_SECOND = 3;
+constexpr int DOGBANE_AUTUMN_STAGE_THIRD = 3;
+constexpr int DOGBANE_WINTER_STAGE_FIRST = 4;
+constexpr int DOGBANE_WINTER_STAGE_SECOND = 4;
+constexpr int DOGBANE_WINTER_STAGE_THIRD = 4;
+constexpr int CORN_SPRING_STAGE_FIRST = 3;
+constexpr int CORN_SPRING_STAGE_SECOND = 2;
+constexpr int CORN_SUMMER_STAGE_FIRST = 2;
+constexpr int CORN_SUMMER_STAGE_SECOND = 1;
+constexpr int CORN_AUTUMN_STAGE_FIRST = 4;
+constexpr int CORN_AUTUMN_STAGE_SECOND = 3;
+constexpr int CORN_WINTER_STAGE_FIRST = 5;
+constexpr int CORN_WINTER_STAGE_SECOND = 4;
+constexpr int CARROT_SPRING_STAGE_FIRST = 4;
+constexpr int CARROT_SPRING_STAGE_SECOND = 2;
+constexpr int CARROT_SUMMER_STAGE_FIRST = 2;
+constexpr int CARROT_SUMMER_STAGE_SECOND = 1;
+constexpr int CARROT_AUTUMN_STAGE_FIRST = 6;
+constexpr int CARROT_AUTUMN_STAGE_SECOND = 5;
+constexpr int CARROT_WINTER_STAGE_FIRST = 7;
+constexpr int CARROT_WINTER_STAGE_SECOND = 6;
 
 //SEED
-constexpr char APPLE_SEED[] = "tools/appleSeed.png";
+constexpr char APPLE_SEED[] = "tools/dogbaneSeed.png";
 constexpr char CARROT_SEED[] = "tools/carrotSeed.png";
 constexpr char CORN_SEED[] = "tools/cornSeed.png";
 constexpr char FERTILIZER[] = "tools/fertilizer.png";
@@ -398,19 +429,91 @@ constexpr int FARMMAP_HEIGHT = 17;
 constexpr int SUN_OFFSET = 100;
 
 // TileNode
-constexpr int SOIL_GID = 36;
-constexpr int HOED_SOIL_GID = 64;
-constexpr int WATER_SOIL_GID = 96;
-constexpr int WATER_GID = 17;
-constexpr int STONE_GID = 22;
+constexpr int GRASS_GID = 87;
+constexpr int SOIL_GID = 1;
+constexpr int HOED_SOIL_GID = 2;
+constexpr int WATER_SOIL_GID = 3;
+constexpr int FERTILIZED_SOIL_GID = 4;
+constexpr int WATER_GID = 95;
+constexpr int STONE_GID = 89;
+constexpr int OBSTACLES_GID = 100;
+constexpr int MOLD_GID = 200;
 constexpr int MAX_WATER_RESOURCE = 1000;
 constexpr int RANIY_REPLENISH = 200;
 
-// Crop
-constexpr int SEED_GID = 34;
-constexpr int APPLE_GID = 1;
-constexpr int CARROT_GID = 2;
-constexpr int CORN_GID = 3;
+// DogbaneCrop
+constexpr int DOGBANE_FIRST = 5;
+constexpr int DOGBANE_FIRST_FERTILIZE = 6;
+constexpr int DOGBANE_FIRST_WATER = 7;
+constexpr int DOGBANE_FIRST_FERTILIZE_WATER = 8;
+constexpr int DOGBANE_SECOND = 9;
+constexpr int DOGBANE_SECOND_FERTILIZE = 10;
+constexpr int DOGBANE_SECOND_WATER = 11;
+constexpr int DOGBANE_SECOND_FERTILIZE_WATER = 12;
+constexpr int DOGBANE_THIRD = 13;
+constexpr int DOGBANE_THIRD_ILL = 14;
+constexpr int DOGBANE_THIRD_FERTILIZE = 15;
+constexpr int DOGBANE_THIRD_WATER = 16;
+constexpr int DOGBANE_THIRD_FERTILIZE_WATER = 17;
+constexpr int DOGBANE_FOURTH = 18;
+constexpr int DOGBANE_FOURTH_ILL = 19;
+constexpr int DOGBANE_FOURTH_FERTILIZE = 20;
+constexpr int DOGBANE_FOURTH_WATER = 21;
+constexpr int DOGBANE_FOURTH_FERTILIZE_WATER = 22;
+
+// CornCrop
+constexpr int CORN_FIRST = 23;
+constexpr int CORN_FIRST_FERTILIZE = 24;
+constexpr int CORN_FIRST_WATER = 25;
+constexpr int CORN_FIRST_FERTILIZE_WATER = 26;
+constexpr int CORN_SECOND = 27;
+constexpr int CORN_SECOND_ILL = 28;
+constexpr int CORN_SECOND_FERTILIZE = 29;
+constexpr int CORN_SECOND_FERTILIZE_WATER = 30;
+constexpr int CORN_SECOND_WATER = 31;
+constexpr int CORN_THIRD = 32;
+constexpr int CORN_THIRD_ILL = 33;
+constexpr int CORN_THIRD_FERTILIZE = 34;
+constexpr int CORN_THIRD_FERTILIZE_WATER = 35;
+constexpr int CORN_THIRD_WATER = 36;
+
+// CarrotCrop
+constexpr int CARROT_FIRST = 37;
+constexpr int CARROT_FIRST_WATER = 38;
+constexpr int CARROT_FIRST_FERTILIZE = 39;
+constexpr int CARROT_FIRST_FERTILIZE_WATER = 40;
+constexpr int CARROT_SECOND = 41;
+constexpr int CARROT_SECOND_ILL = 42;
+constexpr int CARROT_SECOND_FERTILIZE = 43;
+constexpr int CARROT_SECOND_FERTILIZE_WATER = 44;
+constexpr int CARROT_SECOND_WATER = 45;
+constexpr int CARROT_THIRD = 46;
+constexpr int CARROT_THIRD_ILL = 47;
+constexpr int CARROT_THIRD_FERTILIZE = 48;
+constexpr int CARROT_THIRD_WATER = 49;
+constexpr int CARROT_THIRD_FERTILIZE_WATER = 50;
+
+// DeadCrop
+constexpr int DEAD_CROP = 51;
+
+// MAXGROWTHSTAGE
+constexpr int DOGBANE_MAX_GROWTH_STAGE = 4;
+constexpr int CORN_MAX_GROWTH_STAGE = 3;
+constexpr int CARROT_MAX_GROWTH_STAGE = 3;
+
+// CropPestProbability
+constexpr int DOGBANE_SPRING_PEST_PROBABILITY=30;
+constexpr int DOGBANE_SUMMER_PEST_PROBABILITY = 20;
+constexpr int DOGBANE_AUTUMN_PEST_PROBABILITY = 25;
+constexpr int DOGBANE_WINTER_PEST_PROBABILITY = 10;
+constexpr int CORN_SPRING_PEST_PROBABILITY = 25;
+constexpr int CORN_SUMMER_PEST_PROBABILITY = 15;
+constexpr int CORN_AUTUMN_PEST_PROBABILITY = 20;
+constexpr int CORN_WINTER_PEST_PROBABILITY = 10;
+constexpr int CARROT_SPRING_PEST_PROBABILITY = 35;
+constexpr int CARROT_SUMMER_PEST_PROBABILITY = 25;
+constexpr int CARROT_AUTUMN_PEST_PROBABILITY = 30;
+constexpr int CARROT_WINTER_PEST_PROBABILITY = 10;
 
 // Animal
 constexpr char COW[] = "Animal/Cow.png";
@@ -418,7 +521,7 @@ constexpr char CHICKEN[] = "Animal/Chicken.png";
 constexpr char SHEEP[] = "Animal/Sheep.png";
 constexpr char PIG[] = "Animal/Pig.png";
 
-// TOOL
+// Tool
 constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量
 constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
 
@@ -447,6 +550,20 @@ constexpr ItemInfo SHEEP_ITEM = {
 constexpr ItemInfo PIG_ITEM = {
 	"pig",
 	"tools/pig.png"
+};
+
+// FoodItem
+constexpr ItemInfo DOGBANE_ITEM = {
+	"dogbaneFood",
+	"food/parsnip.png"
+};
+constexpr ItemInfo CORN_ITEM = {
+	"cornFood",
+	"food/corn.png"
+};
+constexpr ItemInfo CARROT_ITEM = {
+	"carrotFood",
+	"food/carrot.png"
 };
 
 // fish

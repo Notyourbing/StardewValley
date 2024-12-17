@@ -15,7 +15,6 @@ Food* Food::create(const ItemInfo& item_info) {
     }
 }
 
-
 // init方法：用于初始化Food对象的内部状态
 bool Food::init(const ItemInfo& item_info) {
     itemName = item_info.name;

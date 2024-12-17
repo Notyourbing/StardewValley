@@ -8,6 +8,8 @@
 #include "../Player/Player.h"
 #include "../Tool/Seed.h"
 #include "../Tool/Fertilizer.h"
+#include "../Tool/MilkingPail.h"
+#include "../Tool/Agrochemical.h"
 #include "../Animal/AnimalItem.h"
 #include "../Constant/Constant.h"
 
@@ -82,6 +84,10 @@ bool Bag::init() {
 	addItem(carrotSeed);
 	Tool* fertilizer = Fertilizer::create();
 	addItem(fertilizer);
+	Tool* milkPail = MilkPail::create();
+	addItem(milkPail);
+	Tool* argochemical = Agrochemical::create();
+	addItem(argochemical);
 	Food* tuna = Food::create(TUNA);
 	addItem(tuna);
 	// 添加几种动物
@@ -93,6 +99,7 @@ bool Bag::init() {
 	addItem(sheepItem);
 	AnimalItem* pigItem = PigItem::create();
 	addItem(pigItem);
+	
 
 	selectItem(0);
 

@@ -37,6 +37,7 @@ bool Farm::init() {
 
 	// 玩家
 	auto player = Player::getInstance();
+	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2);
 	addChild(player, 3);
 
 	// 玩家名字
@@ -73,7 +74,7 @@ bool Farm::init() {
 	// 启动一个定时器，每秒调用一次 updateDate 方法
 	schedule([this, dateManage, farmMap,weatherManager](float deltaTime) {
 		dateManage->updateDate();
-		farmMap->farmMapUpdateByTime();
+		farmMap->farmMapTimeUpdate();
 		weatherManager->updateWeather(dateManage->getCurrentWeather());
 		}, 1.0f, "update_date_key");
 
