@@ -189,6 +189,9 @@
     <ClCompile Include="..\Classes\Skill\SkillTreeUI.cpp">
       <Filter>Classes\Skill</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\BeachMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -319,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Item\ItemFactory.h">
       <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\BeachMap.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
