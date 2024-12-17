@@ -85,6 +85,17 @@ private:
 	// 与土壤块的交互
 	void interactWithSoil(std::string itemName, const int& x, const int& y);
 
+	// 与石头块的交互
+	void interactWithStone(std::string itemName, const int& x, const int& y);
+
+	// 与草地的交互
+	void interactWithGrass(std::string itemName, const int& x, const int& y);
+
+	// 与水池的交互
+	void interactWithWater(std::string itemName,const int& x, const int& y);
+
+	// 与箱子的交互
+	void interactWithMold(std::string itemName, const int& x, const int& y);
 };
 
 #endif

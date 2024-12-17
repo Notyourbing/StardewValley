@@ -212,6 +212,21 @@ void FarmMap::interactWithFarmMap() {
     if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
         interactWithSoil(currentItemName,x,y);
     }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Grass) {
+        interactWithGrass(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Water) {
+        interactWithWater(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Mold) {
+        interactWithMold(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Stone) {
+        interactWithStone(currentItemName, x, y);
+    }
+    else {
+        return;
+    }
 }
 
 // 与土壤的交互
@@ -245,6 +260,41 @@ void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
     soilLayer->setTileGID(soilGID,Vec2(x,y));
 }
 
+// 与草地的交互
+void FarmMap::interactWithGrass(std::string itemName, const int& x, const int& y) {
+
+}
+
+// 与水的交互
+void FarmMap::interactWithWater(std::string itemName,const int& x,const int& y) {
+
+}
+
+// 与箱子的交互
+void FarmMap::interactWithMold(std::string itemName, const int& x, const int& y) {
+
+}
+
+// 与石头的交互
+void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y) {
+    // 镐子敲击石头
+    if (itemName == "pickaxe") {
+        dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();
+
+        // 判断石头是否被击碎
+        if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken()) {
+            delete mapTileNode[x][y];
+            mapTileNode[x][y] = nullptr;
+            mapTileNode[x][y] = Soil::create(Vec2(x,y));
+
+            // 更新地图图块
+            stoneLayer->setTileGID(0, Vec2(x, y));
+            soilLayer->setTileGID(SOIL_GID, Vec2(x, y));
+        }
+    }
+}
+
+// 停止移动
 void FarmMap::stopMoving() {
     velocity = Vec2::ZERO;
 }

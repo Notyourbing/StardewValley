@@ -424,7 +424,7 @@ constexpr int CARROT_WINTER_STAGE_FIRST = 7;
 constexpr int CARROT_WINTER_STAGE_SECOND = 6;
 
 //SEED
-constexpr char APPLE_SEED[] = "tools/dogbaneSeed.png";
+constexpr char DOGBANE_SEED[] = "tools/dogbaneSeed.png";
 constexpr char CARROT_SEED[] = "tools/carrotSeed.png";
 constexpr char CORN_SEED[] = "tools/cornSeed.png";
 constexpr char FERTILIZER[] = "tools/fertilizer.png";
