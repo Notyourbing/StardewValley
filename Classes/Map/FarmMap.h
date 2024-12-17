@@ -46,9 +46,8 @@ public:
 	//获取当前位置地图的类
 	TileNode* getTileNode(const int x, const int y) const;
 
-	// 地图随着时间的更新
-	void farmMapUpdateByTime();
-
+	// 地图时间更新
+	void farmMapTimeUpdate();
 private:
 	// 构造函数和析构函数私有化
 	FarmMap();
@@ -81,6 +80,10 @@ private:
 
 	// 动物对象
 	AnimalManager* animalManager;
+
+	// 与土壤块的交互
+	void interactWithSoil(std::string itemName, const int& x, const int& y);
+
 };
 
 #endif

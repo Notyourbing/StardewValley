@@ -1,4 +1,5 @@
 #include "DialogueBox.h"
+#include "../DateManage/DateManage.h"
 
 USING_NS_CC;
 
