@@ -376,7 +376,6 @@ const std::vector<std::string> INIT_ITEMS =
 {	"axe",
 	"pickaxe",
 	"hoe",
-	"fishingRod",
 	"scythe",
 	"kettle",
 	"appleSeed",
@@ -445,6 +444,7 @@ constexpr char WINTER_CONVERSATION[] = "Merry Christmas and Happy Birthday to le
 constexpr int FARMMAP_WIDTH = 31;
 constexpr int FARMMAP_HEIGHT = 17;
 constexpr int SUN_OFFSET = 100;
+constexpr float CHANGE_MAP_DISTANCE = 80.0f;
 
 // BeachMap
 constexpr int BEACHMAP_WIDTH = 48;

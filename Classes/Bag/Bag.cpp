@@ -281,3 +281,15 @@ const std::vector<Item*>& Bag::getItems() const {
 const std::vector<int>& Bag::getQuantities() const { 
 	return quantities; 
 }
+
+// 查看背包中是否有目标物品
+bool Bag::checkItemIn(const std::string& targetName) {
+	for (auto item : items) {
+		if (item) {
+			if (item->getItemName() == targetName) {
+				return true;
+			}
+		}
+	}
+	return false;
+}

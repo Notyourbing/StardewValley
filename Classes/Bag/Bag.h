@@ -59,6 +59,8 @@ public:
 	// 获取所有物品的数量
 	const std::vector<int>& getQuantities() const;
 
+	// 查看背包中是否有目标物品
+	bool checkItemIn(const std::string& targetName);
 private:
 	// 单例实例
 	static Bag* instance;

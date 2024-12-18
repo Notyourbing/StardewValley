@@ -71,9 +71,9 @@ bool Farm::init() {
 	}
 
 	// 控制鼠标和键盘的交互
-	Control* control = Control::create();
-	if (control) {
-		addChild(control, 4);
+	Control* farmControl = Control::create(farmMap);
+	if (farmControl) {
+		addChild(farmControl, 4, "farm_control");
 	}
 
 	// 日期管理
@@ -91,13 +91,13 @@ bool Farm::init() {
 	// 启动定时器，每秒调用一次 updateDate 方法
 	schedule([this, dateManage, farmMap,weatherManager](float deltaTime) {
 		dateManage->updateDate();
-		farmMap->farmMapTimeUpdate();
+		farmMap->mapUpdateByTime();
 		weatherManager->updateWeather(dateManage->getCurrentWeather());
 		}, 5.0f, "update_date_key");
 
 	// 每帧检测是否要切换场景
 	schedule([this](float dt) {
-		// this->changeSceneAuto();
+		this->changeSceneAuto();
 		}, "change_scene");
 
 	return true;
@@ -125,8 +125,40 @@ void Farm::changeSceneAuto() {
 	const auto playerDirection = player->getLastDirection();
 
 	// 人物走向下边界
-	if (playerDirection == Vec2(0, -1) && positionInMap.y < 80.0f && !(this->getChildByName("beach_map"))) {
+	if (playerDirection == Vec2(0, -1) && positionInMap.y < CHANGE_MAP_DISTANCE && !(getChildByName("beach_map"))) {
+		// 移除对农场的控制
+		removeChildByName("farm_control");
 		auto beachMap = BeachMap::getInstance();
+
+		// 添加对沙滩的控制
+		Control* beachControl = Control::create(beachMap);
+		if (beachControl) {
+			addChild(beachControl, 5, "beach_control");
+		}
 		addChild(beachMap, 1, "beach_map");
+
+		// 把人物从下边界转移到上边界
+		const float newPlayerPosX = player->getPositionX();
+		const float newPlayerPosY = WINSIZE.height - player->getPositionY();
+		player->setPosition(Vec2(newPlayerPosX, newPlayerPosY));
+	}
+
+	// 当前是海滩场景
+	if ((getChildByName("beach_map"))) {
+		auto beachMap = BeachMap::getInstance();
+		const auto positionInBeachMap = player->getPosition() - beachMap->getPosition();
+
+		// 如果人物走向上边界
+		if (playerDirection == Vec2(0, 1) && positionInMap.y > WINSIZE.height - CHANGE_MAP_DISTANCE) {
+			removeChildByName("beach_control");
+			removeChildByName("beach_map");
+			Control* farmControl = Control::create(farmMap);
+			addChild(farmControl, 5, "farm_control");
+
+			// 把人物从上边界转移到下边界
+			const float newPlayerPosX = player->getPositionX();
+			const float newPlayerPosY = WINSIZE.height - player->getPositionY();
+			player->setPosition(Vec2(newPlayerPosX, newPlayerPosY));
+		}
 	}
 }

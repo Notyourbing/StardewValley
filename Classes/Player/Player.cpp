@@ -23,6 +23,7 @@ Player* Player::getInstance() {
     return instance;
 }
 
+// 构造函数
 Player::Player()
     : velocity(Vec2::ZERO),
     name(""),
@@ -31,10 +32,9 @@ Player::Player()
     lastDirection(Vec2::ZERO) {
 }
 
+// 析构函数
 Player::~Player() {
-    if (instance != nullptr) {
-        instance = nullptr;
-    }
+    instance = nullptr;
 }
 
 // 初始化
@@ -46,23 +46,9 @@ bool Player::init() {
     loadStandFrames();
     // 每dt时间调用一次
     schedule([this](float dt) {
-
         const Vec2 playerSize(Player::getInstance()->getContentSize());
-
-        // 检查目标位置是否是障碍物
-        auto farmMap = FarmMap::getInstance();
-
-        // 人在地图坐标中下一步会到达的位置
-        // 这里的- velocity / PLAYER_MOVE_SPEED.0f * 10.0f是预测下一步的位置
-        // velocity / PLAYER_MOVE_SPEED.0f是因为velocity的绝对值是PLAYER_MOVE_SPEED
-        Vec2 playerSize1 = Vec2(0.0f, getContentSize().height * 1.0f);
-
-        auto targetPosition = getPosition() - farmMap->getPosition() - playerSize1 * 0.5f + velocity / PLAYER_MOVE_SPEED * 10.0f; // 每帧移动的距离
-        if (farmMap->isCollidable(targetPosition)) {
-            velocity = Vec2::ZERO;
-        }
-        
         auto position = getPosition() + velocity * dt;
+
         // 边界检测，防止玩家移出屏幕
         position.x = std::max(playerSize.x / 2, std::min(position.x, WINSIZE.width - playerSize.x / 2));
         position.y = std::max(playerSize.y / 2, std::min(position.y, WINSIZE.height - playerSize.y / 2));
@@ -142,12 +128,15 @@ void Player::stopMoving() {
     }
 }
 
+// 获取人物最后朝向
 Vec2 Player::getLastDirection() const {
     return lastDirection;
 }
 
+// 设置人物最后朝向
 void Player::setLastDirection(const Vec2& direction) {
     lastDirection = direction;
+
     // 根据最后移动的方向设置站立姿势
     if (lastDirection.equals(Vec2(1, 0))) {
         setStandPose("standRight");
@@ -170,45 +159,42 @@ void Player::loadStandFrames() {
     createStandFrame(ResPath::STAND_UP, "standUp");
     createStandFrame(ResPath::STAND_LEFT, "standLeft");
     createStandFrame(ResPath::STAND_RIGHT, "standRight");
-
 }
 
 //创建移动动画
 void Player::createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount) { 
+    // 如果当前已经在播放相同的动画，则无需重复播放
     if (currentAnimationName == animationName) {
-        return; // 如果当前已经在播放相同的动画，则无需重复播放
+        return;
     }
 
-    stopAllActions(); // 停止所有动作
+    // 停止所有动作
+    stopAllActions();
+
     //先建立移动帧
     SpriteFrame* frame = nullptr;
-
     Vector<SpriteFrame*> frameVec;
-
     for (int i = 0; i < frameCount; ++i) {
         std::string filename = StringUtils::format("playerWalkImages/walk%s%d.png", baseFilename.c_str(), i);
         frame = SpriteFrame::create(filename, CCRectMake(0, 0, 70, 120));
         frameVec.pushBack(frame);
     }
+
     //用移动帧创建动画
     Animation* animation = Animation::createWithSpriteFrames(frameVec);
     animation->setLoops(-1);
     animation->setDelayPerUnit(0.1f);
-
     CCAnimate* animate = CCAnimate::create(animation);
-
     Player::runAction(animate);
 }
 
 //加载某一方向（用filename决定）的站立帧
 void Player::createStandFrame(const std::string& filename, const std::string& animationName) {
     SpriteFrameCache* frameCache = SpriteFrameCache::getInstance();
-
     Texture2D* texture = Director::getInstance()->getTextureCache()->addImage(filename);
     if (!texture) {
         return;
     }
-
     Rect rect(0, 0, texture->getContentSize().width, texture->getContentSize().height);
     SpriteFrame* frame = SpriteFrame::createWithTexture(texture, rect);
     if (frame) {
@@ -236,12 +222,12 @@ std::string Player::getCurrentItemName() const {
 void Player::useCurrentItem() {
     if (currentItem && useItemEnable) {
         // 使用工具
-        currentItem->useItem();  // 触发工具的动画
+        currentItem->useItem();
+
         // 使用完成后将工具重新添加回玩家，并恢复玩家状态
         currentItem->runAction(Sequence::create(
             DelayTime::create(0.5f),  // 等待工具使用完成
             CallFunc::create([this]() {
-                Control::updateMovement();
                 }),
             nullptr
         ));
@@ -256,10 +242,12 @@ void Player::setCurrentItem(Item* item) {
     }
 }
 
+// 获取能否使用当前物品
 bool Player::getUseItemEnable() {
     return useItemEnable;
 }
 
+// 设置能否使用当前物品
 void Player::setUseItemEnable(const bool enable) {
     useItemEnable = enable;
 }

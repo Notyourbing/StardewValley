@@ -55,6 +55,7 @@ public:
 	// 设置能否使用当前物品
 	void setUseItemEnable(const bool enable);
 
+	// 获取能否使用当前物品
 	bool getUseItemEnable();
 
 private:

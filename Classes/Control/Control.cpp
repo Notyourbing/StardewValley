@@ -9,11 +9,16 @@
 
 USING_NS_CC;
 
-std::set<cocos2d::EventKeyboard::KeyCode> Control::keysPressed;
+// 构造函数
+Control::Control() : sceneMap(nullptr) {}
 
-Control* Control::create() {
+// 析构函数
+Control::~Control() {}
+
+// 静态创建Control方法
+Control* Control::create(SceneMap* sceneMap) {
 	Control* control = new(std::nothrow) Control();
-	if (control && control->init()) {
+	if (control  && sceneMap && control->init(sceneMap)) {
 		control->autorelease();
 		return control;
 	}
@@ -21,16 +26,18 @@ Control* Control::create() {
 	return nullptr;
 }
 
-bool Control::init() {
+// 初始化
+bool Control::init(SceneMap* sceneMap) {
 	if (!Node::init()) {
 		return false;
 	}
+	this->sceneMap = sceneMap;
 	initKeyboardListener();
 	initMouseListener();
-
 	return true;
 }
 
+// 根据按下的键来更新玩家和地图移动的方向
 void Control::updateMovement() {
 	Vec2 direction = Vec2::ZERO;
 
@@ -55,12 +62,16 @@ void Control::updateMovement() {
 
 	// 更新玩家和地图的移动方向
 	auto player = Player::getInstance();
-	auto farmMap = FarmMap::getInstance();
-	auto farmDirection = -direction;
-	farmMap->moveMapByDirection(farmDirection);
-	player->moveByDirection(direction);
+	auto mapMoveDirection = -direction;
+	if (sceneMap) {
+		sceneMap->moveMapByDirection(mapMoveDirection);
+	}
+	if (player) {
+		player->moveByDirection(direction);
+	}
 }
 
+// 初始化键盘监听器
 void Control::initKeyboardListener() {
 	// 创建键盘事件监听器
 	auto listener = EventListenerKeyboard::create();
@@ -101,8 +112,8 @@ void Control::initKeyboardListener() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-void Control::initMouseListener()
-{
+// 初始化鼠标监听器
+void Control::initMouseListener() {
 	// 创建鼠标事件监听器
 	auto listener = EventListenerMouse::create();
 
@@ -125,19 +136,18 @@ void Control::initMouseListener()
 	listener->onMouseDown = [this](Event* event) {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();
-		FarmMap* farmMap = FarmMap::getInstance();
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
 			if (DialogueBox::isDialogueVisible == false) {
 				player->stopMoving();
-				farmMap->stopMoving();
+				sceneMap->stopMoving();
 				player->useCurrentItem();
-				farmMap->interactWithFarmMap();
+				sceneMap->interactWithMap();
 			}
 		}
 		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			for (auto npc : Farm::npcs) {
 				// 计算玩家与NPC的距离
-				const float distance = player->getPosition().distance(npc->getPosition() + farmMap->getPosition());
+				const float distance = player->getPosition().distance(npc->getPosition() + sceneMap->getPosition());
 
 				// 当距离小于交互距离并且此时对话框没有显示
 				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
