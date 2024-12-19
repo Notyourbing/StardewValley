@@ -21,14 +21,10 @@ public:
     static bool getTaskStatus() { return isTaskCompleted; }
     bool completeTask() { return isTaskCompleted = true; }
 
-    //bool boardAdd() { return isAdded = true; }
-    //bool isBoardAdded() const { return isAdded; }
-
 private:
     std::string name;
     std::string image;
     static bool isTaskCompleted;
-    //static bool isAdded;
 };
 
 #endif // __NOTICE_BOARD_H__
