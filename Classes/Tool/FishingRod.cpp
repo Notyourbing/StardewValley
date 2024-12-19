@@ -3,30 +3,31 @@
 #include "../Scene/FarmScene.h" 
 #include "../Constant/Constant.h"
 #include "../Bag/Bag.h"
+#include "../Skill/SkillTree.h"
+#include "../Item/CampFire.h"
 #include "cocos2d.h"
 #include "cocos/editor-support/cocostudio/ActionTimeline/CSLoader.h"
 #include "ui/CocosGUI.h"
 #include <string>
-
 
 USING_NS_CC;
 
 bool FishingRod::isUsed = false;
 
 FishingRod* FishingRod::create() {
-	FishingRod* fishingRod = new (std::nothrow) FishingRod();
-	if (fishingRod && fishingRod->init()) {
-		fishingRod->autorelease();
-		return fishingRod;
-	}
-	CC_SAFE_DELETE(fishingRod);
-	return nullptr;
+    FishingRod* fishingRod = new (std::nothrow) FishingRod();
+    if (fishingRod && fishingRod->init()) {
+        fishingRod->autorelease();
+        return fishingRod;
+    }
+    CC_SAFE_DELETE(fishingRod);
+    return nullptr;
 }
 
 bool FishingRod::init()
 {
     // 调用基类的初始化方法
-    return Tool::init({ "fishingRod", FISHING_ROD});
+    return Tool::init({ "fishingRod", FISHING_ROD });
 }
 
 void FishingRod::useItem()
@@ -90,7 +91,7 @@ void FishingRod::useItem()
         frames.pushBack(SpriteFrame::create(ResPath::DOWN_FISHING_OUT_1, ToolRects::DOWN_FISHING_OUT_1));
         frames.pushBack(SpriteFrame::create(ResPath::DOWN_FISHING_OUT_2, ToolRects::DOWN_FISHING_OUT_2));
         frames.pushBack(SpriteFrame::create(ResPath::DOWN_FISHING_OUT_3, ToolRects::DOWN_FISHING_OUT_3));
-        frames.pushBack(SpriteFrame::create(ResPath::DOWN_FISHING_OUT_4, ToolRects::DOWN_FISHING_OUT_4));  
+        frames.pushBack(SpriteFrame::create(ResPath::DOWN_FISHING_OUT_4, ToolRects::DOWN_FISHING_OUT_4));
     }
 
     // 创建动画
@@ -202,13 +203,29 @@ void FishingRod::reelInRod()
                 anchovy
             };
             srand(static_cast<unsigned int>(time(NULL)));
+            auto skills = SkillTree::getInstance()->getAllSkills();
+            int level = skills["Fishing"]->getCurrentLevel();
             int randomIndex = rand() % fishList.size();  // 随机索引
             Food* fishCaught = fishList[randomIndex];  // 获取随机钓到的鱼
-
-            Bag* bag = Bag::getInstance();
-            // 在玩家上方显示钓到的鱼的提示
-            auto label = Label::createWithTTF(std::string(fishCaught->getItemName()) + " Caught!", "fonts/Marker Felt.ttf", 24);
-            bag->addItem(fishCaught);
+            auto label = Label::createWithTTF(std::string(fishCaught->getItemName()) + " Caught!", ResPath::FONT_TTF, 24);
+            // 概率钓鱼，等级越高钓到概率越大
+            int random = (level + 1) * rand() % 100;
+            if (random > 50) {
+                Bag* bag = Bag::getInstance();
+                // 钓鱼次数增加
+                SkillTree::getInstance()->updateFishingCount(1);
+                // 钓到鱼后开启烹饪
+                CampFire* campFire = CampFire::getInstance();
+                if (campFire->getStatus() == false) {
+                    FarmMap* farmMap = FarmMap::getInstance();
+                    farmMap->addChild(campFire);
+                    campFire->setStatus(true);
+                }
+                bag->addItem(fishCaught);
+            }
+            else {
+                label->setString("Nothing got!");
+            }
             label->setPosition(player->getPosition() + Vec2(0, 100));  // 显示在玩家上方
             label->setTextColor(Color4B::WHITE);
             player->getParent()->addChild(label);

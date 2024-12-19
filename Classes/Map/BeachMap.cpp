@@ -3,6 +3,7 @@
 #include "../Constant/Constant.h"
 #include "../Bag/Bag.h"
 #include "../Item/ItemFactory.h"
+#include "../Npc/NoticeBoard.h"
 
 USING_NS_CC;
 
@@ -49,15 +50,6 @@ bool BeachMap::init(const std::string& tmxFile) {
     int width = tiledMap->getMapSize().width;
     int height = tiledMap->getMapSize().height;
 
-    // 来到海滩获得新工具鱼竿
-    auto bag = Bag::getInstance();
-
-    // 如果背包中没有鱼竿，则获得工具鱼竿
-    if (!bag->checkItemIn("fishingRod")) {
-        auto fishingRod = ItemFactory::createItem("fishingRod");
-        bag->addItem(fishingRod);
-    }
-
     // 遍历图层为每一个图层
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
@@ -70,6 +62,11 @@ bool BeachMap::init(const std::string& tmxFile) {
 
         }
     }
+
+    // 放告示牌
+    NoticeBoard* board = NoticeBoard::create();
+    board->setPosition(Vec2(BOARD_X, BOARD_Y));
+    addChild(board);
     // 这个lambda函数会在BeachMap的生存期内每dt时间调用一次
     schedule([this](float dt) {
 

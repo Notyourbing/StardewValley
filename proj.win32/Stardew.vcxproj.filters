@@ -222,6 +222,12 @@
     <ClCompile Include="..\Classes\Map\SceneMap.cpp">
       <Filter>Classes\Map</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Item\CampFire.cpp">
+      <Filter>Classes\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Npc\NoticeBoard.cpp">
+      <Filter>Classes\Npc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -385,6 +391,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\SceneMap.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\StoneItem.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item\CampFire.h">
+      <Filter>Classes\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Npc\NoticeBoard.h">
+      <Filter>Classes\Npc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

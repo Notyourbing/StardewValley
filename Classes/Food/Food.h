@@ -14,10 +14,7 @@ public:
     virtual bool init(const ItemInfo& item_info) override;
 
     // 重写使用物品
-    virtual void useItem() override;
-
-    // 判断是否是相同物品，建议放到Item类中（我不知道为什么放在这里，如果是这个类独有的最好起名isSameFood）
-    bool isSameItem(const Food& other) const;
+    virtual void useItem() override {};
 
     virtual ~Food() {}
 };

@@ -25,6 +25,8 @@ bool Npc::init(const NpcInfo& npc_info) {
     dislikes = npc_info.dislikes;
     dialogues = npc_info.dialogues;
     image = npc_info.image;
+    task = npc_info.task;
+    isTaskCompleted = false;
 
     return true;
 }

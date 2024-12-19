@@ -7,6 +7,8 @@
 #include "../DialogueBox/DialogueBox.h"
 #include "../DateManage/WeatherManager.h"
 #include "../SaveManage/SaveManage.h"
+#include "../Npc/NoticeBoard.h"
+#include "../Item/ItemFactory.h"
 
 USING_NS_CC;
 
@@ -40,7 +42,6 @@ bool Farm::init() {
 		farmMap->npcInit(Vec2(WIZARD_X, WIZARD_Y), wizard);
 		farmMap->npcInit(Vec2(CLEANER_X, CLEANER_Y), cleaner);
 	}
-
 	// 玩家
 	auto player = Player::getInstance();
 	if (player) {
@@ -134,6 +135,13 @@ void Farm::changeSceneAuto() {
 		Control* beachControl = Control::create(beachMap);
 		if (beachControl) {
 			addChild(beachControl, 5, "beach_control");
+			// 来到海滩获得新工具鱼竿
+			auto bag = Bag::getInstance();
+			// 如果背包中没有鱼竿，则获得工具鱼竿
+			if (!bag->checkItemIn("fishingRod")) {
+				auto fishingRod = ItemFactory::createItem("fishingRod");
+				bag->addItem(fishingRod);
+			}
 		}
 		addChild(beachMap, 1, "beach_map");
 

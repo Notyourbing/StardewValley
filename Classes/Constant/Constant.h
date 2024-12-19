@@ -32,6 +32,7 @@ namespace ResPath {
 	constexpr char CLOSE_BUTTON_HOVER[] = "CloseHover.png";
 	constexpr char BAG_BACKGROUND[] = "icon/bagBackground.png";
 	constexpr char SKILL_BACKGROUND[] = "icon/allScreenButton.png";
+	constexpr char SKILL_FOREGROUND[] = "icon/skillButton.png";
 	constexpr char SKILL_CLOSE[] = "icon/closeButton.png";
 	constexpr char SKILL_CLOSE_ON[] = "icon/closeButtonOn.png";
 
@@ -324,7 +325,7 @@ constexpr std::array<const char*, 4> options = {
 	"Relationship between us",
 	"Any tasks?",
 	"Community Celebrations",
-	"I have a gift for you"
+	"I have a gift for you.."
 };
 
 // NPC
@@ -336,26 +337,29 @@ struct NpcInfo {
 	const std::vector<std::string> dislikes;
 	const std::vector<std::string> dialogues;
 	const std::string image;
+	const std::string task;
 };
 
 const NpcInfo WIZARD_INFO = {
 	"Wizard Yuuu",
 	"Fall 5",
 	90,
-	{ "Magic Essence", "Diamond" },
-	{ "Milk" },
+	{ "appleSeed"},
+	{ "tuna" },
 	{ "Get out of my way.", "It's nice to see you here.", "I like to spend time with you." },
-	"npcImages/wizard.png"
+	"npcImages/wizard.png",
+	"Go and get a tuna for my cat."
 };
 
 const NpcInfo CLEANER_INFO = {
 	"Cleaner Levi",
 	"Winter 25",
 	10,
-	{ "Milk", "Cleaning tools" },
-	{ "Clay" },
+	{ "cornSeed"},
+	{ "chicken" },
 	{ "...", "Ahh, hi.", "Come and have some black-tea with me." },
-	"npcImages/cleaner.png"
+	"npcImages/cleaner.png",
+	"Find the notice board, and come back to me when you have finished what it says.\n"
 };
 
 constexpr float INTERACTION_RANGE = 100.0f;			// 可调整的阈值，表示玩家与 NPC 之间的最大交互距离
@@ -363,12 +367,16 @@ constexpr int WIZARD_X = 300;
 constexpr int WIZARD_Y = 300;
 constexpr int CLEANER_X = 500;
 constexpr int CLEANER_Y = 300;
+constexpr int CAMPFIRE_X = 400;
+constexpr int CAMPFIRE_Y = 500;
 constexpr int TALKING_BOX_WIDTH = 1283;
 constexpr int TALKING_BOX_HEIGHT = 462;
 constexpr int TALKING_BOX_X = 640;
 constexpr int TALKING_BOX_Y = 200;
 constexpr int LABEL_WIDTH = 720;
 constexpr int LABEL_HEIGHT = 390;
+constexpr int BOARD_X = 1600;
+constexpr int BOARD_Y = 800;
 
 // Bag
 	// 添加初始化的物品
@@ -383,7 +391,6 @@ const std::vector<std::string> INIT_ITEMS =
 	"carrotSeed",
 	"fertilizer",
 	"agrochemical",
-	"tuna",
 	"cow",
 	"chicken",
 	"sheep",
@@ -553,6 +560,11 @@ struct ItemInfo {
 	const char* image;            // 图片路径
 };
 
+constexpr ItemInfo STONE_ITEM = {
+	"stone",
+	"tools/stone.png"
+};
+
 // AnimalItem
 constexpr ItemInfo COW_ITEM = {
 	"cow",
@@ -604,5 +616,21 @@ constexpr ItemInfo ANCHOVY = {
 	"anchovy",                   // 鱼的名称
 	"tools/anchovy.png",         // 图片路径
 };
+
+constexpr ItemInfo CAMPFIRE = {
+	"campFire",                   // 名称
+	"tools/campFire.png",         // 图片路径
+};
+
+constexpr ItemInfo BOARD = {
+	"noticeBoard",                   // 名称
+	"tools/noticeBoard.png",         // 图片路径
+};
+
+constexpr ItemInfo BUILDING = {
+	"building",                   // 名称
+	"tools/building.png",         // 图片路径
+};
+
 
 #endif __CONSTANT_H

@@ -6,6 +6,8 @@
 
 USING_NS_CC;
 
+int Player::popularity = 0;
+
 // 初始化静态成员变量
 Player* Player::instance = nullptr;
 
@@ -58,7 +60,7 @@ bool Player::init() {
         auto bag = Bag::getInstance();
         const float bagHeight = bag->getContentSize().height;
         const float dHeight = 22.0f; // 修正偏移量，向上调整一些
-        if (position.y < bagHeight) {
+        if (position.y < bagHeight || DialogueBox::getDialogueVisible()) {
             if (bag->getPosition() != Vec2(0.0f, WINSIZE.height - bagHeight + dHeight))
                 bag->setPosition(Vec2(0.0f, WINSIZE.height - bagHeight + dHeight));
         }

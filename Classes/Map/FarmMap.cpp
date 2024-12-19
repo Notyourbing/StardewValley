@@ -3,6 +3,8 @@
 #include "Chicken.h"
 #include "Sheep.h"
 #include "Pig.h"
+#include "../Skill/SkillTree.h"
+#include "../Item/StoneItem.h"
 #include "../Player/Player.h"
 #include<string>
 
@@ -185,14 +187,28 @@ void FarmMap::interactWithMap() {
 
     // 获得当前人物所使用的工具
     std::string currentItemName = player->getCurrentItemName();
-    
+
     if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
-        interactWithSoil(currentItemName,x,y);
+        interactWithSoil(currentItemName, x, y);
     }
 }
+// to do 没找到稿子的使用（挖矿） 下面是相关技能实现
+    ////采矿次数增加
+    //srand(static_cast<unsigned int>(time(NULL)));
+    //auto skills = SkillTree::getInstance()->getAllSkills();
+    //int level = skills["Mining"]->getCurrentLevel();
+    //int random = level * rand() % 100;  // 随机索引
+    //StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
+    // 概率获取第二块石头
+    //if (random > 50) {
+    //    SkillTree::getInstance()->updateMiningCount(1);
+    //    bag->addItem(stoneItem);
+    //}
+    //SkillTree::getInstance()->updateMiningCount(1);
+    //bag->addItem(stoneItem);
 
 // 与土壤的交互
-void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
+void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y) {
     // 根据工具去分类
     if (itemName == "hoe") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilHoe();
@@ -204,10 +220,11 @@ void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilWater();
     }
     else if (itemName == "dogbaneSeed" || itemName == "cornSeed" || itemName == "carrotSeed") {
+        SkillTree::getInstance()->updatePlantingCount(1);
         dynamic_cast<Soil*>(mapTileNode[x][y])->plantCrop(itemName);
     }
     else if (itemName == "scythe") {
-        dynamic_cast<Soil*>(mapTileNode[x][y])->harvest(); 
+        dynamic_cast<Soil*>(mapTileNode[x][y])->harvest();
     }
     else if (itemName == "agrochemical") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->applyAgrochemical();
@@ -219,7 +236,7 @@ void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
     // 操作之后更新soil土壤块
     dynamic_cast<Soil*>(mapTileNode[x][y])->updateGID();
     int soilGID = dynamic_cast<Soil*>(mapTileNode[x][y])->getCurrentGID();
-    soilLayer->setTileGID(soilGID,Vec2(x,y));
+    soilLayer->setTileGID(soilGID, Vec2(x, y));
 }
 
 // 地图时间更新

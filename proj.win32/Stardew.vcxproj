@@ -14,6 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -177,6 +178,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Food\CornFood.cpp" />
     <ClCompile Include="..\Classes\Food\DogbaneFood.cpp" />
     <ClCompile Include="..\Classes\Food\Food.cpp" />
+    <ClCompile Include="..\Classes\Item\CampFire.cpp" />
     <ClCompile Include="..\Classes\Item\Item.cpp" />
     <ClCompile Include="..\Classes\Map\Animal.cpp" />
     <ClCompile Include="..\Classes\Map\AnimalManager.cpp" />
@@ -194,6 +196,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\Sheep.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
+    <ClCompile Include="..\Classes\Npc\NoticeBoard.cpp" />
     <ClCompile Include="..\Classes\Npc\Npc.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\SaveManage\SaveManage.cpp" />
@@ -232,8 +235,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Food\CornFood.h" />
     <ClInclude Include="..\Classes\Food\DogbaneFood.h" />
     <ClInclude Include="..\Classes\Food\Food.h" />
+    <ClInclude Include="..\Classes\Item\CampFire.h" />
     <ClInclude Include="..\Classes\Item\Item.h" />
     <ClInclude Include="..\Classes\Item\ItemFactory.h" />
+    <ClInclude Include="..\Classes\Item\StoneItem.h" />
     <ClInclude Include="..\Classes\Map\Animal.h" />
     <ClInclude Include="..\Classes\Map\AnimalManager.h" />
     <ClInclude Include="..\Classes\Map\BeachMap.h" />
@@ -250,6 +255,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\Sheep.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\MyButton\MyButton.h" />
+    <ClInclude Include="..\Classes\Npc\NoticeBoard.h" />
     <ClInclude Include="..\Classes\Npc\Npc.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\SaveManage\SaveManage.h" />
