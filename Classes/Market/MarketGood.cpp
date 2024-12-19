@@ -1,5 +1,5 @@
 #include "MarketGood.h"
-#include "../DateManage/DateManage.h"
+#include "../Date/DateManage.h"
 #include <string>
 
 // ¾²Ì¬´´½¨º¯Êý

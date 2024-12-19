@@ -7,7 +7,7 @@
 #include "../Npc/Npc.h"
 #include "../Festival/Festival.h"
 #include "../Constant/Constant.h"
-#include "../DateManage/DateManage.h"
+#include "../Date/DateManage.h"
 
 // 农场场景类
 class Farm : public cocos2d::Scene {

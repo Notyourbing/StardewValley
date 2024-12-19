@@ -1,8 +1,8 @@
 #include "FarmMap.h"
-#include "Cow.h"
-#include "Chicken.h"
-#include "Sheep.h"
-#include "Pig.h"
+#include "../Animal/Cow.h"
+#include "../Animal/Chicken.h"
+#include "../Animal/Sheep.h"
+#include "../Animal/Pig.h"
 #include "../Skill/SkillTree.h"
 #include "../Item/StoneItem.h"
 #include "../Player/Player.h"
@@ -208,20 +208,6 @@ void FarmMap::interactWithMap() {
         return;
     }
 }
-// to do 没找到稿子的使用（挖矿） 下面是相关技能实现
-    ////采矿次数增加
-    //srand(static_cast<unsigned int>(time(NULL)));
-    //auto skills = SkillTree::getInstance()->getAllSkills();
-    //int level = skills["Mining"]->getCurrentLevel();
-    //int random = level * rand() % 100;  // 随机索引
-    //StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
-    // 概率获取第二块石头
-    //if (random > 50) {
-    //    SkillTree::getInstance()->updateMiningCount(1);
-    //    bag->addItem(stoneItem);
-    //}
-    //SkillTree::getInstance()->updateMiningCount(1);
-    //bag->addItem(stoneItem);
 
 // 与土壤的交互
 void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y) {
@@ -314,11 +300,27 @@ void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y
         if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken()) {
             delete mapTileNode[x][y];
             mapTileNode[x][y] = nullptr;
-            mapTileNode[x][y] = Soil::create(Vec2(x,y));
+            mapTileNode[x][y] = Soil::create(Vec2(x, y));
 
             // 更新地图图块
             stoneLayer->setTileGID(0, Vec2(x, y));
             soilLayer->setTileGID(SOIL_GID, Vec2(x, y));
+
+
+            //采矿次数增加
+            auto bag = Bag::getInstance();
+            srand(static_cast<unsigned int>(time(NULL)));
+            auto skills = SkillTree::getInstance()->getAllSkills();
+            int level = skills["Mining"]->getCurrentLevel();
+            int random = level * rand() % 100;  // 随机索引
+            StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
+            // 概率获取第二块石头
+            if (random > 50) {
+                SkillTree::getInstance()->updateMiningCount(1);
+                bag->addItem(stoneItem);
+            }
+            SkillTree::getInstance()->updateMiningCount(1);
+            bag->addItem(stoneItem);
         }
     }
 }

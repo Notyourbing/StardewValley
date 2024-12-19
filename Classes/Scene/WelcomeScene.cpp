@@ -4,7 +4,7 @@
 #include "NewGameScene.h"
 #include "FarmScene.h"
 #include "../Constant/Constant.h"
-#include "../SaveManage/SaveManage.h"
+#include "../Save/SaveManage.h"
 #include "../MyButton/MyButton.h"
 
 USING_NS_CC;
