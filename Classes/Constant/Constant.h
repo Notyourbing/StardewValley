@@ -650,5 +650,10 @@ constexpr ItemInfo BUILDING = {
 	"tools/building.png",         // 图片路径
 };
 
+// MarketItem
+struct MarketItemLabel{
+	const char* name;             // 名称
+	const int basePrice;		  // 商品的基础价格
+};
 
 #endif __CONSTANT_H

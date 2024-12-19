@@ -10,10 +10,10 @@
  * Class Name:     MarketState
  * Class Function: 市场交易类
  */
-class MarkState {
+class MarketState {
 public:
 	// 静态创建函数
-	static MarkState* create();
+	static MarketState* create();
 
 	// 市场的初始化
 	bool init();

@@ -16,10 +16,10 @@ public:
 	int supply;						// 背包中该商品的数量
 
 	// 静态创建函数
-	static MarketItem* create(std::string name);
+	static MarketItem* create(std::string name,int price);
 
 	// 初始化
-	bool init();
+	bool init(std::string name, int price);
 
 	// 调整价格
 	void adjustPrice();
