@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< HEAD
+      <FullPath>D:\Work\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+=======
       <FullPath>E:\github\1123\proj.win32\Debug.win32\libcocos2d.dll</FullPath>
+>>>>>>> 85f107f4db29adbf5a2950dd12f77ec3ade8df53
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

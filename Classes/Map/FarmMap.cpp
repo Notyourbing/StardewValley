@@ -191,6 +191,21 @@ void FarmMap::interactWithMap() {
     if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
         interactWithSoil(currentItemName, x, y);
     }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Grass) {
+        interactWithGrass(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Water) {
+        interactWithWater(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Mold) {
+        interactWithMold(currentItemName, x, y);
+    }
+    else if (mapTileNode[x][y]->getTileType() == TileType::Stone) {
+        interactWithStone(currentItemName, x, y);
+    }
+    else {
+        return;
+    }
 }
 // to do 没找到稿子的使用（挖矿） 下面是相关技能实现
     ////采矿次数增加
@@ -236,7 +251,68 @@ void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y)
     // 操作之后更新soil土壤块
     dynamic_cast<Soil*>(mapTileNode[x][y])->updateGID();
     int soilGID = dynamic_cast<Soil*>(mapTileNode[x][y])->getCurrentGID();
-    soilLayer->setTileGID(soilGID, Vec2(x, y));
+    soilLayer->setTileGID(soilGID,Vec2(x,y));
+}
+
+// 与草地的交互
+void FarmMap::interactWithGrass(std::string itemName, const int& x, const int& y) {
+    
+    // 将瓦点坐标转化为地图坐标
+    Vec2 animalPosition;
+    const Size tileSize = tiledMap->getTileSize();                      
+    const Size mapSize = tiledMap->getMapSize();
+    animalPosition.x = x * tileSize.width;
+    animalPosition.y = mapSize.height * tileSize.height - y * tileSize.height;
+
+    // 添加动物
+    if (itemName == "cow") {
+        Cow* cow = Cow::create(animalPosition);
+        animalManager->addAnimal(cow, animalPosition);
+    }
+    else if (itemName == "chicken") {
+        Chicken* chicken = Chicken::create(animalPosition);
+        animalManager->addAnimal(chicken, animalPosition);
+    }
+    else if (itemName == "sheep") {
+        Sheep* sheep = Sheep::create(animalPosition);
+        animalManager->addAnimal(sheep,animalPosition);
+    }
+    else if(itemName=="pig") {
+        Pig* pig = Pig::create(animalPosition);
+        animalManager->addAnimal(pig,animalPosition);
+    }
+    else {
+        return;
+    }
+}
+
+// 与水的交互
+void FarmMap::interactWithWater(std::string itemName,const int& x,const int& y) {
+
+}
+
+// 与箱子的交互
+void FarmMap::interactWithMold(std::string itemName, const int& x, const int& y) {
+
+}
+
+// 与石头的交互
+void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y) {
+    // 镐子敲击石头
+    if (itemName == "pickaxe") {
+        dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();
+
+        // 判断石头是否被击碎
+        if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken()) {
+            delete mapTileNode[x][y];
+            mapTileNode[x][y] = nullptr;
+            mapTileNode[x][y] = Soil::create(Vec2(x,y));
+
+            // 更新地图图块
+            stoneLayer->setTileGID(0, Vec2(x, y));
+            soilLayer->setTileGID(SOIL_GID, Vec2(x, y));
+        }
+    }
 }
 
 // 地图时间更新

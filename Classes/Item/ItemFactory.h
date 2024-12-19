@@ -37,8 +37,8 @@ public:
         else if (itemName == "kettle") {
             return Kettle::create();
         }
-        else if (itemName == "appleSeed") {
-            return AppleSeed::create();
+        else if (itemName == "dogbaneSeed") {
+            return DogbaneSeed::create();
         }
         else if (itemName == "cornSeed") {
             return CornSeed::create();

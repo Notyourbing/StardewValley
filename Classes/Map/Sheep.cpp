@@ -1,4 +1,7 @@
 #include "Sheep.h"
+#include "../Behavior/MovementBehavior .h"
+#include "../Behavior/PatrolMovement.h"
+#include "../Behavior/WanderMovement.h"
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
@@ -17,7 +20,18 @@ Sheep* Sheep::create(const Vec2& position) {
 
 // 初始化对象
 bool Sheep::init() {
-	return Sheep::initWithFile(SHEEP);
+	// ANIMAL初始化
+	if (!Animal::initWithFile(SHEEP)) {
+		return false;
+	}
+
+	// 设置移动行为
+	movementBehavior = WanderMovement::create(SHEEP_MOVE_RADIUS, SHEEP_MOVE_INTERVAL);
+
+	// 启动移动调度
+	setMovementBehavior(movementBehavior);
+
+	return true;
 }
 
 // 构造函数
@@ -28,4 +42,12 @@ Sheep::Sheep(const Vec2& position) :
 
 // 析构函数
 Sheep::~Sheep() {
+
+}
+
+// 设置移动行为
+void Sheep::setMovementBehavior(MovementBehavior* behavior) {
+	if (behavior) {
+		dynamic_cast<WanderMovement*>(behavior)->execute(this);
+	}
 }

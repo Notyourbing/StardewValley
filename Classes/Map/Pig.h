@@ -24,6 +24,12 @@ private:
 
 	// 松露数量
 	int truffleCount;
+
+	// 设置移动行为
+	void setMovementBehavior(MovementBehavior* behavior) override;
+
+	// 移动行为
+	MovementBehavior* movementBehavior;
 };
 
 #endif 

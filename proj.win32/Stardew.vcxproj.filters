@@ -64,6 +64,12 @@
     <Filter Include="Classes\Animal">
       <UniqueIdentifier>{411d41fe-469e-4620-a920-5dd2f58bfa0c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Behavior">
+      <UniqueIdentifier>{a65a0fa1-db54-4bcd-80d8-1fabfaaf9362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Market">
+      <UniqueIdentifier>{2d8b866f-dd07-4b77-8d7e-88e2c7537e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Map\FarmMap.cpp">
@@ -221,6 +227,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Map\SceneMap.cpp">
       <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Behavior\MovementBehavior .cpp">
+      <Filter>Classes\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Behavior\WanderMovement.cpp">
+      <Filter>Classes\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Behavior\PatrolMovement.cpp">
+      <Filter>Classes\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Market\MarketItem.cpp">
+      <Filter>Classes\Market</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Market\MarketState.cpp">
+      <Filter>Classes\Market</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Item\CampFire.cpp">
       <Filter>Classes\Item</Filter>
@@ -391,6 +412,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Map\SceneMap.h">
       <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Behavior\MovementBehavior .h">
+      <Filter>Classes\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Behavior\WanderMovement.h">
+      <Filter>Classes\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Behavior\PatrolMovement.h">
+      <Filter>Classes\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Market\MarketItem.h">
+      <Filter>Classes\Market</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Market\MarketState.h">
+      <Filter>Classes\Market</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Item\StoneItem.h">
       <Filter>Classes\Item</Filter>

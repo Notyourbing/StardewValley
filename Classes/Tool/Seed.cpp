@@ -7,9 +7,9 @@ USING_NS_CC;
 bool Seed::init(const SeedType& seedType) {
     // 对于不同的种类进行初始化
     switch (seedType){ 
-    case SeedType::AppleSeed:
+    case SeedType::DogbaneSeed:
         seedName = "dogbaneSeed";
-        return Tool::init({ "dogbaneSeed", APPLE_SEED});
+        return Tool::init({ "dogbaneSeed", DOGBANE_SEED});
         break;
     case SeedType::CornSeed:
         seedName = "cornSeed";
@@ -27,9 +27,9 @@ void Seed::useItem() {
     return;
 }
 
-AppleSeed* AppleSeed::create() {
-    AppleSeed* seed = new (std::nothrow) AppleSeed();
-    if (seed && seed->init(SeedType::AppleSeed)) {
+DogbaneSeed* DogbaneSeed::create() {
+    DogbaneSeed* seed = new (std::nothrow) DogbaneSeed();
+    if (seed && seed->init(SeedType::DogbaneSeed)) {
         seed->autorelease();
         return seed;
     }

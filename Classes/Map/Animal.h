@@ -2,13 +2,17 @@
 #define __ANIMAL_H__
 
 #include "cocos2d.h"
+#include "../Behavior/MovementBehavior .h"
 #include<string>
 
-// Animal类：动物基类
+/*
+ * Class Name:     Animal
+ * Class Function: 农场动物基类类
+ */
 class Animal : public cocos2d::Sprite {
 public:
 	// 获取动物位置
-	cocos2d::Vec2 getPosition();
+	cocos2d::Vec2 getAnimalPosition();
 	
 	// 获取动物姓名
 	std::string getAnimalName();
@@ -30,5 +34,8 @@ private:
 
 	// 动物位置
 	cocos2d::Vec2 position;
+
+	// 动物移动
+	virtual void setMovementBehavior(MovementBehavior* behavior)=0;
 };
 #endif 
