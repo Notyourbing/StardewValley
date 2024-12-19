@@ -6,6 +6,10 @@
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
 #include "../Skill/SkillTreeUI.h"
+#include "../Skill/SkillTree.h"
+#include "../Item/CampFire.h"
+#include "../Npc/NoticeBoard.h"
+#include "../Map/BeachMap.h"
 
 USING_NS_CC;
 
@@ -80,16 +84,30 @@ void Control::initKeyboardListener() {
 	addChild(skillTreeLayer);
 	listener->onKeyPressed = [this, skillTreeLayer](EventKeyboard::KeyCode keyCode, Event* event) {
 		if (keyCode == EventKeyboard::KeyCode::KEY_E) {
-			if (SkillTreeUI::isOpen == false) {
+			if (SkillTreeUI::getOpenStatus() == false) {
 				skillTreeLayer->setVisible(true);
 				skillTreeLayer->openSkillUI();
-				SkillTreeUI::isOpen = true;
+				SkillTreeUI::setOpenStatus(true);
 				Player::getInstance()->setUseItemEnable(false);
 			}
 			else {
 				skillTreeLayer->setVisible(false);
-				SkillTreeUI::isOpen = false;
+				SkillTreeUI::setOpenStatus(false);
 				Player::getInstance()->setUseItemEnable(true);
+			}
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_Q && DialogueBox::getDialogueVisible() == false) {
+			auto bag = Bag::getInstance();
+			auto item = bag->removeItem(bag->getSelectedIndex());
+		}
+		if (keyCode == EventKeyboard::KeyCode::KEY_C && DialogueBox::getDialogueVisible() == false) {
+			if (CampFire::getInstance()->getStatus()) {
+				CampFire* campFire = CampFire::getInstance();
+				const float distance = Player::getInstance()->getPosition().distance(campFire->getPosition() + FarmMap::getInstance()->getPosition());
+				if (distance < INTERACTION_RANGE ) {
+					campFire->useItem();
+					SkillTree::getInstance()->updateCookingCount(1);
+				}
 			}
 		}
 		if (keyCode >= EventKeyboard::KeyCode::KEY_1 && keyCode <= EventKeyboard::KeyCode::KEY_9) {
@@ -137,7 +155,7 @@ void Control::initMouseListener() {
 		auto mouseEvent = dynamic_cast<EventMouse*>(event);
 		Player* player = Player::getInstance();
 		if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-			if (DialogueBox::isDialogueVisible == false) {
+			if (DialogueBox::getDialogueVisible() == false) {
 				player->stopMoving();
 				sceneMap->stopMoving();
 				player->useCurrentItem();
@@ -145,18 +163,26 @@ void Control::initMouseListener() {
 			}
 		}
 		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
-			for (auto npc : Farm::npcs) {
-				// 计算玩家与NPC的距离
-				const float distance = player->getPosition().distance(npc->getPosition() + sceneMap->getPosition());
+			if (sceneMap == FarmMap::getInstance()) {
+				for (auto npc : Farm::npcs) {
+					// 计算玩家与NPC的距离
+					const float distance = player->getPosition().distance(npc->getPosition() + sceneMap->getPosition());
 
-				// 当距离小于交互距离并且此时对话框没有显示
-				if (distance < INTERACTION_RANGE && DialogueBox::isDialogueVisible == false) {
-					if (!DialogueBox::isDialogueVisible) {
+					// 当距离小于交互距离并且此时对话框没有显示
+					if (distance < INTERACTION_RANGE && DialogueBox::getDialogueVisible() == false) {
 						DialogueBox* dialogueBox = DialogueBox::create(npc);
-						this->addChild(dialogueBox, 5);
+						addChild(dialogueBox, 5);
 						dialogueBox->showInitialDialogue();
 						break;
 					}
+				}
+			}
+			else if (sceneMap == BeachMap::getInstance()) {
+				const float distance = player->getPosition().distance(Vec2(BOARD_X, BOARD_Y) + BeachMap::getInstance()->getPosition());
+				if (distance < INTERACTION_RANGE) {
+					DialogueBox* dialogueBox = DialogueBox::create();
+					addChild(dialogueBox, 5);
+					dialogueBox->showBoardDialogue();
 				}
 			}
 		}

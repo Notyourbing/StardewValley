@@ -16,7 +16,7 @@ public:
 	bool addItem(Item* item);
 		
 	// 移除物品
-	void removeItem(const int index);
+	Item* removeItem(const int index);
 
 	// 获取某个物品
 	Item* getItem(const int index) const;
@@ -40,6 +40,9 @@ public:
 	int getSelectedIndex() {
 		return selectedIndex;
 	}
+
+	// 获取物品数量
+	int getItemQuantity(int index) { return quantities[index]; }
 
 	// 重写基类成员函数getContentSize()
 	const cocos2d::Size& getContentSize() const override;

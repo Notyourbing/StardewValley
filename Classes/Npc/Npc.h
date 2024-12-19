@@ -22,6 +22,8 @@ private:
     std::vector<std::string> dialogues; // NPC的对话列表
     std::string image;                  // 图像的路径
     RelationshipStatus playerRelation;  // 与玩家的关系（None, Friendship, Romance）
+    std::string task;                   // npc的特定任务
+    bool isTaskCompleted;               // 任务是否完成
 
     // 对话框相关成员
     cocos2d::Sprite* dialogueBox;                // 对话框背景
@@ -34,6 +36,11 @@ public:
 
     bool init(const NpcInfo& npc_info);
 
+    //task相关获取
+    std::string getTask() { return task; }
+    bool getTaskStatus() { return isTaskCompleted; }
+    void setTaskStatus(bool status) { isTaskCompleted = status; 
+    }
     // 获取NPC的名字
     std::string getNpcName() const;
 

@@ -1,11 +1,14 @@
-#pragma once
+#ifndef __SKILL_H
+#define __SKILL_H
 #include <string>
 #include <functional>
 
 class Skill {
 public:
-    // 构造函数
-    Skill(const std::string& name, int maxLevel, std::function<void(int)> effect);
+    // 初始化函数
+    bool init(const std::string& name, int maxLevel, std::function<void(int)> effect);
+
+    static Skill* create(const std::string& name, int maxLevel, std::function<void(int)> effect);
 
     // 获取技能名称
     const std::string& getName() const;
@@ -16,8 +19,8 @@ public:
     // 获取技能当前等级
     int getCurrentLevel() const;
 
-    // 升级技能
-    bool levelUp();
+    // 设置技能等级
+    bool setLevel(int level);
 
 private:
     std::string name;                 // 技能名称
@@ -25,3 +28,5 @@ private:
     int currentLevel;             // 当前技能等级
     std::function<void(int)> effect;  // 技能效果，传入当前等级
 };
+
+#endif __SKILL_H
