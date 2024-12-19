@@ -31,7 +31,8 @@ Player::Player()
     name(""),
     useItemEnable(true),
     currentAnimationName(""),
-    lastDirection(Vec2::ZERO) {
+    lastDirection(Vec2::ZERO),
+    playerMoney(PLAYER_INITIAL_MONEY){
 }
 
 // 析构函数
@@ -252,4 +253,14 @@ bool Player::getUseItemEnable() {
 // 设置能否使用当前物品
 void Player::setUseItemEnable(const bool enable) {
     useItemEnable = enable;
+}
+
+// 增加人物金币
+void Player::addMoney(int money) {
+    playerMoney += money;
+}
+
+// 获取当前金币数量
+int Player::getMoney() const {
+    return playerMoney;
 }

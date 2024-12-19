@@ -1,5 +1,6 @@
 #include "DateManage.h"
 #include "../Constant/Constant.h"
+#include "../Player/Player.h"
 #include "cocos2d.h"
 DateManage* DateManage::instance = nullptr;  // 定义并初始化为 nullptr
 
@@ -47,14 +48,22 @@ bool DateManage::init(const int startYear, const int startDay) {
     Festival* winterFestival = Festival::create("Winter Festival", "Merry Christmas and Happy Birthday to levi!", "Winter 25", false);
     if (winterFestival) {
         festivals.push_back(winterFestival);
+
     }
     currentYear = startYear;
     currentDay = startDay;
 
+    // 日期标签
     dateLabel = cocos2d::Label::createWithTTF("", ResPath::FONT_TTF, 24);
     addChild(dateLabel);
     dateLabel->setPosition(cocos2d::Vec2(WINSIZE.width - 100, WINSIZE.height - 40));  // 右上角位置
-
+    
+    // 钱标签
+    moneyLabel = cocos2d::Label::createWithTTF("", ResPath::FONT_TTF, 24);
+    moneyLabel->setColor(Color3B::YELLOW);
+    addChild(moneyLabel);
+    moneyLabel->setPosition(cocos2d::Vec2(WINSIZE.width - 100, WINSIZE.height - 80));  // 右上角位置
+    
     // 初始化天气为晴天
     currentWeater = Weather::Sunny;
 
@@ -150,8 +159,15 @@ void DateManage::updateDate() {
     std::stringstream dateStream;
     dateStream << season << " " << day << " - Year " << year;
 
-    // 更新 Label
+    // 更新Label
     dateLabel->setString(dateStream.str());
+
+    // 更新money字符串
+    Player* player = Player::getInstance();
+    std::stringstream moneyStream;
+    int money = player->getMoney();
+    moneyStream << "money is "<<money;
+    moneyLabel->setString(moneyStream.str());
 
     checkFestivalEvent();
 

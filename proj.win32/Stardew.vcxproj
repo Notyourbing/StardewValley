@@ -198,7 +198,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\SceneMap.cpp" />
     <ClCompile Include="..\Classes\Map\Sheep.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
-    <ClCompile Include="..\Classes\Market\MarketItem.cpp" />
+    <ClCompile Include="..\Classes\Market\MarketGood.cpp" />
     <ClCompile Include="..\Classes\Market\MarketState.cpp" />
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
     <ClCompile Include="..\Classes\Npc\NoticeBoard.cpp" />
@@ -262,7 +262,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\SceneMap.h" />
     <ClInclude Include="..\Classes\Map\Sheep.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
-    <ClInclude Include="..\Classes\Market\MarketItem.h" />
+    <ClInclude Include="..\Classes\Market\MarketGood.h" />
     <ClInclude Include="..\Classes\Market\MarketState.h" />
     <ClInclude Include="..\Classes\MyButton\MyButton.h" />
     <ClInclude Include="..\Classes\Npc\NoticeBoard.h" />

@@ -6,6 +6,7 @@
 #include "../Skill/SkillTree.h"
 #include "../Item/StoneItem.h"
 #include "../Player/Player.h"
+#include "../Market/MarketState.h"
 #include<string>
 
 USING_NS_CC;
@@ -293,13 +294,20 @@ void FarmMap::interactWithWater(std::string itemName,const int& x,const int& y) 
 
 // 与箱子的交互
 void FarmMap::interactWithMold(std::string itemName, const int& x, const int& y) {
+    // 开启市场系统进行交易
+    Player* player = Player::getInstance();
+    MarketState* marketState = MarketState::create();
 
+    // 市场交易
+    int getMoney = marketState->sellingGoods(itemName);
+    player->addMoney(getMoney);
 }
 
 // 与石头的交互
 void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y) {
     // 镐子敲击石头
     if (itemName == "pickaxe") {
+        // 敲击石头
         dynamic_cast<Stone*>(mapTileNode[x][y])->knockRock();
 
         // 判断石头是否被击碎

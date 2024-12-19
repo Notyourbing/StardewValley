@@ -2,7 +2,7 @@
 #define __MARKETSTATE_H__
 
 #include "cocos2d.h"
-#include "MarketItem.h"
+#include "MarketGood.h"
 #include "../DateManage/DateManage.h"
 #include <vector>
 
@@ -19,13 +19,13 @@ public:
 	bool init();
 
 	// 用来存储市场上售卖的物品
-	std::vector<MarketItem> marketItems;
+	std::vector<MarketGood*> marketGoods;
 
 	// 出售物品
-	void sellingItems();
+	int sellingGoods(const std::string& goodName);
 private:
 	// 调整市场中每个物品的价格
-	void adjustItemPrice();
+	void adjustGoodPrice();
 };
 
 #endif // !__MARKETSTATE_H__
