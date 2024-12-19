@@ -55,7 +55,12 @@ public:
 	// 设置能否使用当前物品
 	void setUseItemEnable(const bool enable);
 
+	// 获取能否使用当前物品
 	bool getUseItemEnable();
+
+	//声望相关get和set
+	int getPopularity() const { return popularity; }
+	bool setPopularity(int value) { return popularity = value; }
 
 private:
 	// 单例实例
@@ -96,6 +101,9 @@ private:
 
 	// 加载移动帧并创建动画
 	void createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount);
+
+	// 声望
+	static int popularity;
 };
 
 #endif

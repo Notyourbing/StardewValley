@@ -21,11 +21,3 @@ bool Food::init(const ItemInfo& item_info) {
     itemImage = item_info.image;
     return Sprite::initWithFile(item_info.image);
 }
-
-void Food::useItem()
-{
-}
-
-bool Food::isSameItem(const Food& other) const {
-    return itemName == other.itemName;
-}

@@ -52,7 +52,7 @@ bool Bag::init() {
 	bagBackground = Sprite::create(ResPath::BAG_BACKGROUND);
 	if (bagBackground) {
 		bagBackground->setPosition(Vec2(startX + (capacity * (iconSize + spacing)) / 2, startY + iconSize / 2));
-		this->addChild(bagBackground, 0, "bagBackground");
+		addChild(bagBackground, 0, "bagBackground");
 	}
 
 	// 添加一些物品
@@ -116,24 +116,40 @@ bool Bag::addItem(Item* item) {
 }
 
 // 从背包中移出物品item
-void Bag::removeItem(const int index) {
-	if (index >= 0 && index < row * capacity && items[index]) {
-		// 移出当前物体
-		removeChild(items[index]);
-		removeChild(itemLabels[index]);
-		items[index] = nullptr;
-		quantities[index] = 0;
-		// 后面的每一个物品向前移
-		for (int i = index + 1; i < row * capacity - 1; ++i) {
-			if (!items[i]) {
-				break;
+Item* Bag::removeItem(const int index) {
+	// 不允许删除工具
+	if (index >= 4 && index < row * capacity && items[index]) {
+		Item* item = items[index];
+		int size = getSize() - 1;
+		if (quantities[index] == 1) {
+			removeChild(items[index]);
+			// 后面的每一个物品向前移
+			int i = index + 1;
+			for (; i < getSize(); ++i) {
+				if (!items[i] || i == row * capacity) {
+					break;
+				}
+				items[i - 1] = items[i];
+				quantities[i - 1] = quantities[i];
+				itemLabels[i - 1] = itemLabels[i];
 			}
-			items[i - 1] = items[i];
-			quantities[i - 1] = quantities[i];
-			itemLabels[i - 1] = itemLabels[i];
+			// 保证最后一个物品正确更新
+			items[i - 1] = nullptr;
+			quantities[i - 1] = 0;
+			itemLabels[i - 1] = nullptr;
+			updateDisplay();
+			//防止删除末端物品使用出错
+			if (index == size)
+				setSelectedItem(index - 1);
 		}
-		updateDisplay();
+		else {
+			quantities[index]--;
+			updateDisplay();
+		}
+		
+		return item;
 	}
+	return nullptr;
 }
 
 Item* Bag::getItem(const int index) const {
@@ -152,7 +168,7 @@ void Bag::setSelectedItem(const int index) {
 }
 
 Item* Bag::getSelectedItem() const {
-	if (selectedIndex >= 0 && selectedIndex < capacity && items[selectedIndex]) {
+	if (selectedIndex >= 0 && selectedIndex < row * capacity && items[selectedIndex]) {
 		return items[selectedIndex];
 	}
 	return nullptr;
@@ -182,6 +198,8 @@ void Bag::updateDisplay() {
 			const float dPosition = 4.0f;
 			label->setPosition(icon->getPosition() + Vec2(iconSize / 2 - dPosition, -iconSize / 2 + dPosition));  // 显示在图标的右下角
 		}
+		else
+			label->setString("");
 
 		// 红色矩形框
 		if (i == selectedIndex) {
@@ -280,4 +298,16 @@ const std::vector<Item*>& Bag::getItems() const {
 // 获取所有物品的数量
 const std::vector<int>& Bag::getQuantities() const { 
 	return quantities; 
+}
+
+// 查看背包中是否有目标物品
+bool Bag::checkItemIn(const std::string& targetName) {
+	for (auto item : items) {
+		if (item) {
+			if (item->getItemName() == targetName) {
+				return true;
+			}
+		}
+	}
+	return false;
 }

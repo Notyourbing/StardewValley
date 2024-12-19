@@ -1,22 +1,24 @@
 #include "BeachMap.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
+#include "../Bag/Bag.h"
+#include "../Item/ItemFactory.h"
+#include "../Npc/NoticeBoard.h"
 
 USING_NS_CC;
 
 // 初始化静态实例
 BeachMap* BeachMap::instance = nullptr;
 
-TileNode* BeachMap::getTileNode(const int x, const int y) const {
-    return mapTileNode[x][y];
-}
+// 构造函数
+BeachMap::BeachMap() : backgroundLayer(nullptr), waterLayer(nullptr) {}
 
+// 析构函数
 BeachMap::~BeachMap() {
     instance = nullptr;
 }
 
-BeachMap::BeachMap() : velocity(Vec2::ZERO) {}
-
+// 获取单例实例
 BeachMap* BeachMap::getInstance() {
     if (!instance) {
         instance = new (std::nothrow) BeachMap();
@@ -30,27 +32,19 @@ BeachMap* BeachMap::getInstance() {
     return instance;
 }
 
+// 初始化地图
 bool BeachMap::init(const std::string& tmxFile) {
-    if (!Node::init()) {
+    if (!SceneMap::init(tmxFile)) {
         return false;
     }
-
-    velocity = Vec2::ZERO;
-
-    // 如果传入了文件名,加载地图
-    if (!tmxFile.empty()) {
-        tiledMap = TMXTiledMap::create(tmxFile);
-        if (!tiledMap) {
-            return false;
-        }
-    }
-    addChild(tiledMap);
-
-    const Size beachMapSize = getMapSize();
-    setPosition(WINSIZE.width / 2 - beachMapSize.width / 2, WINSIZE.height / 2 - beachMapSize.height / 2);
-
+    
+    // 获取地图的各个层
     backgroundLayer = tiledMap->getLayer("Background");
     waterLayer = tiledMap->getLayer("Water");
+
+    // 放位置
+    const Size mapSize = getMapSize();
+    setPosition(WINSIZE.width / 2 - mapSize.width / 2,  WINSIZE.height - mapSize.height);
 
     // 获取瓦点地图的长宽
     int width = tiledMap->getMapSize().width;
@@ -68,6 +62,11 @@ bool BeachMap::init(const std::string& tmxFile) {
 
         }
     }
+
+    // 放告示牌
+    NoticeBoard* board = NoticeBoard::create();
+    board->setPosition(Vec2(BOARD_X, BOARD_Y));
+    addChild(board);
     // 这个lambda函数会在BeachMap的生存期内每dt时间调用一次
     schedule([this](float dt) {
 
@@ -75,13 +74,11 @@ bool BeachMap::init(const std::string& tmxFile) {
         auto player = Player::getInstance();
 
         // 人在地图坐标中下一步会到达的位置
-        // 这里的- velocity / 200.0f * 10.0f是预测下一步的位置
-        // velocity / 200.0f是因为velocity的绝对值是200
         Vec2 playerSize2 = Vec2(0.0f, player->getContentSize().height * 1.0f);
-
         auto playerPositionInMap = player->getPosition() - getPosition() - playerSize2 * 0.5f + player->getVelocity() / MAP_MOVE_SPEED * 10.0f;
         if (isCollidable(playerPositionInMap)) {
             velocity = Vec2::ZERO;
+            player->stopMoving();
         }
         auto position = getPosition() + velocity * dt;
         // max保证大于等于下界， min保证小于等于上界
@@ -96,11 +93,6 @@ bool BeachMap::init(const std::string& tmxFile) {
 void BeachMap::moveMapByDirection(const Vec2& direction) {
     velocity = direction * MAP_MOVE_SPEED;
 }
-
-const Size& BeachMap::getMapSize() const {
-    return tiledMap->getContentSize();
-}
-
 
 // 碰撞检测：检查给定位置是否是障碍物, positon是人物在地图坐标系（原点在左下角）中的坐标
 bool BeachMap::isCollidable(const Vec2& position) const {
@@ -127,51 +119,10 @@ bool BeachMap::isCollidable(const Vec2& position) const {
     }
 }
 
-void BeachMap::interactWithBeachMap() {
-    //// 获取玩家、地图、背包实例
-    //Player* player = Player::getInstance();
-    //BeachMap* beachMap = BeachMap::getInstance();
-    //Bag* bag = Bag::getInstance();
-
-    //if (!player->getUseItemEnable()) {
-    //    return;
-    //}
-
-    //// 获取要交互的土块位置
-    //Vec2 playerPosition = player->getPosition();
-    //const Size tileSize = beachMap->tiledMap->getTileSize();
-    //const Size mapSize = beachMap->tiledMap->getMapSize();
-    //playerPosition = playerPosition - beachMap->getPosition();
-    //playerPosition.y = playerPosition.y - player->getContentSize().height / 2 + 10.0f;
-    //playerPosition.x = playerPosition.x / tileSize.width;
-    //playerPosition.y = (mapSize.height * tileSize.height - playerPosition.y) / tileSize.height;
-    //const Vec2 lastDirection = player->getLastDirection();
-
-    //// 当前人物前面的瓦点
-    //if (lastDirection == Vec2(1, 0) && playerPosition.x + 1 < mapSize.width - 1) {
-    //    playerPosition.x++;
-    //}
-    //else if (lastDirection == Vec2(0, 1) && playerPosition.y - 1 >= 0) {
-    //    playerPosition.y--;
-    //}
-    //else if (lastDirection == Vec2(-1, 0) && playerPosition.x - 1 >= 0) {
-    //    playerPosition.x--;
-    //}
-    //else if (lastDirection == Vec2(0, -1) && playerPosition.y + 1 < mapSize.height - 1) {
-    //    playerPosition.y++;
-    //}
-
-    //const int x = playerPosition.x;
-    //const int y = playerPosition.y;
-
-    //// 获得当前人物所使用的工具
-    //std::string currentItemName = player->getCurrentItemName();
+// 重写和地图交互
+void BeachMap::interactWithMap() {
 }
 
-void BeachMap::stopMoving() {
-    velocity = Vec2::ZERO;
-}
-
-TMXTiledMap* BeachMap::getTiledMap() {
-    return tiledMap;
+// 地图随时间更新
+void BeachMap::mapUpdateByTime() {
 }

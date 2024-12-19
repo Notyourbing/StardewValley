@@ -3,6 +3,7 @@
 #include "../Constant/Constant.h"
 #include "../Player/Player.h"
 #include "../MyButton/MyButton.h"
+#include "../Map/FarmMap.h"
 USING_NS_CC;
 
 bool SkillTreeUI::isOpen = false;
@@ -33,6 +34,17 @@ bool SkillTreeUI::init() {
     return true;
 }
 
+void SkillTreeUI::updateUI()
+{
+    SkillTree* skillTree = SkillTree::getInstance();
+    // 每5次升级
+    skillTree->setSkillLevel("Agriculture", skillTree->getPlantingCount() / 5);
+    skillTree->setSkillLevel("Fishing", skillTree->getFishingCount() / 5);
+    skillTree->setSkillLevel("Mining", skillTree->getMiningCount() / 5);
+    skillTree->setSkillLevel("Cooking", skillTree->getCookingCount() / 5);
+    setupUI();
+}
+
 void SkillTreeUI::setupUI() {
     // 获取屏幕尺寸
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -60,6 +72,7 @@ void SkillTreeUI::setupUI() {
 
         // 技能名称标签
         auto skillLabel = Label::createWithTTF(skillName, ResPath::FONT_TTF, 24);
+        skillLabel->setTextColor(cocos2d::Color4B(0, 0, 0, 255));
         skillLabel->setAnchorPoint(Vec2(0, 0.5)); // 左对齐
         skillLabel->setPosition(bg->getPositionX() - bgWidth / 2 + 50, yOffset); // 相对于背景位置
         addChild(skillLabel);
@@ -72,8 +85,16 @@ void SkillTreeUI::setupUI() {
         float levelWidth = bgWidth / 2 / maxLevel;
 
         // 横向显示每个级别
-        for (int i = 0; i < currentLevel; ++i) {
+        for (int i = 0; i < maxLevel; ++i) {
             auto levelBlock = Sprite::create(ResPath::SKILL_BACKGROUND); // 背景块图片
+            levelBlock->setAnchorPoint(Vec2(-5, 0.5));
+            levelBlock->setPosition(bg->getPositionX() - bgWidth / 2 + (i * levelWidth), yOffset); // 水平排列
+            addChild(levelBlock);
+
+        }
+
+        for (int i = 0; i < currentLevel; ++i) {
+            auto levelBlock = Sprite::create(ResPath::SKILL_FOREGROUND); // 前景块图片
             levelBlock->setAnchorPoint(Vec2(-5, 0.5));
             levelBlock->setPosition(bg->getPositionX() - bgWidth / 2 + (i * levelWidth), yOffset); // 水平排列
             addChild(levelBlock);
@@ -83,6 +104,7 @@ void SkillTreeUI::setupUI() {
         // 技能等级标签
         std::string levelText = StringUtils::format("Lv %d/%d", skill->getCurrentLevel(), skill->getMaxLevel());
         auto levelLabel = Label::createWithTTF(levelText, ResPath::FONT_TTF, 20);
+        levelLabel->setTextColor(cocos2d::Color4B(0, 0, 0, 255));
         levelLabel->setPosition(bg->getPositionX() + bgWidth / 3, yOffset); // 技能等级标签居中
         addChild(levelLabel);
 

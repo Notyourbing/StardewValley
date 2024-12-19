@@ -4,6 +4,7 @@
 #include "Crop.h"
 #include "TileNode.h"
 #include "AnimalManager.h"
+#include "SceneMap.h"
 #include "../Npc/Npc.h"
 #include "../Bag/Bag.h"
 #include "../Tool/Kettle.h"
@@ -14,13 +15,13 @@
 #include <vector>
 
 // 农场地图类
-class FarmMap : public cocos2d::Node {
+class FarmMap : public SceneMap {
 public:
 	// 获取单例实例
 	static FarmMap* getInstance();
 
 	// 初始化地图
-	bool init(const std::string& tmxFile);
+	bool init(const std::string& tmxFile) override;
 
 	//随地图创建npc
 	bool npcInit(const cocos2d::Vec2& position, Npc* npc);
@@ -28,26 +29,14 @@ public:
 	// 更新地图位置
 	void moveMapByDirection(const cocos2d::Vec2& direction);
 
-	// 获取地图大小
-	const cocos2d::Size& getMapSize() const;
-
 	// 碰撞检测：检查给定位置是否是障碍物
 	bool isCollidable(const cocos2d::Vec2& position) const;
 
 	// 用于鼠标左键与农场的交互逻辑
-	void interactWithFarmMap();
-
-	// 地图停止移动
-	void stopMoving();
-
-	// 获取地图的瓦片地图对象
-	cocos2d::TMXTiledMap* getTiledMap();
-
-	//获取当前位置地图的类
-	TileNode* getTileNode(const int x, const int y) const;
+	void interactWithMap() override;
 
 	// 地图时间更新
-	void farmMapTimeUpdate();
+	void mapUpdateByTime();
 private:
 	// 构造函数和析构函数私有化
 	FarmMap();
@@ -57,18 +46,8 @@ private:
 	FarmMap(const FarmMap&) = delete;
 	FarmMap& operator=(const FarmMap&) = delete;
 
-
 	// 单例实例
 	static FarmMap* instance;
-
-	// 地图的偏移速度
-	cocos2d::Vec2 velocity;
-
-	// 瓦片地图对象
-	cocos2d::TMXTiledMap* tiledMap;
-
-	// 存储地图上每个节点的类
-	TileNode* mapTileNode[FARMMAP_WIDTH][FARMMAP_HEIGHT];
 
 	// 用来存储TMX地图的各个层
 	cocos2d::TMXLayer* grassLayer;
@@ -96,5 +75,4 @@ private:
 	// 与箱子的交互
 	void interactWithMold(std::string itemName, const int& x, const int& y);
 };
-
 #endif

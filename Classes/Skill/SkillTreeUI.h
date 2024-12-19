@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __SKILLTREEUI_H__
+#define __SKILLTREEUI_H__
+
 #include "cocos2d.h"
 
 class SkillTreeUI : public cocos2d::Layer {
@@ -9,11 +11,17 @@ public:
     // 初始化
     virtual bool init();
 
-    // 是否打开
-    static bool isOpen;
-
     // 打开UI界面
     void openSkillUI();
+
+    // 是否打开
+    static bool getOpenStatus() { return isOpen; }
+
+    // open状态设置
+    static void setOpenStatus(bool status) { isOpen = status; }
+
+    //更新显示状态
+    void updateUI();
 
 private:
     // 静态实例
@@ -27,4 +35,8 @@ private:
 
     // 关闭按钮的回调函数
     void closeCallback(cocos2d::EventListenerMouse* listener);
+
+    // 是否打开
+    static bool isOpen;
 };
+#endif __SKILLTREEUI_H__

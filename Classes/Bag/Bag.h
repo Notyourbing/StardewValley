@@ -16,7 +16,7 @@ public:
 	bool addItem(Item* item);
 		
 	// 移除物品
-	void removeItem(const int index);
+	Item* removeItem(const int index);
 
 	// 获取某个物品
 	Item* getItem(const int index) const;
@@ -41,6 +41,9 @@ public:
 		return selectedIndex;
 	}
 
+	// 获取物品数量
+	int getItemQuantity(int index) { return quantities[index]; }
+
 	// 重写基类成员函数getContentSize()
 	const cocos2d::Size& getContentSize() const override;
 
@@ -59,6 +62,8 @@ public:
 	// 获取所有物品的数量
 	const std::vector<int>& getQuantities() const;
 
+	// 查看背包中是否有目标物品
+	bool checkItemIn(const std::string& targetName);
 private:
 	// 单例实例
 	static Bag* instance;

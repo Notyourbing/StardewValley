@@ -3,6 +3,8 @@
 #include "Chicken.h"
 #include "Sheep.h"
 #include "Pig.h"
+#include "../Skill/SkillTree.h"
+#include "../Item/StoneItem.h"
 #include "../Player/Player.h"
 #include<string>
 
@@ -11,17 +13,19 @@ USING_NS_CC;
 // 初始化静态实例
 FarmMap* FarmMap::instance = nullptr;
 
-TileNode* FarmMap::getTileNode(const int x, const int y) const {
-    return mapTileNode[x][y];
-}
+// 构造函数
+FarmMap::FarmMap() : grassLayer(nullptr), soilLayer(nullptr), obstacleLayer(nullptr),
+moldLayer(nullptr), waterLayer(nullptr), stoneLayer(nullptr),
+animalManager(nullptr) {}
 
-FarmMap::FarmMap() : velocity(Vec2::ZERO) {}
 
+// 析构函数
 FarmMap::~FarmMap() {
     instance = nullptr;
     animalManager=nullptr;
 }
 
+// 获取单例实例
 FarmMap* FarmMap::getInstance() {
     if (!instance) {
         instance = new (std::nothrow) FarmMap();
@@ -36,23 +40,9 @@ FarmMap* FarmMap::getInstance() {
 }
 
 bool FarmMap::init(const std::string& tmxFile) {
-    if (!Node::init()) {
+    if (!SceneMap::init(tmxFile)) {
         return false;
     }
-
-    velocity = Vec2::ZERO;
-
-        // 如果传入了文件名,加载地图
-    if (!tmxFile.empty()) {
-        tiledMap = TMXTiledMap::create(tmxFile);
-        if (!tiledMap) {
-            return false;
-        }
-    }
-    addChild(tiledMap);
-
-    const Size farmMapSize = getMapSize();
-    setPosition(WINSIZE.width / 2 - farmMapSize.width / 2, WINSIZE.height / 2 - farmMapSize.height / 2);
 
     // 获取地图的各个图层
     grassLayer = tiledMap->getLayer("Grass");
@@ -96,18 +86,16 @@ bool FarmMap::init(const std::string& tmxFile) {
 
     // 这个lambda函数会在FarmMap的生存期内每帧时间调用一次
     schedule([this](float dt) {
-
         // 检查目标位置是否是障碍物
         auto player = Player::getInstance();
 
         // 人在地图坐标中下一步会到达的位置
-        // 这里的- velocity / 200.0f * 10.0f是预测下一步的位置
-        // velocity / 200.0f是因为velocity的绝对值是200
         Vec2 playerSize2 = Vec2(0.0f, player->getContentSize().height * 1.0f);
 
         auto playerPositionInMap = player->getPosition() - getPosition() - playerSize2 * 0.5f + player->getVelocity() / MAP_MOVE_SPEED * 10.0f;
         if (isCollidable(playerPositionInMap)) {
              velocity = Vec2::ZERO;
+             player->stopMoving();
         }
         auto position = getPosition() + velocity * dt;
         // max保证大于等于下界， min保证小于等于上界
@@ -119,18 +107,16 @@ bool FarmMap::init(const std::string& tmxFile) {
     return true;
 }
 
+// 随地图创建 NPC
 bool FarmMap::npcInit(const Vec2& position, Npc* npc) {
     npc->setPosition(position);
     addChild(npc, 5);
      return true;
 }
 
+// 更新地图位置
 void FarmMap::moveMapByDirection(const Vec2& direction) {
     velocity = direction * MAP_MOVE_SPEED;
-}
-
-const Size& FarmMap::getMapSize() const {
-    return tiledMap->getContentSize();
 }
 
 // 碰撞检测：检查给定位置是否是障碍物, positon是人物在地图坐标系（原点在左下角）中的坐标
@@ -160,7 +146,7 @@ bool FarmMap::isCollidable(const Vec2& position) const {
 }
 
     // 玩家与农场的接口
-void FarmMap::interactWithFarmMap() {
+void FarmMap::interactWithMap() {
     // 获取玩家、地图、背包实例
     Player* player = Player::getInstance();
     FarmMap* farmMap = FarmMap::getInstance();
@@ -201,9 +187,9 @@ void FarmMap::interactWithFarmMap() {
 
     // 获得当前人物所使用的工具
     std::string currentItemName = player->getCurrentItemName();
-    
+
     if (mapTileNode[x][y]->getTileType() == TileType::Soil) {
-        interactWithSoil(currentItemName,x,y);
+        interactWithSoil(currentItemName, x, y);
     }
     else if (mapTileNode[x][y]->getTileType() == TileType::Grass) {
         interactWithGrass(currentItemName, x, y);
@@ -221,9 +207,23 @@ void FarmMap::interactWithFarmMap() {
         return;
     }
 }
+// to do 没找到稿子的使用（挖矿） 下面是相关技能实现
+    ////采矿次数增加
+    //srand(static_cast<unsigned int>(time(NULL)));
+    //auto skills = SkillTree::getInstance()->getAllSkills();
+    //int level = skills["Mining"]->getCurrentLevel();
+    //int random = level * rand() % 100;  // 随机索引
+    //StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
+    // 概率获取第二块石头
+    //if (random > 50) {
+    //    SkillTree::getInstance()->updateMiningCount(1);
+    //    bag->addItem(stoneItem);
+    //}
+    //SkillTree::getInstance()->updateMiningCount(1);
+    //bag->addItem(stoneItem);
 
 // 与土壤的交互
-void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
+void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y) {
     // 根据工具去分类
     if (itemName == "hoe") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilHoe();
@@ -235,10 +235,11 @@ void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilWater();
     }
     else if (itemName == "dogbaneSeed" || itemName == "cornSeed" || itemName == "carrotSeed") {
+        SkillTree::getInstance()->updatePlantingCount(1);
         dynamic_cast<Soil*>(mapTileNode[x][y])->plantCrop(itemName);
     }
     else if (itemName == "scythe") {
-        dynamic_cast<Soil*>(mapTileNode[x][y])->harvest(); 
+        dynamic_cast<Soil*>(mapTileNode[x][y])->harvest();
     }
     else if (itemName == "agrochemical") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->applyAgrochemical();
@@ -314,13 +315,8 @@ void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y
     }
 }
 
-// 停止移动
-void FarmMap::stopMoving() {
-    velocity = Vec2::ZERO;
-}
-
 // 地图时间更新
-void FarmMap::farmMapTimeUpdate() {
+void FarmMap::mapUpdateByTime() {
     // 动物生长
 
     // 植物生长
@@ -336,8 +332,4 @@ void FarmMap::farmMapTimeUpdate() {
             }
         }
     }
-}
-
-TMXTiledMap* FarmMap::getTiledMap() {
-    return tiledMap;
 }
