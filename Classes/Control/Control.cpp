@@ -179,7 +179,7 @@ void Control::initMouseListener() {
 			}
 			else if (sceneMap == BeachMap::getInstance()) {
 				const float distance = player->getPosition().distance(Vec2(BOARD_X, BOARD_Y) + BeachMap::getInstance()->getPosition());
-				if (distance < INTERACTION_RANGE) {
+				if (distance < INTERACTION_RANGE && DialogueBox::getDialogueVisible() == false) {
 					DialogueBox* dialogueBox = DialogueBox::create();
 					addChild(dialogueBox, 5);
 					dialogueBox->showBoardDialogue();
