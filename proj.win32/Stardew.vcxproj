@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -174,6 +174,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Animal\Pig.cpp" />
     <ClCompile Include="..\Classes\Animal\Sheep.cpp" />
     <ClCompile Include="..\Classes\Bag\Bag.cpp" />
+    <ClCompile Include="..\Classes\Behavior\MovementBehavior .cpp" />
+    <ClCompile Include="..\Classes\Behavior\PatrolMovement.cpp" />
+    <ClCompile Include="..\Classes\Behavior\WanderMovement.cpp" />
     <ClCompile Include="..\Classes\CommunityEvent\CommunityEvent.cpp" />
     <ClCompile Include="..\Classes\Control\Control.cpp" />
     <ClCompile Include="..\Classes\Crop\CarrotCrop.cpp" />
@@ -196,6 +199,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
     <ClCompile Include="..\Classes\Map\SceneMap.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
+    <ClCompile Include="..\Classes\Market\MarketItem.cpp" />
+    <ClCompile Include="..\Classes\Market\MarketState.cpp" />
     <ClCompile Include="..\Classes\MyButton\MyButton.cpp" />
     <ClCompile Include="..\Classes\Npc\NoticeBoard.cpp" />
     <ClCompile Include="..\Classes\Npc\Npc.cpp" />
@@ -232,6 +237,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Animal\Pig.h" />
     <ClInclude Include="..\Classes\Animal\Sheep.h" />
     <ClInclude Include="..\Classes\Bag\Bag.h" />
+    <ClInclude Include="..\Classes\Behavior\MovementBehavior .h" />
+    <ClInclude Include="..\Classes\Behavior\PatrolMovement.h" />
+    <ClInclude Include="..\Classes\Behavior\WanderMovement.h" />
     <ClInclude Include="..\Classes\CommunityEvent\CommunityEvent.h" />
     <ClInclude Include="..\Classes\Constant\Constant.h" />
     <ClInclude Include="..\Classes\Control\Control.h" />
@@ -257,6 +265,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
     <ClInclude Include="..\Classes\Map\SceneMap.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
+    <ClInclude Include="..\Classes\Market\MarketItem.h" />
+    <ClInclude Include="..\Classes\Market\MarketState.h" />
     <ClInclude Include="..\Classes\MyButton\MyButton.h" />
     <ClInclude Include="..\Classes\Npc\NoticeBoard.h" />
     <ClInclude Include="..\Classes\Npc\Npc.h" />

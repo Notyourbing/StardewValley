@@ -2,6 +2,7 @@
 #include "../Date/DateManage.h"
 #include "../Constant/Constant.h"
 
+// 胡萝卜静态创建函数
 Carrot* Carrot::create() {
 	Carrot* carrot = new (std::nothrow) Carrot();
 	if (carrot && carrot->init()) {
@@ -11,6 +12,7 @@ Carrot* Carrot::create() {
 	return nullptr;
 }
 
+// 胡萝卜的初始化
 bool Carrot::init() {
 	// 初始化不同季节的生长阶段天数
 	seasonalGrowthStageDay["Spring"].push_back(CARROT_SPRING_STAGE_FIRST);

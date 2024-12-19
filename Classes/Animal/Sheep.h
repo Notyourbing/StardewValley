@@ -24,6 +24,12 @@ private:
 
 	// 羊毛数量
 	int woolProduction;
+
+	// 设置移动行为
+	void setMovementBehavior(MovementBehavior* behavior) override;
+
+	// 移动行为
+	MovementBehavior* movementBehavior;
 };
 
 #endif 

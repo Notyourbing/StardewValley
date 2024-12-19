@@ -20,6 +20,12 @@ private:
 
 	// 下蛋数量
 	int eggCount;
+
+	// 设置移动行为
+	void setMovementBehavior(MovementBehavior* behavior) override;
+
+	// 移动行为
+	MovementBehavior* movementBehavior;
 };
 
 #endif 
