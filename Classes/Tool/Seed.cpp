@@ -20,7 +20,7 @@ bool Seed::init(const SeedType& seedType) {
         return Tool::init({ "carrotSeed", CARROT_SEED});
         break;
     }
-   
+    return false;
 }
 
 void Seed::useItem() {

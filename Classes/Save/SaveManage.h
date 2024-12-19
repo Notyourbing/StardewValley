@@ -31,12 +31,40 @@ struct BagSaveData {
 	int selectedIndex;
 };
 
+// 用来保存单个瓦片数据的结构
+struct TileSaveData {
+	int x;
+	int y;
+	std::string tileType; // 使用字符串表示瓦片类型
+	int currentGID;
+
+	// Soil特有的属性
+	bool isHoed;
+	bool isWatered;
+	bool isFertilized;
+	int waterLevel;
+	int fertilizeLevel;
+
+	// Crop数据
+	std::string cropType;
+	int growedDay;
+	int growthStage;
+	bool isInfested;
+	int infestedDay;
+	bool isDrought;
+	int droughtDay;
+	bool cropIsFertilized;
+	int cropGID;
+};
+
 // 用来保存所有需要保存的数据的结构
 struct SaveData {
 	PlayerSaveData playerData;
 	MapSaveData mapData;
 	BagSaveData bagData;
 };
+
+
 
 // 存储管理类
 class SaveManage {
@@ -58,7 +86,6 @@ private:
 	// 序列化与反序列化
 	std::string SaveManage::serializeToJson(const SaveData& data);
 	bool deserializeFromJson(const std::string& jsonStr, SaveData& data);
-
 };
 
 #endif

@@ -385,8 +385,8 @@ const std::vector<std::string> INIT_ITEMS =
 	"pickaxe",
 	"hoe",
 	"scythe",
-	"kettle",
-	"appleSeed",
+	"kettle"
+	"dogbaneSeed",
 	"cornSeed",
 	"carrotSeed",
 	"fertilizer",

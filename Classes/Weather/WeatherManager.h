@@ -2,7 +2,7 @@
 #define __WEATHER_MANAGER_H__
 
 #include "cocos2d.h"
-#include "DateManage.h"
+#include "../Date/DateManage.h"
 
 // WeatherManager类：管理天气
 class WeatherManager : public cocos2d::Node {

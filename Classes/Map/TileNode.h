@@ -2,7 +2,7 @@
 #define __TILE_NODE_H__
 
 #include "cocos2d.h"
-#include "Crop.h"
+#include "../Crop/Crop.h"
 #include "../Constant/Constant.h"
 #include "string"
 

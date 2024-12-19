@@ -1,10 +1,10 @@
 #ifndef __FARMMAP_H__
 #define __FARMMAP_H__
 #include "cocos2d.h"
-#include "Crop.h"
+#include "../Crop/Crop.h"
 #include "TileNode.h"
-#include "AnimalManager.h"
 #include "SceneMap.h"
+#include "../Animal/AnimalManager.h"
 #include "../Npc/Npc.h"
 #include "../Bag/Bag.h"
 #include "../Tool/Kettle.h"

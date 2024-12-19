@@ -37,9 +37,6 @@
     <Filter Include="Classes\Fesitval">
       <UniqueIdentifier>{ff64ee16-628b-49ba-9e42-bd3f20d3ce36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\DateManage">
-      <UniqueIdentifier>{4f964f1a-0018-41e5-ba16-2ef2a2c5c5d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Mybutton">
       <UniqueIdentifier>{e19c448f-f1fb-4714-8da8-0eac5346893c}</UniqueIdentifier>
     </Filter>
@@ -58,11 +55,20 @@
     <Filter Include="Classes\Skill">
       <UniqueIdentifier>{5174faea-d06c-4d18-8bd6-a88960f2571b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scene\SaveManage">
-      <UniqueIdentifier>{fd50e063-7c10-4b3d-91f2-9ea0d9b1fb8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Animal">
       <UniqueIdentifier>{411d41fe-469e-4620-a920-5dd2f58bfa0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Crop">
+      <UniqueIdentifier>{27184d04-06b9-4194-bddb-16656a16f18e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Date">
+      <UniqueIdentifier>{4cb170b8-8def-41c8-b51b-49f5baa2f15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Weather">
+      <UniqueIdentifier>{53eccf92-63c9-4475-9a46-bbf39a3f6181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Save">
+      <UniqueIdentifier>{e24a480e-3605-44aa-a979-0e45a21ef8bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +105,6 @@
     <ClCompile Include="..\Classes\Tool\Tool.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Map\Crop.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Tool\Pickaxe.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>
@@ -113,12 +116,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Festival\Festival.cpp">
       <Filter>Classes\Fesitval</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\DateManage\DateManage.cpp">
-      <Filter>Classes\DateManage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\Animal.cpp">
-      <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Hoe.cpp">
       <Filter>Classes\Tool</Filter>
@@ -150,29 +147,8 @@
     <ClCompile Include="..\Classes\Item\Item.cpp">
       <Filter>Classes\Item</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SaveManage\SaveManage.cpp">
-      <Filter>Classes\Scene\SaveManage</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Tool\Fertilizer.cpp">
       <Filter>Classes\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\DateManage\WeatherManager.cpp">
-      <Filter>Classes\DateManage</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\AnimalManager.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\Cow.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\Chicken.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\Sheep.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\Pig.cpp">
-      <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Animal\AnimalItem.cpp">
       <Filter>Classes\Animal</Filter>
@@ -188,18 +164,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\MilkingPail.cpp">
       <Filter>Classes\Tool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\DogbaneCrop.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\CornCrop.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\CarrotCrop.cpp">
-      <Filter>Classes\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Map\FarmResourceManager.cpp">
-      <Filter>Classes\Map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Tool\Agrochemical.cpp">
       <Filter>Classes\Tool</Filter>
@@ -227,6 +191,54 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Npc\NoticeBoard.cpp">
       <Filter>Classes\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Map\CaveMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Animal.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\AnimalManager.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Chicken.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Cow.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Pig.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animal\Sheep.cpp">
+      <Filter>Classes\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\CarrotCrop.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\CornCrop.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\Crop.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\CropManager.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\DogbaneCrop.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Crop\FarmResourceManager.cpp">
+      <Filter>Classes\Crop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Date\DateManage.cpp">
+      <Filter>Classes\Date</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Weather\WeatherManager.cpp">
+      <Filter>Classes\Weather</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Save\SaveManage.cpp">
+      <Filter>Classes\Save</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,13 +275,10 @@
     <ClInclude Include="..\Classes\Tool\Tool.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Map\Crop.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Constant\Constant.h">
       <Filter>Classes\Constant</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Tool\PickAxe.h">
+    <ClInclude Include="..\Classes\Tool\Pickaxe.h">
       <Filter>Classes\Tool</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Bag\Bag.h">
@@ -280,12 +289,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Festival\Festival.h">
       <Filter>Classes\Fesitval</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\DateManage\DateManage.h">
-      <Filter>Classes\DateManage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\Animal.h">
-      <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Hoe.h">
       <Filter>Classes\Tool</Filter>
@@ -317,29 +320,8 @@
     <ClInclude Include="..\Classes\Item\Item.h">
       <Filter>Classes\Item</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SaveManage\SaveManage.h">
-      <Filter>Classes\Scene\SaveManage</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Tool\Fertilizer.h">
       <Filter>Classes\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\DateManage\WeatherManager.h">
-      <Filter>Classes\DateManage</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\AnimalManager.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\Cow.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\Chicken.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\Sheep.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\Pig.h">
-      <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Animal\AnimalItem.h">
       <Filter>Classes\Animal</Filter>
@@ -355,18 +337,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\MilkingPail.h">
       <Filter>Classes\Tool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\DogbaneCrop.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\CornCrop.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\CarrotCrop.h">
-      <Filter>Classes\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Map\FarmResourceManager.h">
-      <Filter>Classes\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Tool\Agrochemical.h">
       <Filter>Classes\Tool</Filter>
@@ -400,6 +370,54 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Npc\NoticeBoard.h">
       <Filter>Classes\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\CaveMap.h">
+      <Filter>Classes\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Animal.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\AnimalManager.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Chicken.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Cow.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Pig.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animal\Sheep.h">
+      <Filter>Classes\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\CarrotCrop.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\CornCrop.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\Crop.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\CropManager.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\DogbaneCrop.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Crop\FarmResourceManager.h">
+      <Filter>Classes\Crop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Date\DateManage.h">
+      <Filter>Classes\Date</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Weather\WeatherManager.h">
+      <Filter>Classes\Weather</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Save\SaveManage.h">
+      <Filter>Classes\Save</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -100,7 +100,7 @@ TMXTiledMap* SceneMap::getTiledMap() {
 
 // 获取特定位置的 TileNode
 TileNode* SceneMap::getTileNode(const int x, const int y) const {
-    if (x < 0 || y < 0 || x >= mapTileNode.size() || y >= mapTileNode[0].size()) {
+    if (x < 0 || y < 0 || x >= static_cast<int>(mapTileNode.size()) || y >= static_cast<int>(mapTileNode[0].size())) {
         return nullptr;
     }
     return mapTileNode[x][y];

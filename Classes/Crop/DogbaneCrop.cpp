@@ -1,6 +1,6 @@
 #include "cocos2d.h"
 #include "DogbaneCrop.h"
-#include "../DateManage/DateManage.h"
+#include "../Date/DateManage.h"
 #include "../Constant/Constant.h"
 
 Dogbane* Dogbane::create() {

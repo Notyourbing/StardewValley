@@ -5,8 +5,8 @@
 #include "../MyButton/MyButton.h"
 #include "../Control/Control.h"
 #include "../DialogueBox/DialogueBox.h"
-#include "../DateManage/WeatherManager.h"
-#include "../SaveManage/SaveManage.h"
+#include "../Weather/WeatherManager.h"
+#include "../Save/SaveManage.h"
 #include "../Npc/NoticeBoard.h"
 #include "../Item/ItemFactory.h"
 

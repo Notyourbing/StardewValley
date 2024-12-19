@@ -1,37 +1,36 @@
-#include "CarrotCrop.h"
-#include "../DateManage/DateManage.h"
+#include "CornCrop.h"
+#include "../Date/DateManage.h"
 #include "../Constant/Constant.h"
 
-Carrot* Carrot::create() {
-	Carrot* carrot = new (std::nothrow) Carrot();
-	if (carrot && carrot->init()) {
-		return carrot;
+Corn* Corn::create() {
+	Corn* corn = new (std::nothrow) Corn();
+	if (corn && corn->init()) {
+		return corn;
 	}
-	CC_SAFE_DELETE(carrot);
+	CC_SAFE_DELETE(corn);
 	return nullptr;
 }
 
-bool Carrot::init() {
+bool Corn::init() {
 	// 初始化不同季节的生长阶段天数
-	seasonalGrowthStageDay["Spring"].push_back(CARROT_SPRING_STAGE_FIRST);
-	seasonalGrowthStageDay["Spring"].push_back(CARROT_SPRING_STAGE_SECOND);
-	seasonalGrowthStageDay["Summer"].push_back(CARROT_SUMMER_STAGE_FIRST);
-	seasonalGrowthStageDay["Summer"].push_back(CARROT_SUMMER_STAGE_SECOND);
-	seasonalGrowthStageDay["Fall"].push_back(CARROT_AUTUMN_STAGE_FIRST);
-	seasonalGrowthStageDay["Fall"].push_back(CARROT_AUTUMN_STAGE_SECOND);
-	seasonalGrowthStageDay["Winter"].push_back(CARROT_WINTER_STAGE_FIRST);
-	seasonalGrowthStageDay["Winter"].push_back(CARROT_WINTER_STAGE_SECOND);
+	seasonalGrowthStageDay["Spring"].push_back(CORN_SPRING_STAGE_FIRST);
+	seasonalGrowthStageDay["Spring"].push_back(CORN_SPRING_STAGE_SECOND);
+	seasonalGrowthStageDay["Summer"].push_back(CORN_SUMMER_STAGE_FIRST);
+	seasonalGrowthStageDay["Summer"].push_back(CORN_SUMMER_STAGE_SECOND);
+	seasonalGrowthStageDay["Fall"].push_back(CORN_AUTUMN_STAGE_FIRST);
+	seasonalGrowthStageDay["Fall"].push_back(CORN_AUTUMN_STAGE_SECOND);
+	seasonalGrowthStageDay["Winter"].push_back(CORN_WINTER_STAGE_FIRST);
+	seasonalGrowthStageDay["Winter"].push_back(CORN_WINTER_STAGE_SECOND);
 	return true;
 }
 
-
 // 构造函数
-Carrot::Carrot() :
-	Crop(CropType::Carrot) {
+Corn::Corn() :
+	Crop(CropType::Corn) {
 }
 
-// 生长函数
-void Carrot::grow() {
+// 作物生长
+void Corn::grow() {
 	// 判断是否干旱以及虫害
 	if (isDrought == false && isInfested == false) {
 		if (isFertilized) {
@@ -41,7 +40,7 @@ void Carrot::grow() {
 			growedDay++;
 		}
 	}
-
+	
 	// 干旱天数增加
 	if (isDrought) {
 		droughtDay++;
@@ -63,12 +62,12 @@ void Carrot::grow() {
 		generatePest();
 	}
 
-	// 更新当前生长阶段
+	// 更新作物生长阶段
 	updateGrowthStage();
 }
 
 // 随机生成病害
-void Carrot::generatePest() {
+void Corn::generatePest() {
 	// 获得当前季节与天气
 	DateManage* dateManage = DateManage::getInstance();
 	std::string season = dateManage->getCurrentSeason();
@@ -84,16 +83,16 @@ void Carrot::generatePest() {
 
 	// 根据季节获得基础虫害概率
 	if (season == "Spring") {
-		basePestProbability = CARROT_SPRING_PEST_PROBABILITY;
+		basePestProbability = CORN_SPRING_PEST_PROBABILITY;
 	}
 	else if (season == "Summer") {
-		basePestProbability = CARROT_SUMMER_PEST_PROBABILITY;
+		basePestProbability = CORN_SUMMER_PEST_PROBABILITY;
 	}
 	else if (season == "Fall") {
-		basePestProbability = CARROT_AUTUMN_PEST_PROBABILITY;
+		basePestProbability = CORN_AUTUMN_PEST_PROBABILITY;
 	}
 	else {
-		basePestProbability = CARROT_WINTER_PEST_PROBABILITY;
+		basePestProbability = CORN_WINTER_PEST_PROBABILITY;
 	}
 
 	// 根据天气增加虫害概率
