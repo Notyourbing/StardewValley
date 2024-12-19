@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "MovementBehavior .h"
-#include "../Map/Animal.h"
+#include "../Animal/Animal.h"
 #include <vector>
 
 /*

@@ -1,6 +1,6 @@
 #include "cocos2d.h"
 #include "Cow.h"
-#include "FarmMap.h"
+#include "../Map/FarmMap.h"
 #include "../Behavior/WanderMovement.h"
 #include "../Behavior/MovementBehavior .h"
 #include "../Constant/Constant.h"

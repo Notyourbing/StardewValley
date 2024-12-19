@@ -306,11 +306,27 @@ void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y
         if (dynamic_cast<Stone*>(mapTileNode[x][y])->isBroken()) {
             delete mapTileNode[x][y];
             mapTileNode[x][y] = nullptr;
-            mapTileNode[x][y] = Soil::create(Vec2(x,y));
+            mapTileNode[x][y] = Soil::create(Vec2(x, y));
 
             // 更新地图图块
             stoneLayer->setTileGID(0, Vec2(x, y));
             soilLayer->setTileGID(SOIL_GID, Vec2(x, y));
+
+
+            //采矿次数增加
+            auto bag = Bag::getInstance();
+            srand(static_cast<unsigned int>(time(NULL)));
+            auto skills = SkillTree::getInstance()->getAllSkills();
+            int level = skills["Mining"]->getCurrentLevel();
+            int random = level * rand() % 100;  // 随机索引
+            StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
+            // 概率获取第二块石头
+            if (random > 50) {
+                SkillTree::getInstance()->updateMiningCount(1);
+                bag->addItem(stoneItem);
+            }
+            SkillTree::getInstance()->updateMiningCount(1);
+            bag->addItem(stoneItem);
         }
     }
 }
