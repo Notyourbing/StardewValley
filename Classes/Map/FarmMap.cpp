@@ -207,20 +207,6 @@ void FarmMap::interactWithMap() {
         return;
     }
 }
-// to do 没找到稿子的使用（挖矿） 下面是相关技能实现
-    ////采矿次数增加
-    //srand(static_cast<unsigned int>(time(NULL)));
-    //auto skills = SkillTree::getInstance()->getAllSkills();
-    //int level = skills["Mining"]->getCurrentLevel();
-    //int random = level * rand() % 100;  // 随机索引
-    //StoneItem* stoneItem = StoneItem::create(STONE_ITEM);
-    // 概率获取第二块石头
-    //if (random > 50) {
-    //    SkillTree::getInstance()->updateMiningCount(1);
-    //    bag->addItem(stoneItem);
-    //}
-    //SkillTree::getInstance()->updateMiningCount(1);
-    //bag->addItem(stoneItem);
 
 // 与土壤的交互
 void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y) {

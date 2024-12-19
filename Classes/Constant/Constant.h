@@ -382,7 +382,6 @@ constexpr int BOARD_Y = 800;
 	// 添加初始化的物品
 const std::vector<std::string> INIT_ITEMS ={	
 	"axe",
-	"pickaxe",
 	"hoe",
 	"scythe",
 	"kettle",

@@ -197,6 +197,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Map\BeachMap.cpp" />
     <ClCompile Include="..\Classes\Map\CaveMap.cpp" />
     <ClCompile Include="..\Classes\Map\FarmMap.cpp" />
+    <ClCompile Include="..\Classes\Map\ForestMap.cpp" />
     <ClCompile Include="..\Classes\Map\SceneMap.cpp" />
     <ClCompile Include="..\Classes\Map\TileNode.cpp" />
     <ClCompile Include="..\Classes\Market\MarketItem.cpp" />
@@ -263,6 +264,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Map\BeachMap.h" />
     <ClInclude Include="..\Classes\Map\CaveMap.h" />
     <ClInclude Include="..\Classes\Map\FarmMap.h" />
+    <ClInclude Include="..\Classes\Map\ForestMap.h" />
     <ClInclude Include="..\Classes\Map\SceneMap.h" />
     <ClInclude Include="..\Classes\Map\TileNode.h" />
     <ClInclude Include="..\Classes\Market\MarketItem.h" />

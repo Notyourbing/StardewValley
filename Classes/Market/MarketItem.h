@@ -11,9 +11,9 @@
 class MarketItem {
 public:
 	std::string marketItemName;				// 商品名称
-	int basePrice;					// 基础价格
-	int currentPrice;				// 现在的价格
-	int supply;						// 背包中该商品的数量
+	int basePrice;							// 基础价格
+	int currentPrice;						// 现在的价格
+	int supply;								// 背包中该商品的数量
 
 	// 静态创建函数
 	static MarketItem* create(std::string name);

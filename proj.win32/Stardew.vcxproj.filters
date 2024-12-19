@@ -261,6 +261,9 @@
     <ClCompile Include="..\Classes\Save\SaveManage.cpp">
       <Filter>Classes\Save</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Map\ForestMap.cpp">
+      <Filter>Classes\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\Map\FarmMap.h">
@@ -454,6 +457,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Save\SaveManage.h">
       <Filter>Classes\Save</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Map\ForestMap.h">
+      <Filter>Classes\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
