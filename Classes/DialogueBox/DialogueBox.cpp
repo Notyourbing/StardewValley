@@ -88,7 +88,6 @@ bool DialogueBox::init()
     dialogueLabel->setPosition(Vec2(dialogueBackground->getPositionX() - 240, dialogueBackground->getPositionY()));
     dialogueLabel->setAlignment(TextHAlignment::LEFT, TextVAlignment::TOP);
     dialogueLabel->setTextColor(Color4B::WHITE);
-
     return true;
 }
 
@@ -124,30 +123,34 @@ void DialogueBox::showBoardDialogue() {
     auto listener = EventListenerMouse::create();
     listener->onMouseDown = [listener, this](Event* event) {
         auto mouseEvent = dynamic_cast<EventMouse*>(event);
-        if (!NoticeBoard::getTaskStatus() && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT && getDialogueVisible()) {
+        if (mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT && getDialogueVisible()) {
             Bag* bag = Bag::getInstance();
-            if (bag->checkItemIn("stone") && bag->getItemQuantity(bag->getItemIndex("stone")) >= 3) {
-                auto optionButton = ui::Button::create();
-                optionButton->setTitleText("SUBMIT");
-                optionButton->setTitleFontSize(30);
-                optionButton->setTitleColor(Color3B::WHITE);
-                optionButton->setPosition(Vec2(400, 200));
-                optionButton->addClickEventListener([this, optionButton, listener, bag](Ref* sender) {
-                    for (int i = 0; i < 3; i++)
-                        bag->removeItem(bag->getItemIndex("stone"));
-                    NoticeBoard::create()->completeTask();
-                    optionButton->setVisible(false);
+            if (!NoticeBoard::getTaskStatus()) {
+                if (bag->checkItemIn("stone") && bag->getItemQuantity(bag->getItemIndex("stone")) >= 3) {
+                    auto optionButton = ui::Button::create();
+                    optionButton->setTitleText("SUBMIT");
+                    optionButton->setTitleFontSize(30);
+                    optionButton->setTitleColor(Color3B::WHITE);
+                    optionButton->setPosition(Vec2(400, 200));
+                    optionButton->addClickEventListener([this, optionButton, listener, bag](Ref* sender) {
+                        for (int i = 0; i < 3; i++)
+                            bag->removeItem(bag->getItemIndex("stone"));
+                        NoticeBoard::create()->completeTask();
+                        optionButton->setVisible(false);
+                        closeDialogue(listener);
+                        //给出房子
+                        auto building = Sprite::create(BUILDING.image);
+                        building->setPosition(Vec2(BOARD_X, BOARD_Y));
+                        BeachMap::getInstance()->addChild(building);
+                        });
+                    this->addChild(optionButton);
+                }
+                else
                     closeDialogue(listener);
-                    //给出房子
-                    auto building = Sprite::create(BUILDING.image);
-                    building->setPosition(Vec2(BOARD_X, BOARD_Y));
-                    BeachMap::getInstance()->addChild(building);
-                    });
-                this->addChild(optionButton);
             }
+            else
+                closeDialogue(listener);
         }
-        else
-            closeDialogue(listener);
         };
     // 添加鼠标事件监听器到事件分发器
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getParent());
