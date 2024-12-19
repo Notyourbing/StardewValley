@@ -3,6 +3,7 @@
 
 #include "Animal.h"
 #include "cocos2d.h"
+#include "../Behavior/MovementBehavior .h"
 
 // Cow类：继承自Animal
 class Cow :public Animal {
@@ -22,6 +23,21 @@ private:
 
 	// 产奶量
 	int milkProduction;
+
+	// 定时器key
+	std::string moveScheduleKey;
+
+	// 启动移动调度
+	void startMoving();
+
+	// 执行一次随机移动
+	void performRandomMove(float dt);
+
+	// 设置移动行为
+	void setMovementBehavior(MovementBehavior* behavior) override;
+
+	// 移动行为
+	MovementBehavior* movementBehavior;
 };
 
 #endif 

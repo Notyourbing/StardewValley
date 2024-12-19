@@ -3,7 +3,7 @@
 USING_NS_CC;
 
 // 获得动物位置
-Vec2 Animal::getPosition() {
+Vec2 Animal::getAnimalPosition() {
 	return position;
 }
 

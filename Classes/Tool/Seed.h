@@ -6,7 +6,7 @@
 #include <string>
 
 enum class SeedType {
-	AppleSeed,
+	DogbaneSeed,
 	CornSeed,
 	CarrotSeed
 };
@@ -23,11 +23,11 @@ public:
 	void useItem() override;
 };
 
-// AppleSeed类：继承自Seed类，表示苹果种子
-class AppleSeed :public Seed {
+// DogbaneSeed类：继承自Seed类，表示防风草种子
+class DogbaneSeed :public Seed {
 public:
 	// 静态创建方法
-	static AppleSeed* create();
+	static DogbaneSeed* create();
 };
 
 // CornSeed类：继承自Seed类，表示玉米种子

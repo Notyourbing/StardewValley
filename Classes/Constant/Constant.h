@@ -372,14 +372,14 @@ constexpr int LABEL_HEIGHT = 390;
 
 // Bag
 	// 添加初始化的物品
-const std::vector<std::string> INIT_ITEMS =
-{	"axe",
+const std::vector<std::string> INIT_ITEMS ={	
+	"axe",
 	"pickaxe",
 	"hoe",
 	"fishingRod",
 	"scythe",
 	"kettle",
-	"appleSeed",
+	"dogbaneSeed",
 	"cornSeed",
 	"carrotSeed",
 	"fertilizer",
@@ -442,6 +442,8 @@ constexpr char FALL_CONVERSATION[] = "Let's picking up the falling leaves!\n";
 constexpr char WINTER_CONVERSATION[] = "Merry Christmas and Happy Birthday to levi!\n";
 
 // FarmMap
+constexpr int FARMMAP_SIZE_WIDTH = 1980;
+constexpr int FARMMAP_SIZE_HEIGHT = 1080;
 constexpr int FARMMAP_WIDTH = 31;
 constexpr int FARMMAP_HEIGHT = 17;
 constexpr int SUN_OFFSET = 100;
@@ -542,6 +544,22 @@ constexpr char COW[] = "Animal/Cow.png";
 constexpr char CHICKEN[] = "Animal/Chicken.png";
 constexpr char SHEEP[] = "Animal/Sheep.png";
 constexpr char PIG[] = "Animal/Pig.png";
+
+// AnimalBehaviorControl
+constexpr float COW_MOVE_RADIUS = 150.0f;
+constexpr float COW_MOVE_INTERVAL = 1.0f;
+constexpr float SHEEP_MOVE_RADIUS = 100.0f;
+constexpr float SHEEP_MOVE_INTERVAL = 0.5f;
+constexpr float PATROL_OFFSET = 50.0f;
+constexpr float	SUNNY_WANDER_RADIUS_INFLUENCE = 20.0f;
+constexpr float SUNNY_WANDER_MOVEDURATION_INFLUENCE = -0.2f;
+constexpr float LIGHTRAIN_WANDER_RADIUS_INFLUENCE = -40.f;
+constexpr float LIGHTRAIN_WANDER_MOVEDURATION_INFLUENCE = 1.0f;
+constexpr float HEAVYRAIN_WANDER_RADIUS_INFLUENCE = -70.f;
+constexpr float HEAVYRAIN_WANDER_MOVEDURATION_INFLUENCE = 2.0f;
+constexpr float SUNNY_SPEED_INFLUENCE = 10;
+constexpr float LIGHTRAIN_SPEED_INFLUENCE = -30;
+constexpr float HEAVYRAIN_SPEED_INFLUENCE = -50;
 
 // Tool
 constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量

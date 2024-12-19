@@ -255,7 +255,34 @@ void FarmMap::interactWithSoil(std::string itemName,const int& x,const int& y) {
 
 // 与草地的交互
 void FarmMap::interactWithGrass(std::string itemName, const int& x, const int& y) {
+    
+    // 将瓦点坐标转化为地图坐标
+    Vec2 animalPosition;
+    const Size tileSize = tiledMap->getTileSize();                      
+    const Size mapSize = tiledMap->getMapSize();
+    animalPosition.x = x * tileSize.width;
+    animalPosition.y = mapSize.height * tileSize.height - y * tileSize.height;
 
+    // 添加动物
+    if (itemName == "cow") {
+        Cow* cow = Cow::create(animalPosition);
+        animalManager->addAnimal(cow, animalPosition);
+    }
+    else if (itemName == "chicken") {
+        Chicken* chicken = Chicken::create(animalPosition);
+        animalManager->addAnimal(chicken, animalPosition);
+    }
+    else if (itemName == "sheep") {
+        Sheep* sheep = Sheep::create(animalPosition);
+        animalManager->addAnimal(sheep,animalPosition);
+    }
+    else if(itemName=="pig") {
+        Pig* pig = Pig::create(animalPosition);
+        animalManager->addAnimal(pig,animalPosition);
+    }
+    else {
+        return;
+    }
 }
 
 // 与水的交互
