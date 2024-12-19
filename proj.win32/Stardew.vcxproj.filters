@@ -201,7 +201,7 @@
     <ClCompile Include="..\Classes\Behavior\PatrolMovement.cpp">
       <Filter>Classes\Behavior</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Market\MarketItem.cpp">
+    <ClCompile Include="..\Classes\Market\MarketGood.cpp">
       <Filter>Classes\Market</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Market\MarketState.cpp">
@@ -395,7 +395,7 @@
     <ClInclude Include="..\Classes\Behavior\PatrolMovement.h">
       <Filter>Classes\Behavior</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Market\MarketItem.h">
+    <ClInclude Include="..\Classes\Market\MarketGood.h">
       <Filter>Classes\Market</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Market\MarketState.h">

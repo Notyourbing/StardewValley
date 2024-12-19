@@ -58,6 +58,12 @@ public:
 	// 获取能否使用当前物品
 	bool getUseItemEnable();
 
+	// 增加金币
+	void addMoney(int money);
+
+	// 获取当前金币数量
+	int getMoney() const;
+
 	//声望相关get和set
 	int getPopularity() const { return popularity; }
 	bool setPopularity(int value) { return popularity = value; }
@@ -104,6 +110,9 @@ private:
 
 	// 声望
 	static int popularity;
+
+	// 金币数
+	int playerMoney;
 };
 
 #endif

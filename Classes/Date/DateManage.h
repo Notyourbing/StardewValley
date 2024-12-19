@@ -16,6 +16,10 @@ class DateManage : public cocos2d::Node {
 public:
     // 用于显示日期的标签
     cocos2d::Label* dateLabel;
+
+    // 用于显示金钱的标签
+    cocos2d::Label* moneyLabel;
+
     // 存在的节日
     std::vector<Festival*> festivals;
 

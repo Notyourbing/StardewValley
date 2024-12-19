@@ -18,7 +18,7 @@ namespace ResPath {
 	constexpr char EXIT_ITEM[] = "icon/exitButton.png";
 	constexpr char EXIT_ON_ITEM[] = "icon/exitButtonOn.png";
 	constexpr char TITLE[] = "icon/title.png";
-	constexpr char FONT_TTF[] = "fonts/Marker Felt.ttf";
+	constexpr char  FONT_TTF[] = "fonts/Marker Felt.ttf";
 	constexpr char FONT_ARIAL[] = "fonts/arial.ttf";
 	constexpr char COOP_BACKGROUND[] = "icon/coopBackground.png";
 	constexpr char COOP_PANEL[] = "icon/cooperationPanel.png";
@@ -649,5 +649,49 @@ constexpr ItemInfo BUILDING = {
 	"tools/building.png",         // 图片路径
 };
 
+// MarketGood
+struct MarketGoodLabel{
+	const char* name;             // 名称
+	const int basePrice;		  // 商品的基础价格
+};
+
+// 防风草商品
+const MarketGoodLabel DOGBANE = {
+	"dogbaneFood",
+	20,
+};
+
+// 玉米商品
+const MarketGoodLabel CORN = {
+	"cornFood",
+	25,
+};
+
+// 胡萝卜商品
+const MarketGoodLabel CARROT = {
+	"carrotFood",
+	30,
+};
+
+// 石头商品
+const MarketGoodLabel STONE = {
+	"stoneItem",
+	5,
+};
+
+// 市场的初始化
+const std::vector<MarketGoodLabel> INIT_GOODS = {
+	DOGBANE,
+	CARROT,
+	CARROT,
+	STONE,
+};
+
+// 人物初始金币
+constexpr int PLAYER_INITIAL_MONEY = 500;
+constexpr int SUNNY_MONEY_INFLUENCE = 0;
+constexpr int LIGHTRAIN_MONEY_INFLUENCE = 10;
+constexpr int HEAVYRAIN_MONEY_INFLUENCE = 30;
+constexpr int SNOWY_MONEY_INFLUENCE = 50;
 
 #endif __CONSTANT_H
