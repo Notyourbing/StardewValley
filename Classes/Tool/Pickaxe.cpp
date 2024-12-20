@@ -1,6 +1,6 @@
 /****************************************************************
  * File Function: 实现十字镐类，继承自Tool,十字镐可以挖矿和石头
- * Author:        赵卓冰
+ * Author:        韦瑾钰 赵卓冰
  ****************************************************************/
 #include "Pickaxe.h"
 #include "../Player/Player.h"
@@ -62,7 +62,6 @@ void Pickaxe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

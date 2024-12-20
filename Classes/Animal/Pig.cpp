@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 农场动物猪类的实现，实现猪的生长、移动等逻辑控制
+ * Author:        高鑫
+ ****************************************************************/
 #include "Pig.h"
 #include "../Behavior/MovementBehavior .h"
 #include "../Behavior/WanderMovement.h"

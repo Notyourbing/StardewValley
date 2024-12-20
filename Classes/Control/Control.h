@@ -1,7 +1,7 @@
 /****************************************************************
  * File Function: 实现控制类，控制鼠标和键盘
  *				  控制人物的移动，地图的移动，人物和npc的交互
- * Author:        赵卓冰
+ * Author:        赵卓冰 韦瑾钰
  ****************************************************************/
 #ifndef __CONTROL_H__
 #define __CONTROL_H__
@@ -27,6 +27,7 @@ public:
 	// 构造函数和析构函数
 	Control();
 	~Control();
+
 private:
 	// 记录当前按下的键
 	std::set<cocos2d::EventKeyboard::KeyCode> keysPressed;

@@ -13,11 +13,10 @@ public:
 	// 静态创建方法
 	static Pickaxe* create();
 
-	// 初始化斧头
+	// 初始化十字镐
 	bool init();
 
 	// 使用工具
 	void useItem() override;
 };
-
 #endif

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 告示牌类，继承Sprite类，用于显示和完成特定npc的特殊任务
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __NOTICE_BOARD_H__
 #define __NOTICE_BOARD_H__
 
@@ -10,8 +14,10 @@ USING_NS_CC;
 class NoticeBoard : public Sprite{
 public:
 
+    // 创建告示牌
     static NoticeBoard* create();
 
+    // 初始化
     bool init(const ItemInfo& noticeBoardInfo);
 
     // 对话信息

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现水壶类，继承自Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Kettle.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"

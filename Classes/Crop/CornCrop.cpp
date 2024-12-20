@@ -1,7 +1,12 @@
+/****************************************************************
+ * File Function: 玉米作物类的实现，实现玉米作物在不同条件下的生长
+ * Author:        高鑫
+ ****************************************************************/
 #include "CornCrop.h"
 #include "../Date/DateManage.h"
 #include "../Constant/Constant.h"
 
+// 静态创建函数
 Corn* Corn::create() {
 	Corn* corn = new (std::nothrow) Corn();
 	if (corn && corn->init()) {
@@ -11,6 +16,7 @@ Corn* Corn::create() {
 	return nullptr;
 }
 
+// 初始化
 bool Corn::init() {
 	// 初始化不同季节的生长阶段天数
 	seasonalGrowthStageDay["Spring"].push_back(CORN_SPRING_STAGE_FIRST);

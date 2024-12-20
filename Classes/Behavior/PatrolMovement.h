@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 巡逻移动控制类，继承自移动控制基类，控制精灵沿着固定路径移动
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __PATROLMOVEMENT_H__
 #define __PATROLMOVEMENT_H__
 
@@ -6,10 +10,7 @@
 #include "../Animal/Animal.h"
 #include <vector>
 
-/*
- * Class Name:     PatrolMovement
- * Class Function: 固定路径的巡逻移动控制类
- */
+// 巡逻移动控制类
 class PatrolMovement : public MovementBehavior {
 public:
     // 静态构造函数，接受路径点

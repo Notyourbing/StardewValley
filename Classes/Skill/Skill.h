@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 技能类，作为PLayer拥有的属性
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __SKILL_H
 #define __SKILL_H
 #include <string>
@@ -8,6 +12,7 @@ public:
     // 初始化函数
     bool init(const std::string& name, int maxLevel, std::function<void(int)> effect);
 
+    // 创建技能
     static Skill* create(const std::string& name, int maxLevel, std::function<void(int)> effect);
 
     // 获取技能名称

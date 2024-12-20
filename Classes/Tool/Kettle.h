@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 水壶类，用于实现工具水壶
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __KETTLE_H__
 #define __KETTLE_H__
 
@@ -25,6 +29,7 @@ public:
 	void Kettle::refillWateringCan(int water);
 
 private:
+
 	// 水壶的含水量
 	int waterLevel;
 };

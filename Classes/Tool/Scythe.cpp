@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现镰刀类, 继承Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Scythe.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
@@ -59,7 +63,6 @@ void Scythe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

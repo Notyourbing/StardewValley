@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 市场单品类，用于初始化市场中的商品，并实现价格动态变化
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __MARKET_ITEM_H__
 #define __MARKET_ITEM_H__
 
@@ -5,9 +9,7 @@
 #include "../Constant/Constant.h"
 #include <string>
 
-/*
- * Class Function: 市场单品类
- */
+// 市场单品类
 class MarketGood {
 public:
 	// 静态创建函数

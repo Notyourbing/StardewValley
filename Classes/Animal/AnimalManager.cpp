@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 农场动物管理类，实现农场上的动物的管理
+ * Author:        高鑫
+ ****************************************************************/
 #include "AnimalManager.h"
 #include "../Constant/Constant.h"
 
@@ -33,7 +37,7 @@ void AnimalManager::addAnimal(Animal* animal, const cocos2d::Vec2& position) {
 	}
 	// 添加动物
 	animals.push_back(animal);
-	addChild(animal,static_cast<int>(animals.size())+6);
+	addChild(animal,static_cast<int>(animals.size()));
 	animal->setPosition(position);
 }
 

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 游戏合作场景类，用于搜寻合作玩家场景的展示
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __COOPERATION_SCENE_H__
 #define __COOPERATION_SCENE_H__
 
@@ -16,7 +20,11 @@ public:
 private:
     // 返回项的回调函数
     void backCallBack(cocos2d::Ref* pSender);
+
+    // 点击向上按钮的动画
     void onUpButtonClicked(cocos2d::Ref* pSender);
+
+    // 点击向下按钮的动画
     void onDownButtonClicked(cocos2d::Ref* pSender);
 
     // 存储 coopText 的指针

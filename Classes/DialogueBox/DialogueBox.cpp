@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现对话框类，用于实现Player与Npc和noticeBoard的对话以及交互
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "DialogueBox.h"
 #include "../Date/DateManage.h"
 #include "../Skill/SkillTree.h"
@@ -9,6 +13,7 @@ USING_NS_CC;
 
 bool DialogueBox::isDialogueVisible = false;
 
+// 静态创建函数
 DialogueBox* DialogueBox::create(Npc* npc) {
     DialogueBox* ret = new DialogueBox();
     if (ret && ret->init(npc)) {
@@ -19,6 +24,7 @@ DialogueBox* DialogueBox::create(Npc* npc) {
     return nullptr;
 }
 
+// board的创建
 DialogueBox* DialogueBox::create()
 {
     DialogueBox* ret = new DialogueBox();
@@ -30,6 +36,7 @@ DialogueBox* DialogueBox::create()
     return nullptr;
 }
 
+// npc初始化
 bool DialogueBox::init(Npc* npc) {
     if (!Node::init()) {
         return false;
@@ -65,6 +72,7 @@ bool DialogueBox::init(Npc* npc) {
     return true;
 }
 
+// 对话框初始化
 bool DialogueBox::init()
 {
     if (!Node::init()) {
@@ -91,6 +99,7 @@ bool DialogueBox::init()
     return true;
 }
 
+// 展示初始对话
 void DialogueBox::showInitialDialogue() {
     // 标记对话框已显示
     setDialogueVisible(true);
@@ -113,7 +122,7 @@ void DialogueBox::showInitialDialogue() {
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
-
+// 展示告示牌初始对话
 void DialogueBox::showBoardDialogue() {
     setDialogueVisible(true);
     this->addChild(dialogueBackground);
@@ -156,6 +165,7 @@ void DialogueBox::showBoardDialogue() {
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this->getParent());
 }
 
+// 展示npc对话选项
 void DialogueBox::showDialogueOptions(EventListenerMouse* lastListener) {
     dialogueLabel->setVisible(false);
     _eventDispatcher->removeEventListener(lastListener);
@@ -176,6 +186,7 @@ void DialogueBox::showDialogueOptions(EventListenerMouse* lastListener) {
     }
 }
 
+// 更新选择选项后的对话
 void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
     // 隐藏所有选项按钮
     for (auto button : optionButtons) {
@@ -252,6 +263,7 @@ void DialogueBox::updateDialogueAfterOptionSelected(int optionIndex) {
     
 }
 
+// 赠送礼物
 void DialogueBox::giftBox(std::string giftName, EventListenerKeyboard* lastListener)
 {
     _eventDispatcher->removeEventListener(lastListener);
@@ -264,6 +276,7 @@ void DialogueBox::giftBox(std::string giftName, EventListenerKeyboard* lastListe
     dialogueLabel->setVisible(true);
 }
 
+// 关闭对话框
 void DialogueBox::closeDialogue(EventListenerMouse* lastListener) {
     _eventDispatcher->removeEventListener(lastListener);
     this->removeFromParent();  // 移除对话框

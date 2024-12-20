@@ -1,6 +1,6 @@
 /****************************************************************
  * File Function: 实现背包类
- * Author:        赵卓冰
+ * Author:        赵卓冰 韦瑾钰
  ****************************************************************/
 #ifndef __BAG_H__
 #define __BAG_H__
@@ -68,6 +68,7 @@ public:
 
 	// 查看背包中是否有目标物品
 	bool checkItemIn(const std::string& targetName);
+
 private:
 	// 单例实例
 	static Bag* instance;
