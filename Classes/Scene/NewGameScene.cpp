@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现新开始游戏场景类，继承自Scene，从开始场景会切换
+ *				  本场景，玩家输入自己的游戏id
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "NewGameScene.h"
 #include "../Player/Player.h"
 #include "FarmScene.h"
@@ -102,7 +107,7 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 	auto bag = Bag::getInstance();
 
 	// 进入FramScene
-	auto farmScene = Farm::create();
+	auto farmScene = Farm::createScene();
 	auto transition = TransitionFade::create(0.5f, farmScene, cocos2d::Color3B::WHITE); // 0.7秒，淡入紫色背景
 	Director::getInstance()->replaceScene(transition);
 }

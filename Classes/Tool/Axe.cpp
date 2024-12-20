@@ -1,8 +1,14 @@
+/****************************************************************
+ * File Function: 实现斧头类，继承自Tool，用来砍树
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "Axe.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
+
 USING_NS_CC;
 
+// 静态创建方法
 Axe* Axe::create() {
 	Axe* axe = new (std::nothrow) Axe();
 	if (axe && axe->init()) {
@@ -13,11 +19,13 @@ Axe* Axe::create() {
 	return nullptr;
 }
 
+// 初始化斧头
 bool Axe::init() {
 	// 调用基类的初始化方法
     return Tool::init({ "axe", AXE});
 }
 
+// 使用物品
 void Axe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();

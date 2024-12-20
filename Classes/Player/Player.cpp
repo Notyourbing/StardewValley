@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现游戏中的玩家类，通过wasd控制玩家鼠标控制玩家
+ *                和地图交互
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "Player.h"
 #include "SimpleAudioEngine.h"
 #include "../Map/FarmMap.h"
@@ -5,8 +10,6 @@
 #include "../Control/Control.h"
 
 USING_NS_CC;
-
-int Player::popularity = 0;
 
 // 初始化静态成员变量
 Player* Player::instance = nullptr;

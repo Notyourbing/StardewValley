@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现游戏中的玩家类，通过wasd控制玩家鼠标控制玩家
+ *                和地图交互
+ * Author:        赵卓冰
+ ****************************************************************/
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
@@ -109,7 +114,7 @@ private:
 	void createWalkAnimation(const std::string& baseFilename, const std::string& animationName, int frameCount);
 
 	// 声望
-	static int popularity;
+	int popularity;
 
 	// 金币数
 	int playerMoney;

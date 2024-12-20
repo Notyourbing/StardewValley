@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现农场地图类
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "FarmMap.h"
 #include "../Animal/Cow.h"
 #include "../Animal/Chicken.h"
@@ -18,7 +22,6 @@ FarmMap* FarmMap::instance = nullptr;
 FarmMap::FarmMap() : grassLayer(nullptr), soilLayer(nullptr), obstacleLayer(nullptr),
 moldLayer(nullptr), waterLayer(nullptr), stoneLayer(nullptr),
 animalManager(nullptr) {}
-
 
 // 析构函数
 FarmMap::~FarmMap() {
@@ -146,7 +149,7 @@ bool FarmMap::isCollidable(const Vec2& position) const {
     }
 }
 
-    // 玩家与农场的接口
+// 玩家与农场的接口
 void FarmMap::interactWithMap() {
     // 获取玩家、地图、背包实例
     Player* player = Player::getInstance();
@@ -328,7 +331,6 @@ void FarmMap::interactWithStone(std::string itemName, const int& x, const int& y
 // 地图时间更新
 void FarmMap::mapUpdateByTime() {
     // 动物生长
-
     // 植物生长
     // 获取瓦点地图的长宽
     int width = tiledMap->getMapSize().width;

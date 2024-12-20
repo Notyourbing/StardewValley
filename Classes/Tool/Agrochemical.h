@@ -4,10 +4,6 @@
 #include "cocos2d.h"
 #include "Tool.h"
 
-/*
- * Class Name:     Agrochemical
- * Class Function: 农药类
- */
 class Agrochemical : public Tool {
 public:
 	// 静态创建方法
@@ -20,4 +16,4 @@ public:
 	void useItem() override;
 };
 
-#endif // !__AGROCHEMICAL_H__
+#endif

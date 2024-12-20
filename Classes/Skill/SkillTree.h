@@ -58,11 +58,14 @@ private:
 
     // 种植次数，用于npc特殊任务
     static int plantingCount;
+
     // 钓鱼次数
     static int fishingCount;
+
     // 采矿次数
     static int miningCount;
-    // 烹饪次数 to do
+
+    // 烹饪次数
     static int cookingCount;
 };
 #endif __SKILLTREE_H__

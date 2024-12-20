@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现农场场景类，继承自Scene，是游戏的主要场景
+ *				  农场中有npc，玩家可以耕种，养殖，钓鱼，砍树，交易等。
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "FarmScene.h"
 #include "../Map/BeachMap.h"
 #include "../Map/CaveMap.h"
@@ -116,6 +121,11 @@ void Farm::closeButtonClicked(Ref* pSender) {
 // 析构函数，防止npcs中存在野指针
 Farm::~Farm() {
 	npcs.clear();
+}
+
+// 获取地图上所有的npc
+std::vector<Npc*> Farm::getNpcs(){
+	return npcs;
 }
 
 // 根据人物的位置自动从农场场景切换到其他四个场景
@@ -263,3 +273,4 @@ void Farm::changeSceneAuto() {
 		}
 	}
 }
+

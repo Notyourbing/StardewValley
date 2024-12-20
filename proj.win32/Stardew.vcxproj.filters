@@ -150,9 +150,6 @@
     <ClCompile Include="..\Classes\DialogueBox\DialogueBox.cpp">
       <Filter>Classes\DialogueBox</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Item\Item.cpp">
-      <Filter>Classes\Item</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Tool\Fertilizer.cpp">
       <Filter>Classes\Tool</Filter>
     </ClCompile>

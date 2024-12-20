@@ -15,6 +15,7 @@ Kettle* Kettle ::create() {
 	return nullptr;
 }
 
+// 初始化水壶
 bool Kettle::init() {
 	// 调用基类的初始化方法
     return Tool::init({"kettle", KETTLE});
@@ -39,6 +40,7 @@ Kettle::Kettle() {
 void Kettle::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
+
     // 创建动画帧
     Vector<SpriteFrame*> frames;
 
@@ -81,8 +83,6 @@ void Kettle::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            //CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

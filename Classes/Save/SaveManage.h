@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现存档管理类，用户在退出程序后可以重新加载存档
+ *				  可以加载人物的信息，背包中的物品和地图的信息
+ * Author:        赵卓冰
+ ****************************************************************/
 #ifndef __SAVE_MANAGE_H__
 #define __SAVE_MANAGE_H__
 #include <string>
@@ -63,8 +68,6 @@ struct SaveData {
 	MapSaveData mapData;
 	BagSaveData bagData;
 };
-
-
 
 // 存储管理类
 class SaveManage {

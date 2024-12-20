@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现森林地图类
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "ForestMap.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"

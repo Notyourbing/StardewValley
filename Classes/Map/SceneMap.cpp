@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现所有地图的基类
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "SceneMap.h"
 
 USING_NS_CC;
@@ -34,6 +38,7 @@ bool SceneMap::loadMap(const std::string& tmxFile) {
     return true;
 }
 
+// 初始化地图
 bool SceneMap::init(const std::string& tmxFile) {
     if (!Node::init()) {
         return false;

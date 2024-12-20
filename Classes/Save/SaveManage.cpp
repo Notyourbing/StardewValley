@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现存档管理类，用户在退出程序后可以重新加载存档
+ *				  可以加载人物的信息，背包中的物品和地图的信息
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "SaveManage.h"
 #include "json/document.h"
 #include "json/writer.h"
@@ -56,7 +61,6 @@ std::string SaveManage::serializeToJson(const SaveData& data) {
 
 	return buffer.GetString();
 }
-
 
 // 反序列化 JSON 字符串到 SaveData
 bool SaveManage::deserializeFromJson(const std::string& jsonStr, SaveData& data) {

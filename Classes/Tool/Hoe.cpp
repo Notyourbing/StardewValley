@@ -1,9 +1,14 @@
+/****************************************************************
+ * File Function: 实现锄头类，继承自Tool，用来锄地
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "Hoe.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
 
+// 静态初始化方法
 Hoe* Hoe::create() {
 	Hoe* hoe = new (std::nothrow) Hoe();
 	if (hoe && hoe->init()) {
@@ -14,11 +19,13 @@ Hoe* Hoe::create() {
     return nullptr;
 }
 
+// 初始化斧头
 bool Hoe::init() {
 	// 调用基类的初始化方法
     return Tool::init({ "hoe", HOE});
 }
 
+// 使用工具
 void Hoe::useItem() {
     // 获取玩家实例
     Player* player = Player::getInstance();
@@ -58,8 +65,6 @@ void Hoe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            //CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

@@ -7,6 +7,7 @@ class Cooperation : public cocos2d::Scene {
 public:
     static cocos2d::Scene* createScene();
 
+    // 初始化
     bool init();
 
     // 实现静态 Cooperation* create()函数

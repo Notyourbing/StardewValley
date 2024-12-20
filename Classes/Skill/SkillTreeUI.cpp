@@ -25,6 +25,7 @@ SkillTreeUI* SkillTreeUI::getInstance() {
     return instance;
 }
 
+// 初始化
 bool SkillTreeUI::init() {
     isOpen = false;
     if (!Layer::init()) {
@@ -46,20 +47,16 @@ void SkillTreeUI::updateUI()
 }
 
 void SkillTreeUI::setupUI() {
-    // 获取屏幕尺寸
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    auto origin = Director::getInstance()->getVisibleOrigin();
-
     // 获取技能树实例
     auto skillTree = SkillTree::getInstance();
 
     // 设置背景图片
     auto bg = Sprite::create(ResPath::COOP_PANEL);
-    float bgWidth = visibleSize.width / 2;  // 背景宽度占屏幕的一半
-    float bgHeight = visibleSize.height / 2; // 背景高度占屏幕的一半
+    float bgWidth = WINSIZE.width / 2;  // 背景宽度占屏幕的一半
+    float bgHeight = WINSIZE.height / 2; // 背景高度占屏幕的一半
     bg->setScaleX(bgWidth / bg->getContentSize().width);  // 按比例缩放宽度
     bg->setScaleY(bgHeight / bg->getContentSize().height); // 按比例缩放高度
-    bg->setPosition(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y); // 背景放置在屏幕中心
+    bg->setPosition(WINSIZE.width / 2, WINSIZE.height / 2); // 背景放置在屏幕中心
     addChild(bg);
 
     // 设置内容的偏移量，确保从背景顶部开始
@@ -114,7 +111,6 @@ void SkillTreeUI::setupUI() {
 
 }
 
-
 void SkillTreeUI::closeCallback(EventListenerMouse* listener) {
     _eventDispatcher->removeEventListener(listener);
     Player::getInstance()->stopAllActions();
@@ -126,6 +122,7 @@ void SkillTreeUI::closeCallback(EventListenerMouse* listener) {
 
 void SkillTreeUI::openSkillUI() {
     Player::getInstance()->setUseItemEnable(false);
+
     // 创建关闭按钮
     auto closeButton = MyButton::create(ResPath::SKILL_CLOSE, ResPath::SKILL_CLOSE_ON);
     closeButton->setPosition(Vec2(WINSIZE.width * 3 / 4 - 25, WINSIZE.height * 3 / 4 - 25));

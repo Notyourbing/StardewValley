@@ -1,3 +1,8 @@
+/****************************************************************
+ * File Function: 实现控制类，控制鼠标和键盘
+ *				  控制人物的移动，地图的移动，人物和npc的交互
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "Control.h"
 #include "../Constant/Constant.h"
 #include "../Map/FarmMap.h"
@@ -164,7 +169,7 @@ void Control::initMouseListener() {
 		}
 		else if (mouseEvent && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_RIGHT) {
 			if (sceneMap == FarmMap::getInstance()) {
-				for (auto npc : Farm::npcs) {
+				for (auto npc : Farm::getNpcs()) {
 					// 计算玩家与NPC的距离
 					const float distance = player->getPosition().distance(npc->getPosition() + sceneMap->getPosition());
 

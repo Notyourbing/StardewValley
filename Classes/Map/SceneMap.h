@@ -1,9 +1,13 @@
+/****************************************************************
+ * File Function: 实现所有地图的基类
+ * Author:        赵卓冰
+ ****************************************************************/
 #ifndef __SCENEMAP_H__
 #define __SCENEMAP_H__
 #include "cocos2d.h"
 #include "TileNode.h"
 
-// 基类 SceneMap
+// SceneMap基类 
 class SceneMap : public cocos2d::Node {
 public:
     // 初始化地图
