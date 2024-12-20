@@ -1,13 +1,14 @@
+/****************************************************************
+ * File Function: 玉米作物类，继承自Crop抽象基类，实现玉米的生长逻辑
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __CORNCROP_H__
 #define __CORNCROP_H__
 
 #include "cocos2d.h"
 #include "Crop.h"
 
-/*
- * Class Name:     Corn
- * Class Function: 玉米作物类
- */
+// 玉米作物基类
 class Corn : public Crop {
 public:
 	// 静态创建函数

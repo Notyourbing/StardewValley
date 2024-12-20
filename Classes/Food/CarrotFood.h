@@ -1,13 +1,14 @@
+/****************************************************************
+ * File Function: 胡萝卜食物类，用于描述胡萝卜物品在背包中的状态
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __CARROTFOOD_H__
 #define __CARROTFOOD_H__
 
 #include "cocos2d.h"
 #include "Food.h"
 
-/*
- * Class Name:     CarrotFood
- * Class Function: 胡萝卜食物类
- */
+// 胡萝卜食物类
 class CarrotFood : public Food {
 public:
 	// 静态创建方法

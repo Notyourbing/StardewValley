@@ -182,7 +182,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Crop\CarrotCrop.cpp" />
     <ClCompile Include="..\Classes\Crop\CornCrop.cpp" />
     <ClCompile Include="..\Classes\Crop\Crop.cpp" />
-    <ClCompile Include="..\Classes\Crop\CropManager.cpp" />
     <ClCompile Include="..\Classes\Crop\DogbaneCrop.cpp" />
     <ClCompile Include="..\Classes\Crop\FarmResourceManager.cpp" />
     <ClCompile Include="..\Classes\Date\DateManage.cpp" />
@@ -247,7 +246,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Crop\CarrotCrop.h" />
     <ClInclude Include="..\Classes\Crop\CornCrop.h" />
     <ClInclude Include="..\Classes\Crop\Crop.h" />
-    <ClInclude Include="..\Classes\Crop\CropManager.h" />
     <ClInclude Include="..\Classes\Crop\DogbaneCrop.h" />
     <ClInclude Include="..\Classes\Crop\FarmResourceManager.h" />
     <ClInclude Include="..\Classes\Date\DateManage.h" />

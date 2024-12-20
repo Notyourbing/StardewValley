@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 农场动物羊类，实现羊的生长、移动等逻辑控制
+ * Author:        高鑫
+ ****************************************************************/
 #include "Sheep.h"
 #include "../Behavior/MovementBehavior .h"
 #include "../Behavior/PatrolMovement.h"

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 动物物品类，牛、鸡、羊、猪的背包物品
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __AnimalItem_H__
 #define __AnimalItem_H__
 
@@ -35,7 +39,7 @@ public:
 	// 静态创建方法
 	static SheepItem* create();
 
-	// 初始化斧头
+	// 初始化羊物品
 	bool init();
 
 	// 使用工具
@@ -48,7 +52,7 @@ public:
 	// 静态创建方法
 	static ChickenItem* create();
 
-	// 初始化斧头
+	// 初始化鸡物品
 	bool init();
 
 	// 使用工具
@@ -61,7 +65,7 @@ public:
 	// 静态创建方法
 	static PigItem* create();
 
-	// 初始化斧头
+	// 初始化猪物品
 	bool init();
 
 	// 使用工具
