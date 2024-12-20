@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现海滩地图类
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "BeachMap.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"

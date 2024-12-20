@@ -56,6 +56,7 @@ bool Crop::isMature() {
 		return growthStage == CARROT_MAX_GROWTH_STAGE;
 		break;
 	}
+	return false;
 }
 
 //  π”√≈©“©

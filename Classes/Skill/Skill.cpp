@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 技能类，作为PLayer拥有的属性
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Skill.h"
 
 bool Skill::init(const std::string& name, int maxLevel, std::function<void(int)> effect)

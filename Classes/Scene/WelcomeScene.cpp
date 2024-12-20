@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现开始场景类，继承自Scene，是游戏的第一个场景
+ * Author:        赵卓冰
+ ****************************************************************/
 #include "WelcomeScene.h"
 #include "SimpleAudioEngine.h"
 #include "CooperationScene.h"

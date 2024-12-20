@@ -1,6 +1,6 @@
 /****************************************************************
  * File Function: 实现对话框类，用于实现Player与Npc和noticeBoard的对话以及交互
- * Author:        韦瑾钰
+ * Author:        韦瑾钰 赵卓冰
  ****************************************************************/
 #include "DialogueBox.h"
 #include "../Date/DateManage.h"

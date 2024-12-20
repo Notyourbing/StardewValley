@@ -1,6 +1,6 @@
 /****************************************************************
  * File Function: 实现日期管理类，用于显示并管理游戏中日期的记载与更迭
- * Author:        韦瑾钰
+ * Author:        韦瑾钰 赵卓冰
  ****************************************************************/
 #include "DateManage.h"
 #include "../Constant/Constant.h"
@@ -182,7 +182,7 @@ void DateManage::updateDate() {
     Player* player = Player::getInstance();
     std::stringstream moneyStream;
     int money = player->getMoney();
-    moneyStream << "money is "<<money;
+    moneyStream << "Current Money: "<<money;
     moneyLabel->setString(moneyStream.str());
 
     checkFestivalEvent();

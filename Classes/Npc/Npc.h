@@ -32,7 +32,7 @@ private:
     // 对话框相关成员
     cocos2d::Sprite* dialogueBox;                // 对话框背景
     cocos2d::Label* dialogueLabel;               // 对话框中的文本标签
-    bool isDialogueVisible;             // 用于标记对话框是否显示
+    bool isDialogueVisible;                      // 用于标记对话框是否显示
 
 public:
 

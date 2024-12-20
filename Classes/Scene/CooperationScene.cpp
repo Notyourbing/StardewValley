@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 游戏合作场景类，用于搜寻合作玩家场景的展示
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "CooperationScene.h"
 #include "SimpleAudioEngine.h"
 #include "../Constant/Constant.h"
