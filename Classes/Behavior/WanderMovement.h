@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 漫游移动类，继承自移动控制基类，控制精灵漫游移动
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __WANDERMOVEMENT_H__
 #define __WANDERMOVEMENT_H__
 
@@ -5,10 +9,7 @@
 #include "MovementBehavior .h"
 #include "../Animal/Animal.h"
 
-/*
- * Class Name:     WanderMovement
- * Class Function: 漫游移动控制类
- */
+// 漫游移动控制类
 class WanderMovement : public MovementBehavior {
 public:
 	// 静态构造函数

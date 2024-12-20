@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: MilkingPail类的具体实现
+ * Author:        高鑫
+ ****************************************************************/
 #include "MilkingPail.h"
 #include "../Constant/Constant.h"
 
@@ -22,4 +26,5 @@ bool MilkPail::init() {
 
 // MilkPail类：使用工具
 void MilkPail::useItem() {
+
 }

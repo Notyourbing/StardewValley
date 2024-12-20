@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 农场动物抽象基类，是农场上的动物的抽象基类
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __ANIMAL_H__
 #define __ANIMAL_H__
 
@@ -5,10 +9,7 @@
 #include "../Behavior/MovementBehavior .h"
 #include<string>
 
-/*
- * Class Name:     Animal
- * Class Function: 农场动物基类类
- */
+// 农场动物抽象基类
 class Animal : public cocos2d::Sprite {
 public:
 	// 获取动物位置

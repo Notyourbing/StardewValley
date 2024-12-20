@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 瓦点类的实现，实现每个瓦点的具体功能
+ * Author:        高鑫
+ ****************************************************************/
 #include "TileNode.h"
 #include "../Crop/Crop.h"
 #include "../Crop/DogbaneCrop.h"
@@ -162,6 +166,8 @@ void Soil::cropGrow() {
 		dynamic_cast<Carrot*>(crop)->grow();
 		break;
 	}
+
+	// 更新土壤图块
 	updateGID();
 }
 
@@ -186,12 +192,15 @@ void Soil::harvest() {
 			break;
 		}
 
-		// 添加作物
+		// 添加作物物品
 		bag->addItem(harvestFood);
+
+		// 删除地图上的作物
 		delete crop;
 		crop = nullptr;
+
+		// 更新图块
 		updateGID();
-		bag = nullptr;
 	}
 }
 
@@ -213,6 +222,7 @@ void Soil::updateByTime() {
 		crop->soilInfluence(waterLevel, fertilizeLevel);
 	}
 
+	// 更新图块
 	updateGID();
 }
 

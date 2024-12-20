@@ -1,8 +1,13 @@
+/****************************************************************
+ * File Function: 防风草作物类的实现，实现防风草作物在不同条件下的生长
+ * Author:        高鑫
+ ****************************************************************/
 #include "cocos2d.h"
 #include "DogbaneCrop.h"
 #include "../Date/DateManage.h"
 #include "../Constant/Constant.h"
 
+// 静态创建函数
 Dogbane* Dogbane::create() {
 	Dogbane* dogbane = new (std::nothrow) Dogbane();
 	if (dogbane && dogbane->init()) {
@@ -12,6 +17,7 @@ Dogbane* Dogbane::create() {
 	return nullptr;
 }
 
+// 防风草的初始化
 bool Dogbane::init() {
 	// 初始化不同季节的生长阶段天数
 	seasonalGrowthStageDay["Spring"].push_back(DOGBANE_SPRING_STAGE_FIRST);

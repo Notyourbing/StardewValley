@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 市场经济类，用于模拟动态市场价格系统，影响作物和产品的销售价
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __MARKETSTATE_H__
 #define __MARKETSTATE_H__
 
@@ -6,10 +10,7 @@
 #include "../Date/DateManage.h"
 #include <vector>
 
-/*
- * Class Name:     MarketState
- * Class Function: 市场交易类
- */
+// 市场交易类
 class MarketState {
 public:
 	// 静态创建函数

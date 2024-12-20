@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 种子物品类
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __SEED_H__
 #define __SEED_H__
 
@@ -5,13 +9,14 @@
 #include "cocos2d.h"
 #include <string>
 
+// 种子枚举类
 enum class SeedType {
 	DogbaneSeed,
 	CornSeed,
 	CarrotSeed
 };
 
-// Seed类：继承自工具类，表示物品中的苹果种子
+// Seed类：继承自工具类
 class Seed : public Tool {
 private:
 	std::string seedName;

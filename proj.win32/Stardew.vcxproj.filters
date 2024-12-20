@@ -243,9 +243,6 @@
     <ClCompile Include="..\Classes\Crop\Crop.cpp">
       <Filter>Classes\Crop</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Crop\CropManager.cpp">
-      <Filter>Classes\Crop</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Crop\DogbaneCrop.cpp">
       <Filter>Classes\Crop</Filter>
     </ClCompile>
@@ -438,9 +435,6 @@
       <Filter>Classes\Crop</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Crop\Crop.h">
-      <Filter>Classes\Crop</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Crop\CropManager.h">
       <Filter>Classes\Crop</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Crop\DogbaneCrop.h">

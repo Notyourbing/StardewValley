@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: MarketState类的实现，建立市场并实现人物售卖商品
+ * Author:        高鑫
+ ****************************************************************/
 #include "MarketState.h"
 #include "../Constant/Constant.h"
 #include <string>

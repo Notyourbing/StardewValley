@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 瓦点类，为瓦点地图上不同的图块赋予不同的属性
+ * Author:        高鑫
+ ****************************************************************/
 #ifndef __TILE_NODE_H__
 #define __TILE_NODE_H__
 
@@ -6,10 +10,7 @@
 #include "../Constant/Constant.h"
 #include "string"
 
-/*
- * Class Name:     TileType
- * Class Function: 瓦点类型
- */
+// 瓦点类型
 enum class TileType {
 	Grass,
 	Soil,
@@ -19,10 +20,7 @@ enum class TileType {
 	Stone,
 };
 
-/*
- * Class Name:     TileNode
- * Class Function: 瓦点基类
- */
+// 瓦点抽象基类
 class TileNode {
 private:
 	// 瓦点位置
@@ -55,10 +53,7 @@ public:
 	virtual void updateGID();
 };
 
-/*
- * Class Name:	   Grass
- * Class Function: 地图中的草
- */
+// 瓦店草类，地图上的草
 class Grass : public TileNode {
 public:
 	// 静态创建函数
@@ -71,10 +66,7 @@ public:
 	bool init() override;
 };
 
-/*
- * Class Name:	   Soil
- * Class Function: 地图中的土壤
- */
+// 瓦点土壤类，地图上的土壤
 class Soil : public TileNode {
 private:
 	// 作物
@@ -139,7 +131,7 @@ public:
 	void updateGID() override;
 };
 
-
+// 瓦点水类，地图上的水
 class Water : public TileNode {
 public:
 	// 静态创建函数
@@ -152,6 +144,7 @@ public:
 	Water(const cocos2d::Vec2& position);
 };
 
+// 瓦点障碍类，地图上的障碍
 class Obstacle : public TileNode {
 public:
 	// 静态创建函数
@@ -164,6 +157,7 @@ public:
 	Obstacle(const cocos2d::Vec2& position);
 };
 
+// 瓦点石头类，地图上的石头
 class Stone : public TileNode {
 private:
 	// 坚固程度
@@ -185,7 +179,7 @@ public:
 	bool isBroken() const;
 };
 
-
+// 瓦点箱子类，地图上的箱子
 class Mold : public TileNode {
 public:
 	// 静态创建函数
