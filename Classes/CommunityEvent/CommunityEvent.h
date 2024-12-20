@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 社区事件类，抽象基类，给出社区事件
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __COMMUNITY_EVENT_H__
 #define __COMMUNITY_EVENT_H__
 
@@ -13,9 +17,6 @@ public:
 
     // 公有方法：启动事件
     virtual void startEvent() = 0;
-
-    // 公有方法：显示活动详情
-    void displayEventDetails() const;
 
     // 获取事件名称
     std::string getEventName() const;

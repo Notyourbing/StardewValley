@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 对话框类，用于实现Player与Npc和noticeBoard的对话以及交互
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __DIALOGUE_BOX_H__
 #define __DIALOGUE_BOX_H__
 
@@ -13,6 +17,7 @@ class DialogueBox : public cocos2d::Node {
 public:
     // 静态创建函数
     static DialogueBox* create(Npc* npc);
+
     //board
     static DialogueBox* create();
 

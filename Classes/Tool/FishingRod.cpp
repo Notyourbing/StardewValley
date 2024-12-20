@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现鱼竿类，继承自Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "FishingRod.h"
 #include "../Player/Player.h"
 #include "../Scene/FarmScene.h" 

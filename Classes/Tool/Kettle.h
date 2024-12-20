@@ -27,6 +27,7 @@ public:
 
 	// 补充当前水壶里的水量
 	void Kettle::refillWateringCan(int water);
+
 private:
 
 	// 水壶的含水量

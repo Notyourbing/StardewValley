@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现技能树在场景中展示类，用于实现技能树的显示与更新
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "SkillTreeUI.h"
 #include "SkillTree.h"
 #include "../Constant/Constant.h"
@@ -25,6 +29,7 @@ SkillTreeUI* SkillTreeUI::getInstance() {
     return instance;
 }
 
+// 初始化
 bool SkillTreeUI::init() {
     isOpen = false;
     if (!Layer::init()) {
@@ -34,6 +39,7 @@ bool SkillTreeUI::init() {
     return true;
 }
 
+// 更新
 void SkillTreeUI::updateUI()
 {
     SkillTree* skillTree = SkillTree::getInstance();
@@ -45,6 +51,7 @@ void SkillTreeUI::updateUI()
     setupUI();
 }
 
+// 展示具体UI
 void SkillTreeUI::setupUI() {
     // 获取屏幕尺寸
     auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -114,7 +121,7 @@ void SkillTreeUI::setupUI() {
 
 }
 
-
+// 关闭按钮的回调函数
 void SkillTreeUI::closeCallback(EventListenerMouse* listener) {
     _eventDispatcher->removeEventListener(listener);
     Player::getInstance()->stopAllActions();
@@ -124,6 +131,7 @@ void SkillTreeUI::closeCallback(EventListenerMouse* listener) {
     Player::getInstance()->setUseItemEnable(true);
 }
 
+// 打开UI界面
 void SkillTreeUI::openSkillUI() {
     Player::getInstance()->setUseItemEnable(false);
     // 创建关闭按钮
@@ -143,6 +151,7 @@ void SkillTreeUI::openSkillUI() {
     }
 }
 
+// 析构函数
 SkillTreeUI::~SkillTreeUI() {
     if (instance) {
         instance = nullptr;

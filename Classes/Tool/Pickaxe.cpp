@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现十字镐类，继承自Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Pickaxe.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
@@ -58,7 +62,6 @@ void Pickaxe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

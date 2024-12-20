@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 日期管理类，用于显示并管理游戏中日期的记载与更迭
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __DATAMANAGE_H__
 #define __DATAMANAGE_H__
 
@@ -51,7 +55,8 @@ public:
     //开始节日
     void checkFestivalEvent();
 
-    static DateManage* instance;  // 单例实例
+    // 单例实例
+    static DateManage* instance; 
 
     // 获取季节的索引
     int getSeasonIndex(const std::string& season);
@@ -64,6 +69,7 @@ public:
 
     // 更新每天的天气
     void updateCurrentWeather();
+
 private:
     // 私有构造函数，防止外部直接创建对象
     DateManage();

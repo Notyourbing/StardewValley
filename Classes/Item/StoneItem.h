@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 石头类，继承Item类，被稿子挖下的石头以Item子类的方式存储于背包中
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __STONEITEM_H__
 #define __STONEITEM_H__
 
@@ -27,6 +31,7 @@ public:
 		return Sprite::initWithFile(item_info.image);
 	}
 
+	// 重写使用工具
 	void useItem() override {};
 };
 
