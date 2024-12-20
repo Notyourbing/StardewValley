@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现节日类，继承CommunityEvent类并具体实现，作为游戏中节日庆典
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Festival.h"
 #include "../Map/FarmMap.h"
 #include "../Constant/Constant.h"
@@ -28,6 +32,7 @@ bool Festival::init(const std::string& name, const std::string& description, con
     return true;
 }
 
+// 开始活动
 void Festival::startEvent() {
     // 创建文本并设置内容
     std::string message = "The festival " + eventName + " has started!";
@@ -63,8 +68,7 @@ void Festival::startEvent() {
     }
 }
 
+// 判断当前是否为节日
 bool Festival::isHoliday() const {
     return holiday;
 }
-
-Festival::Festival() {}

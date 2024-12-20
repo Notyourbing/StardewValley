@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 篝火类，继承Item类，用于烹饪食物
+ * Author:        韦瑾钰
+ ****************************************************************/
 #ifndef __CampFire_H__
 #define __CampFire_H__
 
@@ -12,6 +16,7 @@ public:
     // 单例模式获取实例
     static CampFire* getInstance();
 
+    // 创建篝火
     CampFire* create(const ItemInfo& item_info);
 
     // 使用篝火：将食物烤熟（如果靠近篝火）

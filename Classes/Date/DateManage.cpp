@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现日期管理类，用于显示并管理游戏中日期的记载与更迭
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "DateManage.h"
 #include "../Constant/Constant.h"
 #include "../Player/Player.h"
@@ -7,6 +11,7 @@ DateManage* DateManage::instance = nullptr;  // 定义并初始化为 nullptr
 // 私有构造函数，防止外部直接创建对象
 DateManage::DateManage()  {}
 
+// 析构函数
 DateManage::~DateManage() {
     if (instance != nullptr) {
         instance = nullptr;
@@ -70,6 +75,7 @@ bool DateManage::init(const int startYear, const int startDay) {
     return true;
 }
 
+// 获取当前日期
 std::string DateManage::getCurrentDate() const {
     int dayInSeason = (currentDay - 1) % DAYSINSEASON + 1; // 当前季节的第几天
     int seasonIndex = (currentDay - 1) / DAYSINSEASON % 4; // 季节索引
@@ -80,23 +86,28 @@ std::string DateManage::getCurrentDate() const {
     return dateStream.str();
 }
 
+// 获取当前季节
 std::string DateManage::getCurrentSeason() const {
     int seasonIndex = ((currentDay - 1) / DAYSINSEASON) % 4;
     return SEASONNAME[seasonIndex];
 }
 
+// 获取当前日期在当前季节中是第几天
 int DateManage::getCurrentDayInSeason() const {
     return (currentDay - 1) % DAYSINSEASON + 1; // 当前季节的第几天
 }
 
+// 获取当前日期在星期中是第几天
 int DateManage::getCurrentDayInWeek() const {
     return (currentDay - 1) % DAYSINWEEK + 1; // 每周的哪一天
 }
 
+// 获取当前天数
 int DateManage::getDay() const{
     return currentDay;
 }
 
+// 当前日期增加一天
 void DateManage::advanceDay() {
     ++currentDay;
     if (currentDay > DAYSINYEAR) {
@@ -105,6 +116,7 @@ void DateManage::advanceDay() {
     }
 }
 
+// 判断当前是否为特殊节日
 bool DateManage::isFestivalDay() const {
     // 节日出现在每个季节的特定日期
     int dayInSeason = getCurrentDayInSeason();
@@ -117,6 +129,7 @@ bool DateManage::isFestivalDay() const {
     return false;
 }
 
+// 获取季节序号
 int DateManage::getSeasonIndex(const std::string& season) {
     auto it = SEASONINDEX.find(season);
         if (it != SEASONINDEX.end()) {
@@ -126,6 +139,8 @@ int DateManage::getSeasonIndex(const std::string& season) {
             return -1;
         }
 }
+
+// 获取当前年份
 int DateManage::getCurrentYear() const {
     return currentYear;
 }
@@ -143,6 +158,7 @@ void DateManage::checkFestivalEvent() {
     }
 }
 
+// 增加日期
 void DateManage::updateDate() {
     // 获取 DateManage 实例
     DateManage* dateManager = DateManage::getInstance();

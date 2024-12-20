@@ -1,6 +1,6 @@
 /****************************************************************
  * File Function: 实现物品类，是一个抽象基类，物品被装在背包中
- * Author:        赵卓冰
+ * Author:        赵卓冰 韦瑾钰
  ****************************************************************/
 #include "Bag.h"
 #include "../Player/Player.h"
@@ -17,6 +17,7 @@ USING_NS_CC;
 // 初始化静态成员变量
 Bag* Bag::instance = nullptr;
 
+// 获取背包实例
 Bag* Bag::getInstance() {
 	if (instance == nullptr) {
 		instance = new (std::nothrow) Bag();
@@ -32,12 +33,14 @@ Bag* Bag::getInstance() {
 
 Bag::Bag() {}
 
+// 背包析构函数
 Bag::~Bag() {
 	if (instance != nullptr) {
 		instance = nullptr;
 	}
 }
 
+// 初始化
 bool Bag::init() {
 	if (!Node::init()) {
 		return false;
@@ -93,6 +96,7 @@ bool Bag::init() {
 	return true;
 }
 
+// 向背包增加物品
 bool Bag::addItem(Item* item) {
 	// 遍历整个背包
 	for (int i = 0; i < row * capacity; ++i) {
@@ -156,6 +160,7 @@ Item* Bag::removeItem(const int index) {
 	return nullptr;
 }
 
+// 从背包获取物品的序号
 Item* Bag::getItem(const int index) const {
 	if (index >= 0 && index < row * capacity) {
 		return items[index];
@@ -163,6 +168,7 @@ Item* Bag::getItem(const int index) const {
 	return nullptr;
 }
 
+// 选中对应序号的物品
 void Bag::setSelectedItem(const int index) {
 	if (index >= 0 && index < row * capacity && items[index]) {
 		selectedIndex = index;
@@ -171,6 +177,7 @@ void Bag::setSelectedItem(const int index) {
 	updateDisplay();
 }
 
+// 获取选中物品的序号
 Item* Bag::getSelectedItem() const {
 	if (selectedIndex >= 0 && selectedIndex < row * capacity && items[selectedIndex]) {
 		return items[selectedIndex];
@@ -178,6 +185,7 @@ Item* Bag::getSelectedItem() const {
 	return nullptr;
 }
 
+// 更新背包的显示
 void Bag::updateDisplay() {
 	const float startX = WINSIZE.width / 2 - (capacity * iconSize + (capacity - 2) * spacing) / 2;
 	const float startY = 100.0f; // 背包显示在屏幕底部，距底部 100 像素
@@ -243,6 +251,7 @@ int Bag::getSize() {
 	return row * capacity;
 }
 
+// 获取背包大小
 const Size& Bag::getContentSize() const {
 	// 背包的图像大小就是背包背景的大小
 	auto bagBackground = getChildByName("bagBackground");

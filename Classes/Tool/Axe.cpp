@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现斧子类，继承自Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Axe.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
@@ -58,8 +62,6 @@ void Axe::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            //CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
         nullptr
     );

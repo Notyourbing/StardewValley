@@ -3,7 +3,6 @@
 #include "../Constant/Constant.h"
 
 USING_NS_CC;
-using namespace CocosDenshion;
 
 Scene* Cooperation::createScene() {
     return Cooperation::create();

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现篝火类，继承Item类，用于烹饪食物
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "CampFire.h"
 #include "cocos2d.h"
 #include "../Food/Food.h" 
@@ -17,6 +21,7 @@ bool CampFire::init(const ItemInfo& item_info) {
     return Sprite::initWithFile(item_info.image);
 }
 
+// 获取单例
 CampFire* CampFire::getInstance() {
     if (instance == nullptr) {
         instance = new (std::nothrow) CampFire();
@@ -31,6 +36,7 @@ CampFire* CampFire::getInstance() {
     return instance;
 }
 
+// 创建方法
 CampFire* CampFire::create(const ItemInfo& item_info) {
     CampFire* campFire = new (std::nothrow) CampFire();
 
@@ -44,7 +50,7 @@ CampFire* CampFire::create(const ItemInfo& item_info) {
     }
 }
 
-// 使用篝火（例如烤熟食物）
+// 使用篝火（烤熟食物）
 void CampFire::useItem() {
     // 如果靠近篝火，就进行食物烹饪
     auto skills = SkillTree::getInstance()->getAllSkills();

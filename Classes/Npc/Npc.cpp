@@ -1,3 +1,7 @@
+/****************************************************************
+* File Function : 实现Npc类，完成npc创建，随地图一起加载
+* Author : 韦瑾钰
+* ***************************************************************/
 #include "Npc.h"
 #include <iostream>
 
@@ -14,6 +18,7 @@ Npc* Npc::create(const NpcInfo& npc_info) {
     return nullptr;
 }
 
+// 初始化
 bool Npc::init(const NpcInfo& npc_info) {
     if (!Sprite::initWithFile(npc_info.image)) {
         return false;

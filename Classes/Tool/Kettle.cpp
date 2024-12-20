@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 实现水壶类，继承自Tool类
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "Kettle.h"
 #include "../Player/Player.h"
 #include "../Constant/Constant.h"
@@ -81,8 +85,6 @@ void Kettle::useItem() {
     auto sequence = Sequence::create(
         animate,
         CallFunc::create([=]() {
-            //CCLOG("Using axe at player position (%f, %f)", getPositionX(), getPositionY());
-            // todo: 可以添加逻辑，比如检测是否命中目标
             }),
             nullptr
             );

@@ -1,3 +1,7 @@
+/****************************************************************
+ * File Function: 控制类， 控制人物的移动，地图的移动，人物和npc的交互
+ * Author:        赵卓冰 韦瑾钰
+ ****************************************************************/
 #ifndef __CONTROL_H__
 #define __CONTROL_H__
 
@@ -7,8 +11,6 @@
 #include "../Map/SceneMap.h"
 #include <set>
 
-// 控制类， 控制人物的移动，地图的移动，人物和npc的交互
-// 控制类不是单例的原因：有多个地图，每一个地图对应一个控制类
 class Control : public cocos2d::Node {
 public:
 	// 静态创建Control方法
@@ -23,6 +25,7 @@ public:
 	// 构造函数和析构函数
 	Control();
 	~Control();
+
 private:
 	// 记录当前按下的键
 	std::set<cocos2d::EventKeyboard::KeyCode> keysPressed;
