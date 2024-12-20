@@ -1,6 +1,6 @@
 /****************************************************************
- * File Function: ´æ´¢ËùÓĞµÄ³£Á¿
- * Author:        ÕÔ×¿±ù Î¤èªîÚ
+ * File Function: å­˜å‚¨æ‰€æœ‰çš„å¸¸é‡
+ * Author:        èµµå“å†° éŸ¦ç‘¾é’° é«˜é‘«
  ****************************************************************/
 #ifndef __CONSTANT_H
 #define __CONSTANT_H
@@ -9,9 +9,9 @@
 #include <array>
 #include <unordered_map>
 
-// ×ÊÔ´Â·¾¶
+// èµ„æºè·¯å¾„
 namespace ResPath {
-	// ±³¾°¿ò¡¢°´Å¥¡¢×ÖÌå
+	// èƒŒæ™¯æ¡†ã€æŒ‰é’®ã€å­—ä½“
 	constexpr char BACKGROUND_IMAGE[] = "icon/background.png";
 	constexpr char NEW_GAME_ITEM[] = "icon/newGameButton.png";
 	constexpr char NEW_GAME_ON_ITEM[] = "icon/newGameButtonOn.png";
@@ -40,7 +40,7 @@ namespace ResPath {
 	constexpr char SKILL_CLOSE[] = "icon/closeButton.png";
 	constexpr char SKILL_CLOSE_ON[] = "icon/closeButtonOn.png";
 
-	// Axe ¶¯»­Ö¡
+	// Axe åŠ¨ç”»å¸§
 	constexpr char AXE_RIGHT_1[] = "tools/axe/rightUseAxe1.png";
 	constexpr char AXE_RIGHT_2[] = "tools/axe/rightUseAxe2.png";
 	constexpr char AXE_RIGHT_3[] = "tools/axe/rightUseAxe3.png";
@@ -54,7 +54,7 @@ namespace ResPath {
 	constexpr char AXE_DOWN_2[] = "tools/axe/downUseAxe2.png";
 	constexpr char AXE_DOWN_3[] = "tools/downUseAxe3.png";
 
-	// Hoe ¶¯»­Ö¡Â·¾¶
+	// Hoe åŠ¨ç”»å¸§è·¯å¾„
 	constexpr char HOE_RIGHT_1[] = "tools/hoe/rightUseHoe1.png";
 	constexpr char HOE_RIGHT_2[] = "tools/hoe/rightUseHoe2.png";
 	constexpr char HOE_RIGHT_3[] = "tools/hoe/rightUseHoe3.png";
@@ -67,7 +67,7 @@ namespace ResPath {
 	constexpr char HOE_DOWN_1[] = "tools/hoe/downUseHoe1.png";
 	constexpr char HOE_DOWN_2[] = "tools/hoe/downUseHoe2.png";
 
-	// Pickaxe ¶¯»­Ö¡Â·¾¶
+	// Pickaxe åŠ¨ç”»å¸§è·¯å¾„
 	constexpr char PICKAXE_RIGHT_1[] = "tools/pickaxe/rightUsePickaxe1.png";
 	constexpr char PICKAXE_RIGHT_2[] = "tools/pickaxe/rightUsePickaxe2.png";
 	constexpr char PICKAXE_RIGHT_3[] = "tools/pickaxe/rightUsePickaxe3.png";
@@ -80,7 +80,7 @@ namespace ResPath {
 	constexpr char PICKAXE_DOWN_2[] = "tools/pickaxe/downUsePickaxe2.png";
 	constexpr char PICKAXE_DOWN_3[] = "tools/pickaxe/downUsePickaxe3.png";
 
-	// Scythe ¶¯»­Ö¡Â·¾¶
+	// Scythe åŠ¨ç”»å¸§è·¯å¾„
 	constexpr char SCYTHE_RIGHT_1[] = "tools/scythe/rightUseScythe1.png";
 	constexpr char SCYTHE_RIGHT_2[] = "tools/scythe/rightUseScythe2.png";
 	constexpr char SCYTHE_RIGHT_3[] = "tools/scythe/rightUseScythe3.png";
@@ -156,13 +156,13 @@ namespace ResPath {
 	constexpr char KETTLE_DOWN_2[] = "tools/kettle/downUseKettle2.png";
 	constexpr char KETTLE_DOWN_3[] = "tools/kettle/downUseKettle3.png";
 
-	// Íæ¼ÒÕ¾Á¢Ö¡
+	// ç©å®¶ç«™ç«‹å¸§
 	constexpr char STAND_RIGHT[] = "playerWalkImages/standRight.png";
 	constexpr char STAND_LEFT[] = "playerWalkImages/standLeft.png";
 	constexpr char STAND_UP[] = "playerWalkImages/standUp.png";
 	constexpr char STAND_DOWN[] = "playerWalkImages/standDown.png";
 }
-//¹¤¾ßÍ¼Æ¬
+//å·¥å…·å›¾ç‰‡
 constexpr char AXE[] = "tools/axe.png";
 constexpr char FISHING_ROD[] = "tools/fishingRod.png";
 constexpr char HOE[] = "tools/hoe.png";
@@ -172,9 +172,9 @@ constexpr char KETTLE[] = "tools/kettle.png";
 constexpr char MILKPAIL[] = "tools/milkPail.png";
 constexpr char AGROCHEMICAL[] = "tools/agrochemical.png";
 
-// ¹¤¾ß¶¯»­Ö¡µÄ²Ã¼ôÇøÓò
+// å·¥å…·åŠ¨ç”»å¸§çš„è£å‰ªåŒºåŸŸ
 namespace ToolRects {
-	// Axe ¶¯»­Ö¡ Rect
+	// Axe åŠ¨ç”»å¸§ Rect
 	const cocos2d::Rect AXE_RIGHT_1(0, 0, 100, 183);
 	const cocos2d::Rect AXE_RIGHT_2(0, 0, 201, 183);
 	const cocos2d::Rect AXE_RIGHT_3(0, 0, 165, 164);
@@ -188,7 +188,7 @@ namespace ToolRects {
 	const cocos2d::Rect AXE_DOWN_2(0, 0, 75, 127);
 	const cocos2d::Rect AXE_DOWN_3(0, 0, 77, 109);
 
-	// Hoe ¶¯»­Ö¡ Rect
+	// Hoe åŠ¨ç”»å¸§ Rect
 	const cocos2d::Rect HOE_RIGHT_1(0, 0, 128, 180);
 	const cocos2d::Rect HOE_RIGHT_2(0, 0, 169, 184);
 	const cocos2d::Rect HOE_RIGHT_3(0, 0, 206, 271);
@@ -201,7 +201,7 @@ namespace ToolRects {
 	const cocos2d::Rect HOE_DOWN_1(0, 0, 70, 196);
 	const cocos2d::Rect HOE_DOWN_2(0, 0, 70, 195);
 
-	// Pickaxe ¶¯»­Ö¡ Rect
+	// Pickaxe åŠ¨ç”»å¸§ Rect
 	const cocos2d::Rect PICKAXE_RIGHT_1(0, 0, 131, 198);
 	const cocos2d::Rect PICKAXE_RIGHT_2(0, 0, 95, 193);
 	const cocos2d::Rect PICKAXE_RIGHT_3(0, 0, 267, 183);
@@ -214,7 +214,7 @@ namespace ToolRects {
 	const cocos2d::Rect PICKAXE_DOWN_2(0, 0, 81, 203);
 	const cocos2d::Rect PICKAXE_DOWN_3(0, 0, 63, 132);
 
-	// Scythe¶¯»­Ö¡
+	// ScytheåŠ¨ç”»å¸§
 	const cocos2d::Rect SCYTHE_RIGHT_1(0, 0, 105, 182);
 	const cocos2d::Rect SCYTHE_RIGHT_2(0, 0, 208, 155);
 	const cocos2d::Rect SCYTHE_RIGHT_3(0, 0, 159, 210);
@@ -290,40 +290,40 @@ namespace ToolRects {
 	const cocos2d::Rect KETTLE_DOWN_2(0, 0, 91, 160);
 	const cocos2d::Rect KETTLE_DOWN_3(0, 0, 163, 235);
 
-	// Íæ¼ÒÕ¾Á¢Ö¡ Rect
+	// ç©å®¶ç«™ç«‹å¸§ Rect
 	const cocos2d::Rect STAND_RIGHT(0, 0, 70, 120);
 	const cocos2d::Rect STAND_LEFT(0, 0, 70, 120);
 	const cocos2d::Rect STAND_UP(0, 0, 70, 120);
 	const cocos2d::Rect STAND_DOWN(0, 0, 70, 120);
 }
 
-// È«¾Ö´°¿Ú´óĞ¡
+// å…¨å±€çª—å£å¤§å°
 const cocos2d::Size WINSIZE(1280.0f, 720.0f);
 
-// È«¾ÖÒÆ¶¯ËÙ¶È
-constexpr float MAP_MOVE_SPEED = 300.0f;			// µØÍ¼ÒÆ¶¯ËÙ¶È
-constexpr float PLAYER_MOVE_SPEED = 300.0f;			// Íæ¼ÒÒÆ¶¯ËÙ¶È
+// å…¨å±€ç§»åŠ¨é€Ÿåº¦
+constexpr float MAP_MOVE_SPEED = 300.0f;			// åœ°å›¾ç§»åŠ¨é€Ÿåº¦
+constexpr float PLAYER_MOVE_SPEED = 300.0f;			// ç©å®¶ç§»åŠ¨é€Ÿåº¦
 
 // WecomScene
-constexpr float MENU_ITEM_INTERVAL = 24.0f;			// ²Ëµ¥ÏîÖ®¼äµÄ¼ä¾à
-constexpr float WELCOME_LABEL_SIZE = 24.0f;			// Weclome±êÇ©×ÖÌå´óĞ¡
-const cocos2d::Color3B PURPUL(15, 13, 38);			// ×ÏÉ«
+constexpr float MENU_ITEM_INTERVAL = 24.0f;			// èœå•é¡¹ä¹‹é—´çš„é—´è·
+constexpr float WELCOME_LABEL_SIZE = 24.0f;			// Weclomeæ ‡ç­¾å­—ä½“å¤§å°
+const cocos2d::Color3B PURPUL(15, 13, 38);			// ç´«è‰²
 
 // NewGameScene
-constexpr char DEFAULT_PLAYER_NAME[] = "Kuanye";	// Ä¬ÈÏÍæ¼ÒÃû×Ö
-constexpr float OK_BUTTON_POSITION_X_RATIO = 0.7f;	// OK°´Å¥XÖáÎ»ÖÃ±ÈÀı
-constexpr float OK_BUTTON_POSITION_Y_RATIO = 0.3f;	// OK°´Å¥YÖáÎ»ÖÃ±ÈÀı
-constexpr float BACK_BUTTON_PADDING_RIGHT = 40.0f;	// ·µ»Ø°´Å¥ÓÒ±ß¾à
-constexpr float BACK_BUTTON_PADDING_BOTTOM = 20.0f; // ·µ»Ø°´Å¥ÏÂ±ß¾à
+constexpr char DEFAULT_PLAYER_NAME[] = "Kuanye";	// é»˜è®¤ç©å®¶åå­—
+constexpr float OK_BUTTON_POSITION_X_RATIO = 0.7f;	// OKæŒ‰é’®Xè½´ä½ç½®æ¯”ä¾‹
+constexpr float OK_BUTTON_POSITION_Y_RATIO = 0.3f;	// OKæŒ‰é’®Yè½´ä½ç½®æ¯”ä¾‹
+constexpr float BACK_BUTTON_PADDING_RIGHT = 40.0f;	// è¿”å›æŒ‰é’®å³è¾¹è·
+constexpr float BACK_BUTTON_PADDING_BOTTOM = 20.0f; // è¿”å›æŒ‰é’®ä¸‹è¾¹è·
 
 // CooperationScene
-constexpr float ARROW_BUTTON_PADDING = 40.0f;		// ·­Ò³°´Å¥µÄÓÒ±ß¾à
-constexpr float UP_BUTTON_OFFSET_Y = 50.0f;			// ÏòÉÏ¼ıÍ·°´Å¥YÖáÆ«ÒÆ
-constexpr float DOWN_BUTTON_OFFSET_Y = -50.0f;		// ÏòÏÂ¼ıÍ·°´Å¥YÖáÆ«ÒÆ
-constexpr float MOVE_BY_DISTANCE = 50.0f;			// ·­Ò³°´Å¥ÒÆ¶¯µÄÏñËØ¾àÀë
+constexpr float ARROW_BUTTON_PADDING = 40.0f;		// ç¿»é¡µæŒ‰é’®çš„å³è¾¹è·
+constexpr float UP_BUTTON_OFFSET_Y = 50.0f;			// å‘ä¸Šç®­å¤´æŒ‰é’®Yè½´åç§»
+constexpr float DOWN_BUTTON_OFFSET_Y = -50.0f;		// å‘ä¸‹ç®­å¤´æŒ‰é’®Yè½´åç§»
+constexpr float MOVE_BY_DISTANCE = 50.0f;			// ç¿»é¡µæŒ‰é’®ç§»åŠ¨çš„åƒç´ è·ç¦»
 constexpr char COOP_TEXT_CONTENT[] = "Connecting to online services...";
 
-//¶Ô»°¿ò
+//å¯¹è¯æ¡†
 constexpr char DIALOGUE_BACKGROUND[] = "npcImages/dialogueBox.png";
 constexpr std::array<const char*, 4> options = {
 	"Relationship between us",
@@ -366,7 +366,7 @@ const NpcInfo CLEANER_INFO = {
 	"Find the notice board, and come back to me when you have finished what it says.\n"
 };
 
-constexpr float INTERACTION_RANGE = 100.0f;			// ¿Éµ÷ÕûµÄãĞÖµ£¬±íÊ¾Íæ¼ÒÓë NPC Ö®¼äµÄ×î´ó½»»¥¾àÀë
+constexpr float INTERACTION_RANGE = 100.0f;			// å¯è°ƒæ•´çš„é˜ˆå€¼ï¼Œè¡¨ç¤ºç©å®¶ä¸ NPC ä¹‹é—´çš„æœ€å¤§äº¤äº’è·ç¦»
 constexpr int WIZARD_X = 300;
 constexpr int WIZARD_Y = 300;
 constexpr int CLEANER_X = 500;
@@ -383,7 +383,7 @@ constexpr int BOARD_X = 1600;
 constexpr int BOARD_Y = 800;
 
 // Bag
-	// Ìí¼Ó³õÊ¼»¯µÄÎïÆ·
+	// æ·»åŠ åˆå§‹åŒ–çš„ç‰©å“
 const std::vector<std::string> INIT_ITEMS ={	
 	"hoe",
 	"axe",
@@ -440,11 +440,11 @@ constexpr char FERTILIZER[] = "tools/fertilizer.png";
 
 // DateManage
 const std::unordered_map<std::string, int>
-SEASONINDEX = { {"Spring", 0}, {"Summer", 1}, {"Fall", 2}, {"Winter", 3} }; // ¼¾½ÚµÄË÷Òı
-const std::string SEASONNAME[] = { "Spring", "Summer", "Fall", "Winter" };  // ¼¾½ÚµÄÃû×Ö
-constexpr int DAYSINSEASON = 28;											// Ã¿¸ö¼¾½ÚµÄÌìÊı
-constexpr int DAYSINYEAR = 112;												// Ã¿ÄêµÄÌìÊı£¨Ò»Äê4¼¾£¬Ã¿¼¾28Ìì£©
-constexpr int DAYSINWEEK = 7;												// Ã¿ÖÜµÄÌìÊı
+SEASONINDEX = { {"Spring", 0}, {"Summer", 1}, {"Fall", 2}, {"Winter", 3} }; // å­£èŠ‚çš„ç´¢å¼•
+const std::string SEASONNAME[] = { "Spring", "Summer", "Fall", "Winter" };  // å­£èŠ‚çš„åå­—
+constexpr int DAYSINSEASON = 28;											// æ¯ä¸ªå­£èŠ‚çš„å¤©æ•°
+constexpr int DAYSINYEAR = 112;												// æ¯å¹´çš„å¤©æ•°ï¼ˆä¸€å¹´4å­£ï¼Œæ¯å­£28å¤©ï¼‰
+constexpr int DAYSINWEEK = 7;												// æ¯å‘¨çš„å¤©æ•°
 constexpr char SPRING_CONVERSATION[] = "Celebrate the arrival of Spring with games, food, and fun!\n";
 constexpr char SUMMER_CONVERSATION[] = "The hot days of Summer are here! Time for the beach!\n";
 constexpr char FALL_CONVERSATION[] = "Let's picking up the falling leaves!\n";
@@ -572,13 +572,13 @@ constexpr float LIGHTRAIN_SPEED_INFLUENCE = -30;
 constexpr float HEAVYRAIN_SPEED_INFLUENCE = -50;
 
 // Tool
-constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// Ë®ºø×î´óÈİÁ¿
-constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// Ã¿´ÎÓÃË®Á¿
+constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// æ°´å£¶æœ€å¤§å®¹é‡
+constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// æ¯æ¬¡ç”¨æ°´é‡
 
 //Item
 struct ItemInfo {
-	const char* name;             // Ãû³Æ
-	const char* image;            // Í¼Æ¬Â·¾¶
+	const char* name;             // åç§°
+	const char* image;            // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo STONE_ITEM = {
@@ -622,68 +622,68 @@ constexpr ItemInfo CARROT_ITEM = {
 };
 
 // fish
-// Ê¾ÀıÓãÀàÊı¾İ
+// ç¤ºä¾‹é±¼ç±»æ•°æ®
 constexpr ItemInfo PUFFER_FISH = {
-	"pufferFish",               // ÓãµÄÃû³Æ
-	"tools/pufferFish.png"      // Í¼Æ¬Â·¾¶
+	"pufferFish",               // é±¼çš„åç§°
+	"tools/pufferFish.png"      // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo TUNA = {
-	"tuna",                      // ÓãµÄÃû³Æ
-	"tools/tuna.png",            // Í¼Æ¬Â·¾¶
+	"tuna",                      // é±¼çš„åç§°
+	"tools/tuna.png",            // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo ANCHOVY = {
-	"anchovy",                   // ÓãµÄÃû³Æ
-	"tools/anchovy.png",         // Í¼Æ¬Â·¾¶
+	"anchovy",                   // é±¼çš„åç§°
+	"tools/anchovy.png",         // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo CAMPFIRE = {
-	"campFire",                   // Ãû³Æ
-	"tools/campFire.png",         // Í¼Æ¬Â·¾¶
+	"campFire",                   // åç§°
+	"tools/campFire.png",         // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo BOARD = {
-	"noticeBoard",                   // Ãû³Æ
-	"tools/noticeBoard.png",         // Í¼Æ¬Â·¾¶
+	"noticeBoard",                   // åç§°
+	"tools/noticeBoard.png",         // å›¾ç‰‡è·¯å¾„
 };
 
 constexpr ItemInfo BUILDING = {
-	"building",                   // Ãû³Æ
-	"tools/building.png",         // Í¼Æ¬Â·¾¶
+	"building",                   // åç§°
+	"tools/building.png",         // å›¾ç‰‡è·¯å¾„
 };
 
 // MarketGood
 struct MarketGoodLabel{
-	const char* name;             // Ãû³Æ
-	const int basePrice;		  // ÉÌÆ·µÄ»ù´¡¼Û¸ñ
+	const char* name;             // åç§°
+	const int basePrice;		  // å•†å“çš„åŸºç¡€ä»·æ ¼
 };
 
-// ·À·ç²İÉÌÆ·
+// é˜²é£è‰å•†å“
 const MarketGoodLabel DOGBANE = {
 	"dogbaneFood",
 	20,
 };
 
-// ÓñÃ×ÉÌÆ·
+// ç‰ç±³å•†å“
 const MarketGoodLabel CORN = {
 	"cornFood",
 	25,
 };
 
-// ºúÂÜ²·ÉÌÆ·
+// èƒ¡èåœå•†å“
 const MarketGoodLabel CARROT = {
 	"carrotFood",
 	30,
 };
 
-// Ê¯Í·ÉÌÆ·
+// çŸ³å¤´å•†å“
 const MarketGoodLabel STONE = {
 	"stoneItem",
 	5,
 };
 
-// ÊĞ³¡µÄ³õÊ¼»¯
+// å¸‚åœºçš„åˆå§‹åŒ–
 const std::vector<MarketGoodLabel> INIT_GOODS = {
 	DOGBANE,
 	CARROT,
@@ -691,7 +691,7 @@ const std::vector<MarketGoodLabel> INIT_GOODS = {
 	STONE,
 };
 
-// ÈËÎï³õÊ¼½ğ±Ò
+// äººç‰©åˆå§‹é‡‘å¸
 constexpr int PLAYER_INITIAL_MONEY = 500;
 constexpr int SUNNY_MONEY_INFLUENCE = 0;
 constexpr int LIGHTRAIN_MONEY_INFLUENCE = 10;
