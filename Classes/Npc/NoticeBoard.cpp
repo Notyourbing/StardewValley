@@ -1,10 +1,14 @@
+/****************************************************************
+ * File Function: 实现告示牌类，继承Sprite类，用于显示和完成特定npc的特殊任务
+ * Author:        韦瑾钰
+ ****************************************************************/
 #include "NoticeBoard.h"
 
 USING_NS_CC;
 
-//bool NoticeBoard::isAdded = false;
 bool NoticeBoard::isTaskCompleted = false;
 
+// 创建方法
 NoticeBoard* NoticeBoard::create() {
     NoticeBoard* noticeBoard = new (std::nothrow) NoticeBoard;
     if (noticeBoard && noticeBoard->init(BOARD)) {
