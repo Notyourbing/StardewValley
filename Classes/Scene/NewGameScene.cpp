@@ -8,7 +8,9 @@
 #include "FarmScene.h"
 #include "../Constant/Constant.h"
 #include "../MyButton/MyButton.h"
+#include "SimpleAudioEngine.h"
 
+using namespace CocosDenshion;
 USING_NS_CC;
 
 Scene* NewGame::createScene() {
@@ -90,6 +92,10 @@ bool NewGame::init() {
 
 // OK按钮的回调函数
 void NewGame::onOKButtonClicked(Ref* pSender) {
+	// 播放音效
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
 	// 获取输入的名字
 	std::string playerName = nameInput->getString();
 	
@@ -114,5 +120,9 @@ void NewGame::onOKButtonClicked(Ref* pSender) {
 
 // 返回项的回调函数
 void NewGame::backCallBack(Ref* pSender) {
+	// 播放音效
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
 	Director::getInstance()->popScene();
 }
