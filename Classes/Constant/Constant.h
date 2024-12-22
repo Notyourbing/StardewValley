@@ -613,15 +613,15 @@ constexpr ItemInfo PIG_ITEM = {
 
 // FoodItem
 constexpr ItemInfo DOGBANE_ITEM = {
-	"dogbaneFood",
+	"dogbane",
 	"food/parsnip.png"
 };
 constexpr ItemInfo CORN_ITEM = {
-	"cornFood",
+	"corn",
 	"food/corn.png"
 };
 constexpr ItemInfo CARROT_ITEM = {
-	"carrotFood",
+	"carrot",
 	"food/carrot.png"
 };
 
