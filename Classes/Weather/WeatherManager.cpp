@@ -46,8 +46,7 @@ void WeatherManager::updateWeather(Weather weather) {
         currentWeatherSystem->setPosition(WINSIZE.width - SUN_OFFSET, WINSIZE.height - SUN_OFFSET); // 右上角
         currentWeatherSystem->setStartColor(Color4F(1.0f, 0.9f, 0.5f, 1.0f));	// 太阳的颜色
         currentWeatherSystem->setEndColor(Color4F(1.0f, 0.8f, 0.3f, 0.8f));		// 太阳渐变的颜色
-        currentWeatherSystem->setSpeed(0);										// 无风
-        currentWeatherSystem->setLife(0);										// 不需要生死周期，只是装饰效果
+        currentWeatherSystem->setSpeed(SUNNY_SET_SPEED);						// 无风
 
         // 删除背景遮罩
         if (backgroundMask) {
@@ -62,15 +61,15 @@ void WeatherManager::updateWeather(Weather weather) {
         currentWeatherSystem->setPosition(WINSIZE.width / 2, WINSIZE.height);	// 屏幕中心
         currentWeatherSystem->setStartColor(Color4F(0.4f, 0.4f, 1.0f, 1.0f));	// 浅蓝色雨滴
         currentWeatherSystem->setEndColor(Color4F(0.2f, 0.2f, 0.8f, 0.8f));		// 雨滴渐变
-        currentWeatherSystem->setSpeed(500);									// 雨滴速度
-        currentWeatherSystem->setSpeedVar(50);									// 增加一些速度的随机性
-        currentWeatherSystem->setStartSize(10.0f);								// 增加雨滴的大小
-        currentWeatherSystem->setEndSize(5.0f);									// 渐小
+        currentWeatherSystem->setSpeed(LIGHTRAIN_SPEED);						// 雨滴速度
+        currentWeatherSystem->setSpeedVar(LIGHTRAIN_SPEED_VAR);					// 增加一些速度的随机性
+        currentWeatherSystem->setStartSize(LIGHTRAIN_SIZE);						// 增加雨滴的大小
+        currentWeatherSystem->setEndSize(LIGHTRAIN_SIZE_END);									// 渐小
 
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 32));			// 半透明黑色
-            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
+            addChild(backgroundMask);									        // 添加到场景，层级低于粒子效果
         }
         break;
 
@@ -82,14 +81,14 @@ void WeatherManager::updateWeather(Weather weather) {
         currentWeatherSystem->setStartColor(Color4F(0.4f, 0.4f, 1.0f, 1.0f));	// 蓝色雨滴
         currentWeatherSystem->setEndColor(Color4F(0.2f, 0.2f, 0.8f, 0.8f));		// 渐变
         currentWeatherSystem->setTotalParticles(600);							// 增加粒子的数量，更多的雨滴
-        currentWeatherSystem->setSpeed(800);									// 增加速度
-        currentWeatherSystem->setSpeedVar(100);									// 增加速度的随机性
-        currentWeatherSystem->setStartSize(15.0f);								// 更大的雨滴
-        currentWeatherSystem->setEndSize(10.0f);								// 渐小
+        currentWeatherSystem->setSpeed(HEAVYRAIN_SPEED);						// 增加速度
+        currentWeatherSystem->setSpeedVar(HEAVYRAIN_SPEED_VAR);					// 增加速度的随机性
+        currentWeatherSystem->setStartSize(HEAVYRAIN_SIZE);						// 更大的雨滴
+        currentWeatherSystem->setEndSize(HEAVYRAIN_SIZE_END);					// 渐小
         // 添加背景遮罩
         if (!backgroundMask) {
             backgroundMask = LayerColor::create(Color4B(0, 0, 0, 64));			// 更深的半透明黑色
-            addChild(backgroundMask, 99);									// 添加到场景，层级低于粒子效果
+            addChild(backgroundMask);									        // 添加到场景，层级低于粒子效果
         }
         break;
 
@@ -99,16 +98,16 @@ void WeatherManager::updateWeather(Weather weather) {
         currentWeatherSystem->setPosition(WINSIZE.width / 2, WINSIZE.height);	// 屏幕中心
         currentWeatherSystem->setStartColor(Color4F(1.0f, 1.0f, 1.0f, 1.0f));	// 白色雪花
         currentWeatherSystem->setEndColor(Color4F(0.8f, 0.8f, 0.8f, 0.8f));		// 渐变为透明
-        currentWeatherSystem->setSpeed(100);									// 轻柔的雪花速度
-        currentWeatherSystem->setSpeedVar(20);									// 稍微有点随机性
-        currentWeatherSystem->setStartSize(10.0f);								// 中等大小雪花
-        currentWeatherSystem->setEndSize(5.0f);									// 渐小
+        currentWeatherSystem->setSpeed(SNOWY_SPEED);							// 轻柔的雪花速度
+        currentWeatherSystem->setSpeedVar(SNOWY_SPEED_VAR);						// 稍微有点随机性
+        currentWeatherSystem->setStartSize(SNOWY_SIZE);							// 中等大小雪花
+        currentWeatherSystem->setEndSize(SNOWY_SIZE_END);						// 渐小
         break;
     }
 
     // 添加粒子系统到场景
     if (currentWeatherSystem) {
-        addChild(currentWeatherSystem, 100);
+        addChild(currentWeatherSystem);
     }
 }
 
@@ -119,6 +118,7 @@ void WeatherManager::removeWeatherEffect() {
         removeChild(currentWeatherSystem);
         currentWeatherSystem = nullptr;
     }
+
     // 移除当前背景遮罩
     if (backgroundMask) {
         removeChild(backgroundMask);
