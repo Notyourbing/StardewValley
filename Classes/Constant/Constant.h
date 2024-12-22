@@ -1,7 +1,3 @@
-/****************************************************************
- * File Function: 存储所有的常量
- * Author:        赵卓冰 韦瑾钰 高鑫
- ****************************************************************/
 #ifndef __CONSTANT_H
 #define __CONSTANT_H
 #include "cocos2d.h"
@@ -161,6 +157,11 @@ namespace ResPath {
 	constexpr char STAND_LEFT[] = "playerWalkImages/standLeft.png";
 	constexpr char STAND_UP[] = "playerWalkImages/standUp.png";
 	constexpr char STAND_DOWN[] = "playerWalkImages/standDown.png";
+
+	// 音乐
+	constexpr char SPRING_MUSIC[] = "sound/spring.mp3";
+	constexpr char WELCOME_MUSIC[] = "sound/welcome.mp3";
+	constexpr char BUTTON_MUSIC[] = "sound/button.mp3";
 }
 //工具图片
 constexpr char AXE[] = "tools/axe.png";

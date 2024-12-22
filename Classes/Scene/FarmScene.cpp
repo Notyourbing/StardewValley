@@ -16,7 +16,9 @@
 #include "../Save/SaveManage.h"
 #include "../Npc/NoticeBoard.h"
 #include "../Item/ItemFactory.h"
+#include "SimpleAudioEngine.h"
 
+using namespace CocosDenshion;
 USING_NS_CC;
 
 // 地图上的npc;
@@ -56,6 +58,10 @@ bool Farm::init() {
 		addChild(player, 3);
 	}
 	player->setPosition(WINSIZE.width / 2, WINSIZE.height / 2);
+
+	if (player->getPlayerName().length() == 0) {
+		player->setPlayerName("kuanye");
+	}
 
 	// 玩家名字标签
 	auto nameLabel = Label::createWithTTF(player->getPlayerName() + "'s farm", ResPath::FONT_TTF, 24);
@@ -109,11 +115,19 @@ bool Farm::init() {
 		this->changeSceneAuto();
 		}, "change_scene");
 
+	// 循环播放音乐
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playBackgroundMusic(ResPath::SPRING_MUSIC, true);
+
 	return true;
 }
 
 // 关闭按钮的回调函数
 void Farm::closeButtonClicked(Ref* pSender) {
+	// 循环播放音乐
+	auto audio = SimpleAudioEngine::getInstance();
+	audio->playBackgroundMusic(ResPath::WELCOME_MUSIC, true);
+
 	SaveManage::getInstance()->saveGameData();
 	Director::getInstance()->popScene();
 }

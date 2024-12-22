@@ -10,7 +10,9 @@
 #include "../Constant/Constant.h"
 #include "../Save/SaveManage.h"
 #include "../MyButton/MyButton.h"
+#include "SimpleAudioEngine.h"
 
+using namespace CocosDenshion;
 USING_NS_CC;
 
 Scene* Welcome::createScene() {
@@ -85,11 +87,19 @@ bool Welcome::init() {
         this->addChild(sprite, 0);
     }
 
+    // 循环播放音乐
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->playBackgroundMusic(ResPath::WELCOME_MUSIC, true);
+
     return true;
 }
 
 // 新游戏项回调函数
 void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
+    // 播放音效
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
     auto newGameScene = NewGame::createScene();
     auto transition = TransitionFade::create(0.5f, newGameScene, PURPUL); // 0.5秒，淡入紫色背景
     Director::getInstance()->pushScene(transition);
@@ -97,6 +107,10 @@ void Welcome::menuNewGameCallback(cocos2d::Ref* pSender) {
 
 // 加载游戏项回调函数
 void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
+    // 播放音效
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
     // 加载存档数据
     SaveManage::getInstance()->loadGameData();
 
@@ -108,6 +122,10 @@ void Welcome::menuLoadGameCallback(cocos2d::Ref* pSender) {
 
 // 合作项回调函数
 void Welcome::menuCooperationCallback(Ref* pSender) {
+    // 播放音效
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
     auto cooperationScene = Cooperation::createScene();
     auto transition = TransitionFade::create(0.5f, cooperationScene, PURPUL); // 0.5秒，淡入紫色背景
     Director::getInstance()->pushScene(transition);
@@ -115,6 +133,10 @@ void Welcome::menuCooperationCallback(Ref* pSender) {
 
 // 关闭引用项回调函数
 void Welcome::menuExitCallback(Ref* pSender) {
+    // 播放音效
+    auto audio = SimpleAudioEngine::getInstance();
+    audio->playEffect(ResPath::BUTTON_MUSIC, false, 1.0f, 1.0f, 1.0f);
+
     // 关闭应用程序
     Director::getInstance()->end();
 }
