@@ -474,6 +474,8 @@ constexpr int STONE_GID = 89;
 constexpr int OBSTACLES_GID = 100;
 constexpr int MOLD_GID = 200;
 constexpr int MAX_WATER_RESOURCE = 1000;
+constexpr int MAX_SEED_RESOURCE = 1000;
+constexpr int MAX_FERTILIZE_RESOURCE = 1000;
 constexpr int RANIY_REPLENISH = 200;
 
 // DogbaneCrop
@@ -575,6 +577,7 @@ constexpr float HEAVYRAIN_SPEED_INFLUENCE = -50;
 // Tool
 constexpr int MAX_WATERINGCAN_CAPACITY = 100;			// 水壶最大容量
 constexpr int AMOUNT_OF_WATER_PER_USE = 20;				// 每次用水量
+constexpr int AMOUNT_OF_FERTILIZE_PER_USE = 10;			// 每次施肥量
 
 //Item
 struct ItemInfo {
@@ -698,5 +701,21 @@ constexpr int SUNNY_MONEY_INFLUENCE = 0;
 constexpr int LIGHTRAIN_MONEY_INFLUENCE = 10;
 constexpr int HEAVYRAIN_MONEY_INFLUENCE = 30;
 constexpr int SNOWY_MONEY_INFLUENCE = 50;
+
+// Weather
+constexpr int SUNNY_SET_SPEED = 0;
+constexpr int LIGHTRAIN_SPEED=500;
+constexpr int LIGHTRAIN_SPEED_VAR = 50;
+constexpr float LIGHTRAIN_SIZE = 10.0f;
+constexpr float LIGHTRAIN_SIZE_END = 5.0f;
+constexpr int HEAVYRAIN_SPEED = 800;
+constexpr int HEAVYRAIN_SPEED_VAR = 100;
+constexpr float HEAVYRAIN_SIZE = 15.0f;
+constexpr float HEAVYRAIN_SIZE_END = 10.0f;
+constexpr int SNOWY_SPEED = 100;
+constexpr int SNOWY_SPEED_VAR = 20;
+constexpr float SNOWY_SIZE = 10.0f;
+constexpr float SNOWY_SIZE_END = 5.0f;
+constexpr int WEATHER_CHILD_NUM = 100;
 
 #endif __CONSTANT_H

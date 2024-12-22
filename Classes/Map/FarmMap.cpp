@@ -11,6 +11,7 @@
 #include "../Item/StoneItem.h"
 #include "../Player/Player.h"
 #include "../Market/MarketState.h"
+#include "../Crop/FarmResourceManager.h"
 #include<string>
 
 USING_NS_CC;
@@ -198,9 +199,6 @@ void FarmMap::interactWithMap() {
     else if (mapTileNode[x][y]->getTileType() == TileType::Grass) {
         interactWithGrass(currentItemName, x, y);
     }
-    else if (mapTileNode[x][y]->getTileType() == TileType::Water) {
-        interactWithWater(currentItemName, x, y);
-    }
     else if (mapTileNode[x][y]->getTileType() == TileType::Mold) {
         interactWithMold(currentItemName, x, y);
     }
@@ -220,13 +218,19 @@ void FarmMap::interactWithSoil(std::string itemName, const int& x, const int& y)
     }
     else if (itemName == "fertilizer") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilFertilize();
+        FarmResourceManager* farmResourceManager = FarmResourceManager::create();
+        farmResourceManager->useFertilize();
     }
     else if (itemName == "kettle") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->soilWater();
+        FarmResourceManager* farmResourceManager = FarmResourceManager::create();
+        farmResourceManager->useWater();
     }
     else if (itemName == "dogbaneSeed" || itemName == "cornSeed" || itemName == "carrotSeed") {
         SkillTree::getInstance()->updatePlantingCount(1);
         dynamic_cast<Soil*>(mapTileNode[x][y])->plantCrop(itemName);
+        FarmResourceManager* farmResourceManager = FarmResourceManager::create();
+        farmResourceManager->useSeed();
     }
     else if (itemName == "scythe") {
         dynamic_cast<Soil*>(mapTileNode[x][y])->harvest();
@@ -274,11 +278,6 @@ void FarmMap::interactWithGrass(std::string itemName, const int& x, const int& y
     else {
         return;
     }
-}
-
-// 与水的交互
-void FarmMap::interactWithWater(std::string itemName,const int& x,const int& y) {
-
 }
 
 // 与箱子的交互

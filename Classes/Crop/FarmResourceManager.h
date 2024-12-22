@@ -14,8 +14,22 @@ private:
 	int waterResource;				// 水资源
 	int seedResource;				// 种子资源
 	int ferilizerResource;			// 肥料资源
-public:
 
+public:
+	// 静态创建函数
+	static FarmResourceManager* create();
+
+	// 初始化
+	bool init();
+
+	// 浇水
+	void useWater();
+
+	// 施肥
+	void useFertilize();
+
+	// 播种
+	void useSeed();
 };
 
 #endif 
