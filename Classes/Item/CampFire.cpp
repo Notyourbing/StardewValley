@@ -75,7 +75,10 @@ void CampFire::useItem() {
                 // 动画完成后执行添加食物的操作
                 std::string newName = cookedFood + "Cooked";
                 std::string newImage = "tools/" + newName + ".png";
-                bag->addItem(Food::create({ newName.c_str(), newImage.c_str() }));
+                auto newFood = Food::create({ newName.c_str(), newImage.c_str() });
+                if (newFood) {
+                    bag->addItem(newFood);
+                }
                 }),  // 添加食物到背包
             RemoveSelf::create(),
             nullptr
