@@ -49,11 +49,11 @@
 
 - **钓鱼** : 本游戏设计了丰富的钓鱼场景
 
-  ![](readmeImage\fishing.png)
+- ![](readmeImage/fishing.png)
 
 - **烹饪**
   
-  ![](readmeImage\cook.png)
+- ![](readmeImage/cook.png)
 
 - **农场资源管理**：农场水资源有限且需定期进行补充，实现了水资源的管理。同时对种植的种子和肥料进行存储管理。
 
@@ -177,7 +177,7 @@
 
 ## 项目结构清晰规范
 
-![](/readmeImage/projectStruct.png)
+![](readmeImage/projectStruct.png)
 
 ## 使用git合作开发
 
@@ -271,7 +271,7 @@ Item为物品的抽象基类，用于表示玩家背包中的物品，
 
   用于表示玩家的工具，包括十字镐、锄头、镰刀、种子等，用于农场耕地、作物收获、敲击石头等诸多场景
 
-![Item](D:\Work\readmeImage\Item.png)
+![Item](readmeImage/Item.png)
 
 ## Map
 
