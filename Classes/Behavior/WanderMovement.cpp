@@ -50,6 +50,7 @@ void WanderMovement::execute(Animal* animal) {
 
 }
 
+// 具体移动实现
 void WanderMovement::performRandomMove(Animal* animal){
     // 天气影响
     float radius;

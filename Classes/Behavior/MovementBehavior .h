@@ -7,10 +7,7 @@
 
 #include "cocos2d.h"
 
-/*
- * Class Name:     MovementBehavior
- * Class Function: 移动控制类
- */
+// 移动控制类
 class MovementBehavior {
 public:
 	// 虚析构函数
