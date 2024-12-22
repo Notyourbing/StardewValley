@@ -60,6 +60,8 @@ bool Player::init() {
         position.y = std::max(playerSize.y / 2, std::min(position.y, WINSIZE.height - playerSize.y / 2));
         setPosition(position);
         
+        setPopularity(0);
+
         // ±³°üÎ»ÖÃ
         auto bag = Bag::getInstance();
         const float bagHeight = bag->getContentSize().height;
