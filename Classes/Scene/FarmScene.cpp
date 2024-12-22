@@ -220,9 +220,9 @@ void Farm::changeSceneAuto() {
 	if (getChildByName("beach_control")) {
 		auto beachMap = BeachMap::getInstance();
 		const auto positionInBeachMap = player->getPosition() - beachMap->getPosition();
-
+		const auto beachMapSize = beachMap->getMapSize();
 		// 如果人物走向上边界
-		if (playerDirection == Vec2(0, 1) && positionInBeachMap.y > WINSIZE.height - CHANGE_MAP_DISTANCE) {
+		if (playerDirection == Vec2(0, 1) && positionInBeachMap.y > beachMapSize.height - 2 * CHANGE_MAP_DISTANCE) {
 			removeChildByName("beach_control");
 			removeChildByName("beach_map");
 			Control* farmControl = Control::create(farmMap);

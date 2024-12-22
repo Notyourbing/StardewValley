@@ -147,8 +147,12 @@ Item* Bag::removeItem(const int index) {
 			itemLabels[i - 1] = nullptr;
 			updateDisplay();
 			//防止删除末端物品使用出错
-			if (index == size)
+			if (index == size) {
 				setSelectedItem(index - 1);
+			}
+			else {
+				setSelectedItem(index);
+			}
 		}
 		else {
 			quantities[index]--;
